@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Issue
+        psr4_prefix: Issue
+        src_path: app
