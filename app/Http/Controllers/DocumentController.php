@@ -1,7 +1,7 @@
 <?php
 
 namespace Issue\Http\Controllers;
-
+use  Issue\Document, Issue\DocumentTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;

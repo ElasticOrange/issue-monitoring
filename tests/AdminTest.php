@@ -27,7 +27,14 @@ class AdminTest extends TestCase
 
 	public function testDocumentsView()
 	{
-		$response = $this->call('GET', '/admin/documents');
+		$response = $this->call('GET', '/backend/document');
+
+		$this->assertEquals(200, $response->status());
+	}
+
+	public function testDocumentsCreate()
+	{
+		$response = $this->call('GET', '/backend/document/create');
 
 		$this->assertEquals(200, $response->status());
 	}
