@@ -16,7 +16,18 @@
                 <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
-                <a href="/admin/documents"><i class="fa fa-table fa-fw"></i> Documents</a>
+                <a href="#"><i class="fa fa-table fa-fw"></i> Documents<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="/backend/document/create">Adauga Document</a>
+                    </li>
+                    <li>
+                        <a href="/backend/document">Lista Documente</a>
+                    </li>
+                    <li>
+                        <a href="#">Cauta Documente</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
