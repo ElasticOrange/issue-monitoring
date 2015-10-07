@@ -24,9 +24,6 @@
                     <li>
                         <a href="/backend/document">Lista Documente</a>
                     </li>
-                    <li>
-                        <a href="#">Cauta Documente</a>
-                    </li>
                 </ul>
             </li>
         </ul>

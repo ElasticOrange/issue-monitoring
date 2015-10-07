@@ -12,7 +12,7 @@
 	        	<div class="form-group">
 	            	<label class="col-md-3 control-label">Propunere legislativa</label>
 	            	<div class="col-md-7">
-	                    <select id="propid" name="propid" class="form-control" onchange="selectSteps();">
+	                    <select id="propid" name="propid" class="form-control">
 							<option value="">Selecteaza</option>
 							<option value="121">Propunere legislativă pentru modificarea şi completarea Ordonanţei de urgenţă a Guvernului nr.96/2002 privind acordarea de produse lactate şi de panificaţie pentru elevii din învăţământul primar şi gimnazial de stat şi privat, precum şi pentru copiii preşcolari din grădiniţele de stat şi private cu program normal de 4 ore</option>
 							<option value="122">Propunere legislativă privind modificarea şi completarea articolului 1. din Ordonanţa de Urgenţă a Guvernului nr. 96 din 2002, privind acordarea de produse lactate şi de panificaţie pentru elevii din clasele I-IV din învăţământul de stat, modificat şi completat</option>
@@ -26,19 +26,25 @@
 	                <div class="col-md-7">
 	                    <select id="stepid" name="stepid" class="form-control">
 	                        <option value="">Selecteaza o propunere de mai sus</option>
+	                        <option value="204">Inregistrare la prima camera sesizata pentru dezbatere</option>
+							<option value="205">Prezentat in Biroul Permanent al primei camere sesizate</option>
+							<option value="206">Dezbatere in comisiile de specialitate ale primei camere sesizate</option>
+							<option value="207">Dezbatere  in plenul primei camere sesizate</option>
+							<option value="208">Transmis spre dezbatere catre camera decizionala</option>
+							<option value="209">Solicitare aviz Consiliul Legislativ</option>
 	                    </select>
 	                </div>
 	            </div>
 	            <div class="form-group">
 	            	<label class="col-md-3 control-label">Descriere succinta</label>
 	            	<div class="col-md-7">
-	                	<textarea id="content" name="content" class="form-control" rows="3"></textarea>
+                		<textarea id="content" name="ro_description" class="form-control" rows="3"></textarea>
 	            	</div>
 	        	</div>
 	            <div class="form-group">
 	                <label class="col-md-3 control-label">Short description</label>
 	                <div class="col-md-7">
-	                    <textarea id="encontent" name="encontent" class="form-control" rows="3"></textarea>
+	                    <textarea id="encontent" name="en_description" class="form-control" rows="3"></textarea>
 	                </div>
 	            </div>
 	            <div class="form-group">
@@ -50,7 +56,7 @@
 	            <div class="form-group">
 	                <label class="col-md-3 control-label">Data</label>
 	                <div class="col-md-7">
-	                    <input type="text" id="initat" name="initat" class="form-control datepicker11" />
+	                    <input type="text" id="initat" name="initat" class="form-control" />
 	                </div>
 	            </div>
 	            <div class="form-group">
