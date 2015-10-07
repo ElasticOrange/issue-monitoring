@@ -13,10 +13,10 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="/admin/backend"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
-                <a href="/admin/backend/documents"><i class="fa fa-table fa-fw"></i> Documents</a>
+                <a href="/admin/documents"><i class="fa fa-table fa-fw"></i> Documents</a>
             </li>
         </ul>
     </div>

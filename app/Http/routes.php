@@ -11,4 +11,4 @@
 |
 */
 
-Route::controller('/admin/backend/', 'AdminDashboardController');
+Route::controller('/admin', 'AdminDashboardController');

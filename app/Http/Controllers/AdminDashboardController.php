@@ -18,4 +18,9 @@ class AdminDashboardController extends Controller
     	return view('admin.backend.documents');
     }
 
+    public function getLogin()
+    {
+    	return view('admin.backend.login');
+    }
+
 }
