@@ -56,7 +56,7 @@
 	            <div class="form-group">
 	                <label class="col-md-3 control-label">Data</label>
 	                <div class="col-md-7">
-	                    <input type="text" id="initat" name="initat" class="form-control" />
+	                    <input type="date" id="initat" name="initat" class="form-control" />
 	                </div>
 	            </div>
 	            <div class="form-group">

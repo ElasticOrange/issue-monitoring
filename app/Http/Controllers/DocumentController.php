@@ -1,7 +1,8 @@
 <?php
 
 namespace Issue\Http\Controllers;
-use  Issue\Document, Issue\DocumentTranslation;
+use  Issue\Document;
+use Issue\DocumentTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
@@ -37,7 +38,21 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        dd($input);
+
+        $document = new Document;
+        $document->propid = $input['propid'];
+        $document->stepid = $input['stepid'];
+        $document->initat = $input['initat'];
+        $document->link = $input['link'];
+        $document->online = true;
+
+        $docRo = $input['ro_description'];
+        $docEn = $input['en_description'];
+
+        $document->translateOrNew('ro')->description = $input['ro_description'];
+        $document->translateOrNew('en')->description = $input['en_description'];
+
+        $document->save();
     }
 
     /**

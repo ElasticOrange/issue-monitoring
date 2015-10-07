@@ -17,7 +17,8 @@ class CreateDocumentsTable extends Migration
             $table->boolean('online');
             $table->string('propid');
             $table->string('stepid');
-            $table->string('filespath');
+            $table->string('filespath')->nullable();
+            $table->string('link')->nullable();
             $table->timestamp('initat');
             $table->timestamps();
         });
