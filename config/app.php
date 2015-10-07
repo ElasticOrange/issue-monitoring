@@ -145,6 +145,11 @@ return [
         Issue\Providers\EventServiceProvider::class,
         Issue\Providers\RouteServiceProvider::class,
 
+        /*
+         * Other Service Providers...
+         */
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+
     ],
 
     /*
