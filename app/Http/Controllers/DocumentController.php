@@ -1,11 +1,12 @@
 <?php
 
 namespace Issue\Http\Controllers;
-use  Issue\Document;
+use Issue\Document;
 use Issue\DocumentTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
+use Storage;
 
 class DocumentController extends Controller
 {
@@ -45,6 +46,13 @@ class DocumentController extends Controller
         $document->initat = $input['initat'];
         $document->link = $input['link'];
         $document->online = true;
+
+        $documentsLocation = storage_path() . '/documents/';
+        Storage::makeDirectory($documentsLocation);
+        $fileMove = $input['filespath'];
+        $fileName = $input['filespath']->getClientOriginalName();
+        $fileMove->move($documentsLocation, $fileName);
+        $document->filespath = $fileName;
 
         foreach (['ro', 'en'] as $locale)
         {

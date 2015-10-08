@@ -12,3 +12,5 @@ Envoy.blade.php
 /public/css
 
 /resources/assets/bower
+
+/storage/documents
