@@ -20,3 +20,5 @@ Route::resource(
 		'only' => ['index', 'create', 'store']
 		]
 );
+
+Route::get('/backend/document/{name}', 'DocumentController@getDocument');

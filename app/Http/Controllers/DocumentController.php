@@ -17,7 +17,18 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return view('admin.backend.documents');
+        $document = Document::all();
+        $documentTranslation = DocumentTranslation::all();
+
+        return view('admin.backend.documents', ['document' => $document, 'documentTranslation' => $documentTranslation]);
+    }
+
+    public function getDocument($filespath)
+    {
+        $entry = Document::where('filespath', $filespath)->firstOrFail();
+        $doc_name = $entry->filespath;
+        $documentsLocation = storage_path() . '/documents/';
+        return response()->download($documentsLocation . $doc_name);
     }
 
     /**
