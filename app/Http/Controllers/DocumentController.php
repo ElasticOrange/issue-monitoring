@@ -40,8 +40,8 @@ class DocumentController extends Controller
         $input = $request->all();
 
         $document = new Document;
-        $document->propid = $input['proposalid'];
-        $document->stepid = $input['stageid'];
+        $document->proposalid = $input['proposalid'];
+        $document->stageid = $input['stageid'];
         $document->initat = $input['initat'];
         $document->link = $input['link'];
         $document->online = true;
