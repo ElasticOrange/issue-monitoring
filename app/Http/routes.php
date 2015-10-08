@@ -13,12 +13,6 @@
 
 Route::controller('/admin', 'AdminDashboardController');
 
-Route::resource(
-	  '/backend/document'
-	, 'DocumentController'
-	,  [
-		'only' => ['index', 'create', 'store', 'edit', 'update']
-		]
-);
+Route::resource('/backend/document', 'DocumentController');
 
 Route::get('/backend/document/{name}', 'DocumentController@getDocument');

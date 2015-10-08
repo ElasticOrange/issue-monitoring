@@ -60,16 +60,24 @@
 											<td>{{ $item->proposalid }}</td>
 											<td class="text-center">
 												<a href="/backend/document/{{ $item->filespath }}" target="_blank">
-												<i class="fa fa-file-pdf-o"></i>
+													<i class="fa fa-file-pdf-o"></i>
 												</a>
 											</td>
-											<td class="center">{{ $item->link }}</td>
+											<td class="text-center">
+												<a href="http://{{ $item->link }}" target="_blank">
+													<i class="fa fa-external-link"></i>
+												</a>
+											</td>
 											<td class="center">{{ $item->initat }}</td>
 											<td>
 												<a href="/backend/document/{{ $item->id }}/edit">
 													<button type="button" class="btn btn-warning" style="width: 81px;">Edit</button>
 												</a>
-												<button type="button" class="btn btn-danger" style="width: 81px;">Delete</button>
+												<form method="POST" action="/backend/document/{{ $item->id }}">
+													<input type="hidden" name="_token" value="{{ csrf_token() }}">
+													<input name="_method" type="hidden" value="DELETE">
+													<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">
+												</form>
 											</td>
 										</tr>
 									@endforeach
@@ -118,4 +126,8 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('js')
+<script src="/js/deleteDocument.js"></script>
 @endsection

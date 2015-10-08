@@ -59,12 +59,17 @@ class DocumentController extends Controller
         $document->link = $input['link'];
         $document->online = true;
 
-        $documentsLocation = storage_path() . '/documents/';
-        Storage::makeDirectory($documentsLocation);
-        $fileMove = $input['filespath'];
-        $fileName = $input['filespath']->getClientOriginalName();
-        $fileMove->move($documentsLocation, $fileName);
-        $document->filespath = $fileName;
+        $fileExist = $request->file('filespath');
+
+        if(isset($fileExist) && !empty($fileExist))
+        {
+            $documentsLocation = storage_path() . '/documents/';
+            Storage::makeDirectory($documentsLocation);
+            $fileMove = $input['filespath'];
+            $fileName = $input['filespath']->getClientOriginalName();
+            $fileMove->move($documentsLocation, $fileName);
+            $document->filespath = $fileName;
+        }
 
         foreach (['ro', 'en'] as $locale)
         {
@@ -97,12 +102,10 @@ class DocumentController extends Controller
     {
         $document = Document::findOrFail($id);
         $documentTranslation = DocumentTranslation::find($id);
-        $descRo = $documentTranslation->where('locale', 'ro')->first();
 
         return view('admin.backend.documents.documents-edit',
             [
               'document' => $document
-            , 'descRo' => $descRo
             , 'documentTranslation' => $documentTranslation
             ]);
     }
@@ -116,7 +119,34 @@ class DocumentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $document = Document::findOrFail($id);
+        $input = $request->all();
+
+        $document->proposalid = $input['proposalid'];
+        $document->stageid = $input['stageid'];
+        $document->initat = $input['initat'];
+        $document->link = $input['link'];
+
+        $fileExist = $request->file('filespath');
+
+        if(isset($fileExist) && !empty($fileExist))
+        {
+            $documentsLocation = storage_path() . '/documents/';
+            Storage::makeDirectory($documentsLocation);
+            $fileMove = $input['filespath'];
+            $fileName = $input['filespath']->getClientOriginalName();
+            $fileMove->move($documentsLocation, $fileName);
+            $document->filespath = $fileName;
+        }
+
+        foreach (['ro', 'en'] as $locale)
+        {
+            $document->translateOrNew($locale)->description = $input['description'][$locale];
+        }
+
+        $document->save();
+
+        return redirect('/backend/document');
     }
 
     /**
@@ -127,6 +157,8 @@ class DocumentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Document::destroy($id);
+
+        return redirect('/backend/document');
     }
 }
