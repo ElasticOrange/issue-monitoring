@@ -66,7 +66,9 @@
 											<td class="center">{{ $item->link }}</td>
 											<td class="center">{{ $item->initat }}</td>
 											<td>
-												<button type="button" class="btn btn-warning" style="width: 81px;">Edit</button>
+												<a href="/backend/document/{{ $item->id }}/edit">
+													<button type="button" class="btn btn-warning" style="width: 81px;">Edit</button>
+												</a>
 												<button type="button" class="btn btn-danger" style="width: 81px;">Delete</button>
 											</td>
 										</tr>

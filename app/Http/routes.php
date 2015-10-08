@@ -17,7 +17,7 @@ Route::resource(
 	  '/backend/document'
 	, 'DocumentController'
 	,  [
-		'only' => ['index', 'create', 'store']
+		'only' => ['index', 'create', 'store', 'edit', 'update']
 		]
 );
 

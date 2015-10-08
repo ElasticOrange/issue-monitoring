@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Storage;
+use Carbon\Carbon;
 
 class DocumentController extends Controller
 {
@@ -20,7 +21,7 @@ class DocumentController extends Controller
         $document = Document::all();
         $documentTranslation = DocumentTranslation::all();
 
-        return view('admin.backend.documents', ['document' => $document, 'documentTranslation' => $documentTranslation]);
+        return view('admin.backend.documents.documents', ['document' => $document, 'documentTranslation' => $documentTranslation]);
     }
 
     public function getDocument($filespath)
@@ -38,7 +39,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('admin.backend.documents-create');
+        return view('admin.backend.documents.documents-create');
     }
 
     /**
@@ -71,6 +72,8 @@ class DocumentController extends Controller
         }
 
         $document->save();
+
+        return redirect('/backend/document');
     }
 
     /**
@@ -92,7 +95,16 @@ class DocumentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $document = Document::findOrFail($id);
+        $documentTranslation = DocumentTranslation::find($id);
+        $descRo = $documentTranslation->where('locale', 'ro')->first();
+
+        return view('admin.backend.documents.documents-edit',
+            [
+              'document' => $document
+            , 'descRo' => $descRo
+            , 'documentTranslation' => $documentTranslation
+            ]);
     }
 
     /**
