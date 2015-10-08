@@ -40,17 +40,16 @@ class DocumentController extends Controller
         $input = $request->all();
 
         $document = new Document;
-        $document->propid = $input['propid'];
-        $document->stepid = $input['stepid'];
+        $document->propid = $input['proposalid'];
+        $document->stepid = $input['stageid'];
         $document->initat = $input['initat'];
         $document->link = $input['link'];
         $document->online = true;
 
-        $docRo = $input['ro_description'];
-        $docEn = $input['en_description'];
-
-        $document->translateOrNew('ro')->description = $input['ro_description'];
-        $document->translateOrNew('en')->description = $input['en_description'];
+        foreach (['ro', 'en'] as $locale)
+        {
+            $document->translateOrNew($locale)->description = $input['description'][$locale];
+        }
 
         $document->save();
     }

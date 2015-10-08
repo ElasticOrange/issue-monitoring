@@ -15,8 +15,8 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('online');
-            $table->string('propid');
-            $table->string('stepid');
+            $table->string('proposalid');
+            $table->string('stageid');
             $table->string('filespath')->nullable();
             $table->string('link')->nullable();
             $table->timestamp('initat');
