@@ -52,6 +52,9 @@ class DocumentController extends Controller
     {
         $input = $request->all();
 
+        $documentsLocation = storage_path() . '/documents/';
+        Storage::makeDirectory($documentsLocation);
+
         $document = new Document;
         $document->proposalid = $input['proposalid'];
         $document->stageid = $input['stageid'];
@@ -61,10 +64,8 @@ class DocumentController extends Controller
 
         $fileExist = $request->file('filespath');
 
-        if(isset($fileExist) && !empty($fileExist))
+        if($fileExist)
         {
-            $documentsLocation = storage_path() . '/documents/';
-            Storage::makeDirectory($documentsLocation);
             $fileMove = $input['filespath'];
             $fileName = $input['filespath']->getClientOriginalName();
             $fileMove->move($documentsLocation, $fileName);
@@ -101,12 +102,12 @@ class DocumentController extends Controller
     public function edit($id)
     {
         $document = Document::findOrFail($id);
-        $documentTranslation = DocumentTranslation::find($id);
+        // $documentTranslation = DocumentTranslation::find($id);
 
         return view('admin.backend.documents.documents-edit',
             [
               'document' => $document
-            , 'documentTranslation' => $documentTranslation
+            // , 'documentTranslation' => $documentTranslation
             ]);
     }
 
@@ -122,6 +123,9 @@ class DocumentController extends Controller
         $document = Document::findOrFail($id);
         $input = $request->all();
 
+        $documentsLocation = storage_path() . '/documents/';
+        Storage::makeDirectory($documentsLocation);
+
         $document->proposalid = $input['proposalid'];
         $document->stageid = $input['stageid'];
         $document->initat = $input['initat'];
@@ -129,10 +133,8 @@ class DocumentController extends Controller
 
         $fileExist = $request->file('filespath');
 
-        if(isset($fileExist) && !empty($fileExist))
+        if($fileExist)
         {
-            $documentsLocation = storage_path() . '/documents/';
-            Storage::makeDirectory($documentsLocation);
             $fileMove = $input['filespath'];
             $fileName = $input['filespath']->getClientOriginalName();
             $fileMove->move($documentsLocation, $fileName);

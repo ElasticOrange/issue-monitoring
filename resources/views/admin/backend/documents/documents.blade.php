@@ -59,16 +59,18 @@
 											<td class="sorting_1">{{ $item->id }}</td>
 											<td>{{ $item->proposalid }}</td>
 											<td class="text-center">
-												@if(isset($item->filespath))
-												<a href="/backend/document/{{ $item->filespath }}" target="_blank">
-													<i class="fa fa-file-pdf-o"></i>
-												</a>
+												@if(!empty($item->filespath))
+													<a href="/get/document/{{ $item->filespath }}" target="_blank">
+														<i class="fa fa-file-pdf-o"></i>
+													</a>
 												@endif
 											</td>
 											<td class="text-center">
-												<a href="http://{{ $item->link }}" target="_blank">
-													<i class="fa fa-external-link"></i>
-												</a>
+												@if(!empty($item->link))
+													<a href="http://{{ $item->link }}" target="_blank">
+														<i class="fa fa-external-link"></i>
+													</a>
+												@endif
 											</td>
 											<td class="center">{{ $item->initat }}</td>
 											<td>
