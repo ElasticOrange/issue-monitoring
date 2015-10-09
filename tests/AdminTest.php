@@ -4,6 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use Issue\Document;
+use Storage;
+
 class AdminTest extends TestCase
 {
     /**
@@ -25,14 +28,14 @@ class AdminTest extends TestCase
 		$this->assertEquals(200, $response->status());
 	}
 
-	public function testDocumentsView()
+	public function testDocumentsListView()
 	{
 		$response = $this->call('GET', '/backend/document');
 
 		$this->assertEquals(200, $response->status());
 	}
 
-	public function testDocumentsCreate()
+	public function testDocumentsCreateView()
 	{
 		$response = $this->call('GET', '/backend/document/create');
 
