@@ -15,4 +15,4 @@ Route::controller('/admin', 'AdminDashboardController');
 
 Route::resource('/backend/document', 'DocumentController');
 
-Route::get('/get/document/{name}', 'DocumentController@getDocument');
+Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
