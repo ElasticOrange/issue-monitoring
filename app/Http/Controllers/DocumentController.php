@@ -131,9 +131,9 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($document)
     {
-        Document::destroy($id);
+        $document->delete();
 
         return redirect()->action('DocumentController@index');
     }

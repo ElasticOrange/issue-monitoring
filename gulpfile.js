@@ -33,6 +33,10 @@ elixir(function(mix) {
         , 'datatables/media/js/jquery.dataTables.min.js'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
             ], 'public/js/all.js', bowerDir)
+    .scripts(
+              'resources/assets/js/deleteDocument.js'
+            , 'public/js/all.js'
+            )
     .styles(
             [
                   'style.css'
