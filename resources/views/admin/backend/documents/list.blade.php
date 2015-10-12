@@ -72,7 +72,3 @@
     });
 </script>
 @endsection
-
-@section('js')
-<script src="/js/deleteDocument.js"></script>
-@endsection
