@@ -19,11 +19,11 @@
 						<thead>
 							<tr role="row">
 								<th style="width: 80px;">Id</th>
-								<th style="width: 900px;">Content</th>
-								<th style="width: 80px;" class="">Document</th>
-								<th style="width: 80px;" class="">Link</th>
+								<th style="width: 900px;">Descriere</th>
+								<th style="width: 80px;">Document</th>
+								<th style="width: 80px;">Link</th>
 								<th style="width: 120px;">Data</th>
-								<th style="width: 182px;" class="">Action</th>
+								<th style="width: 182px;">Actiuni</th>
 							</tr>
 						</thead>
 						<tbody>
