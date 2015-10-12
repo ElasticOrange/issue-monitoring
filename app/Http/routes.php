@@ -16,3 +16,5 @@ Route::controller('/admin', 'AdminDashboardController');
 Route::resource('/backend/document', 'DocumentController');
 
 Route::get('/get/document/{name}', 'DocumentController@getDocument');
+
+Route::get('/', 'AdminDashboardController@getIndex');
