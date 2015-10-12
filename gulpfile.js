@@ -32,11 +32,8 @@ elixir(function(mix) {
         , 'startbootstrap-sb-admin-2/dist/js/sb-admin-2.js'
         , 'datatables/media/js/jquery.dataTables.min.js'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
+        , 'customJs/deleteDocument.js'
             ], 'public/js/all.js', bowerDir)
-    .scripts(
-              'resources/assets/js/deleteDocument.js'
-            , 'public/js/all.js'
-            )
     .styles(
             [
                   'style.css'
