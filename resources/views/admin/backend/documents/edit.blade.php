@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<!-- BEGIN PAGE CONTENT-->
 <div class="col-sm-12 text-center">
 	<h1>Editeaza Document</h1>
 	<br /><br /><br />
@@ -14,5 +13,4 @@
 	    </div>
 	</div>
 </div>
-<!-- END PAGE CONTENT-->
 @endsection
