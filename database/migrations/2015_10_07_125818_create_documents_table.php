@@ -14,21 +14,18 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('online');
-            $table->string('proposalid');
-            $table->string('stageid');
-            $table->string('filespath')->nullable();
+            $table->boolean('public');
+            $table->string('file_name')->nullable();
+            $table->string('original_file_name')->nullable();
             $table->string('link')->nullable();
-            $table->timestamp('initat');
+            $table->timestamp('init_at');
             $table->timestamps();
         });
         Schema::create('document_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('document_id')->unsigned();
-            $table->string('locale')->index();
-
-            $table->string('description');
-
+            $table->string('locale', 3)->index();
+            $table->string('description', 1000);
             $table->unique(['document_id','locale']);
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
         });

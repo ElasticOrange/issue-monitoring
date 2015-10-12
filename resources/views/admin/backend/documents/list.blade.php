@@ -27,13 +27,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($document as $item)
+							@foreach ($document as $key=>$item)
 								<tr class="gradeA odd" role="row">
-									<td class="sorting_1">{{ $item->id }}</td>
-									<td>{{ $item->proposalid }}</td>
+									<td class="sorting_1">{{ $key + 1 }}</td>
+									<td>{{ $item->description }}</td>
 									<td class="text-center">
-										@if(!empty($item->filespath))
-											<a href="/get/document/{{ $item->filespath }}" target="_blank">
+										@if(!empty($item->file_name))
+											<a href="/document/{{ $item->file_name }}" target="_blank">
 												<i class="fa fa-file-pdf-o"></i>
 											</a>
 										@endif
@@ -45,12 +45,10 @@
 											</a>
 										@endif
 									</td>
-									<td class="center">{{ $item->initat }}</td>
+									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
 									<td>
-										<a href="/backend/document/{{ $item->id }}/edit">
-											<button type="button" class="btn btn-warning" style="width: 81px;">Edit</button>
-										</a>
-										<form method="POST" action="/backend/document/{{ $item->id }}">
+										<a href="/backend/document/{{ $item->id }}/edit" class="btn btn-primary" style="width: 81px;">Edit</a>
+										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input name="_method" type="hidden" value="DELETE">
 											<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">
