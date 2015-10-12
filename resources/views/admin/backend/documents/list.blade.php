@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-lg-12 text-center">
-		<h1 class="page-header">Tables</h1>
+		<h1 class="page-header">Documente</h1>
 	</div>
 </div>
 
@@ -20,10 +20,10 @@
 							<tr role="row">
 								<th style="width: 80px;">Id</th>
 								<th style="width: 900px;">Content</th>
-								<th style="width: 80px;">Document</th>
-								<th style="width: 80px;">Link</th>
+								<th style="width: 80px;" class="">Document</th>
+								<th style="width: 80px;" class="">Link</th>
 								<th style="width: 120px;">Data</th>
-								<th style="width: 182px;">Action</th>
+								<th style="width: 182px;" class="">Action</th>
 							</tr>
 						</thead>
 						<tbody>
