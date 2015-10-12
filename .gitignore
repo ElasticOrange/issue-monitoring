@@ -13,4 +13,6 @@ Envoy.blade.php
 
 /resources/assets/bower
 
+!/resources/assets/bower/customJs
+
 /storage/documents
