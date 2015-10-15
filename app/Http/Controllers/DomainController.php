@@ -21,6 +21,13 @@ class DomainController extends Controller
         return view('admin.backend.domains.list', ['domain' => $domain]);
     }
 
+    public function getTree()
+    {
+        $domain = Domain::all();
+
+        return $domain;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
