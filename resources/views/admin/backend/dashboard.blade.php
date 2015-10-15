@@ -7,6 +7,11 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
+<div class="form-group">
+    <button class="btn btn-default"><a href="/backend/document/create"><span class="glyphicon glyphicon-plus"></span> Adauga Document</a></button>
+</div>
+
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
