@@ -1,12 +1,11 @@
+/.idea
 /vendor
 /node_modules
-Homestead.yaml
-Homestead.json
 .env
 
 Envoy.blade.php
 
-# Ignore the builded files because they are annoying. The application needs to be built on the server.
+# Ignore the builded files. The application needs to be built on the server.
 /public/build
 /public/js
 /public/css

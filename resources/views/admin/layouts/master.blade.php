@@ -45,6 +45,7 @@
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
     <!-- /Scripts -->
+    @yield('js')
 </body>
 
 </html>

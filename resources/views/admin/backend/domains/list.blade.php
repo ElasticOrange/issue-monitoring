@@ -26,14 +26,61 @@
 						</form>
 					</div>
 				</div>
+				<br /><br />
 				<div class="row">
 					<div class="col-lg-4">
-						<div id="domaintree"></div>
+						<div id="jqxTree"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+@endsection
 
+@section('js')
+<script type="text/javascript">
+	$(document).ready(function () {
+		// Create jqxTree
+		var tree = $('#jqxTree');
+		var source = null;
+		$.ajax({
+			async: false,
+			url: "/getTree",
+			success: function (data) {
+				console.log(data);
+				var data = data;
+				source = builddata(data);
+			}
+		});
+
+		function builddata(data) {
+			var object = [];
+			var items = [];
+
+			for (i = 0; i < data.length; i++) {
+				var item = data[i];
+				var label = item["name"];
+				var parentid = item["parent_id"];
+				var id = item["id"];
+
+				if (items[parentid]) {
+					item = { parentid: parentid, label: label, item: item };
+					if (!items[parentid].items) {
+						items[parentid].items = [];
+					}
+					items[parentid].items[items[parentid].items.length] = item;
+					items[id] = item;
+				}
+				else {
+					items[id] = { parentid: parentid, label: label, item: item };
+					object[id] = items[id];
+				}
+			}
+			return object;
+		}
+		var height = tree.jqxTree('height');
+		tree.jqxTree({ source: source,  height: height, width: 300 });
+	});
+</script>
 @endsection

@@ -56,6 +56,14 @@ elixir(function(mix) {
            'resources/assets/bower/bootstrap/dist/fonts/',
            'public/build/fonts/'
            )
+    .copy(
+            'resources/assets/bower/jqwidgets/jqwidgets/styles/images/',
+            'public/build/css/images/'
+        )
+    .copy(
+            'resources/assets/bower/datatables/media/images/',
+            'public/build/images/'
+        )
 	.version([
 			  'css/all.css'
 			, 'js/all.js'

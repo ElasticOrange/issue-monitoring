@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(DocumentTableSeeder::class);
+        $this->call(DomainTableSeeder::class);
 
         Model::reguard();
     }
