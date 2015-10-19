@@ -121,7 +121,7 @@ class DocumentController extends Controller
     {
         $this->fillDocument($document, $request);
         $document->save();
-
+f
         return redirect()->action('DocumentController@index');
     }
 
