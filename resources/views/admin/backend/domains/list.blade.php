@@ -16,10 +16,32 @@
 						<input type="search" class="form-control" placeholder="Search here">
 					</div>
 					<div class="col-lg-1 col-lg-offset-4">
-						<a href="/backend/domain//edit" class="btn btn-primary" style="width: 81px;">Edit</a>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+							+ Adauga
+						</button>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<form action="/backend/domain" method="post" data-form="true">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title" id="myModalLabel">Adauga Domeniu</h4>
+										</div>
+										<div class="modal-body">
+											@include('admin.backend.domains.form')
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Inchide</button>
+											<button type="submit" data-adauga="true" class="btn btn-primary">+ Adauga</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-lg-1">
-						<form method="POST" action="/backend/domain/" style="display: inline-block;">
+						<form method="POST" action="{{ action('DomainController@destroy') }}" style="display: inline-block;">
 							<input type="hidden" name="_token" value="{{ csrf_token() }}">
 							<input name="_method" type="hidden" value="DELETE">
 							<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">
@@ -30,6 +52,7 @@
 				<div class="row">
 					<div class="col-lg-4">
 						<div id="jqxTree"></div>
+						<input type="button" style="margin: 10px;" id="jqxbutton" value="Get item" />
 					</div>
 				</div>
 			</div>
@@ -41,7 +64,50 @@
 @section('js')
 <script type="text/javascript">
 	$(document).ready(function () {
-		// Create jqxTree
+
+		$('#jqxbutton').click(function () {
+			var item = tree.jqxTree('getSelectedItem');
+//			var id = $(item).attr('parentElement');
+			console.log("item id: ", item);
+		});
+
+		$('[data-adauga=true]').click(function () {
+			submitGenericAjaxForm($('[data-form=true]'));
+		});
+
+		function submitGenericAjaxForm(form) {
+			var $form = $(form);
+			var item = tree.jqxTree('getSelectedItem');
+			var id = $(item).attr('id');
+			var formdata = $form.serialize();
+			formdata.push({name: 'parent_id', value: id});
+			var action = $form.attr('action') || window.document.location;
+			var method = $form.attr('method') || 'POST';
+
+			showLoader();
+			var request = $.ajax({
+				url: action,
+				method: method,
+				data: formdata,
+				dataType: 'json'
+			});
+
+			request.done(function(data) {
+				console.log('Ajax success: ', data);
+			});
+
+			request.fail(function(error) {
+				console.error('Ajax error: ', error.responseJSON);
+			});
+
+			request.always(function() {
+				hideLoader();
+			});
+
+			return request;
+		}
+
+
 		var tree = $('#jqxTree');
 		var source = null;
 		$.ajax({
@@ -76,11 +142,12 @@
 					object[id] = items[id];
 				}
 			}
+			console.log(object);
 			return object;
 		}
 
 		var height = tree.jqxTree('height');
-		tree.jqxTree({source: source, height: height, width: 300});
+		tree.jqxTree({source: source, height: 300, width: 300});
 
 		function singleClick(event) {
 			var _item = event.target;
@@ -98,7 +165,7 @@
 			var text = event.target.textContent;
 			var text2 = text.replace(/\s+/g, ' ');
 			alert(text2+' e pregatit pentru edit :)');
-		};
+		}
 		$("#jqxTree .jqx-tree-item").click(function (event) {
 			var that = this;
 			setTimeout(function () {

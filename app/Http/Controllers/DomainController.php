@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\Domain;
+use Issue\DomainTranslation;
 
 class DomainController extends Controller
 {
@@ -28,6 +29,17 @@ class DomainController extends Controller
         return $domain;
     }
 
+    private function fillDomain($domain, $request) {
+        $input = $request->all();
+
+        foreach (['ro', 'en'] as $locale)
+        {
+            $domain->translateOrNew($locale)->name = $input['name'][$locale];
+        }
+
+        return $domain;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +47,9 @@ class DomainController extends Controller
      */
     public function create()
     {
-        //
+        $domain = new Domain();
+
+        return view('admin.backend.domains.list', ['domain' => $domain]);
     }
 
     /**
@@ -46,7 +60,11 @@ class DomainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $domain = new Domain();
+        $this->fillDomain($domain, $request);
+        $domain->save();
+
+        return response()->json(['status' => 'OK', 'message' => 'Formul a fost completat']);
     }
 
     /**
@@ -89,8 +107,10 @@ class DomainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($domain)
     {
-        //
+        $domain->delete();
+
+        return redirect()->action('DomainController@index');
     }
 }

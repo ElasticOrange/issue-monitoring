@@ -78,11 +78,7 @@ class DocumentController extends Controller
      */
     public function edit($document)
     {
-        return view('admin.backend.documents.edit',
-            [
-              'document' => $document
-            // , 'documentTranslation' => $documentTranslation
-            ]);
+        return view('admin.backend.documents.edit', ['document' => $document]);
     }
 
     private function fillDocument($document, $request) {
@@ -121,7 +117,7 @@ class DocumentController extends Controller
     {
         $this->fillDocument($document, $request);
         $document->save();
-f
+
         return redirect()->action('DocumentController@index');
     }
 
