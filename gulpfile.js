@@ -35,6 +35,7 @@ elixir(function(mix) {
         , 'datatables/media/js/jquery.dataTables.min.js'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
         , 'jqwidgets/jqwidgets/jqxcore.js'
+        , 'jqwidgets/jqwidgets/jqxdata.js'
         , 'jqwidgets/jqwidgets/jqxbuttons.js'
         , 'jqwidgets/jqwidgets/jqxscrollbar.js'
         , 'jqwidgets/jqwidgets/jqxpanel.js'
