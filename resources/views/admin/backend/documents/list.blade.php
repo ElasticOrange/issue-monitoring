@@ -7,6 +7,10 @@
 	</div>
 </div>
 
+<div class="form-group">
+    <a href="/backend/document/create"><button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
+</div>
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -18,7 +22,6 @@
 					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr role="row">
-								<th style="width: 80px;">Id</th>
 								<th style="width: 900px;">Descriere</th>
 								<th style="width: 80px;">Document</th>
 								<th style="width: 80px;">Link</th>
@@ -29,7 +32,6 @@
 						<tbody>
 							@foreach ($document as $key=>$item)
 								<tr class="gradeA odd" role="row">
-									<td class="sorting_1">{{ $key + 1 }}</td>
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
 										@if(!empty($item->file_name))
@@ -46,12 +48,12 @@
 										@endif
 									</td>
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
-									<td>
-										<a href="/backend/document/{{ $item->id }}/edit" class="btn btn-primary" style="width: 81px;">Edit</a>
+									<td class="text-center">
+										<a href="/backend/document/{{ $item->id }}/edit" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
 										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input name="_method" type="hidden" value="DELETE">
-											<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">
+											<button class="btn btn-danger" title="Delete" data-confirm="true" type="submit""><span class="glyphicon glyphicon-trash"></span></button>
 										</form>
 									</td>
 								</tr>
@@ -67,7 +69,20 @@
 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
-                responsive: true
+                responsive: true,
+                "language":{
+                	"sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
+                	"sInfoEmpty": "Arata de la 0 la 0 din 0 intrari",
+                	"sLengthMenu": "Arata _MENU_ intrari",
+                	"sSearch": "Cauta",
+                	"paginate":{
+                		"next": "Inainte",
+                		"previous": "Inapoi",
+                		"first": "Primul",
+                		"last": "Ultimul"
+                	},
+                	"sEmptyTable": "Nu exista nici o inregistrare in tabel"
+                }
         });
     });
 </script>

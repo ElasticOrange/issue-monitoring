@@ -6,10 +6,17 @@
 	<br /><br /><br />
 	<div class="row">
 		<div class="col-md-12">
-	        <form action="/backend/document" class="form-horizontal" method="POST" enctype="multipart/form-data">
+			<form action="/backend/document" class="form-horizontal" method="POST" enctype="multipart/form-data">
 				@include('admin.backend.documents.form')
-	        </form>
-	    </div>
+			</form>
+			@if ($errors->any())
+				<ul class="alert alert-danger">
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+				</ul>
+			@endif
+		</div>
 	</div>
 </div>
 @endsection
