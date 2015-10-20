@@ -16,7 +16,7 @@
                 <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
-                <a href="/backend/document"><i class="fa fa-table fa-fw"></i> Documents</a>
+                <a href="/backend/document"><i class="fa fa-table fa-fw"></i> Documente</a>
             </li>
         </ul>
     </div>

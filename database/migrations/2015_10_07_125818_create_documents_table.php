@@ -25,7 +25,9 @@ class CreateDocumentsTable extends Migration
             $table->increments('id');
             $table->integer('document_id')->unsigned();
             $table->string('locale', 3)->index();
+
             $table->string('description', 1000);
+
             $table->unique(['document_id','locale']);
             $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
         });

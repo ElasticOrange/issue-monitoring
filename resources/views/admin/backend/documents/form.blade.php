@@ -1,12 +1,12 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="form-group">
-	<label class="col-md-3 control-label">Descriere succinta</label>
+	<label class="col-md-3 control-label">Titlu</label>
 	<div class="col-md-7">
 		<textarea id="content" name="description[ro]" class="form-control" rows="3">{{ $document->translateOrNew('ro')->description }}</textarea>
 	</div>
 </div>
 <div class="form-group">
-    <label class="col-md-3 control-label">Short description</label>
+    <label class="col-md-3 control-label">Title</label>
     <div class="col-md-7">
         <textarea id="encontent" name="description[en]" class="form-control" rows="3">{{ $document->translateOrNew('en')->description }}</textarea>
     </div>

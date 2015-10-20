@@ -25,9 +25,11 @@ class DocumentRequest extends Request
     {
         return [
             'description' => 'array',
-            'description[ro]' => 'string',
-            'description[en]' => 'string',
-            'init_at' => 'date'
+            'description.ro' => 'required|string',
+            'description.en' => 'required|string',
+            'init_at' => 'date',
+            'file' => 'required|min:1',
+            'link' => 'url'
         ];
     }
 }

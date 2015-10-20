@@ -7,6 +7,10 @@
 	</div>
 </div>
 
+<div class="form-group">
+    <a href="/backend/document/create"><button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
+</div>
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -45,11 +49,11 @@
 									</td>
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
 									<td class="text-center">
-										<a href="/backend/document/{{ $item->id }}/edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="/backend/document/{{ $item->id }}/edit" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
 										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input name="_method" type="hidden" value="DELETE">
-											<button class="btn btn-danger" data-confirm="true" type="submit""><span class="glyphicon glyphicon-trash"></span></button>
+											<button class="btn btn-danger" title="Delete" data-confirm="true" type="submit""><span class="glyphicon glyphicon-trash"></span></button>
 										</form>
 									</td>
 								</tr>
