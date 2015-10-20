@@ -48,8 +48,8 @@ elixir(function(mix) {
     .scripts([
               '../customJs/deleteDocument.js'
             , '../customJs/ajaxForms.js'
-            , '../customJs/datatablesTranslated.js'
             , '../customJs/jqxtreeActivation.js'
+            , '../customJs/datatableTranslated.js'
             ]
             , 'public/js/custom.js'
             , bowerDir)
