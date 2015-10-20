@@ -204,8 +204,6 @@ $(document).ready(function() {
         hideWarningMessage();
     });
 
-console.error('mare', $errorBox);
-
     $(document).on('submit', 'form[data-ajax=true]', function(ev) {
         ev.preventDefault();
         submitAjaxForm(this);
