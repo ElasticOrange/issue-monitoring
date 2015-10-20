@@ -64,122 +64,22 @@
 @section('js')
 <script type="text/javascript">
 	$(document).ready(function () {
-
-		$('#jqxbutton').click(function () {
-			var item = tree.jqxTree('getSelectedItem');
-//			var id = $(item).attr('parentElement');
-			console.log("item id: ", item);
-		});
-
-		$('[data-adauga=true]').click(function () {
-			submitGenericAjaxForm($('[data-form=true]'));
-		});
-
-		function submitGenericAjaxForm(form) {
-			var $form = $(form);
-			var item = tree.jqxTree('getSelectedItem');
-			var id = $(item).attr('id');
-			var formdata = $form.serialize();
-			formdata.push({name: 'parent_id', value: id});
-			var action = $form.attr('action') || window.document.location;
-			var method = $form.attr('method') || 'POST';
-
-			showLoader();
-			var request = $.ajax({
-				url: action,
-				method: method,
-				data: formdata,
-				dataType: 'json'
-			});
-
-			request.done(function(data) {
-				console.log('Ajax success: ', data);
-			});
-
-			request.fail(function(error) {
-				console.error('Ajax error: ', error.responseJSON);
-			});
-
-			request.always(function() {
-				hideLoader();
-			});
-
-			return request;
-		}
-
-
 		var tree = $('#jqxTree');
 		var source = null;
 		$.ajax({
 			async: false,
 			url: "/getTree",
-			success: function (data) {
-				var data = data;
-				source = builddata(data);
+			success: function (data, status, xhr) {
+				source = (data);
 			}
 		});
 
-		function builddata(data) {
-			var object = [];
-			var items = [];
-
-			for (i = 0; i < data.length; i++) {
-				var item = data[i];
-				var label = item["name"];
-				var parentid = item["parent_id"];
-				var id = item["id"];
-
-				if (items[parentid]) {
-					item = {parentid: parentid, label: label, item: item};
-					if (!items[parentid].items) {
-						items[parentid].items = [];
-					}
-					items[parentid].items[items[parentid].items.length] = item;
-					items[id] = item;
-				}
-				else {
-					items[id] = {parentid: parentid, label: label, item: item};
-					object[id] = items[id];
-				}
-			}
-			console.log(object);
-			return object;
-		}
-
-		var height = tree.jqxTree('height');
-		tree.jqxTree({source: source, height: 300, width: 300});
-
-		function singleClick(event) {
-			var _item = event.target;
-			if (_item.tagName != "LI") {
-				_item = $(_item).parents("li:first");
-			}
-			var item = tree.jqxTree('getItem', _item[0]);
-			if (item.isExpanded == true) {
-				$('#jqxTree').jqxTree('collapseItem', _item[0]);
-			} else {
-				$('#jqxTree').jqxTree('expandItem', _item[0]);
-			}
-		}
-		function doubleClick(event) {
-			var text = event.target.textContent;
-			var text2 = text.replace(/\s+/g, ' ');
-			alert(text2+' e pregatit pentru edit :)');
-		}
-		$("#jqxTree .jqx-tree-item").click(function (event) {
-			var that = this;
-			setTimeout(function () {
-				var dblclick = parseInt($(that).data('double'), 10);
-				if (dblclick > 0) {
-					$(that).data('double', dblclick - 1);
-				} else {
-					singleClick.call(that, event);
-				}
-			}, 300);
-		}).dblclick(function (event) {
-			$(this).data('double', 2);
-			doubleClick.call(this, event);
-		});
+		var dataAdapter = new $.jqx.dataAdapter(source);
+		dataAdapter.dataBind();
+		var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{ name: 'name', map: 'label' }]);
+		console.log(records);
+		tree.jqxTree({ source: records });
+//		tree.jqxTree({ source: source,  height: 300, width: 200 });
 	});
 
 </script>
