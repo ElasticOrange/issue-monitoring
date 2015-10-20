@@ -1,5 +1,70 @@
 $(document).ready(function() {
 
+    function generateLaravelErrorList(errorList) {
+        if(!_.isPlainObject(errorList)) {
+            console.error('generateLaravelErrorList(): errorList is invalid', errorList);
+            return;
+        }
+
+        var resultHtml = '';
+
+        _.forOwn(errorList, function(messageList, formItem) {
+            if (!_.isArray(messageList)) {
+                console.error('generateLaravelErrorList(): messageList should be array', messageList, errorList, formItem);
+                return;
+            }
+
+            _.forEach(messageList, function(errorMessage) {
+                resultHtml += '<li>' + errorMessage + '</li>';
+            })
+        });
+
+        return '<ul>' + resultHtml + '</ul>';
+    }
+
+    function getKeyFromPlaceholder(placeholder) {
+        if (!_.isString(placeholder)) {
+            console.error('getKeyFromPlaceholder(): placeholder is not string', placeholder);
+            return;
+        }
+
+        if ((placeholder[0] !== '{') || (placeholder.substr(-1) !== '}')) {
+            console.error('getKeyFromPlaceholder(): placeholder is not of form {key}', placeholder);
+            return placeholder;
+        }
+
+        return placeholder.replace(/[{}]/g, '');
+    }
+
+    function fillPlaceholdersInString(string, data) {
+        if(!_.isString(string)) {
+            console.error('fillPlaceholdersInString(): string parameter should be of string type', string);
+            return;
+        }
+
+        if (!_.isPlainObject(data)) {
+            console.error('fillPlaceholdersInString(): data should be an object', data);
+            return string;
+        }
+
+        var placeholders = string.match(/\{([a-z0-9\-_]+)\}/gi);
+        var resultString = string;
+
+        if (!placeholders.length) {
+            return resultString;
+        }
+
+        _.forEach(placeholders, function(placeholder) {
+            var regex = new RegExp(placeholder, 'g');
+            var key = getKeyFromPlaceholder(placeholder);
+            if (placeholder && data[key]) {
+                resultString = resultString.replace(regex, data[key]);
+            }
+        });
+
+        return resultString;
+    }
+
     function submitGenericAjaxForm(form) {
         var $form = $(form);
         var data = $form.serialize();

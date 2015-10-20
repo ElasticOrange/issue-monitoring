@@ -6,7 +6,15 @@
 	<br /><br /><br />
 	<div class="row">
 		<div class="col-md-12">
-	        <form action="/backend/document" class="form-horizontal" method="POST" enctype="multipart/form-data">
+	        <form action="/backend/document"
+				  class="form-horizontal"
+				  method="POST"
+				  enctype="multipart/form-data"
+				  data-ajax="true"
+				  success-message="Template created successfuly"
+				  error-message="Error creating template"
+				  success-url="/backend/document"
+					>
 				@include('admin.backend.documents.form')
 	        </form>
 	    </div>
