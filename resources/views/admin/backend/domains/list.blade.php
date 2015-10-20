@@ -63,7 +63,7 @@
 
 @section('js')
 <script type="text/javascript">
-	$(document).ready(function () {
+	$(function () {
 		var tree = $('#jqxTree');
 		var source = null;
 		$.ajax({
@@ -74,13 +74,46 @@
 			}
 		});
 
+		$(document).on('click', '#add-domain', function() {
+			/*
+				- function insert parent id into form(form) with
+					- get current selected domain id
+					- put domain id in input#parent.val()
+
+				- set data-ajax = create
+			 */
+
+		})
+
+
+/*			$(document).on('submit', 'data-ajax=create', function())
+				- on form submmit
+					- ajax post
+						- on succes
+							- insert element
+			$(document).on('submit', 'data-ajax=edit', function())
+				- on form submmit
+					- ajax post
+						- on succes
+							- insert element
+*/
+		$('#jqxTree').dblclick(funciton())
+			/*
+				- add insert parent id
+				= set data-ajax=edit
+
+
+			 */
+
 		var dataAdapter = new $.jqx.dataAdapter(source);
 		dataAdapter.dataBind();
 		var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{ name: 'name', map: 'label' }]);
 		console.log(records);
-		tree.jqxTree({ source: records });
-//		tree.jqxTree({ source: source,  height: 300, width: 200 });
+		tree.jqxTree({ source: records,  height: 300, width: 200 });
+
+
 	});
+
 
 </script>
 @endsection
