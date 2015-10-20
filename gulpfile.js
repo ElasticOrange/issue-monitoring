@@ -24,6 +24,7 @@ elixir(function(mix) {
     	, 'font-awesome/css/font-awesome.min.css'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
         , 'datatables-responsive/css/responsive.dataTables.scss'
+        , 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
     	] , 'public/css/style.css', bowerDir)
     .scripts([
           'jquery/dist/jquery.min.js'
@@ -33,6 +34,9 @@ elixir(function(mix) {
         , 'startbootstrap-sb-admin-2/dist/js/sb-admin-2.js'
         , 'datatables/media/js/jquery.dataTables.min.js'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
+        , 'moment/min/moment.min.js'
+        , 'moment/locale/ro.js'
+        , 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
             ], 'public/js/all.js', bowerDir)
     .styles(
             [
