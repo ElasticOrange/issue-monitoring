@@ -85,7 +85,7 @@ class DocumentController extends Controller
         $input = $request->all();
         Storage::makeDirectory(DOCUMENTS_LOCATION);
 
-        $document->init_at = $input['init_at'];
+        $document->init_at = $input['date'];
         $document->link = $input['link'];
         $document->public = true;
 

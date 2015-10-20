@@ -1,12 +1,12 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="form-group">
-	<label class="col-md-3 control-label">Descriere succinta</label>
+	<label class="col-md-3 control-label">Titlu</label>
 	<div class="col-md-7">
 		<textarea id="content" name="description[ro]" class="form-control" rows="3">{{ $document->translateOrNew('ro')->description }}</textarea>
 	</div>
 </div>
 <div class="form-group">
-    <label class="col-md-3 control-label">Short description</label>
+    <label class="col-md-3 control-label">Title</label>
     <div class="col-md-7">
         <textarea id="encontent" name="description[en]" class="form-control" rows="3">{{ $document->translateOrNew('en')->description }}</textarea>
     </div>
@@ -21,7 +21,8 @@
 <div class="form-group">
     <label class="col-md-3 control-label">Data</label>
     <div class="col-md-7">
-        <input type="date" name="init_at" value="{{ $document->init_at->format('Y-m-d') }}" class="form-control" />
+        <input type="text" date-widget="true" name="init_at" class="form-control" />
+        <input type="hidden" name="date">
     </div>
 </div>
 <div class="form-group">
@@ -37,3 +38,21 @@
      	</div>
     </div>
 </div>
+
+<script type="text/javascript"> 
+ 
+    var dateWidgets = $('[date-widget="true"]')
+    .datetimepicker({
+        locale: 'ro',
+        format: 'L',
+        defaultDate: moment()
+    })
+
+    $('[name=date]').val(moment().format("YYYY-MM-DD"));
+
+    dateWidgets.on('dp.change', function(){
+        var d = $(this).data("DateTimePicker").date();
+        var e = d.format("YYYY-MM-DD");
+        $('[name=date]').val(e);
+    })
+</script>
