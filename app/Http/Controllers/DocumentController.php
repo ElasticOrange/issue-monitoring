@@ -56,7 +56,8 @@ class DocumentController extends Controller
         $this->fillDocument($document, $request);
         $document->save();
 
-        return redirect()->action('DocumentController@index');
+        return $document;
+        //return redirect()->action('DocumentController@index');
     }
 
     /**

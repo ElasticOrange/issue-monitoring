@@ -6,11 +6,23 @@
 	<br /><br /><br />
 	<div class="row">
 		<div class="col-md-12">
-	        <form action="/backend/document/{{ $document->id }}" class="form-horizontal" method="POST" enctype="multipart/form-data" role="form">
+			<form action="/backend/document/{{ $document->id }}"
+				  class="form-horizontal"
+				  method="POST"
+				  enctype="multipart/form-data"
+				  data-ajax="true"
+				  success-message="Template created successfuly"
+				  error-message="Error creating template"
+				  success-url="/backend/document"
+					>
 				<input name="_method" type="hidden" value="PUT">
 				@include('admin.backend.documents.form')
 	        </form>
 	    </div>
 	</div>
 </div>
+
+@endsection
+@section('js')
+	<script src="{{ elixir('js/custom.js') }}"></script>
 @endsection

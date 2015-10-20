@@ -13,11 +13,15 @@
 				  data-ajax="true"
 				  success-message="Template created successfuly"
 				  error-message="Error creating template"
-				  success-url="/backend/document"
+				  success-url="/backend/document/{id}/edit"
 					>
 				@include('admin.backend.documents.form')
 	        </form>
 	    </div>
 	</div>
 </div>
+
+@endsection
+@section('js')
+	<script src="{{ elixir('js/custom.js') }}"></script>
 @endsection

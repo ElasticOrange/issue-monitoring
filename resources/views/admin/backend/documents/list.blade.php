@@ -64,11 +64,7 @@
 	</div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-</script>
+@endsection
+@section('js')
+	<script src="{{ elixir('js/custom.js') }}"></script>
 @endsection
