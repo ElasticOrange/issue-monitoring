@@ -48,7 +48,7 @@
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
 									<td>
 										<a href="/backend/document/{{ $item->id }}/edit" class="btn btn-primary" style="width: 81px;">Edit</a>
-										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
+										<form method="POST" data-ajax="true" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input name="_method" type="hidden" value="DELETE">
 											<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">

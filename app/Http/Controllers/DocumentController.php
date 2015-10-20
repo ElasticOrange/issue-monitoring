@@ -57,7 +57,6 @@ class DocumentController extends Controller
         $document->save();
 
         return $document;
-        //return redirect()->action('DocumentController@index');
     }
 
     /**
@@ -123,7 +122,7 @@ class DocumentController extends Controller
         $this->fillDocument($document, $request);
         $document->save();
 
-        return redirect()->action('DocumentController@index');
+        return $document;
     }
 
     /**
@@ -136,6 +135,6 @@ class DocumentController extends Controller
     {
         $document->delete();
 
-        return redirect()->action('DocumentController@index');
+        return $document;
     }
 }
