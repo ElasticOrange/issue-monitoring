@@ -20,9 +20,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $document = Document::all();
-
-        return view('admin.backend.documents.list', ['document' => $document]);
+        $documents = Document::all();
+// dd($documents);
+        return view('admin.backend.documents.list', ['documents' => $documents]);
     }
 
     public function downloadDocument($file_name)

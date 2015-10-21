@@ -8,7 +8,7 @@ class Stakeholder extends Model
 {
     use \Dimsav\Translatable\Translatable;
 
-    public $translatedAttributes = ['contact','	profile','position'];
+    public $translatedAttributes = ['contact','profile','position'];
 
     protected $guarded = ['id'];
 }

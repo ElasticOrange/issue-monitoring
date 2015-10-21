@@ -12,10 +12,10 @@ class CreateStakeholdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('stakeholder', function (Blueprint $table) {
+        Schema::create('stakeholders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('type');
+            $table->enum('type',['persoana','organizatie']);
             $table->string('site');
             $table->string('download_code', 30);
             $table->boolean('published');
@@ -23,15 +23,15 @@ class CreateStakeholdersTable extends Migration
         });
         Schema::create('stakeholder_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('document_id')->unsigned();
+            $table->integer('stakeholder_id')->unsigned();
             $table->string('locale', 3)->index();
 
             $table->string('contact', 1000);
             $table->string('profile', 1000);
             $table->string('position', 1000);
 
-            $table->unique(['document_id','locale']);
-            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
+            $table->unique(['stakeholder_id','locale']);
+            $table->foreign('stakeholder_id')->references('id')->on('stakeholders')->onDelete('cascade');
         });
     }
 
@@ -42,7 +42,9 @@ class CreateStakeholdersTable extends Migration
      */
     public function down()
     {
+        Schema::drop('stakeholder_translations');
         Schema::drop('stakeholders');
+
     }
 }
 

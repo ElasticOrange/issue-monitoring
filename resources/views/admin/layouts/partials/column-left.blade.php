@@ -18,6 +18,9 @@
             <li>
                 <a href="/backend/document"><i class="fa fa-table fa-fw"></i> Documente</a>
             </li>
+            <li>
+                <a href="/backend/stakeholders/"><i class="fa fa-user fa-fw"></i> Stakeholders</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

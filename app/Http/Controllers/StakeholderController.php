@@ -1,12 +1,13 @@
 <?php
 
 namespace Issue\Http\Controllers;
-
 use Issue\Stakeholder;
 use Issue\StakeholderTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
+use Issue\Http\Requests\StakeholderRequest;
 use Issue\Http\Controllers\Controller;
+
 
 class StakeholderController extends Controller
 {
@@ -17,7 +18,9 @@ class StakeholderController extends Controller
      */
     public function index()
     {
-        //
+        $stakeholders = Stakeholder::all();
+// dd($stakeholders);
+        return view('admin.backend.stakeholders.list', ['stakeholders' => $stakeholders]);
     }
 
     /**
@@ -27,7 +30,8 @@ class StakeholderController extends Controller
      */
     public function create()
     {
-        //
+        $stakeholder = new Stakeholder;
+        return view('admin.backend.stakeholders.create', ['stakeholder' => $stakeholder]);
     }
 
     /**
@@ -38,7 +42,7 @@ class StakeholderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $stockholder=new Stockholder;
     }
 
     /**

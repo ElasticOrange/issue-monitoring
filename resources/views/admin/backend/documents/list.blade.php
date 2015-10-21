@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-    <a href="/backend/document/create"><button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
+    <a href="/backend/documents/create"><button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
 </div>
 
 <div class="row">
@@ -27,7 +27,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($document as $key=>$item)
+							@foreach ($documents as $key=>$item)
 								<tr class="gradeA odd" role="row">
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
@@ -50,7 +50,7 @@
 										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input name="_method" type="hidden" value="DELETE">
-											<button class="btn btn-danger" title="Delete" data-confirm="true" type="submit""><span class="glyphicon glyphicon-trash"></span></button>
+											<button class="btn btn-danger" title="Delete" data-confirm="true" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
 										</form>
 									</td>
 								</tr>
