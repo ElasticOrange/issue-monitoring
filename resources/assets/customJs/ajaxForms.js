@@ -205,8 +205,9 @@ function submitAjaxForm(form) {
 }
 
 function addDomainToTree(domain) {
-    var currentTreeItem = $('#domainTree').jqxTree('getSelectedItem');
-    $('#domainTree').jqxTree('addTo', {label: domain['name']}, currentTreeItem);
+    var tree =  $('#domainTree');
+    var currentTreeItem = tree.jqxTree('getSelectedItem');
+    tree.jqxTree('addTo', {label: domain['name'], id: parseInt(domain['id'])}, currentTreeItem);
     $('#myModal').modal('hide');
 }
 
