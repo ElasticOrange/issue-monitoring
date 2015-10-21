@@ -16,14 +16,21 @@
 						<input type="search" class="form-control" placeholder="Search here">
 					</div>
 					<div class="col-lg-1 col-lg-offset-4">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-modal="true" data-target="#myModal">
 							+ Adauga
 						</button>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
-									<form action="/backend/domain" method="post" data-form="true">
+									<form
+											action="/backend/domain"
+											method="post"
+											data-ajax="true"
+											success-message="Template created successfuly"
+											error-message="Error creating template"
+											success-function="addDomainToTree"
+											>
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title" id="myModalLabel">Adauga Domeniu</h4>
@@ -51,8 +58,7 @@
 				<br /><br />
 				<div class="row">
 					<div class="col-lg-4">
-						<div id="jqxTree"></div>
-						<input type="button" style="margin: 10px;" id="jqxbutton" value="Get item" />
+						<div id="domainTree"></div>
 					</div>
 				</div>
 			</div>

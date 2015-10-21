@@ -2,7 +2,6 @@
 
 namespace Issue\Http\Controllers;
 use Issue\Document;
-use Issue\DocumentTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\DocumentRequest;

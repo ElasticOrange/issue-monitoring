@@ -10,6 +10,14 @@ function redirect(url, timeout) {
         window.document.location = url;
     } , timeout);
 }
+function addValueToHiddenElement()
+{
+    var item = $('#domainTree').jqxTree('getSelectedItem');
+    var parentId = $(item).attr('id');
+
+    $('[data-parent=true]').attr("value", parentId);
+}
+
 
 function hideSuccessMessage() {
     $successBox.addClass('hidden');
@@ -183,7 +191,7 @@ function submitAjaxForm(form) {
 
         if (successFunctionName) {
             if (_.isFunction(window[successFunctionName])) {
-                window[successFunctionName]();
+                window[successFunctionName](data);
             }
         }
     });
@@ -194,6 +202,12 @@ function submitAjaxForm(form) {
 
         showErrorMessage(message);
     });
+}
+
+function addDomainToTree(domain) {
+    var currentTreeItem = $('#domainTree').jqxTree('getSelectedItem');
+    $('#domainTree').jqxTree('addTo', {label: domain['name']}, currentTreeItem);
+    $('#myModal').modal('hide');
 }
 
 $(document).ready(function() {
@@ -207,5 +221,9 @@ $(document).ready(function() {
     $(document).on('submit', 'form[data-ajax=true]', function(ev) {
         ev.preventDefault();
         submitAjaxForm(this);
+    });
+
+    $(document).on('click', $('[data-modal=true]'), function() {
+        addValueToHiddenElement();
     });
 });
