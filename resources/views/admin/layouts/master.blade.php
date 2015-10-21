@@ -27,11 +27,12 @@
 
 <body>
 
-<div id="wrapper">
-    @yield('js')
-    @include('admin.layouts.partials.navigation')
+    <div id="wrapper">
+        @yield('js')
+        @include('admin.layouts.partials.navigation')
 
         <div id="page-wrapper">
+            @include('admin.layouts.partials.error_messages')
             @yield('content')
         </div>
     </div>
