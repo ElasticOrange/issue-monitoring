@@ -46,7 +46,7 @@
         locale: 'ro',
         format: 'L',
         defaultDate: moment()
-    })
+    });
 
     $('[name=date]').val(moment().format("YYYY-MM-DD"));
 
