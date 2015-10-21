@@ -139,7 +139,19 @@ function hideLoader() {
 
 function submitGenericAjaxForm(form) {
     var $form = $(form);
-    var data = $form.serialize();
+    var formData = new FormData();
+
+    var data = $form.serializeArray();
+    $.each(data,function(key,input){
+        formData.append(input.name,input.value);
+    });
+
+    var file_data = $('input[type="file"]')[0].files;
+
+    for(var i = 0; i < file_data.length; i++){
+        formData.append("file", file_data[i]);
+    }
+
     var action = $form.attr('action') || window.document.location;
     var method = $form.attr('method') || 'POST';
 
@@ -147,8 +159,10 @@ function submitGenericAjaxForm(form) {
     var request = $.ajax({
         url: action,
         method: method,
-        data: data,
-        dataType: 'json'
+        data: formData,
+        dataType: 'json',
+        contentType: false,
+        processData: false
     });
 
     request.done(function(data) {

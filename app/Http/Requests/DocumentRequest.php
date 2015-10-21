@@ -28,7 +28,7 @@ class DocumentRequest extends Request
             'description.ro' => 'required|string',
             'description.en' => 'required|string',
             'init_at' => 'date',
-            'file' => 'required|min:1',
+            'file' => 'required|max:10000',
             'link' => 'url'
         ];
     }
