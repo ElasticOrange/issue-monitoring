@@ -27,7 +27,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($document as $key=>$item)
+							@foreach ($documents as $key=>$item)
 								<tr class="gradeA odd" role="row">
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
@@ -39,7 +39,7 @@
 									</td>
 									<td class="text-center">
 										@if(!empty($item->link))
-											<a href="http://{{ $item->link }}" target="_blank">
+											<a href="{{ $item->link }}" target="_blank">
 												<i class="fa fa-external-link"></i>
 											</a>
 										@endif

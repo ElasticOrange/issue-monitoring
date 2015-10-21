@@ -19,9 +19,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $document = Document::all();
+        $documents = Document::all();
 
-        return view('admin.backend.documents.list', ['document' => $document]);
+        return view('admin.backend.documents.list', ['documents' => $documents]);
     }
 
     public function downloadDocument($file_name)
@@ -112,7 +112,7 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DocumentRequest $request, $document)
+    public function update(Request $request, $document)
     {
         $this->fillDocument($document, $request);
         $document->save();
