@@ -1,7 +1,8 @@
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="form-group">
 	<label class="col-md-2 control-label">Nume</label>
 	<div class="col-md-8">
-		<input type="text" id="name" name="name" class="form-control"></input>
+		<input type="text" id="name" name="name" class="form-control" value="{{ $stakeholder->name }}"/>
     </div>
 </div>
 
@@ -25,17 +26,17 @@
 
         <div class="form-group">
             <label class="col-md-3">Contact</label>
-            <textarea id="encontent" name="contact[ro]" class="form-control" rows="3"></textarea>
+            <textarea id="encontent" name="contact[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->contact }}</textarea>
         </div>
 
         <div class="form-group">
             <label class="col-md-3">Profil</label>
-            <textarea id="encontent" name="profile[ro]" class="form-control" rows="3"></textarea>
+            <textarea id="encontent" name="profile[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
         </div>
 
         <div class="form-group">
             <label class="col-md-3">Pozitie si apartenenta</label>
-            <textarea id="encontent" name="position[ro]" class="form-control" rows="3"></textarea>
+            <textarea id="encontent" name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
         </div>
 
     </div>
@@ -44,17 +45,17 @@
 
         <div class="form-group">
             <label class="col-md-3">Contact</label>
-            <textarea id="encontent" name="contact[en]" class="form-control" rows="3"></textarea>
+            <textarea id="encontent" name="contact[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->contact }}</textarea>
         </div>
 
         <div class="form-group">
             <label class="col-md-3">Profile</label>
-            <textarea id="encontent" name="profile[en]" class="form-control" rows="3"></textarea>
+            <textarea id="encontent" name="profile[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
         </div>
 
         <div class="form-group">
             <label class="col-md-3">Position and affiliation</label>
-            <textarea id="encontent" name="position[en]" class="form-control" rows="3"></textarea>
+            <textarea id="encontent" name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
         </div>
 
     </div>
@@ -63,7 +64,7 @@
 <div class="form-group">
     <label class="col-md-2 control-label">Site/blog</label>
     <div class="col-md-8">
-        <input type="text" id="name" name="site" class="form-control"></input>
+        <input type="text" id="name" name="site" class="form-control" value="{{ $stakeholder->site }}"></input>
     </div>
 </div>
 
@@ -84,24 +85,15 @@
 <div class="form-group">
     <label class="col-md-2 control-label">Link public</label>
     <div class="col-md-8">
-        <input type="text" id="name" name="download_code" class="form-control"></input>
+        <input type="text" id="name" name="download_code" class="form-control" value="{{ $stakeholder->download_code }}"></input>
     </div>
 </div>
 
 <div class="checkbox col-md-8 col-md-offset-1">
-    <input type="hidden" value="0" />
     <label>
-        <input type="checkbox" value="1" name="publised"/>Publica
+        <input type="checkbox" value="1" name="published"/>Publica
     </label>
 </div>
 
-<div class="row">
-    <div class="col-sm-4" style="margin-top:25px;">
-        <button class="btn btn-primary">Salveaza schimbari</button>
-        <a href="/backend/stakeholders/"<button class="btn btn-info">Inapoi la lista</button></a>
-    </div>
-    <div class="col-sm-2 col-sm-offset-6" style="margin-top:25px;">
-        <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-erase"> Sterge</button>
-    </div>
 
 

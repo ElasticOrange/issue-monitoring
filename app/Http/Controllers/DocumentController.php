@@ -21,7 +21,7 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Document::all();
-// dd($documents);
+
         return view('admin.backend.documents.list', ['documents' => $documents]);
     }
 

@@ -18,7 +18,7 @@ class CreateStakeholdersTable extends Migration
             $table->enum('type',['persoana','organizatie']);
             $table->string('site');
             $table->string('download_code', 30);
-            $table->boolean('published');
+            $table->boolean('published')->nullable();
             $table->timestamps();
         });
         Schema::create('stakeholder_translations', function (Blueprint $table) {

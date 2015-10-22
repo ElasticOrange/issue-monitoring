@@ -19,4 +19,4 @@ Route::get('/', 'DocumentController@index');
 
 Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
 
-Route::resource('/backend/stakeholders', 'StakeholderController');
+Route::resource('/backend/stakeholder', 'StakeholderController');
