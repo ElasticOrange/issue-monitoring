@@ -10,19 +10,6 @@ function redirect(url, timeout) {
         window.document.location = url;
     } , timeout);
 }
-function addValueToHiddenElement(element) {
-    var item = $('#domainTree').jqxTree('getSelectedItem');
-    var itemId = $(item).attr('id');
-
-    $('[data-adauga=true]').show();
-    $('[data-edit=true]').addClass('hidden');
-    $('[data-ajax=true]').attr("action", "/backend/domain");
-    $('input[value=PUT]').remove();
-
-    $(element).attr("value", itemId);
-    console.log("id from adauga: ", itemId);
-}
-
 
 function hideSuccessMessage() {
     $successBox.addClass('hidden');
@@ -225,13 +212,7 @@ function submitAjaxForm(form) {
     });
 }
 
-function addDomainToTree(domain) {
-    var tree =  $('#domainTree');
-    var currentTreeItem = tree.jqxTree('getSelectedItem');
-    tree.jqxTree('addTo', {label: domain['name'], id: parseInt(domain['id'])}, currentTreeItem);
-    $('#myModal').modal('hide');
-}
-
+// Set message boxes
 $(document).ready(function() {
     $successBox = $('.message-box.success');
     $errorBox = $('.message-box.error');
@@ -244,9 +225,24 @@ $(document).ready(function() {
         ev.preventDefault();
         submitAjaxForm(this);
     });
+});
 
-    $(document).on('click', 'button[data-modal=true]', function(ev) {
-        ev.preventDefault();
-        addValueToHiddenElement('[data-parent=true]');
+$(document).ready(function() {
+    $('#dataTables-example').DataTable({
+        responsive: true,
+        "language":{
+                "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
+                "sInfoEmpty": "Arata de la 0 la 0 din 0 intrari",
+                "sLengthMenu": "Arata _MENU_ intrari",
+                "sSearch": "Cauta",
+                "paginate":{
+                    "next": "Inainte",
+                    "previous": "Inapoi",
+                    "first": "Primul",
+                    "last": "Ultimul"
+                },
+                "sEmptyTable": "Nu exista nicio inregistrare in tabel"
+        }
     });
 });
+

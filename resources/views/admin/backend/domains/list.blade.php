@@ -24,13 +24,14 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<form
-											action="/backend/domain"
-											method="post"
-											data-ajax="true"
-											success-message="Template created successfuly"
-											error-message="Error creating template"
-											success-function="addDomainToTree"
-											>
+										action="/backend/domain"
+										method="post"
+										data-ajax="true"
+										success-message="Template created successfuly"
+										error-message="Error creating template"
+										success-function=""
+										id="domain-form"
+									>
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title" id="myModalLabel">Adauga Domeniu</h4>
@@ -39,9 +40,8 @@
 											@include('admin.backend.domains.form')
 										</div>
 										<div class="modal-footer">
+											<button type="submit" class="btn btn-primary">Salveaza</button>
 											<button type="button" class="btn btn-default" data-dismiss="modal">Inchide</button>
-											<button type="submit" data-adauga="true" class="btn btn-primary">+ Adauga</button>
-											<button type="submit" data-edit="true" class="btn btn-primary hidden">Editeaza</button>
 										</div>
 									</form>
 								</div>
@@ -69,5 +69,5 @@
 @endsection
 
 @section('js')
-	<script src="{{ elixir('js/custom.js') }}"></script>
+    <script type="text/javascript" src="/js/domains.js"></script>
 @endsection

@@ -13,8 +13,7 @@
 
     <link type="text/css" rel="stylesheet" href="{{ elixir('css/all.css') }}" media="all">
 
-    <!-- Bootstrap Core CSS -->
-    <script src="{{ elixir('js/all.js') }}"></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,7 +27,6 @@
 <body>
 
     <div id="wrapper">
-        @yield('js')
         @include('admin.layouts.partials.navigation')
 
         <div id="page-wrapper">
@@ -37,17 +35,9 @@
         </div>
     </div>
 
-            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-{{--
-    <script>
-    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-                function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-                r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-    </script>
---}}
-
+    <!-- Bootstrap Core CSS -->
+    <script src="{{ elixir('js/all.js') }}"></script>
+    <script type="text/javascript" src="/js/global.js"></script>
+    @yield('js')
 </body>
 </html>

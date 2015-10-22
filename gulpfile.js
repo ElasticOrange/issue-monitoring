@@ -45,14 +45,14 @@ elixir(function(mix) {
         , 'moment/locale/ro.js'
         , 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
         ], 'public/js/all.js', bowerDir)
-    .scripts([
+/*    .scripts([
               '../customJs/deleteDocument.js'
             , '../customJs/ajaxForms.js'
             , '../customJs/jqxtreeActivation.js'
             , '../customJs/datatableTranslated.js'
             ]
             , 'public/js/custom.js'
-            , bowerDir)
+            , bowerDir)*/
     .styles(
             [
                   'style.css'
@@ -80,6 +80,6 @@ elixir(function(mix) {
 	.version([
 			  'css/all.css'
 			, 'js/all.js'
-            , 'js/custom.js'
+//            , 'js/custom.js'
 		]);
 });
