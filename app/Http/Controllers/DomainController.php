@@ -87,7 +87,8 @@ class DomainController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return $domain;
     }
 
     /**
@@ -97,9 +98,9 @@ class DomainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DomainRequest $request, $domain)
+    public function update(Request $request, $domain)
     {
-        $this->fillDocument($domain, $request);
+        $this->fillDomain($domain, $request);
         $domain->save();
 
         return $domain;

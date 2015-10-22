@@ -35,19 +35,5 @@ class DomainTableSeeder extends Seeder
 
 	        $domain->save();
         }
-
-        foreach (range(1, 7) as $index) {
-	        $domain = \Issue\Domain::create([
-	            'parent_id' => rand(2,4),
-	        ]);
-
-	        $string = str_random(6);
-	        $domainNames = [ 'ro' => $string.'_ro', 'en' => $string.'_en'];
-	        foreach (['ro', 'en'] as $locale) {
-	            $domain->translateOrNew($locale)->name = $domainNames[$locale];
-	        }
-
-	        $domain->save();
-        }
     }
 }

@@ -41,6 +41,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Inchide</button>
 											<button type="submit" data-adauga="true" class="btn btn-primary">+ Adauga</button>
+											<button type="submit" data-edit="true" class="btn btn-primary hidden">Editeaza</button>
 										</div>
 									</form>
 								</div>

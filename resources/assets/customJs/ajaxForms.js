@@ -10,12 +10,17 @@ function redirect(url, timeout) {
         window.document.location = url;
     } , timeout);
 }
-function addValueToHiddenElement()
-{
+function addValueToHiddenElement(element) {
     var item = $('#domainTree').jqxTree('getSelectedItem');
-    var parentId = $(item).attr('id');
+    var itemId = $(item).attr('id');
 
-    $('[data-parent=true]').attr("value", parentId);
+    $('[data-adauga=true]').show();
+    $('[data-edit=true]').addClass('hidden');
+    $('[data-ajax=true]').attr("action", "/backend/domain/");
+    $('input[value=PUT]').remove();
+
+    $(element).attr("value", itemId);
+    console.log("id from adauga: ", itemId);
 }
 
 
@@ -240,7 +245,8 @@ $(document).ready(function() {
         submitAjaxForm(this);
     });
 
-    $(document).on('click', $('[data-modal=true]'), function() {
-        addValueToHiddenElement();
+    $(document).on('click', 'button[data-modal=true]', function(ev) {
+        ev.preventDefault();
+        addValueToHiddenElement('[data-parent=true]');
     });
 });
