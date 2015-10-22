@@ -2,7 +2,6 @@
 
 namespace Issue\Http\Controllers;
 use Issue\Document;
-use Issue\DocumentTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\DocumentRequest;
@@ -20,9 +19,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $document = Document::all();
+        $documents = Document::all();
 
-        return view('admin.backend.documents.list', ['document' => $document]);
+        return view('admin.backend.documents.list', ['documents' => $documents]);
     }
 
     public function downloadDocument($file_name)
@@ -56,7 +55,7 @@ class DocumentController extends Controller
         $this->fillDocument($document, $request);
         $document->save();
 
-        return redirect()->action('DocumentController@index');
+        return $document;
     }
 
     /**
@@ -85,7 +84,7 @@ class DocumentController extends Controller
         $input = $request->all();
         Storage::makeDirectory(DOCUMENTS_LOCATION);
 
-        $document->init_at = $input['init_at'];
+        $document->init_at = $input['date'];
         $document->link = $input['link'];
         $document->public = true;
 
@@ -113,12 +112,12 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DocumentRequest $request, $document)
+    public function update(Request $request, $document)
     {
         $this->fillDocument($document, $request);
         $document->save();
 
-        return redirect()->action('DocumentController@index');
+        return $document;
     }
 
     /**

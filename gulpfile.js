@@ -22,13 +22,14 @@ elixir(function(mix) {
     	, 'startbootstrap-sb-admin-2/dist/css/sb-admin-2.css'
     	, 'morrisjs/morris.css'
     	, 'font-awesome/css/font-awesome.min.css'
-      , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
-      , 'datatables-responsive/css/responsive.dataTables.scss'
-      , 'jqwidgets/jqwidgets/styles/jqx.base.css'
+        , 'jqwidgets/jqwidgets/styles/jqx.base.css'
+        , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
+        , 'datatables-responsive/css/responsive.dataTables.scss'
+        , 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
     	] , 'public/css/style.css', bowerDir)
     .scripts([
           'jquery/dist/jquery.min.js'
-        , '../customJs/deleteDocument.js'
+        , 'lodash/lodash.min.js'
         , 'bootstrap/dist/js/bootstrap.min.js'
         , 'metisMenu/dist/metisMenu.js'
         , 'startbootstrap-sb-admin-2/dist/js/sb-admin-2.js'
@@ -40,7 +41,18 @@ elixir(function(mix) {
         , 'jqwidgets/jqwidgets/jqxscrollbar.js'
         , 'jqwidgets/jqwidgets/jqxpanel.js'
         , 'jqwidgets/jqwidgets/jqxtree.js'
-            ], 'public/js/all.js', bowerDir)
+        , 'moment/min/moment.min.js'
+        , 'moment/locale/ro.js'
+        , 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+        ], 'public/js/all.js', bowerDir)
+    .scripts([
+              '../customJs/deleteDocument.js'
+            , '../customJs/ajaxForms.js'
+            , '../customJs/jqxtreeActivation.js'
+            , '../customJs/datatableTranslated.js'
+            ]
+            , 'public/js/custom.js'
+            , bowerDir)
     .styles(
             [
                   'style.css'
@@ -68,5 +80,6 @@ elixir(function(mix) {
 	.version([
 			  'css/all.css'
 			, 'js/all.js'
+            , 'js/custom.js'
 		]);
 });

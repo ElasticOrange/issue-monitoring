@@ -1,8 +1,9 @@
 {
   "name": "issuemonitoring",
   "dependencies": {
-    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
     "startbootstrap-sb-admin-2": "~1.0.7",
-    "jqwidgets": "*"
+    "jqwidgets": "*",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "lodash": "~3.10.1"
   }
 }

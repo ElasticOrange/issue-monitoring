@@ -7,18 +7,18 @@
 	</div>
 </div>
 
+<div class="form-group">
+    <a href="/backend/document/create"><button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
+</div>
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<!-- <div class="panel-heading">
-				DataTables Advanced Tables
-			</div> -->
 			<div class="panel-body">
 				<div class="dataTable_wrapper">
 					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr role="row">
-								<th style="width: 80px;">Id</th>
 								<th style="width: 900px;">Descriere</th>
 								<th style="width: 80px;">Document</th>
 								<th style="width: 80px;">Link</th>
@@ -27,9 +27,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($document as $key=>$item)
+							@foreach ($documents as $key=>$item)
 								<tr class="gradeA odd" role="row">
-									<td class="sorting_1">{{ $key + 1 }}</td>
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
 										@if(!empty($item->file_name))
@@ -40,18 +39,18 @@
 									</td>
 									<td class="text-center">
 										@if(!empty($item->link))
-											<a href="http://{{ $item->link }}" target="_blank">
+											<a href="{{ $item->link }}" target="_blank">
 												<i class="fa fa-external-link"></i>
 											</a>
 										@endif
 									</td>
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
-									<td>
-										<a href="/backend/document/{{ $item->id }}/edit" class="btn btn-primary" style="width: 81px;">Edit</a>
+									<td class="text-center">
+										<a href="/backend/document/{{ $item->id }}/edit" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
 										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
 											<input name="_method" type="hidden" value="DELETE">
-											<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">
+											<button class="btn btn-danger" title="Delete" data-confirm="true" type="submit""><span class="glyphicon glyphicon-trash"></span></button>
 										</form>
 									</td>
 								</tr>
@@ -63,12 +62,8 @@
 		</div>
 	</div>
 </div>
+@endsection
 
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
-    });
-</script>
+@section('js')
+	<script src="{{ elixir('js/custom.js') }}"></script>
 @endsection

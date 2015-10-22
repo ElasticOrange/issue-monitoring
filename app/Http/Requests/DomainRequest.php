@@ -4,7 +4,7 @@ namespace Issue\Http\Requests;
 
 use Issue\Http\Requests\Request;
 
-class DocumentRequest extends Request
+class DomainRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +24,10 @@ class DocumentRequest extends Request
     public function rules()
     {
         return [
-            'description' => 'array',
-            'description.ro' => 'required|string',
-            'description.en' => 'required|string',
-            'init_at' => 'date',
-            'file' => 'required|max:10000',
-            'link' => 'url'
+            'name' => 'array',
+            'name.ro' => 'required|string',
+            'name.en' => 'required|string',
+            'parent_id' => 'required|integer'
         ];
     }
 }

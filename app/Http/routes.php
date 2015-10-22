@@ -19,6 +19,7 @@ Route::get('/', 'DocumentController@index');
 
 Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
 
+//Route::post('/backend/domain/{id}', 'DomainController@update');
 Route::resource('/backend/domain', 'DomainController');
 
 Route::get('/getTree', 'DomainController@getTree');

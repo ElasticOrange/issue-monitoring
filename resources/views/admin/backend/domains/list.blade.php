@@ -16,14 +16,21 @@
 						<input type="search" class="form-control" placeholder="Search here">
 					</div>
 					<div class="col-lg-1 col-lg-offset-4">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-modal="true" data-target="#myModal">
 							+ Adauga
 						</button>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
-									<form action="/backend/domain" method="post" data-form="true">
+									<form
+											action="/backend/domain"
+											method="post"
+											data-ajax="true"
+											success-message="Template created successfuly"
+											error-message="Error creating template"
+											success-function="addDomainToTree"
+											>
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 											<h4 class="modal-title" id="myModalLabel">Adauga Domeniu</h4>
@@ -34,6 +41,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Inchide</button>
 											<button type="submit" data-adauga="true" class="btn btn-primary">+ Adauga</button>
+											<button type="submit" data-edit="true" class="btn btn-primary hidden">Editeaza</button>
 										</div>
 									</form>
 								</div>
@@ -51,8 +59,7 @@
 				<br /><br />
 				<div class="row">
 					<div class="col-lg-4">
-						<div id="jqxTree"></div>
-						<input type="button" style="margin: 10px;" id="jqxbutton" value="Get item" />
+						<div id="domainTree"></div>
 					</div>
 				</div>
 			</div>
@@ -62,58 +69,5 @@
 @endsection
 
 @section('js')
-<script type="text/javascript">
-	$(function () {
-		var tree = $('#jqxTree');
-		var source = null;
-		$.ajax({
-			async: false,
-			url: "/getTree",
-			success: function (data, status, xhr) {
-				source = (data);
-			}
-		});
-
-		$(document).on('click', '#add-domain', function() {
-			/*
-				- function insert parent id into form(form) with
-					- get current selected domain id
-					- put domain id in input#parent.val()
-
-				- set data-ajax = create
-			 */
-
-		})
-
-
-/*			$(document).on('submit', 'data-ajax=create', function())
-				- on form submmit
-					- ajax post
-						- on succes
-							- insert element
-			$(document).on('submit', 'data-ajax=edit', function())
-				- on form submmit
-					- ajax post
-						- on succes
-							- insert element
-*/
-		$('#jqxTree').dblclick(funciton())
-			/*
-				- add insert parent id
-				= set data-ajax=edit
-
-
-			 */
-
-		var dataAdapter = new $.jqx.dataAdapter(source);
-		dataAdapter.dataBind();
-		var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{ name: 'name', map: 'label' }]);
-		console.log(records);
-		tree.jqxTree({ source: records,  height: 300, width: 200 });
-
-
-	});
-
-
-</script>
+	<script src="{{ elixir('js/custom.js') }}"></script>
 @endsection
