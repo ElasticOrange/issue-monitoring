@@ -23,14 +23,10 @@
 			<div class="form-group">
     			<div class="col-sm-4" style="margin-top:25px;">
 			        <button class="btn btn-primary">Salveaza schimbari</button>
-			        <a href="/backend/stakeholders/"<button class="btn btn-info">Inapoi la lista</button></a>
+			        <a href="{{ action('StakeholderController@index') }}"<button class="btn btn-info">Inapoi la lista</button></a>
     			</div>
     			<div class="col-sm-2 col-sm-offset-6" style="margin-top:25px;">
-			        <form method="POST" action="/backend/stakeholder/{{ $stakeholder    ->id }}" style="display: inline-block;">
-			            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-			            <input type="hidden" name="_method" value="DELETE">
-			            <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"> Sterge</span></button>
-			        </form>
+		            <a href="{{ action("StakeholderController@destroy", [$stakeholder]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
     			</div>
 			</div>
 		</form>

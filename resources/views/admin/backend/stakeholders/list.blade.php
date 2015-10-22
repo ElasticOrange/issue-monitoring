@@ -36,27 +36,22 @@
 									<th  class="text-center" style="width: 180x;">Contact</th>
 									<th  class="text-center" style="width: 180x;">Organizatie</th>
 									<th  class="text-center" style="width: 120px;">Foto</th>
-									<th  class="text-center" style="width: 180px;"></th>
+									<th  class="text-center" style="width: 180px;">Publicat</th>
 									<th  class="text-center" style="width: 200px;">Actiuni</th>
 								</tr>
 							</thead>
 							<tbody>
-								@foreach ($stakeholders as $stakeholder=>$item)
+								@foreach ($stakeholders as $stakeholder)
 									<tr class="gradeA odd" role="row">
-										<td>{{ $item->name }}</td>
-										<td>{{ $item->contact }}</td>
-										<td>{{ $item->type }}</td>
+										<td>{{ $stakeholder->name }}</td>
+										<td>{{ $stakeholder->contact }}</td>
+										<td>{{ $stakeholder->type }}</td>
 										<td></td>
-										<td></td>
+										<td class="text-center"><input type="checkbox" name="published" data-id="{{ $stakeholder->id }}" data-action="publish-stakeholder"/></td>
 										<td class="text-center">
 										<div class="row">
-											<a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span></a>
-											<a href="/backend/stakeholder/{{ $item->id }}/edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-											<form method="POST" action="/backend/stakeholder/{{ $item->id }}" style="display: inline-block;">
-												<input type="hidden" name="_token" value="{{ csrf_token() }}">
-												<button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-												<input type="hidden" name="_method" value="DELETE">
-											</form>
+											<a href="{{ action('StakeholderController@edit', [$stakeholder])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a href=" {{ action('StakeholderController@destroy', [$stakeholder]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 										</div>
 										</td>
 									</tr>

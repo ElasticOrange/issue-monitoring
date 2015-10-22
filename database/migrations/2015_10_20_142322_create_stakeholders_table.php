@@ -17,10 +17,12 @@ class CreateStakeholdersTable extends Migration
             $table->string('name');
             $table->enum('type',['persoana','organizatie']);
             $table->string('site');
-            $table->string('download_code', 30);
-            $table->boolean('published')->nullable();
+            $table->string('link');
+            $table->string('public_code', 30);
+            $table->boolean('published');
             $table->timestamps();
         });
+
         Schema::create('stakeholder_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('stakeholder_id')->unsigned();

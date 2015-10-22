@@ -34,26 +34,7 @@ class StakeholderController extends Controller
         return view('admin.backend.stakeholders.create', ['stakeholder' => $stakeholder]);
     }
 
-    public function fillStakeholder($stakeholder, $request)
-    {
-        $stakeholder->name = $request->get('name');
-        $stakeholder->type = $request->get('type');
-        $stakeholder->site = $request->get('site');
-        $stakeholder->download_code = $request->get('download_code');
-        if(is_null($request->get('published'))){
-            $stakeholder->published = 0;
-        }
-        else{
-        $stakeholder->published = $request->get('published');
-        }
-        foreach (['ro', 'en'] as $locale)
-        {
-            $stakeholder->translateOrNew($locale)->contact = $request->get('contact')[$locale];
-            $stakeholder->translateOrNew($locale)->profile = $request->get('profile')[$locale];
-            $stakeholder->translateOrNew($locale)->position = $request->get('position')[$locale];
-        }
-        return $stakeholder;
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -61,11 +42,10 @@ class StakeholderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StakeholderRequest $request)
     {
         $stakeholder = new Stakeholder;
-        $this->fillStakeholder($stakeholder, $request);
-        $stakeholder->save();
+        $stakeholder->setAll($request);
 
         return redirect()->action('StakeholderController@index');
     }
@@ -99,10 +79,9 @@ class StakeholderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $stakeholder)
+    public function update(StakeholderRequest $request, $stakeholder)
     {
-        $this->fillStakeholder($stakeholder, $request);
-        $stakeholder->save();
+        $stakeholder->setAll($request);
 
         return redirect()->action('StakeholderController@index');
     }
