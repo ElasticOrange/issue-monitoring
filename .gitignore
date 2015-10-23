@@ -2,6 +2,7 @@
 /vendor
 /node_modules
 .env
+getbranches.sh
 
 Envoy.blade.php
 
