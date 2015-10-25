@@ -19,7 +19,8 @@ Route::get('/', 'DocumentController@index');
 
 Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
 
-//Route::post('/backend/domain/{id}', 'DomainController@update');
-Route::resource('/backend/domain', 'DomainController');
+Route::get('/backend/domain/{domain}/edit', 'DomainController@edit');
+Route::get('/backend/domain/{domain}/delete', 'DomainController@destroy');
+Route::resource('/backend/domain', 'DomainController', ['except' => ['edit', 'destroy']]);
 
 Route::get('/getTree', 'DomainController@getTree');

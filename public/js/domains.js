@@ -19,11 +19,11 @@
         tree.jqxTree({source: records, height: 300, width: 200});
 
         $("#domainTree .jqx-tree-item").dblclick(function (event) {
-            var currentTreeItem = tree.jqxTree('getSelectedItem');
-            var currentTreeItemId = currentTreeItem.id;
-            var currentTreeItemParentId = currentTreeItem.parentId;
-            changeParentIdForSelectedItemBeforeEdit(currentTreeItemParentId);
-            editDomain(currentTreeItemId);
+            event.preventDefault();
+            $('#myModal').modal('show');
+
+            $('[data-ajax=true]').remove();
+            ajaxGetDomainName();
         });
 
         $(document).on('click', 'button[data-modal=true]', function(ev) {
@@ -32,7 +32,17 @@
         });
     });
 
-
+    function ajaxGetDomainName() {
+        var domain = getSelectedDomain();
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/backend/domain/" + domain.id + "/edit",
+            success: function (data) {
+                $('.modal-content').html(data);
+            }
+        });
+    }
     function getDomainForm() {
         if ( ! domainForm) {
             domainForm = $('#domain-form');
@@ -72,7 +82,7 @@
         var item = _.find(items, {id: id.toString()});
 
         return item;
-    }
+    };
 
     window.onDomainCreated = function(domain) {
         var currentDomain = getSelectedDomain();
@@ -84,48 +94,14 @@
         tree.jqxTree('expandItem', currentDomain);
 
         $('#myModal').modal('hide');
-    }
+    };
 
+    window.onDomainUpdate = function(domain) {
+        var currentDomain = getSelectedDomain();
+        tree.jqxTree('updateItem', currentDomain.element, {label: domain['name'], id: parseInt(domain['id'])});
+        tree.jqxTree('selectItem',  getTreeItemById(tree, domain.id));
+        tree.jqxTree('expandItem', currentDomain);
 
-/*
-
-    function changeLabelForSelectedTreeItem() {
-        var element = tree.jqxTree('getSelectedItem');
-        var label = $('#content').val();
-        tree.jqxTree('updateItem', element, {label: label});
-    }
-
-    function changeParentIdForSelectedItemBeforeEdit(parentId) {
-        $('[data-parent=true]').val(parentId);
-    console.log("edit parentid is: ", parentId);
-    }
-
-    function editDomain(id){
-        $('[data-ajax=true]').attr("action", "/backend/domain/"+id);
-        $('<input>').attr({type: 'hidden', name: '_method', value: 'PUT'}).appendTo('form');
-        $('#myModal').modal('show');
-        $('[data-adauga=true]').hide();
-        $('[data-edit=true]').removeClass('hidden');
-    }
-
-
-    function addDomainToTree(domain) {
-
-    }
-
-    function addValueToHiddenElement(element) {
-        var item = $('#domainTree').jqxTree('getSelectedItem');
-        var itemId = $(item).attr('id');
-
-        $('[data-adauga=true]').show();
-        $('[data-edit=true]').addClass('hidden');
-        $('[data-ajax=true]').attr("action", "/backend/domain");
-        $('input[value=PUT]').remove();
-
-        $(element).attr("value", itemId);
-        console.log("id from adauga: ", itemId);
-    }
-
-*/
-
+        $('#myModal').modal('hide');
+    };
 })();

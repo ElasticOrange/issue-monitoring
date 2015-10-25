@@ -49,11 +49,7 @@
 						</div>
 					</div>
 					<div class="col-lg-1">
-						<form method="POST" action="{{ action('DomainController@destroy') }}" style="display: inline-block;">
-							<input type="hidden" name="_token" value="{{ csrf_token() }}">
-							<input name="_method" type="hidden" value="DELETE">
-							<input class="btn btn-danger" data-confirm="true" type="submit" value="Delete" style="width: 81px;">
-						</form>
+						<a href="{{ action("DomainController@destroy", [$domain]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
 					</div>
 				</div>
 				<br /><br />

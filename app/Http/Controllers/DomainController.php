@@ -10,6 +10,7 @@ use Issue\Http\Requests\DomainRequest;
 
 class DomainController extends Controller
 {
+    use \Dimsav\Translatable\Translatable;
     /**
      * Display a listing of the resource.
      *
@@ -84,10 +85,9 @@ class DomainController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($domain)
     {
-
-        return $domain;
+        return view('admin.backend.domains.edit', ['domain' => $domain]);
     }
 
     /**
@@ -115,6 +115,6 @@ class DomainController extends Controller
     {
         $domain->delete();
 
-        return redirect()->action('DomainController@index');
+        return $domain;
     }
 }

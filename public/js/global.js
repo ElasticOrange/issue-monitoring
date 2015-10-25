@@ -225,9 +225,7 @@ $(document).ready(function() {
         ev.preventDefault();
         submitAjaxForm(this);
     });
-});
 
-$(document).ready(function() {
     $('#dataTables-example').DataTable({
         responsive: true,
         "language":{
@@ -243,6 +241,20 @@ $(document).ready(function() {
                 },
                 "sEmptyTable": "Nu exista nicio inregistrare in tabel"
         }
+    });
+
+    var dateWidgets = $('[date-widget=true]').datetimepicker({
+        locale: 'ro',
+        format: 'L',
+        defaultDate: moment()
+    });
+
+    $('[name=date]').val(moment().format("YYYY-MM-DD"));
+
+    dateWidgets.on('dp.change', function () {
+        var d = $(this).data("DateTimePicker").date();
+        var e = d.format("YYYY-MM-DD");
+        $('[name=date]').val(e);
     });
 });
 

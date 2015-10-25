@@ -65,5 +65,5 @@
 @endsection
 
 @section('js')
-	<script src="{{ elixir('js/custom.js') }}"></script>
+	<script type="text/javascript" src="/js/documents.js"></script>
 @endsection
