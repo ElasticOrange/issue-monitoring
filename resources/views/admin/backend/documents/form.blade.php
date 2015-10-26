@@ -16,6 +16,9 @@
     <div class="col-md-7">
 		<input type="file" id="file" name="file" />
     	{{ $document->original_file_name }}
+        <a href="/document/{{ $document->file_name }}" target="_blank">
+            <i class="fa fa-file-pdf-o"></i>
+        </a>
     </div>
 </div>
 <div class="form-group">
