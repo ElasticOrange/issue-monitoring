@@ -20,6 +20,7 @@
             </li>
             <li>
                 <a href="/backend/domain"><i class="fa fa-fw"></i>Domenii</a>
+                <a href="/backend/stakeholder"><i class="fa fa-user fa-fw"></i> Stakeholders</a>
             </li>
         </ul>
     </div>

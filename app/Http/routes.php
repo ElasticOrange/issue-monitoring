@@ -24,3 +24,5 @@ Route::get('/backend/domain/{domain}/delete', 'DomainController@destroy');
 Route::resource('/backend/domain', 'DomainController', ['except' => ['edit', 'destroy']]);
 
 Route::get('/getTree', 'DomainController@getTree');
+Route::get('/backend/stakeholder/{stakeholder}/delete', 'StakeholderController@destroy');
+Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['destroy']]);

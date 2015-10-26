@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('document', 'Issue\Document');
         $router->model('domain', 'Issue\Domain');
+        $router->model('stakeholder', 'Issue\Stakeholder');
     }
 
     /**
