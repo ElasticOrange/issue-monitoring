@@ -42,6 +42,7 @@ elixir(function(mix) {
               '../customJs/deleteDocument.js'
             , '../customJs/ajaxForms.js'
             , '../customJs/datatableTranslated.js'
+            , '../customJs/SetPublishedAjax.js'
             ]
             , 'public/js/custom.js'
             , bowerDir)

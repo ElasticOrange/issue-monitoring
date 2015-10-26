@@ -98,4 +98,11 @@ class StakeholderController extends Controller
 
         return redirect()->action('StakeholderController@index');
     }
+
+    public function setPublished($stakeholder, Request $request)
+    {
+        $stakeholder->published = $request->input('published') == 'true';
+        $stakeholder->save();
+        return ['result' => true];
+    }
 }

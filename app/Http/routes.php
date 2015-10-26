@@ -21,3 +21,5 @@ Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
 
 Route::get('/backend/stakeholder/{stakeholder}/delete', 'StakeholderController@destroy');
 Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['destroy']]);
+
+Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderController@setPublished');
