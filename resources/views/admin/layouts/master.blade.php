@@ -15,6 +15,7 @@
 
     <!-- Bootstrap Core CSS -->
     <script src="{{ elixir('js/all.js') }}"></script>
+    <script src="{{ elixir('js/custom.js') }}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,8 +36,8 @@
             @yield('content')
         </div>
     </div>
-
-            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<!--
+            Google Analytics: change UA-XXXXX-X to be your site's ID.
     <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
                 function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -45,7 +46,7 @@
                 r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-            <!-- /Scripts -->
+            /Scripts -->
 
 </body>
 </html>

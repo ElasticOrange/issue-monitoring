@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#dataTables-example').DataTable({
+    $('.dataTables-example').DataTable({
         responsive: true,
         "language":{
             "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
