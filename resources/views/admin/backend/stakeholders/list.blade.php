@@ -29,7 +29,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+						<table class="table table-striped table-bordered table-hover dataTables-example">
 							<thead>
 								<tr role="row">
 									<th  class="text-center" style="width: 180px;">Nume</th>
@@ -47,7 +47,7 @@
 										<td>{{ $stakeholder->contact }}</td>
 										<td>{{ $stakeholder->type }}</td>
 										<td></td>
-										<td class="text-center"><input type="checkbox" name="published" data-id="{{ $stakeholder->id }}" data-action="publish-stakeholder"/></td>
+										<td class="text-center"><input type="checkbox" name="published" data-id="{{ $stakeholder->id }}" data-action="publish-stakeholder" stakeholder-id="{{ $stakeholder->id }}" /></td>
 										<td class="text-center">
 										<div class="row">
 											<a href="{{ action('StakeholderController@edit', [$stakeholder])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
