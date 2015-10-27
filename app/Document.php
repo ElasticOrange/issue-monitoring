@@ -12,4 +12,9 @@ class Document extends Model
     public $dates = ['init_at'];
 
     protected $guarded = ['id'];
+
+    public function file()
+    {
+        return $this->belongsTo('Issue\UploadedFile', 'uploaded_file_id');
+    }
 }

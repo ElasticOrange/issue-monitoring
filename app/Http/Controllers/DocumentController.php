@@ -2,6 +2,7 @@
 
 namespace Issue\Http\Controllers;
 use Issue\Document;
+use Issue\UploadedFile;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\DocumentRequest;
@@ -24,14 +25,6 @@ class DocumentController extends Controller
         return view('admin.backend.documents.list', ['documents' => $documents]);
     }
 
-    public function downloadDocument($file_name)
-    {
-
-        $entry = Document::where('file_name', $file_name)->firstOrFail();
-
-        return response()->download(storage_path().DOCUMENTS_LOCATION . $file_name, $entry->original_file_name);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -40,6 +33,7 @@ class DocumentController extends Controller
     public function create()
     {
         $document = new Document(['init_at' => date('Y-m-d')]);
+
         return view('admin.backend.documents.create', ['document' => $document]);
     }
 
@@ -88,14 +82,9 @@ class DocumentController extends Controller
         $document->link = $input['link'];
         $document->public = true;
 
-        $fileExist = $request->file('file');
-        if($fileExist)
-        {
-            $file = $input['file'];
-            $document->file_name = str_random(40);
-            $document->original_file_name = $file->getClientOriginalName();
-            $file->move(storage_path().DOCUMENTS_LOCATION, $document->file_name);
-        }
+        $file = new UploadedFile;
+        $file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
+        $file->document()->save($document);
 
         foreach (['ro', 'en'] as $locale)
         {

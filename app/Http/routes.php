@@ -17,7 +17,8 @@ Route::resource('/backend/document', 'DocumentController');
 
 Route::get('/', 'DocumentController@index');
 
-Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
+//Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
+Route::get('/file/{fileName}', 'UploadedFileController@downloadFile');
 
 Route::get('/backend/domain/{domain}/edit', 'DomainController@edit');
 Route::get('/backend/domain/{domain}/delete', 'DomainController@destroy');
