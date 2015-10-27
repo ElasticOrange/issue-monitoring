@@ -37,4 +37,39 @@ class Stakeholder extends Model
         $this->save();
     }
 
+    public function sections()
+    {
+        return $this->hasMany('Issue\Section');
+    }
+
+    public function syncSections($sections)
+    {
+        $currentSections = $this->sections()->get();
+
+        if ( ! is_array($sections)) {
+            $sections = [];
+        }
+
+        foreach($currentSections as $currentSection)
+        {
+            if( ! array_key_exists($currentSection->id, $sections))
+            {
+                $currentSection->delete();
+                continue;
+            }
+
+            $currentSection->setSection($sections[$currentSection->id]);
+            $currentSection->save();
+            unset($sections[$currentSection->id]);
+        }
+
+        foreach ($sections as $sectionData) {
+            $newSection = new Section;
+            $newSection->setSection($sectionData);
+            $this->sections()->save($newSection);
+        }
+
+        return true;
+    }
+
 }

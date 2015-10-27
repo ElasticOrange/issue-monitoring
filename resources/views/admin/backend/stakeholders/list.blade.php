@@ -47,7 +47,15 @@
 										<td>{{ $stakeholder->contact }}</td>
 										<td>{{ $stakeholder->type }}</td>
 										<td></td>
-										<td class="text-center"><input type="checkbox" name="published" data-id="{{ $stakeholder->id }}" data-action="publish-stakeholder" stakeholder-id="{{ $stakeholder->id }}" /></td>
+										<td class="text-center">
+											<input  type="checkbox"
+													name="published"
+													data-id="{{ $stakeholder->id }}"
+													data-action="publish-stakeholder"
+													update-url="{{ action("StakeholderController@setPublished",[$stakeholder]) }}"
+													@if($stakeholder->published) checked="checked" @endif
+											/>
+										</td>
 										<td class="text-center">
 										<div class="row">
 											<a href="{{ action('StakeholderController@edit', [$stakeholder])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>

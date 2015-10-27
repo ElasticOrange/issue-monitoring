@@ -50,6 +50,7 @@ elixir(function(mix) {
             , '../customJs/ajaxForms.js'
             , '../customJs/jqxtreeActivation.js'
             , '../customJs/datatableTranslated.js'
+            , '../customJs/SetPublishedAjax.js'
             ]
             , 'public/js/custom.js'
             , bowerDir)*/

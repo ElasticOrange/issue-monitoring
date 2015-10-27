@@ -1,3 +1,17 @@
+$(document).ready(function(){
+    $('[data-confirm=true]').click(function(e)
+    {
+        if(confirm('Vrei sa stergi acest user ?'))
+        {
+            return true;
+        }
+        else
+        {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
 var $successBox, $errorBox, $warningBox, successBoxTimeout, errorBoxTimeout;
 var LOADER_DELAY = 200;
 
@@ -131,21 +145,7 @@ function hideLoader() {
 
 function submitGenericAjaxForm(form) {
     var $form = $(form);
-    var formData = new FormData();
-    var data = $form.serializeArray();
-
-    $.each(data,function(key,input){
-        formData.append(input.name,input.value);
-    });
-
-    if($('input[type="file"]').length) {
-        var file_data = $('input[type="file"]')[0].files;
-
-        for(var i = 0; i < file_data.length; i++){
-            formData.append("file", file_data[i]);
-        }
-    }
-
+    var data = $form.serialize();
     var action = $form.attr('action') || window.document.location;
     var method = $form.attr('method') || 'POST';
 
@@ -153,10 +153,8 @@ function submitGenericAjaxForm(form) {
     var request = $.ajax({
         url: action,
         method: method,
-        data: formData,
-        dataType: 'json',
-        contentType: false,
-        processData: false
+        data: data,
+        dataType: 'json'
     });
 
     request.done(function(data) {
@@ -199,7 +197,7 @@ function submitAjaxForm(form) {
 
         if (successFunctionName) {
             if (_.isFunction(window[successFunctionName])) {
-                window[successFunctionName](data);
+                window[successFunctionName]();
             }
         }
     });
@@ -224,5 +222,39 @@ $(document).ready(function() {
         ev.preventDefault();
         submitAjaxForm(this);
     });
-
 });
+
+$(document).ready(function() {
+    $('.dataTables-example').DataTable({
+        responsive: true,
+        "language":{
+            "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
+            "sInfoEmpty": "Arata de la 0 la 0 din 0 intrari",
+            "sLengthMenu": "Arata _MENU_ intrari",
+            "sSearch": "Cauta",
+            "paginate":{
+                "next": "Inainte",
+                "previous": "Inapoi",
+                "first": "Primul",
+                "last": "Ultimul"
+            },
+            "sEmptyTable": "Nu exista nici o inregistrare in tabel"
+        }
+    });
+});
+
+$(document).ready(function(){
+	$("input[data-action='publish-stakeholder'").click(function(){
+		var request = $.ajax({
+			url: $(this).attr('update-url'),
+			data: {
+				published:$(this).prop('checked'),
+			},
+			method:'get'
+		});
+		request.done(function(data){
+			console.error("ajaxresult",data);
+		});
+	});
+});
+//# sourceMappingURL=custom.js.map

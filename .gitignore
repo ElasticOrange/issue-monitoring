@@ -8,10 +8,9 @@ Envoy.blade.php
 
 # Ignore the builded files. The application needs to be built on the server.
 /public/build
-/public/css
 /public/js/all.js
 /public/js/all.js.map
-
+/public/css
 /resources/assets/bower
 
 /storage/documents

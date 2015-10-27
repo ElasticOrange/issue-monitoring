@@ -61,6 +61,46 @@
     </div>
 </div>
 
+<hr>
+
+<div class="sections">
+    @if(isset($sections))
+        @foreach($sections as $section)
+        <div class="section" id="section{{ $section->id }}">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#section_ro{{ $section->id }}" data-toggle="tab">RO</a></li>
+                <li><a href="#section_en{{ $section->id }}" data-toggle="tab">EN</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="section_ro{{ $section->id }}">
+                    <div class="form-group">
+                        <label class="col-md-3">Titlu</label>
+                        <input type="text" name="section[{{ $section->id }}][title][ro]" class="form-control" value="{{ $section->translateOrNew('ro')->title }}"></input>
+                        <label class="col-md-3">Descriere</label>
+                        <textarea name="section[{{ $section->id }}][description][ro]" class="form-control" rows="3">{{ $section->translateOrNew('ro')->description }}</textarea>
+                    </div>
+                </div>
+                <div class="tab-pane" id="section_en{{ $section->id }}">
+                    <div class="form-group">
+                        <label class="col-md-3">Title</label>
+                        <input type="text" name="section[{{ $section->id }}][title][en]" class="form-control" value="{{ $section->translateOrNew('en')->title }}">
+                        <label class="col-md-3">Description</label>
+                        <textarea name="section[{{ $section->id }}][description][en]" class="form-control" rows="3">{{ $section->translateOrNew('en')->description }}</textarea>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger delete_section" id="{{ $section->id }}">Sterge Sectiune</button>
+            </div>
+            <hr>
+        </div>
+        @endforeach
+    @endif
+    @include('admin.backend.stakeholders.section')
+</div>
+
+
+<button type="button" class="btn btn-default add_section">Adauga sectiune</button>
+
 <div class="form-group">
     <label class="col-md-2 control-label">Site/blog</label>
     <div class="col-md-8">
@@ -100,6 +140,11 @@
         />Publica
     </label>
 </div>
+
+@section('js')
+    <script type="text/javascript" src="/js/stakeholder-sections.js"></script>
+@endsection
+
 
 
 

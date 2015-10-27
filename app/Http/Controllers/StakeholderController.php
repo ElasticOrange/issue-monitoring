@@ -2,7 +2,7 @@
 
 namespace Issue\Http\Controllers;
 use Issue\Stakeholder;
-use Issue\StakeholderTranslation;
+use Issue\Section;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\StakeholderRequest;
@@ -43,10 +43,12 @@ class StakeholderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StakeholderRequest $request)
+    public function store(Request $request)
     {
         $stakeholder = new Stakeholder;
         $stakeholder->setAll($request);
+
+        $stakeholder->syncSections($request->input('section'));
 
         return redirect()->action('StakeholderController@index');
     }
@@ -70,7 +72,7 @@ class StakeholderController extends Controller
      */
     public function edit($stakeholder)
     {
-        return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder]);
+        return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder, 'sections' => $stakeholder->sections()->get()]);
     }
 
     /**
@@ -83,6 +85,7 @@ class StakeholderController extends Controller
     public function update(StakeholderRequest $request, $stakeholder)
     {
         $stakeholder->setAll($request);
+        $stakeholder->syncSections($request->input('section'));
 
         return redirect()->action('StakeholderController@index');
     }
@@ -98,5 +101,12 @@ class StakeholderController extends Controller
         $stakeholder -> delete();
 
         return redirect()->action('StakeholderController@index');
+    }
+
+    public function setPublished($stakeholder, Request $request)
+    {
+        $stakeholder->published = $request->input('published') == 'true';
+        $stakeholder->save();
+        return ['result' => true];
     }
 }
