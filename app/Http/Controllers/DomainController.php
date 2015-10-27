@@ -50,7 +50,7 @@ class DomainController extends Controller
     {
         $domain = new Domain;
 
-        return view('admin.backend.domains.list', ['domain' => $domain]);
+        return view('admin.backend.domains.create', ['domain' => $domain]);
     }
 
     /**
