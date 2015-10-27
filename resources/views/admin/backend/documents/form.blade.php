@@ -15,7 +15,10 @@
     <label class="col-md-3 control-label">Incarca document</label>
     <div class="col-md-7">
 		<input type="file" id="file" name="file" />
-    	{{ $document->original_file_name }}
+        <a href="/document/{{ $document->file_name }}" target="_blank">
+    	   {{ $document->original_file_name }}
+            <i class="fa fa-file-pdf-o"></i>
+        </a>
     </div>
 </div>
 <div class="form-group">
