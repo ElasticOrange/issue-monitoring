@@ -61,19 +61,17 @@
     </div>
 </div>
 
-<button type="button" class="btn btn-default add_section">Adauga sectiune</button>
+<hr>
 
 <div class="sections">
-<section type="text/template" id="section_template">
-    <div class="section">
+    <script type="text/template" id="section_template">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#ro2" data-toggle="tab">RO</a></li>
-            <li><a href="#en2" data-toggle="tab">EN</a></li>
+            <li class="active"><a href="#section_ro<%= sectionid%>" data-toggle="tab">RO</a></li>
+            <li><a href="#section_en<%= sectionid%>" data-toggle="tab">EN</a></li>
         </ul>
 
         <div class="tab-content">
-
-            <div class="tab-pane active" id="ro2">
+            <div class="tab-pane active" id="section_ro<%= sectionid%>">
                 <div class="form-group">
                     <label class="col-md-3">Titlu</label>
                     <input type="text" name="title[ro]" class="form-control"></input>
@@ -81,8 +79,7 @@
                     <textarea name="description[ro]" class="form-control" rows="3"></textarea>
                 </div>
             </div>
-
-            <div class="tab-pane" id="en2">
+            <div class="tab-pane" id="section_en<%= sectionid%>">
                 <div class="form-group">
                     <label class="col-md-3">Title</label>
                     <input type="text" name="title[en]" class="form-control">
@@ -92,9 +89,12 @@
             </div>
             <button type="button" class="btn btn-danger delete_section">Sterge Sectiune</button>
         </div>
-    </div>
-</section>
+        <hr>
+    </script>
 </div>
+
+
+<button type="button" class="btn btn-default add_section">Adauga sectiune</button>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Site/blog</label>
@@ -140,14 +140,13 @@
 
 var compiled = _.template($('#section_template').html());
 
+
 $('.add_section').on('click', function(){
-    $('.sections').append(compiled);
-});
 
-$('.delete_section').on('click', function(){
-    $('.sections div:last-child').remove();
-});
+    var template_populated= compiled({ 'sectionid':_.random(100000, 1000000)});
 
+    $('.sections').append(template_populated);
+});
 
 </script>
 
