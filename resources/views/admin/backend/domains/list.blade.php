@@ -30,7 +30,7 @@
 					</div>
 					<div class="col-lg-2">
 						<button type="submit" title="Edit" id="editDomain" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
-						<a href="{{ action("DomainController@destroy", [$domain]) }}" id="deleteDomain" title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+						<button id="deleteDomain" title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
 					</div>
 				</div>
 				<br /><br />

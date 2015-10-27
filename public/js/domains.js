@@ -35,7 +35,14 @@
 
     function setIdForDeleteAction() {
         var domain = getSelectedDomain();
-        $('#deleteDomain').attr('href', '/backend/domain/' + domain.id + '/delete');
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/backend/domain/" + domain.id + "/delete",
+            success: function (data) {
+                tree.jqxTree('removeItem', domain.element);
+            }
+        });
     }
 
     function ajaxGetDomainNameForEdit() {
@@ -96,10 +103,5 @@
         tree.jqxTree('expandItem', currentDomain);
 
         $('#myModal').modal('hide');
-    };
-
-    window.onDomainDeleted = function() {
-        var currentDomain = getSelectedDomain();
-        tree.jqxTree('updateItem', currentDomain.element);
     };
 })();
