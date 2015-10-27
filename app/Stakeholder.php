@@ -37,4 +37,9 @@ class Stakeholder extends Model
         $this->save();
     }
 
+    public function section()
+    {
+        return $this->hasMany('Issue\Section');
+    }
+
 }

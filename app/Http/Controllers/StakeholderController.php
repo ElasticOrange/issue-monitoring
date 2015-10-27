@@ -2,7 +2,7 @@
 
 namespace Issue\Http\Controllers;
 use Issue\Stakeholder;
-use Issue\StakeholderTranslation;
+use Issue\Section;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\StakeholderRequest;
@@ -47,8 +47,18 @@ class StakeholderController extends Controller
         $stakeholder = new Stakeholder;
         $stakeholder->setAll($request);
 
+        $section = new Section;
+        $section->setSections($request);
+
         return redirect()->action('StakeholderController@index');
     }
+
+    // public function storeSections(Request $request)
+    // {
+
+
+    //     dd($section);
+    // }
 
     /**
      * Display the specified resource.
