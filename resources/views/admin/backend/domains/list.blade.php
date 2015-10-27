@@ -14,42 +14,23 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<input type="search" class="form-control" placeholder="Search here">
+						<br />
 					</div>
-					<div class="col-lg-1 col-lg-offset-4">
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-modal="true" data-target="#myModal">
+					<div class="col-lg-1 col-lg-offset-3">
+						<button type="submit" class="btn btn-primary" id="addDomain" data-toggle="modal" data-modal="true" data-target="#myModal">
 							+ Adauga
 						</button>
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
-									<form
-										action="/backend/domain"
-										method="post"
-										data-ajax="true"
-										success-message="Template created successfuly"
-										error-message="Error creating template"
-										success-function=""
-										id="domain-form"
-									>
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title" id="myModalLabel">Adauga Domeniu</h4>
-										</div>
-										<div class="modal-body">
-											@include('admin.backend.domains.form')
-										</div>
-										<div class="modal-footer">
-											<button type="submit" class="btn btn-primary">Salveaza</button>
-											<button type="button" class="btn btn-default" data-dismiss="modal">Inchide</button>
-										</div>
-									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-1">
-						<a href="{{ action("DomainController@destroy", [$domain]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
+					<div class="col-lg-2">
+						<button type="submit" title="Edit" id="editDomain" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
+						<button id="deleteDomain" title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
 					</div>
 				</div>
 				<br /><br />

@@ -18,21 +18,34 @@
         var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{name: 'name', map: 'label'}]);
         tree.jqxTree({source: records, height: 300, width: 200});
 
-        $("#domainTree .jqx-tree-item").dblclick(function (event) {
-            event.preventDefault();
+        $(document).on('click', '#editDomain', function (event) {
             $('#myModal').modal('show');
-
-            $('[data-ajax=true]').remove();
-            ajaxGetDomainName();
+            ajaxGetDomainNameForEdit();
         });
 
-        $(document).on('click', 'button[data-modal=true]', function(ev) {
+        $(document).on('click', '#addDomain', function(ev) {
             ev.preventDefault();
             setDomainFormForCreate();
         });
+
+        $(document).on('click', '#deleteDomain', function(ev) {
+            setIdForDeleteAction();
+        });
     });
 
-    function ajaxGetDomainName() {
+    function setIdForDeleteAction() {
+        var domain = getSelectedDomain();
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/backend/domain/" + domain.id + "/delete",
+            success: function (data) {
+                tree.jqxTree('removeItem', domain.element);
+            }
+        });
+    }
+
+    function ajaxGetDomainNameForEdit() {
         var domain = getSelectedDomain();
         $.ajax({
             async: false,
@@ -40,21 +53,9 @@
             url: "/backend/domain/" + domain.id + "/edit",
             success: function (data) {
                 $('.modal-content').html(data);
+                $('input[name=parent_id]').attr("value", parseInt(domain.parentId));
             }
         });
-    }
-    function getDomainForm() {
-        if ( ! domainForm) {
-            domainForm = $('#domain-form');
-        }
-
-        return domainForm;
-    }
-
-    function resetForm(form) {
-        var token = form.find('input[name=_token]').val();
-        form.find(':input').val('');
-        form.find('input[name=_token]').val(token);
     }
 
     function getSelectedDomain() {
@@ -63,17 +64,16 @@
     }
 
     function setDomainFormForCreate() {
-        var form = getDomainForm();
-
-        resetForm(form);
-
-        form.attr('action', '/backend/domain');
-        form.attr('success-function', 'onDomainCreated')
-
         var domain = getSelectedDomain();
-        if (domain.id) {
-            form.find('input[name=parent_id]').val(domain.id);
-        }
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/backend/domain/create",
+            success: function (data) {
+                $('.modal-content').html(data);
+                $('input[name=parent_id]').attr("value", parseInt(domain.id));
+            }
+        });
     }
 
     window.getTreeItemById = function (tree, id) {
