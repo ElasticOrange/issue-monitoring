@@ -15,6 +15,6 @@ class Document extends Model
 
     public function file()
     {
-        return $this->belongsTo('Issue\UploadedFile');
+        return $this->belongsTo('Issue\UploadedFile', 'uploaded_file_id');
     }
 }

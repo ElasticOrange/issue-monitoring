@@ -3,9 +3,8 @@
 namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Storage;
-use File;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UploadedFile extends Model
 {
