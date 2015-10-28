@@ -14,7 +14,11 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('stakeholder_id')->unsigned()->index();
             $table->timestamps();
+
+            // $table->index(['stakeholder_id']);
+            $table->foreign('stakeholder_id')->references('id')->on('stakeholders')->onDelete('cascade');
         });
 
         Schema::create('section_translations', function (Blueprint $table) {
@@ -38,6 +42,7 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('section_translations');
+        Schema::drop('sections');
     }
 }

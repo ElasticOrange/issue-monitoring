@@ -2,7 +2,8 @@ $(document).ready(function(){
 	var compiled = _.template($('#section_template').html());
 
 	$('.add_section').on('click', function(){
-	    var template_populated= compiled({ 'sectionid':_.random(100000, 1000000)});
+	    var template_populated= compiled({ 'sectionid': _.random(100000, 1000000),
+											'id': _.uniqueId()});
 	    $('.sections').append(template_populated);
 	});
 

@@ -42,13 +42,16 @@ class StakeholderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StakeholderRequest $request)
+    public function store(Request $request)
     {
         $stakeholder = new Stakeholder;
         $stakeholder->setAll($request);
 
-        $section = new Section;
-        $section->setSections($request);
+        foreach($request->get('section') as $sec)
+        {
+            $section = new Section;
+            $section->setSections($request, $stakeholder, $sec);
+        }
 
         return redirect()->action('StakeholderController@index');
     }
