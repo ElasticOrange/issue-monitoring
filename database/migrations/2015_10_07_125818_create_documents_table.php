@@ -15,8 +15,7 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('public');
-            $table->string('file_name')->nullable();
-            $table->string('original_file_name')->nullable();
+            $table->integer('uploaded_file_id')->nullable();
             $table->string('link')->nullable();
             $table->timestamp('init_at');
             $table->timestamps();

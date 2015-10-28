@@ -2,6 +2,7 @@
 
 namespace Issue\Http\Controllers;
 use Issue\Document;
+use Issue\UploadedFile;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\DocumentRequest;
@@ -88,14 +89,9 @@ class DocumentController extends Controller
         $document->link = $input['link'];
         $document->public = true;
 
-        $fileExist = $request->file('file');
-        if($fileExist)
-        {
-            $file = $input['file'];
-            $document->file_name = str_random(40);
-            $document->original_file_name = $file->getClientOriginalName();
-            $file->move(storage_path().DOCUMENTS_LOCATION, $document->file_name);
-        }
+        $file = new UploadedFile;
+        $file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
+        $file->document()->save($document);
 
         foreach (['ro', 'en'] as $locale)
         {
