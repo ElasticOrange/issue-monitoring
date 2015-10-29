@@ -17,11 +17,12 @@ class UploadedFile extends Model
             return false;
         }
 
-        while(UploadedFile::where('file_name', $this->file_name = str_random(40))->count() > 0)
+        do
         {
             $this->file_name = str_random(40);
-        }
+        } while(UploadedFile::where('file_name', $this->file_name)->count() > 0);
 
+        $this->folder = $directory;
         $this->original_file_name = $uploadedFile->getClientOriginalName();
         $uploadedFile->move(storage_path().$directory, $this->file_name);
         $this->mime_type = File::mimeType(storage_path().$directory.$this->file_name);

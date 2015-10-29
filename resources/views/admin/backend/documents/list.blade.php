@@ -31,11 +31,9 @@
 								<tr class="gradeA odd" role="row">
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
-										@if(!empty($item->file_name))
-											<a href="/document/{{ $item->file_name }}" target="_blank">
-												<i class="fa fa-file-pdf-o"></i>
-											</a>
-										@endif
+										<a href="{{ action('UploadedFileController@downloadFile', [$item->file->file_name]) }}" target="_blank">
+											<i class="fa fa-file-pdf-o"></i>
+										</a>
 									</td>
 									<td class="text-center">
 										@if(!empty($item->link))

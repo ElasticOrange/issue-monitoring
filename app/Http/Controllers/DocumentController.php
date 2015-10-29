@@ -25,14 +25,6 @@ class DocumentController extends Controller
         return view('admin.backend.documents.list', ['documents' => $documents]);
     }
 
-    public function downloadDocument($file_name)
-    {
-
-        $entry = Document::where('file_name', $file_name)->firstOrFail();
-
-        return response()->download(storage_path().DOCUMENTS_LOCATION . $file_name, $entry->original_file_name);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,6 +33,7 @@ class DocumentController extends Controller
     public function create()
     {
         $document = new Document(['init_at' => date('Y-m-d')]);
+
         return view('admin.backend.documents.create', ['document' => $document]);
     }
 

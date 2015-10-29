@@ -19,7 +19,7 @@ class StakeholderController extends Controller
     public function index()
     {
         $stakeholders = Stakeholder::all();
-// dd($stakeholders);
+
         return view('admin.backend.stakeholders.list', ['stakeholders' => $stakeholders]);
     }
 
@@ -31,6 +31,7 @@ class StakeholderController extends Controller
     public function create()
     {
         $stakeholder = new Stakeholder;
+
         return view('admin.backend.stakeholders.create', ['stakeholder' => $stakeholder]);
     }
 
