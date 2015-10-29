@@ -47,21 +47,10 @@ class StakeholderController extends Controller
         $stakeholder = new Stakeholder;
         $stakeholder->setAll($request);
 
-        foreach($request->get('section') as $sec)
-        {
-            $section = new Section;
-            $section->setSections($request, $stakeholder, $sec);
-        }
+        $stakeholder->syncSections($request->input('section'));
 
         return redirect()->action('StakeholderController@index');
     }
-
-    // public function storeSections(Request $request)
-    // {
-
-
-    //     dd($section);
-    // }
 
     /**
      * Display the specified resource.
@@ -82,7 +71,7 @@ class StakeholderController extends Controller
      */
     public function edit($stakeholder)
     {
-        return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder]);
+        return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder, 'sections' => $stakeholder->sections()->get()]);
     }
 
     /**
@@ -95,6 +84,7 @@ class StakeholderController extends Controller
     public function update(StakeholderRequest $request, $stakeholder)
     {
         $stakeholder->setAll($request);
+        $stakeholder->syncSections($request->input('section'));
 
         return redirect()->action('StakeholderController@index');
     }

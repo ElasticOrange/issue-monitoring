@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	$('.add_section').on('click', function(){
 	    var template_populated= compiled({ 'sectionid': _.random(100000, 1000000),
-											'id': _.uniqueId()});
+											'id': _.uniqueId('new-')});
 	    $('.sections').append(template_populated);
 	});
 

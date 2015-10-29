@@ -20,14 +20,13 @@ class Section extends Model
     	return $this->belongsTo('Issue\Stakeholder');
     }
 
-    public function setSections($request, $stakeholder, $sec)
+    public function setSection($section_data)
     {
-        $this->stakeholder_id = $stakeholder->id;
         foreach (\Config::get('app.all_locales') as $locale)
         {
-            $this->translateOrNew($locale)->title = $sec['title'][$locale];
-            $this->translateOrNew($locale)->description = $sec['description'][$locale];
+            $this->translateOrNew($locale)->title = $section_data['title'][$locale];
+            $this->translateOrNew($locale)->description = $section_data['description'][$locale];
         }
-        $this->save();
+        return true;
     }
 }
