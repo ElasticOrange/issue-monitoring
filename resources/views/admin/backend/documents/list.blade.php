@@ -16,7 +16,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="dataTable_wrapper">
-					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+					<table class="table table-striped table-bordered table-hover" data-table="true">
 						<thead>
 							<tr role="row">
 								<th style="width: 200px;">Titlu</th>
