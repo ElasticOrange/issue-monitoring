@@ -9,18 +9,8 @@
 	</div>
 
 	<div class="row">
-		<div class="form-group">
-			<div class="col-lg-10">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Go!</button>
-					</span>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<a href="/backend/stakeholder/create"><button class="btn btn-default form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
-			</div>
+		<div class="col-lg-2">
+			<a href="/backend/stakeholder/create"><button class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
 		</div>
 	</div>
 
@@ -29,12 +19,12 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover dataTables-example">
+						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
 									<th  class="text-center" style="width: 180px;">Nume</th>
 									<th  class="text-center" style="width: 180x;">Contact</th>
-									<th  class="text-center" style="width: 180x;">Organizatie</th>
+									<th  class="text-center" style="width: 180x;">Tip</th>
 									<th  class="text-center" style="width: 120px;">Foto</th>
 									<th  class="text-center" style="width: 180px;">Publicat</th>
 									<th  class="text-center" style="width: 200px;">Actiuni</th>
@@ -74,5 +64,5 @@
 @endsection
 
 @section('js')
-	<script type="text/javascript" src="/js/datatableTranslated.js"></script>
+    <script type="text/javascript" src="/js/stakeholders.js"></script>
 @endsection

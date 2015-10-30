@@ -10,8 +10,8 @@
     <label class="col-md-2 control-label">Tip</label>
     <div class="col-md-8">
         <select class="form-control" name="type">
-            <option>persoana</option>
-            <option>organizatie</option>
+            <option value="persoana">persoana</option>
+            <option value="organizatie" @if($stakeholder->type === 'organizatie') selected="selected" @endif>organizatie</option>
         </select>
     </div>
 </div>
@@ -98,8 +98,7 @@
     @include('admin.backend.stakeholders.section')
 </div>
 
-
-<button type="button" class="btn btn-primary add_section">Adauga sectiune</button>
+<button type="button" class="btn btn-primary add_section"><span class="glyphicon glyphicon-plus"></span> Adauga sectiune</button>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Site/blog</label>
@@ -140,10 +139,6 @@
         />Publica
     </label>
 </div>
-
-@section('js')
-    <script type="text/javascript" src="/js/stakeholder-sections.js"></script>
-@endsection
 
 
 
