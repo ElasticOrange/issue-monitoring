@@ -23,8 +23,6 @@ elixir(function(mix) {
     	, 'morrisjs/morris.css'
     	, 'font-awesome/css/font-awesome.min.css'
         , 'jqwidgets/jqwidgets/styles/jqx.base.css'
-        , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
-        , 'datatables-responsive/css/responsive.dataTables.scss'
         , 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
     	] , 'public/css/style.css', bowerDir)
     .scripts([
