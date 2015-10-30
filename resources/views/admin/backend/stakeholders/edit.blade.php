@@ -23,6 +23,14 @@
 		>
 			<input type="hidden" name="_method" value="PUT"/>
 			@include('admin.backend.stakeholders.form')
+
+			<div class="form-group">
+			    <label class="col-md-2 control-label">Link public</label>
+			    <div class="col-md-8 control-label" style="text-align: left">
+			    	<a href="{{ action("StakeholderController@show", [$stakeholder->public_code]) }}" target="_blank">{{ action("StakeholderController@show", [$stakeholder->public_code]) }}</a>
+			    </div>
+			</div>
+
 			<div class="form-group">
     			<div class="col-sm-4" style="margin-top:25px;">
 			        <button class="btn btn-primary">Salveaza schimbari</button>

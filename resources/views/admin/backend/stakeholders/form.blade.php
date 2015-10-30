@@ -148,32 +148,16 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label">Link public</label>
-    <div class="col-md-8">
-        <input type="text" name="public_code" class="form-control" value="{{ $stakeholder->public_code }}"></input>
+    <div class="checkbox col-md-10 col-md-offset-2">
+        <label>
+            <input  type="checkbox"
+                    value="1"
+                    name="published"
+                    @if($stakeholder->published)
+                        checked="checked"
+                    @endif
+            />Publica
+        </label>
     </div>
 </div>
-
-<div class="checkbox col-md-8 col-md-offset-1">
-    <label>
-        <input  type="checkbox"
-                value="1"
-                name="published"
-                @if($stakeholder->published)
-                    checked="checked"
-                @endif
-        />Publica
-    </label>
-</div>
-
-@if($errors->any())
-    <ul class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-@endif
-
-
-
 

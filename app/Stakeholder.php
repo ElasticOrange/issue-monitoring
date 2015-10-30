@@ -14,21 +14,30 @@ class Stakeholder extends Model
     protected $fillable = [
     	'name',
     	'type',
-    	'site',
-    	'public_code',
+    	'site'
     ];
 
     public $translatedAttributes = ['contact','profile','position'];
 
     protected $guarded = ['id'];
 
+    public function createPublicCode() {
+        do {
+            $public_code = str_random(40);
+        } while ($this->where('public_code', $public_code)->count() > 0);
+
+        return $public_code;
+    }
+
     public function setAll($request)
     {
-    	$this->name = $request->get('name');
-    	$this->type = $request->get('type');
-    	$this->site = $request->get('site');
-    	$this->public_code = $request->get('public_code');
+        $this->name = $request->get('name');
+        $this->type = $request->get('type');
+        $this->site = $request->get('site');
         $this->published = $request->get('published') == true;
+        if ( ! $this->public_code) {
+            $this->public_code = $this->createPublicCode();
+        }
 
         if ($request->file('cv_file')) {
             if ($this->fileCv) {
@@ -106,4 +115,10 @@ class Stakeholder extends Model
         return $this->belongsTo('Issue\UploadedFile', 'uploaded_poza_id');
     }
 
+
+    public static function getByPublicCode($code) {
+        $instance = new static;
+
+        return $instance->where('public_code', $code)->firstOrFail();
+    }
 }
