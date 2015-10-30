@@ -138,12 +138,10 @@ function submitGenericAjaxForm(form) {
         formData.append(input.name,input.value);
     });
 
-    if($('input[type="file"]').length) {
-        var file_data = $('input[type="file"]')[0].files;
-
-        for(var i = 0; i < file_data.length; i++){
-            formData.append("file", file_data[i]);
-        }
+    if($('input[type=file]').length) {
+        _.forEach($('input[type=file]'), function(fileInput) {
+            formData.append($(fileInput).attr('name'), fileInput.files[0]);
+        });
     }
 
     var action = $form.attr('action') || window.document.location;

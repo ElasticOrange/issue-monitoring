@@ -13,7 +13,15 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" method="POST" action="/backend/stakeholder" enctype="multipart/form-data">
+		<form 	class="form-horizontal"
+				method="POST"
+				action="{{ action("StakeholderController@store") }}"
+				enctype="multipart/form-data"
+				data-ajax="true"
+				success-message="Stakeholder adaugat"
+				error-message="Eroare"
+				success-url="/backend/stakeholder/{id}/edit"
+		>
 			@include('admin.backend.stakeholders.form')
 			<div class="form-group">
     			<div class="col-sm-4" style="margin-top:25px;">

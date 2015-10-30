@@ -52,7 +52,7 @@ class StakeholderController extends Controller
 
         $stakeholder->syncSections($request->input('section'));
 
-        return redirect()->action('StakeholderController@index');
+        return $stakeholder;
     }
 
     /**
@@ -84,12 +84,12 @@ class StakeholderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $stakeholder)
+    public function update(StakeholderRequest $request, $stakeholder)
     {
         $stakeholder->setAll($request);
         $stakeholder->syncSections($request->input('section'));
 
-        return redirect()->action('StakeholderController@index');
+        return $stakeholder;
     }
 
     /**

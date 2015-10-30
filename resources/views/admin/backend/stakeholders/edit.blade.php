@@ -13,7 +13,14 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" method="POST" action="/backend/stakeholder/{{ $stakeholder->id }}" enctype="multipart/form-data">
+		<form 	class="form-horizontal"
+				method="POST"
+				action="{{ action('StakeholderController@update', [$stakeholder]) }}"
+				enctype="multipart/form-data"
+				data-ajax="true"
+				success-message="Stakeholder salvat"
+				error-message="Eroare"
+		>
 			<input type="hidden" name="_method" value="PUT"/>
 			@include('admin.backend.stakeholders.form')
 			<div class="form-group">
