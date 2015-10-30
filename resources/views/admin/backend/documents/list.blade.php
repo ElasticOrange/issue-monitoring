@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="row">
-	<div class="col-lg-12 text-center">
+	<div class="col-lg-12 text-left">
 		<h1 class="page-header">Documente</h1>
 	</div>
 </div>
 
 <div class="form-group">
-    <a href="/backend/document/create"><button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
+    <a href="/backend/document/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</a>
 </div>
 
 <div class="row">
