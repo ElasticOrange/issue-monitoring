@@ -24,7 +24,7 @@
 								<tr role="row">
 									<th  class="text-center" style="width: 180px;">Nume</th>
 									<th  class="text-center" style="width: 180x;">Contact</th>
-									<th  class="text-center" style="width: 180x;">Organizatie</th>
+									<th  class="text-center" style="width: 180x;">Tip</th>
 									<th  class="text-center" style="width: 120px;">Foto</th>
 									<th  class="text-center" style="width: 180px;">Publicat</th>
 									<th  class="text-center" style="width: 200px;">Actiuni</th>
