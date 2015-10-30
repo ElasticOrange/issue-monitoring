@@ -271,11 +271,17 @@ $(document).ready(function() {
         $('[name=date]').val(e);
     });
 
-
     $('input[type=file]')
         .change(function() {
             $(this).parent().find('.selected-file').html(getFileNameFromPath($(this).val()));
         });
+
+    $(document).on('click', '[confirm]', function(ev) {
+        if ( ! confirm($(this).attr('confirm'))) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+        }
+    });
 
 });
 

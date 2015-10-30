@@ -21,7 +21,7 @@
 							<span class="glyphicon glyphicon-plus"></span> Adauga
 						</button>
 						<button type="submit" title="Edit" id="editDomain" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Editeaza</button>
-						<button id="deleteDomain" title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</button>
+						<button id="deleteDomain" title="Delete" confirm="Stergi domeniul selectat?" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</button>
 
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
