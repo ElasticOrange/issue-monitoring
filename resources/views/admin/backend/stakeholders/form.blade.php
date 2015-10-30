@@ -26,18 +26,24 @@
     <div class="tab-pane active" id="ro">
 
         <div class="form-group">
-            <label class="col-md-3">Contact</label>
-            <textarea name="contact[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->contact }}</textarea>
+            <label class="col-md-2 control-label">Contact</label>
+            <div class="col-md-8">
+                <textarea name="contact[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->contact }}</textarea>
+            </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-3">Profil</label>
-            <textarea name="profile[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
+            <label class="col-md-2 control-label">Profil</label>
+            <div class="col-md-8">
+                <textarea name="profile[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
+            </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-3">Pozitie si apartenenta</label>
-            <textarea name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
+            <label class="col-md-2 control-label">Pozitie si apartenenta</label>
+            <div class="col-md-8">
+                <textarea name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
+            </div>
         </div>
 
     </div>
@@ -45,18 +51,24 @@
     <div class="tab-pane" id="en">
 
         <div class="form-group">
-            <label class="col-md-3">Contact</label>
-            <textarea name="contact[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->contact }}</textarea>
+            <label class="col-md-2 control-label">Contact</label>
+            <div class="col-md-8">
+                <textarea name="contact[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->contact }}</textarea>
+            </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-3">Profile</label>
-            <textarea name="profile[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+            <label class="col-md-2 control-label">Profile</label>
+            <div class="col-md-8">
+                <textarea name="profile[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+            </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-3">Position and affiliation</label>
-            <textarea name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+            <label class="col-md-2 control-label">Position and affiliation</label>
+            <div class="col-md-8">
+                <textarea name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+            </div>
         </div>
 
     </div>
@@ -77,22 +89,30 @@
                 <br/>
                 <div class="tab-pane active" id="section_ro{{ $section->id }}">
                     <div class="form-group">
-                        <label class="col-md-3">Titlu</label>
-                        <input type="text" name="section[{{ $section->id }}][title][ro]" class="form-control" value="{{ $section->translateOrNew('ro')->title }}"></input>
+                        <label class="col-md-2 control-label">Titlu</label>
+                        <div class="col-md-8">
+                            <input type="text" name="section[{{ $section->id }}][title][ro]" class="form-control" value="{{ $section->translateOrNew('ro')->title }}"></input>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3">Descriere</label>
-                        <textarea name="section[{{ $section->id }}][description][ro]" class="form-control" rows="3">{{ $section->translateOrNew('ro')->description }}</textarea>
+                        <label class="col-md-2 control-label">Descriere</label>
+                        <div class="col-md-8">
+                            <textarea name="section[{{ $section->id }}][description][ro]" class="form-control" rows="3">{{ $section->translateOrNew('ro')->description }}</textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane" id="section_en{{ $section->id }}">
                     <div class="form-group">
-                        <label class="col-md-3">Title</label>
-                        <input type="text" name="section[{{ $section->id }}][title][en]" class="form-control" value="{{ $section->translateOrNew('en')->title }}">
+                        <label class="col-md-2 control-label">Title</label>
+                        <div class="col-md-8">
+                            <input type="text" name="section[{{ $section->id }}][title][en]" class="form-control" value="{{ $section->translateOrNew('en')->title }}">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3">Description</label>
-                        <textarea name="section[{{ $section->id }}][description][en]" class="form-control" rows="3">{{ $section->translateOrNew('en')->description }}</textarea>
+                        <label class="col-md-2 control-label">Description</label>
+                        <div class="col-md-8">
+                            <textarea name="section[{{ $section->id }}][description][en]" class="form-control" rows="3">{{ $section->translateOrNew('en')->description }}</textarea>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-danger delete_section" id="{{ $section->id }}">Sterge Sectiune</button>

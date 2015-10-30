@@ -9,22 +9,30 @@
             <br/>
             <div class="tab-pane active" id="section_ro<%= sectionid%>">
                 <div class="form-group">
-                    <label class="col-md-3">Titlu</label>
-                    <input type="text" name="section[<%- id%>][title][ro]" class="form-control"></input>
+                    <label class="col-md-2 control-label">Titlu</label>
+                    <div class="col-md-8">
+                        <input type="text" name="section[<%- id%>][title][ro]" class="form-control"></input>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3">Descriere</label>
-                    <textarea name="section[<%- id%>][description][ro]" class="form-control" rows="3"></textarea>
+                    <label class="col-md-2 control-label">Descriere</label>
+                    <div class="col-md-8">
+                        <textarea name="section[<%- id%>][description][ro]" class="form-control" rows="3"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane" id="section_en<%= sectionid%>">
                 <div class="form-group">
-                    <label class="col-md-3">Title</label>
-                    <input type="text" name="section[<%- id%>][title][en]" class="form-control">
+                    <label class="col-md-2 control-label">Title</label>
+                    <div class="col-md-8">
+                        <input type="text" name="section[<%- id%>][title][en]" class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3">Description</label>
-                    <textarea name="section[<%- id%>][description][en]" class="form-control" rows="3"></textarea>
+                    <label class="col-md-2 control-label">Description</label>
+                    <div class="col-md-8">
+                        <textarea name="section[<%- id%>][description][en]" class="form-control" rows="3"></textarea>
+                    </div>
                 </div>
             </div>
             <button type="button" class="btn btn-danger delete_section" id="<%= sectionid%>"><span class="glyphicon glyphicon-trash"></span> Sterge Sectiune</button>
