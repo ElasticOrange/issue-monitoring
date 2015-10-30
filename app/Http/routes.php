@@ -13,7 +13,8 @@
 
 Route::controller('/admin', 'AdminDashboardController');
 
-Route::resource('/backend/document', 'DocumentController');
+Route::get('/backend/document/{public_code}/show', 'DocumentController@show');
+Route::resource('/backend/document', 'DocumentController', ['except' => ['show']]);
 
 Route::get('/', 'DocumentController@index');
 

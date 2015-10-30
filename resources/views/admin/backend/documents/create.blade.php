@@ -16,6 +16,14 @@
 				  success-url="/backend/document/{id}/edit"
 			>
 				@include('admin.backend.documents.form')
+				<div class="form-actions">
+				    <div class="row">
+				        <div class="col-md-offset-3 col-md-7">
+				               <input type="submit" value="Salveaza" class="btn btn-primary btn-lg btn-block" />
+				       </div>
+				    </div>
+				</div>
+
 			</form>
 		</div>
 	</div>

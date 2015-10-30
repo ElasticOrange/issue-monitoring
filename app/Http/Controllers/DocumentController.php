@@ -58,9 +58,11 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($code)
     {
-        //
+        $document = Document::getByPublicCode($code);
+
+        return $this->edit($document);
     }
 
     /**
@@ -79,7 +81,9 @@ class DocumentController extends Controller
         Storage::makeDirectory(DOCUMENTS_LOCATION);
 
         $document->init_at = $input['date'];
-        $document->link = $input['link'];
+        if (! $document->public_code) {
+            $document->public_code = $document->createPublicCode();
+        }
         $document->public = true;
 
         $file = new UploadedFile;

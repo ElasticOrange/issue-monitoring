@@ -16,7 +16,7 @@ class CreateDocumentsTable extends Migration
             $table->increments('id');
             $table->boolean('public');
             $table->integer('uploaded_file_id')->nullable();
-            $table->string('link')->nullable();
+            $table->string('public_code')->nullable();
             $table->timestamp('init_at');
             $table->timestamps();
         });

@@ -33,16 +33,4 @@
         <input type="hidden" name="date">
     </div>
 </div>
-<div class="form-group">
-    <label class="col-md-3 control-label">Link</label>
-    <div class="col-md-7">
-        <input type="text" id="link" name="link" placeholder="Ex: www.server.com/test/document.doc" class="form-control" value="{{ $document->link }}" size="105" />
-    </div>
-</div>
-<div class="form-actions">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-7">
-        	<input type="submit" value="Salveaza" class="btn btn-primary btn-lg btn-block" />
-     	</div>
-    </div>
-</div>
+
