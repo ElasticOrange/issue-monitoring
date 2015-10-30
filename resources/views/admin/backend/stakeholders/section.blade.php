@@ -22,7 +22,7 @@
                     <textarea name="section[<%- id%>][description][en]" class="form-control" rows="3"></textarea>
                 </div>
             </div>
-            <button type="button" class="btn btn-danger delete_section" id="<%= sectionid%>">Sterge Sectiune</button>
+            <button type="button" class="btn btn-danger delete_section" id="<%= sectionid%>"><span class="glyphicon glyphicon-trash"></span> Sterge Sectiune</button>
         </div>
         <hr>
     </div>

@@ -99,7 +99,7 @@
 </div>
 
 
-<button type="button" class="btn btn-default add_section">Adauga sectiune</button>
+<button type="button" class="btn btn-primary add_section"><span class="glyphicon glyphicon-plus"></span> Adauga sectiune</button>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Site/blog</label>

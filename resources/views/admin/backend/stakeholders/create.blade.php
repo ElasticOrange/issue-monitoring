@@ -4,11 +4,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="col-sm-6">
-			<h1>Creaza Stakeholder</h1>
-		</div>
-		<div class="col-sm-4 col-sm-offset-2" style="margin-top:25px;">
-			<button class="btn btn-primary">Salveaza schimbari</button>
-			<a href="/backend/stakeholders"<button class="btn btn-info">Inapoi la lista</button></a>
+			<h1>Adauga Stakeholder</h1>
 		</div>
 	</div>
 </div>
@@ -21,8 +17,8 @@
 			@include('admin.backend.stakeholders.form')
 			<div class="form-group">
     			<div class="col-sm-4" style="margin-top:25px;">
-			        <button class="btn btn-primary">Salveaza schimbari</button>
-			        <a href="/backend/stakeholders/"<button class="btn btn-info">Inapoi la lista</button></a>
+			        <button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salveaza</button>
+			        <a href="{{ action('StakeholderController@index') }}"<button class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Inapoi la lista</button></a>
     			</div>
 			</div>
 		</form>
