@@ -24,10 +24,16 @@ class StakeholderRequest extends Request
 	public function rules()
 	{
 		return [
-			'name' => 'required',
-			'type' => 'string',
-			'site' => 'link',
-			'public_code' => 'link',
+			'name' => 'required|string',
+			'type' => 'in:persoana,organizatie',
+			'contact[ro]' => 'required|string',
+			'contact[en]' => 'required|string',
+			'profile[ro]' => 'required|string',
+			'profile[en]' => 'required|string',
+			'position[ro]' => 'required|string',
+			'position[en]' => 'required|string',
+			'site' => 'required|link',
+			'public_code' => 'required|link',
 			'published' => 'boolean'
 		];
 	}
