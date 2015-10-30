@@ -16,10 +16,13 @@
 						<input type="search" class="form-control" placeholder="Search here">
 						<br />
 					</div>
-					<div class="col-lg-1 col-lg-offset-3">
+					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary" id="addDomain" data-toggle="modal" data-modal="true" data-target="#myModal">
-							+ Adauga
+							<span class="glyphicon glyphicon-plus"></span> Adauga
 						</button>
+						<button type="submit" title="Edit" id="editDomain" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Editeaza</button>
+						<button id="deleteDomain" title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</button>
+
 						<!-- Modal -->
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
@@ -28,14 +31,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2">
-						<button type="submit" title="Edit" id="editDomain" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
-						<button id="deleteDomain" title="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-					</div>
 				</div>
-				<br /><br />
 				<div class="row">
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 						<div id="domainTree"></div>
 					</div>
 				</div>

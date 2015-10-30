@@ -1,17 +1,14 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
 	<div class="row">
 		<div class="col-lg-12 text-left">
 			<h1 class="page-header">Stakeholderi</h1>
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-lg-2">
-			<a href="/backend/stakeholder/create"><button class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
-		</div>
+	<div class="form-group">
+		<a href="/backend/stakeholder/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga stakeholder</a>
 	</div>
 
 	<div class="row">

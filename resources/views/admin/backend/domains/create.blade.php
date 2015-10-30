@@ -2,8 +2,8 @@
         action="{{ action('DomainController@store') }}"
         method="post"
         data-ajax="true"
-        success-message="Template created successfuly"
-        error-message="Error creating template"
+        success-message="Domeniu creat cu succes"
+        error-message="Eroare"
         success-function="onDomainCreated"
         id="domain-form"
         >
