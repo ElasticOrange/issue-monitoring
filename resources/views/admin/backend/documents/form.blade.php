@@ -18,10 +18,12 @@
             <span class="btn btn-primary selected-file">Incarca fisier</span>
     	    <input type="file" id="file" name="file" class="hidden"/>
         </label>
-        <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank">
-            <i class="fa fa-file-pdf-o"></i>
-    	   {{ $document->file->original_file_name }}
-        </a>
+        @if($document->file)
+            <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+        	   {{ $document->file->original_file_name }}
+            </a>
+        @endif
     </div>
 </div>
 <div class="form-group">
