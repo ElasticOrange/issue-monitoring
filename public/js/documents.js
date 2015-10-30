@@ -5,10 +5,7 @@ $(document).ready(function(){
         {
             return true;
         }
-        else
-        {
-            e.preventDefault();
-            return false;
-        }
+        e.preventDefault();
+        return false;
     });
 });
