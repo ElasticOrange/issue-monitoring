@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Requests\StakeholderRequest;
 use Issue\Http\Controllers\Controller;
+use Issue\UploadedFile;
+use Storage;
 
 
 class StakeholderController extends Controller
@@ -82,7 +84,7 @@ class StakeholderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StakeholderRequest $request, $stakeholder)
+    public function update(Request $request, $stakeholder)
     {
         $stakeholder->setAll($request);
         $stakeholder->syncSections($request->input('section'));

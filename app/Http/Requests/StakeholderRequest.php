@@ -26,8 +26,7 @@ class StakeholderRequest extends Request
 		return [
 			'name' => 'required',
 			'type' => 'string',
-			'site' => 'link',
-			'public_code' => 'link',
+			'site' => 'url',
 			'published' => 'boolean'
 		];
 	}
