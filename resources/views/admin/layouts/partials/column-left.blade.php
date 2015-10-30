@@ -16,10 +16,10 @@
                 <a href="/admin"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
-                <a href="/backend/document"><i class="fa fa-table fa-fw"></i> Documente</a>
+                <a href="/backend/document"><i class="fa fa-file-word-o fa-fw"></i> Documente</a>
             </li>
             <li>
-                <a href="/backend/domain"><i class="fa fa-folder-o fa-fw"></i> Domenii</a>
+                <a href="/backend/domain"><i class="fa fa-tags fa-fw"></i> Domenii</a>
             </li>
             <li>
                 <a href="/backend/stakeholder"><i class="fa fa-user fa-fw"></i> Stakeholders</a>
