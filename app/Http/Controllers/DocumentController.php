@@ -86,9 +86,15 @@ class DocumentController extends Controller
         }
         $document->public = true;
 
-        $file = new UploadedFile;
-        $file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
-        $file->document()->save($document);
+        if ($request->file('file')){
+            if ($document->file) {
+                $document->file->delete();
+            }
+
+            $file = new UploadedFile;
+            $file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
+            $file->document()->save($document);
+        }
 
         foreach (['ro', 'en'] as $locale)
         {

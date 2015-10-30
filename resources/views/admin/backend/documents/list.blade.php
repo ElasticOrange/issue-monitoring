@@ -31,13 +31,15 @@
 								<tr class="gradeA odd" role="row">
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
-										<a href="{{ action('UploadedFileController@downloadFile', [$item->file->file_name]) }}" target="_blank" title="{{ $item->file->original_file_name }}">
-											<i class="fa fa-file-pdf-o fa-lg"></i>
-										</a>
+										@if($item->file)
+											<a href="{{ action('UploadedFileController@downloadFile', [$item->file->file_name]) }}" target="_blank" title="{{ $item->file->original_file_name }}">
+												<i class="fa fa-file-pdf-o fa-lg"></i>
+											</a>
+										@endif
 									</td>
 									<td class="text-center">
-										@if(!empty($item->link))
-											<a href="{{ $item->link }}" target="_blank" title="{{ $item->link}}">
+										@if($item->public_code)
+											<a href="{{ action('DocumentController@show', [$item->public_code]) }}" target="_blank" title="{{ action('DocumentController@show', [$item->public_code]) }}">
 												<i class="fa fa-external-link fa-lg"></i>
 											</a>
 										@endif
