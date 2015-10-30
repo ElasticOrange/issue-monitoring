@@ -26,13 +26,13 @@ class StakeholderRequest extends Request
 		return [
 			'name' => 'required|string',
 			'type' => 'in:persoana,organizatie',
-			'contact.ro' => 'required|string',
-			'contact.en' => 'required|string',
-			'profile.ro' => 'required|string',
-			'profile.en' => 'required|string',
-			'position.ro' => 'required|string',
-			'position.en' => 'required|string',
-			'site' => 'required|url',
+			'contact.ro' => 'string',
+			'contact.en' => 'string',
+			'profile.ro' => 'string',
+			'profile.en' => 'string',
+			'position.ro' => 'string',
+			'position.en' => 'string',
+			'site' => 'url',
 			'published' => 'boolean'
 		];
 	}
