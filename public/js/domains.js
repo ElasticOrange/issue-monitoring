@@ -96,7 +96,7 @@
         $('#myModal').modal('hide');
     };
 
-    window.onDomainUpdate = function(domain) {
+    window.onDomainUpdated = function(domain) {
         var currentDomain = getSelectedDomain();
         tree.jqxTree('updateItem', currentDomain.element, {label: domain['name'], id: parseInt(domain['id'])});
         tree.jqxTree('selectItem',  getTreeItemById(tree, domain.id));

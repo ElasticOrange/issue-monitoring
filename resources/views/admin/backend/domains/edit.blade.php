@@ -2,9 +2,9 @@
         action="{{ action('DomainController@update', [$domain]) }}"
         method="post"
         data-ajax="true"
-        success-message="Template created successfuly"
-        error-message="Error creating template"
-        success-function="onDomainUpdate"
+        success-message="Domeniu salvat cu succes"
+        error-message="Eroare"
+        success-function="onDomainUpdated"
         id="domain-form"
         >
     <div class="modal-header">
