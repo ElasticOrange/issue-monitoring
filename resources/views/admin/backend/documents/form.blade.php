@@ -14,7 +14,7 @@
 <div class="form-group text-left">
     <label class="col-md-3 control-label">Incarca document</label>
     <div class="col-md-9">
-        <label class="">
+        <label>
             <span class="btn btn-primary selected-file">Incarca fisier</span>
     	    <input type="file" id="file" name="file" class="hidden"/>
         </label>

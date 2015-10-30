@@ -118,14 +118,32 @@
 <div class="form-group">
     <label class="col-md-2 control-label">CV</label>
     <div class="col-md-8">
-        <input type="file" name="cv_file"/>
+        <label>
+            <span class="btn btn-primary selected-file">Incarca fisier</span>
+            <input type="file" name="cv_file" class="hidden"/>
+        </label>
+        @if($stakeholder->fileCv)
+            <a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->fileCv->file_name]) }}" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+               {{ $stakeholder->fileCv->original_file_name }}
+            </a>
+        @endif
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Poza</label>
     <div class="col-md-8">
-        <input type="file" name="poza_file"/>
+        <label>
+            <span class="btn btn-primary selected-file">Incarca fisier</span>
+            <input type="file" name="poza_file" class="hidden"/>
+        </label>
+        @if($stakeholder->filePoza)
+            <a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->filePoza->file_name]) }}" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+               {{ $stakeholder->filePoza->original_file_name }}
+            </a>
+        @endif
     </div>
 </div>
 
