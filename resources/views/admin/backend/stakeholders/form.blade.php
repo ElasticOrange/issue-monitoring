@@ -10,8 +10,8 @@
     <label class="col-md-2 control-label">Tip</label>
     <div class="col-md-8">
         <select class="form-control" name="type">
-            <option>persoana</option>
-            <option>organizatie</option>
+            <option value="persoana">persoana</option>
+            <option value="organizatie" @if($stakeholder->type === 'organizatie') selected="selected" @endif>organizatie</option>
         </select>
     </div>
 </div>
