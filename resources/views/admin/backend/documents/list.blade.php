@@ -32,13 +32,13 @@
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
 										<a href="{{ action('UploadedFileController@downloadFile', [$item->file->file_name]) }}" target="_blank" title="{{ $item->file->original_file_name }}">
-											<i class="fa fa-file-pdf-o"></i>
+											<i class="fa fa-file-pdf-o fa-lg"></i>
 										</a>
 									</td>
 									<td class="text-center">
 										@if(!empty($item->link))
 											<a href="{{ $item->link }}" target="_blank" title="{{ $item->link}}">
-												<i class="fa fa-external-link"></i>
+												<i class="fa fa-external-link fa-lg"></i>
 											</a>
 										@endif
 									</td>
