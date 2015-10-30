@@ -30,13 +30,26 @@ class Stakeholder extends Model
     	$this->public_code = $request->get('public_code');
         $this->published = $request->get('published') == true;
 
-        $cvFile = new UploadedFile;
-        $cvFile->storeFile(CV_LOCATION, $request->file('cv_file'));
-        $this->fileCv()->associate($cvFile);
+        if ($request->file('cv_file')) {
+            if ($this->fileCv) {
+                $this->fileCv()->delete();
+            }
 
-        $pozaFile = new UploadedFile;
-        $pozaFile->storeFile(POZA_LOCATION, $request->file('poza_file'));
-        $this->filePoza()->associate($pozaFile);
+            $cvFile = new UploadedFile;
+            $cvFile->storeFile(CV_LOCATION, $request->file('cv_file'));
+            $this->fileCv()->associate($cvFile);
+        }
+
+
+        if ($request->file('poza_file')) {
+            if ($this->filePoza) {
+                $this->filePoza()->delete();
+            }
+
+            $pozaFile = new UploadedFile;
+            $pozaFile->storeFile(POZA_LOCATION, $request->file('poza_file'));
+            $this->filePoza()->associate($pozaFile);
+        }
 
         foreach (\Config::get('app.all_locales') as $locale)
         {
