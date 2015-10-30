@@ -4,6 +4,9 @@ namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
 
+const CV_LOCATION = '/cv/';
+const POZA_LOCATION = '/poza/';
+
 class Stakeholder extends Model
 {
     use \Dimsav\Translatable\Translatable;
@@ -26,6 +29,14 @@ class Stakeholder extends Model
     	$this->site = $request->get('site');
     	$this->public_code = $request->get('public_code');
         $this->published = $request->get('published') == true;
+
+        $cvFile = new UploadedFile;
+        $cvFile->storeFile(CV_LOCATION, $request->file('cv_file'));
+        $this->fileCv()->associate($cvFile);
+
+        $pozaFile = new UploadedFile;
+        $pozaFile->storeFile(POZA_LOCATION, $request->file('poza_file'));
+        $this->filePoza()->associate($pozaFile);
 
         foreach (\Config::get('app.all_locales') as $locale)
         {
@@ -70,6 +81,16 @@ class Stakeholder extends Model
         }
 
         return true;
+    }
+
+    public function fileCv()
+    {
+        return $this->belongsTo('Issue\UploadedFile', 'uploaded_cv_id');
+    }
+
+    public function filePoza()
+    {
+        return $this->belongsTo('Issue\UploadedFile', 'uploaded_poza_id');
     }
 
 }

@@ -118,14 +118,14 @@
 <div class="form-group">
     <label class="col-md-2 control-label">CV</label>
     <div class="col-md-8">
-        <input type="file" name="file"/>
+        <input type="file" name="cv_file"/>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Poza</label>
     <div class="col-md-8">
-        <input type="file" name="file"/>
+        <input type="file" name="poza_file"/>
     </div>
 </div>
 

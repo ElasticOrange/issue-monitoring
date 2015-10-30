@@ -35,4 +35,9 @@ class UploadedFile extends Model
     {
         return $this->hasOne('Issue\Document');
     }
+
+    public function stakeholder()
+    {
+        return $this->hasOne('Issue\Stakeholder');
+    }
 }

@@ -13,7 +13,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" method="POST" action="/backend/stakeholder">
+		<form class="form-horizontal" method="POST" action="/backend/stakeholder" enctype="multipart/form-data">
 			@include('admin.backend.stakeholders.form')
 			<div class="form-group">
     			<div class="col-sm-4" style="margin-top:25px;">

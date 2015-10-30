@@ -18,6 +18,8 @@ class CreateStakeholdersTable extends Migration
             $table->enum('type',['persoana','organizatie']);
             $table->string('site');
             $table->string('link');
+            $table->integer('uploaded_cv_id')->nullable();
+            $table->integer('uploaded_poza_id')->nullable();
             $table->string('public_code', 30);
             $table->boolean('published');
             $table->timestamps();
