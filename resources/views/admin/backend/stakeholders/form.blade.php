@@ -22,6 +22,7 @@
 </ul>
 
 <div class="tab-content">
+    <br/>
     <div class="tab-pane active" id="ro">
 
         <div class="form-group">
@@ -73,10 +74,13 @@
             </ul>
 
             <div class="tab-content">
+                <br/>
                 <div class="tab-pane active" id="section_ro{{ $section->id }}">
                     <div class="form-group">
                         <label class="col-md-3">Titlu</label>
                         <input type="text" name="section[{{ $section->id }}][title][ro]" class="form-control" value="{{ $section->translateOrNew('ro')->title }}"></input>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-3">Descriere</label>
                         <textarea name="section[{{ $section->id }}][description][ro]" class="form-control" rows="3">{{ $section->translateOrNew('ro')->description }}</textarea>
                     </div>
@@ -85,6 +89,8 @@
                     <div class="form-group">
                         <label class="col-md-3">Title</label>
                         <input type="text" name="section[{{ $section->id }}][title][en]" class="form-control" value="{{ $section->translateOrNew('en')->title }}">
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-3">Description</label>
                         <textarea name="section[{{ $section->id }}][description][en]" class="form-control" rows="3">{{ $section->translateOrNew('en')->description }}</textarea>
                     </div>
@@ -99,6 +105,8 @@
 </div>
 
 <button type="button" class="btn btn-primary add_section"><span class="glyphicon glyphicon-plus"></span> Adauga sectiune</button>
+
+<hr/>
 
 <div class="form-group">
     <label class="col-md-2 control-label">Site/blog</label>

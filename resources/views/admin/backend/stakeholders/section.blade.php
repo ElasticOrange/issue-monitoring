@@ -6,10 +6,13 @@
         </ul>
 
         <div class="tab-content">
+            <br/>
             <div class="tab-pane active" id="section_ro<%= sectionid%>">
                 <div class="form-group">
                     <label class="col-md-3">Titlu</label>
                     <input type="text" name="section[<%- id%>][title][ro]" class="form-control"></input>
+                </div>
+                <div class="form-group">
                     <label class="col-md-3">Descriere</label>
                     <textarea name="section[<%- id%>][description][ro]" class="form-control" rows="3"></textarea>
                 </div>
@@ -18,6 +21,8 @@
                 <div class="form-group">
                     <label class="col-md-3">Title</label>
                     <input type="text" name="section[<%- id%>][title][en]" class="form-control">
+                </div>
+                <div class="form-group">
                     <label class="col-md-3">Description</label>
                     <textarea name="section[<%- id%>][description][en]" class="form-control" rows="3"></textarea>
                 </div>
