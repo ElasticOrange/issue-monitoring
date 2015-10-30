@@ -16,6 +16,8 @@
 						<input type="search" class="form-control" placeholder="Search here">
 						<br />
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary" id="addDomain" data-toggle="modal" data-modal="true" data-target="#myModal">
 							<span class="glyphicon glyphicon-plus"></span> Adauga
@@ -32,8 +34,9 @@
 						</div>
 					</div>
 				</div>
+				<br/>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-3">
 						<div id="domainTree"></div>
 					</div>
 				</div>

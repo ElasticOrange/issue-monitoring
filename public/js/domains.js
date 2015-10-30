@@ -16,8 +16,8 @@
         var dataAdapter = new $.jqx.dataAdapter(source);
         dataAdapter.dataBind();
         var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{name: 'name', map: 'label'}]);
-        tree.jqxTree({source: records, height: 300, width: 200});
-
+        records[0].expanded = true;
+        tree.jqxTree({source: records, height: 300, width: '100%'});
         $(document).on('click', '#editDomain', function (event) {
             $('#myModal').modal('show');
             ajaxGetDomainNameForEdit();
@@ -35,6 +35,15 @@
 
     function setIdForDeleteAction() {
         var domain = getSelectedDomain();
+
+        if (!domain) {
+            return false;
+        }
+
+        if (domain.level == 0) {
+            return false;
+        }
+
         $.ajax({
             async: false,
             type: "GET",
