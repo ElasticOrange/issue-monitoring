@@ -11,14 +11,19 @@
         <textarea id="encontent" name="description[en]" class="form-control" rows="3">{{ $document->translateOrNew('en')->description }}</textarea>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group text-left">
     <label class="col-md-3 control-label">Incarca document</label>
-    <div class="col-md-7">
-		<input type="file" id="file" name="file" />
-        <a href="/document/{{ $document->file_name }}" target="_blank">
-    	   {{ $document->original_file_name }}
-            <i class="fa fa-file-pdf-o"></i>
-        </a>
+    <div class="col-md-9">
+        <label class="">
+            <span class="btn btn-primary selected-file">Incarca fisier</span>
+    	    <input type="file" id="file" name="file" class="hidden"/>
+        </label>
+        @if($document->file)
+            <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank">
+                <i class="fa fa-file-pdf-o"></i>
+        	   {{ $document->file->original_file_name }}
+            </a>
+        @endif
     </div>
 </div>
 <div class="form-group">
@@ -31,7 +36,7 @@
 <div class="form-group">
     <label class="col-md-3 control-label">Link</label>
     <div class="col-md-7">
-        <input type="text" id="link" name="link" placeholder="www.server.com/test/document.doc" class="form-control" value="{{ $document->link }}" size="105" />
+        <input type="text" id="link" name="link" placeholder="Ex: www.server.com/test/document.doc" class="form-control" value="{{ $document->link }}" size="105" />
     </div>
 </div>
 <div class="form-actions">
