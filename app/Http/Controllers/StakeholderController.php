@@ -43,7 +43,7 @@ class StakeholderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StakeholderRequest $request)
     {
         $stakeholder = new Stakeholder;
         $stakeholder->setAll($request);
