@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-    <a href="/backend/document/create"><button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
+    <a href="/backend/document/create"><button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</button></a>
 </div>
 
 <div class="row">
@@ -19,7 +19,7 @@
 					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
 						<thead>
 							<tr role="row">
-								<th style="width: 900px;">Descriere</th>
+								<th style="width: 200px;">Titlu</th>
 								<th style="width: 80px;">Document</th>
 								<th style="width: 80px;">Link</th>
 								<th style="width: 120px;">Data</th>
