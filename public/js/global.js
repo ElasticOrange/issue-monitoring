@@ -212,6 +212,20 @@ function submitAjaxForm(form) {
     });
 }
 
+function getFileNameFromPath(filePath) {
+    if ( ! _.isString(filePath)) {
+        return withError(['getFileNameFromPath(): filePath should be string', filePath]);
+    }
+
+    var result = filePath.match(/[\/\\]([^\/\\]+)$/);
+
+    if ( ! result) {
+        return filePath;
+    }
+
+    return result[1];
+}
+
 // Set message boxes
 $(document).ready(function() {
     $successBox = $('.message-box.success');
@@ -256,5 +270,12 @@ $(document).ready(function() {
         var e = d.format("YYYY-MM-DD");
         $('[name=date]').val(e);
     });
+
+
+    $('input[type=file]')
+        .change(function() {
+            $(this).parent().find('.selected-file').html(getFileNameFromPath($(this).val()));
+        });
+
 });
 
