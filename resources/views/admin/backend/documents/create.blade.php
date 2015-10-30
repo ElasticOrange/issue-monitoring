@@ -11,10 +11,10 @@
 				  method="POST"
 				  enctype="multipart/form-data"
 				  data-ajax="true"
-				  success-message="Template created successfuly"
-				  error-message="Error creating template"
+				  success-message="Document adaugat"
+				  error-message="Eroare"
 				  success-url="/backend/document/{id}/edit"
-					>
+			>
 				@include('admin.backend.documents.form')
 			</form>
 		</div>

@@ -11,8 +11,8 @@
 				  method="POST"
 				  enctype="multipart/form-data"
 				  data-ajax="true"
-				  success-message="Template created successfuly"
-				  error-message="Error creating template"
+				  success-message="Document salvat cu succes"
+				  error-message="Eroare"
 				  success-url="/backend/document"
 					>
 				<input name="_method" type="hidden" value="PUT">
