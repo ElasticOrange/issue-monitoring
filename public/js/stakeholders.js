@@ -11,4 +11,17 @@ $(document).ready(function(){
 	    var selected_id = $(this).attr("id");
 	    $('#section'+selected_id).remove();
 	});
+
+	$("input[data-action=publish-stakeholder").click(function(){
+		var request = $.ajax({
+			url: $(this).attr('update-url'),
+			data: {
+				published:$(this).prop('checked'),
+			},
+			method:'get'
+		});
+		request.done(function(data){
+			console.error("ajaxresult",data);
+		});
+	});
 });

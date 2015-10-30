@@ -141,10 +141,6 @@
     </label>
 </div>
 
-@section('js')
-    <script type="text/javascript" src="/js/stakeholder-sections.js"></script>
-@endsection
-
 
 
 
