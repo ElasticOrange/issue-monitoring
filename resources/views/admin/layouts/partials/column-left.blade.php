@@ -24,6 +24,9 @@
             <li>
                 <a href="/backend/stakeholder"><i class="fa fa-user fa-fw"></i> Stakeholders</a>
             </li>
+            <li>
+                <a href="/backend/news"><i class="fa fa-newspaper-o fa-fw"></i> News</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

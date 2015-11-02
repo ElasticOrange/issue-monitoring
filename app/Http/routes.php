@@ -31,3 +31,11 @@ Route::get('/backend/stakeholder/{public_code}/show', 'StakeholderController@sho
 Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['destroy', 'show']]);
 
 Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderController@setPublished');
+
+Route::get('backend/news', function(){
+	return view('admin.backend.news.list');
+});
+
+Route::get('/backend/news/create', function(){
+	return view('admin.backend.news.create');
+});
