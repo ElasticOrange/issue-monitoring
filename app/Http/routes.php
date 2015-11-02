@@ -18,7 +18,6 @@ Route::resource('/backend/document', 'DocumentController', ['except' => ['show']
 
 Route::get('/', 'DocumentController@index');
 
-//Route::get('/document/{file_name}', 'DocumentController@downloadDocument');
 Route::get('/file/{fileName}', 'UploadedFileController@downloadFile');
 
 Route::get('/backend/domain/{domain}/edit', 'DomainController@edit');
@@ -31,3 +30,5 @@ Route::get('/backend/stakeholder/{public_code}/show', 'StakeholderController@sho
 Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['destroy', 'show']]);
 
 Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderController@setPublished');
+
+Route::resource('/backend/location', 'LocationController');
