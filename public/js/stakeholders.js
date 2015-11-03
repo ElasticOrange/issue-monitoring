@@ -33,7 +33,12 @@ $(document).ready(function(){
 		datumTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
 			url: $('#stakeholder-autocomplete').attr('source-url'),
-			wildcard: '{name}'
+			wildcard: '{name}',
+			transform: function (response) {
+				return _.filter(response, function(item){
+					return $('[stakeholder-id=' + item.id + ']').length == 0;
+				});
+			}
 		}
 	});
 
@@ -54,8 +59,6 @@ $(document).ready(function(){
 
 			var template = _.template($('#connected-stakeholder-template').html());
 			var compiled_template = template(suggestion);
-
-			console.log(compiled_template);
 
 			$('#connected-stakeholders-container').append(compiled_template);
 		}
