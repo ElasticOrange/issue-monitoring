@@ -5,7 +5,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use Issue\Document;
-use Storage;
 
 class AdminTest extends TestCase
 {
