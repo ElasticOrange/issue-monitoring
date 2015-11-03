@@ -4,9 +4,6 @@
 			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
 		</a>
 		<h4 class="list-group-item-heading"><%= name %></h4>
-		<p class="list-group-item-text">
-			It's a mee! Mario!
-		</p>
-
+		<p class="list-group-item-text"></p>
 	</div>
 </script>
