@@ -40,6 +40,8 @@ elixir(function(mix) {
         , 'jqwidgets/jqwidgets/jqxscrollbar.js'
         , 'jqwidgets/jqwidgets/jqxpanel.js'
         , 'jqwidgets/jqwidgets/jqxtree.js'
+        , 'jqwidgets/jqwidgets/jqxdragdrop.js'
+        , 'jqwidgets/jqwidgets/jqxcheckbox.js'
         , 'moment/min/moment.min.js'
         , 'moment/locale/ro.js'
         , 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
