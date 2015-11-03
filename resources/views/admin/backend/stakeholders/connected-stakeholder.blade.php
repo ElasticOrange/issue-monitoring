@@ -1,8 +1,12 @@
 <script type="text/template" id="connected-stakeholder-template">
-	<a href="#" class="list-group-item">
-		<h4 class="list-group-item-heading">Mario</h4>
+	<div class="list-group-item" stakeholder-id="<%= id %>">
+		<a class="badge" connected-stakeholder-delete="<%= id %>">
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+		</a>
+		<h4 class="list-group-item-heading"><%= name %></h4>
 		<p class="list-group-item-text">
 			It's a mee! Mario!
 		</p>
-	</a>
+
+	</div>
 </script>
