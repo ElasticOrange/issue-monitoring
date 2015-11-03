@@ -8,17 +8,17 @@
 	<div class="tab-pane active" id="news_ro">
 		<div class="form-group">
 			<label class="col-md-3">Titlu</label>
-			<input type="text" name="news[title][ro]" class="form-control">
+			<input type="text" name="title[ro]" class="form-control">
 			<label class="col-md-3">Descriere</label>
-			<textarea name="news[description][ro]" class="form-control" rows="3"></textarea>
+			<textarea name="description[ro]" class="form-control" rows="3"></textarea>
 		</div>
 	</div>
 	<div class="tab-pane" id="news_en">
 		<div class="form-group">
 			<label class="col-md-3">Title</label>
-			<input type="text" name="news[title][en]" class="form-control">
+			<input type="text" name="title[en]" class="form-control">
 			<label class="col-md-3">Description</label>
-			<textarea name="news[description][en]" class="form-control" rows="3"></textarea>
+			<textarea name="description[en]" class="form-control" rows="3"></textarea>
 		</div>
 	</div>
 </div>
@@ -39,7 +39,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Link</label>
 	<div class="col-md-8">
-		<input type="text" name="site" class="form-control"></input>
+		<input type="text" name="link" class="form-control"></input>
 	</div>
 </div>
 

@@ -39,6 +39,20 @@
 									<th  class="text-center" style="width: 200px;">Actiuni</th>
 								</tr>
 							</thead>
+							<tbody>
+								@foreach($news as $news)
+									<tr class='gradeA odd' role="row">
+										<td>{{ $news->title }}</td>
+										<td>{{ $news->date->format('d-m-Y') }}</td>
+										<td></td>
+										<td></td>
+										<td class="text-center">
+											<a href="{{ action('NewsController@edit', [$news])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a href=" {{ action('StakeholderController@destroy', [$news]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+										</td>
+									</tr>
+								@endforeach
+							</tbody>
 						</table>
 					</div>
 				</div>
