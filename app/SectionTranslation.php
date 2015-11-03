@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SectionTranslation extends Model
 {
-    public $timestamps = false;
+	public $timestamps = false;
 
-    protected $guarded = ['id'];
+	protected $guarded = ['id'];
 }

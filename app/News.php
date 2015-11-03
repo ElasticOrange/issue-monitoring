@@ -6,30 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-    use \Dimsav\Translatable\Translatable;
+	use \Dimsav\Translatable\Translatable;
 
-    protected $guarded = ['id'];
+	protected $guarded = ['id'];
 
-    protected $fillable = [
-    	'title',
-    	'description',
-    ];
+	protected $fillable = [
+		'title',
+		'description',
+	];
 
-    public $dates = ['date'];
+	public $dates = ['date'];
 
-    public $translatedAttributes = ['title', 'description'];
+	public $translatedAttributes = ['title', 'description'];
 
-    public function setAll($request)
-    {
-    	$this->date = $request->get('date');
-    	$this->link = $request->get('link');
-    	$this->published = $request->get('published') == true;
+	public function setAll($request)
+	{
+		$this->date = $request->get('date');
+		$this->link = $request->get('link');
+		$this->published = $request->get('published') == true;
 
-    	foreach(\Config::get('app.all_locales') as $locale){
-    		$this->translateOrNew($locale)->title = $request->get('title')[$locale];
-    		$this->translateOrNew($locale)->description = $request->get('description')[$locale];
-    	}
+		foreach(\Config::get('app.all_locales') as $locale){
+			$this->translateOrNew($locale)->title = $request->get('title')[$locale];
+			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
+		}
 
-    	$this->save();
-    }
+		$this->save();
+	}
 }

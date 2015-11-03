@@ -16,10 +16,10 @@
 		<form class="form-horizontal" method="POST" action="/backend/news">
 			@include('admin.backend.news.form')
 			<div class="form-group">
-    			<div class="col-sm-4" style="margin-top:25px;">
-			        <button class="btn btn-primary">Salveaza schimbari</button>
-			        <a href="/backend/news/"<button class="btn btn-info">Inapoi la lista</button></a>
-    			</div>
+				<div class="col-sm-4" style="margin-top:25px;">
+					<button class="btn btn-primary">Salveaza schimbari</button>
+					<a href="/backend/news/"<button class="btn btn-info">Inapoi la lista</button></a>
+				</div>
 			</div>
 		</form>
 	</div>

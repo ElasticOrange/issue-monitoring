@@ -6,22 +6,22 @@
 	<br /><br /><br />
 	<div class="row">
 		<div class="col-md-12">
-	        <form action="/backend/document"
-				  class="form-horizontal"
-				  method="POST"
-				  enctype="multipart/form-data"
-				  data-ajax="true"
-				  success-message="Document adaugat"
-				  error-message="Eroare"
-				  success-url="/backend/document/{id}/edit"
+			<form action="/backend/document"
+				class="form-horizontal"
+				method="POST"
+				enctype="multipart/form-data"
+				data-ajax="true"
+				success-message="Document adaugat"
+				error-message="Eroare"
+				success-url="/backend/document/{id}/edit"
 			>
 				@include('admin.backend.documents.form')
 				<div class="form-actions">
-				    <div class="row">
-				        <div class="col-md-offset-3 col-md-7">
-				               <input type="submit" value="Salveaza" class="btn btn-primary btn-lg btn-block" />
-				       </div>
-				    </div>
+					<div class="row">
+						<div class="col-md-offset-3 col-md-7">
+							<input type="submit" value="Salveaza" class="btn btn-primary btn-lg btn-block" />
+						</div>
+					</div>
 				</div>
 
 			</form>

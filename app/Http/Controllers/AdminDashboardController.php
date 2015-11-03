@@ -8,14 +8,14 @@ use Issue\Http\Controllers\Controller;
 
 class AdminDashboardController extends Controller
 {
-    public function getIndex()
-    {
-    	return view('admin.backend.dashboard');
-    }
+	public function getIndex()
+	{
+		return view('admin.backend.dashboard');
+	}
 
-    public function getLogin()
-    {
-    	return view('admin.backend.login');
-    }
+	public function getLogin()
+	{
+		return view('admin.backend.login');
+	}
 
 }

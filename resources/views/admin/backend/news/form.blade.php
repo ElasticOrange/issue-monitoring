@@ -29,11 +29,11 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label">Data</label>
-    <div class="col-md-8">
-        <input type="text" date-widget="true" name="init_at" class="form-control" />
-        <input type="hidden" name="date">
-    </div>
+	<label class="col-md-2 control-label">Data</label>
+	<div class="col-md-8">
+		<input type="text" date-widget="true" name="init_at" class="form-control" />
+		<input type="hidden" name="date">
+	</div>
 </div>
 
 <div class="form-group">
@@ -119,22 +119,4 @@
 		/>Publica
 	</label>
 </div>
-
-<script type="text/javascript">
-
-    var dateWidgets = $('[date-widget="true"]')
-    .datetimepicker({
-        locale: 'ro',
-        format: 'L',
-        defaultDate: moment()
-    })
-
-    $('[name=date]').val(moment().format("YYYY-MM-DD"));
-
-    dateWidgets.on('dp.change', function(){
-        var d = $(this).data("DateTimePicker").date();
-        var e = d.format("YYYY-MM-DD");
-        $('[name=date]').val(e);
-    })
-</script>
 
