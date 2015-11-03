@@ -14,7 +14,7 @@ class CreateNewsTable extends Migration
 	{
 		Schema::create('news', function (Blueprint $table) {
 			$table->increments('id');
-			$table->date('date');
+			$table->timestamp('date');
 			$table->string('link');
 			$table->boolean('published');
 			$table->timestamps();
@@ -40,6 +40,7 @@ class CreateNewsTable extends Migration
 	 */
 	public function down()
 	{
+		Schema::drop('news_translations');
 		Schema::drop('news');
 	}
 }

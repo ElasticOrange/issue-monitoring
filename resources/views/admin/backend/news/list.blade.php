@@ -4,7 +4,7 @@
 
 	<div class="row">
 		<div class="col-lg-12 text-left">
-			<h1 class="page-header">Stiri si decalratii</h1>
+			<h1 class="page-header">Stiri si declaratii</h1>
 		</div>
 	</div>
 
@@ -29,7 +29,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover dataTables-example">
+						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
 									<th  class="text-center" style="width: 180px;">Titlu</th>
@@ -48,7 +48,7 @@
 										<td></td>
 										<td class="text-center">
 											<a href="{{ action('NewsController@edit', [$news])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href=" {{ action('StakeholderController@destroy', [$news]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+											<a href=" {{ action('NewsController@destroy', [$news]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 										</td>
 									</tr>
 								@endforeach

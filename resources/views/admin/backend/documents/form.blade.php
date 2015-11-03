@@ -29,7 +29,7 @@
 <div class="form-group">
 	<label class="col-md-3 control-label">Data</label>
 	<div class="col-md-7">
-		<input type="text" date-widget="true" name="init_at" class="form-control" />
+		<input type="text" date-widget="true" name="init_at" class="form-control" value="{{ $document->init_at->format('d-m-Y') }}" />
 		<input type="hidden" name="date">
 	</div>
 </div>

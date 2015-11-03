@@ -15,7 +15,7 @@ class News extends Model
 		'description',
 	];
 
-	public $dates = ['date'];
+	public $dates = ['date','init_at'];
 
 	public $translatedAttributes = ['title', 'description'];
 

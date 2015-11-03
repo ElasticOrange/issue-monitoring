@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="col-sm-6">
-			<h1>Creaza Stire/Declaratie</h1>
+			<h1>Modifica Stire/Declaratie</h1>
 		</div>
 	</div>
 </div>
@@ -13,7 +13,15 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" method="POST" action="/backend/news">
+		<form 	class="form-horizontal"
+				method="POST"
+				action="{{ action('NewsController@update', [$news]) }}"
+				enctype="multipart/form-data"
+				data-ajax="true"
+				success-message="Stire salvata"
+				success-url="{{ action('NewsController@index') }}"
+				error-message="Eroare"
+		>
 			<input name="_method" type="hidden" value="PUT"/>
 			@include('admin.backend.news.form')
 			<div class="form-group">
@@ -22,7 +30,7 @@
 					<a href="{{ action('NewsController@index') }}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Inapoi la lista</button></a>
 				</div>
 				<div class="col-sm-2 col-sm-offset-6" style="margin-top:25px;">
-				<a href="{{ action("NewsController@destroy", [$stakeholder]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
+				<a href="{{ action("NewsController@destroy", [$news]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
 				</div>
 			</div>
 		</form>

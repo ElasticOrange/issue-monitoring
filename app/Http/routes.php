@@ -33,3 +33,4 @@ Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['d
 Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderController@setPublished');
 
 Route::resource('/backend/news', 'NewsController', ['except' =>['show', 'destroy']]);
+Route::get('/backend/news/{news}/delete', 'NewsController@destroy');

@@ -13,7 +13,15 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" method="POST" action="/backend/news">
+		<form 	class="form-horizontal"
+				method="POST"
+				action="{{ action('NewsController@store', [$news]) }}"
+				enctype="multipart/form-data"
+				data-ajax="true"
+				success-message="Stire salvata"
+				success-url="{{ action('NewsController@index') }}"
+				error-message="Eroare"
+		>
 			@include('admin.backend.news.form')
 			<div class="form-group">
 				<div class="col-sm-4" style="margin-top:25px;">

@@ -8,17 +8,17 @@
 	<div class="tab-pane active" id="news_ro">
 		<div class="form-group">
 			<label class="col-md-3">Titlu</label>
-			<input type="text" name="title[ro]" class="form-control">
+			<input type="text" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
 			<label class="col-md-3">Descriere</label>
-			<textarea name="description[ro]" class="form-control" rows="3"></textarea>
+			<textarea name="description[ro]" class="form-control" rows="3">{{ $news->translateOrNew('ro')->description}}</textarea>
 		</div>
 	</div>
 	<div class="tab-pane" id="news_en">
 		<div class="form-group">
 			<label class="col-md-3">Title</label>
-			<input type="text" name="title[en]" class="form-control">
+			<input type="text" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
 			<label class="col-md-3">Description</label>
-			<textarea name="description[en]" class="form-control" rows="3"></textarea>
+			<textarea name="description[en]" class="form-control" rows="3">{{ $news->translateOrNew('en')->description}}</textarea>
 		</div>
 	</div>
 </div>
@@ -31,7 +31,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Data</label>
 	<div class="col-md-8">
-		<input type="text" date-widget="true" name="init_at" class="form-control" />
+		<input type="text" date-widget="true" name="init_at" class="form-control" value="{{ $news->date ? $news->date->format('d-m-Y') : '' }}"/>
 		<input type="hidden" name="date">
 	</div>
 </div>
@@ -39,7 +39,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Link</label>
 	<div class="col-md-8">
-		<input type="text" name="link" class="form-control"></input>
+		<input type="text" name="link" class="form-control" value="{{ $news->link }}"></input>
 	</div>
 </div>
 
@@ -116,6 +116,9 @@
 		<input  type="checkbox"
 				value="1"
 				name="published"
+				@if($news->published)
+					checked="checked"
+				@endif
 		/>Publica
 	</label>
 </div>

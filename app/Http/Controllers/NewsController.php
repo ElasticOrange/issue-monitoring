@@ -2,10 +2,11 @@
 
 namespace Issue\Http\Controllers;
 
+use Issue\News;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
-use Issue\News;
 use Issue\Http\Controllers\Controller;
+use Storage;
 
 class NewsController extends Controller
 {
@@ -44,7 +45,7 @@ class NewsController extends Controller
 		$news = new News;
 		$news->setAll($request);
 
-		return redirect()->action('NewsController@index');
+		return $news;
 	}
 
 	/**
@@ -66,7 +67,7 @@ class NewsController extends Controller
 	 */
 	public function edit($news)
 	{
-		//
+		return view('admin.backend.news.edit', ['news'=> $news]);
 	}
 
 	/**
@@ -76,9 +77,11 @@ class NewsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request, $news)
 	{
-		//
+		$news -> setAll($request);
+
+		return $news;
 	}
 
 	/**
@@ -87,8 +90,10 @@ class NewsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy($news)
 	{
-		//
+		$news -> delete();
+
+		return redirect()->action('NewsController@index');
 	}
 }
