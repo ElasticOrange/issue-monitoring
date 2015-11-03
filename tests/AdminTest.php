@@ -9,16 +9,16 @@ use Storage;
 
 class AdminTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testAdminDashboardView()
+	/**
+	 * A basic test example.
+	 *
+	 * @return void
+	 */
+	public function testAdminDashboardView()
 	{
-	    $response = $this->call('GET', '/admin');
+		$response = $this->call('GET', '/admin');
 
-	    $this->assertEquals(200, $response->status());
+		$this->assertEquals(200, $response->status());
 	}
 
 	public function testLoginView()

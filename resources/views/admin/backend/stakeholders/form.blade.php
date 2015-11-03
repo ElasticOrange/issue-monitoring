@@ -168,6 +168,15 @@
 </div>
 
 <div class="form-group">
+	<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
+	<input id="stakeholder-autocomplete" type="text" placeholder="Stakeholderi cu care doresti sa conectezi" class="form-control">
+</div>
+
+<div class="form-group">
+	
+</div>
+
+<div class="form-group">
     <div class="checkbox col-md-10 col-md-offset-2">
         <label>
             <input  type="checkbox"
@@ -180,4 +189,3 @@
         </label>
     </div>
 </div>
-
