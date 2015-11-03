@@ -5,5 +5,6 @@
 		</a>
 		<h4 class="list-group-item-heading"><%= name %></h4>
 		<p class="list-group-item-text"></p>
+		<input type="hidden" name="connected-stakeholers[]" value="<%= id %>" />
 	</div>
 </script>
