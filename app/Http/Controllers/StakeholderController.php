@@ -114,8 +114,12 @@ class StakeholderController extends Controller
 		return ['result' => true];
 	}
 
-	public function queryList()
+	public function queryList(Request $request)
 	{
-		return response()->json(['a' => 1234]);
+		$queryName = $request->get('name');
+
+		$stakeholders = Stakeholder::where('name', 'like', '%'. $queryName .'%')->get();
+
+		return response()->json($stakeholders);
 	}
 }
