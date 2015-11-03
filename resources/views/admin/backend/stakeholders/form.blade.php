@@ -169,7 +169,7 @@
 
 <div class="form-group">
 	<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
-	<input id="stakeholder-autocomplete" source-url="{{ action('StakeholderController@queryList') }}" type="text" placeholder="Stakeholderi cu care doresti sa conectezi" class="form-control">
+	<input id="stakeholder-autocomplete" source-url="{{ action('StakeholderController@queryList') }}/?name={name}" type="text" placeholder="Stakeholderi cu care doresti sa conectezi" class="form-control">
 </div>
 
 <div class="form-group">
