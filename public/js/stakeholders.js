@@ -46,4 +46,18 @@ $(document).ready(function(){
 			source: stakeholdersList
 		}
 	);
+
+	$('#stakeholder-autocomplete').bind(
+		'typeahead:select',
+		function(event, suggestion) {
+			$(this).typeahead('val', '');
+
+			var template = _.template($('#connected-stakeholder-template').html());
+			var compiled_template = template(suggestion);
+
+			console.log(compiled_template);
+
+			$('#connected-stakeholders-container').append(compiled_template);
+		}
+	);
 });

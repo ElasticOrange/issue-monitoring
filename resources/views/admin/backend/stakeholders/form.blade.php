@@ -167,13 +167,25 @@
 	</div>
 </div>
 
+<!-- Connected stakeholders autocomplete -->
 <div class="form-group">
 	<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
-	<input id="stakeholder-autocomplete" source-url="{{ action('StakeholderController@queryList') }}/?name={name}" type="text" placeholder="Stakeholderi cu care doresti sa conectezi" class="form-control">
+	<input
+		id="stakeholder-autocomplete"
+		source-url="{{ action('StakeholderController@queryList') }}/?name={name}"
+		type="text"
+		placeholder="Nume"
+		class="form-control"
+	/>
 </div>
 
-<div class="form-group">
+<!-- Connected stakeholders list -->
+@include('admin.backend.stakeholders.connected-stakeholder')
+<div class="panel panel-success">
+	<div class="panel-heading">Stakeholderi conectati</div>
+	<div class="list-group" id="connected-stakeholders-container">
 
+	</div>
 </div>
 
 <div class="form-group">
