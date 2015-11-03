@@ -5,6 +5,7 @@ namespace Issue\Http\Controllers;
 use Issue\Stakeholder;
 use Issue\Section;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Issue\Http\Requests;
 use Issue\Http\Requests\StakeholderRequest;
 use Issue\Http\Controllers\Controller;
@@ -114,6 +115,11 @@ class StakeholderController extends Controller
 		return ['result' => true];
 	}
 
+	/**
+	 * Query the list of stakeholders for autocomplete purposes
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function queryList(Request $request)
 	{
 		$queryName = $request->get('name');

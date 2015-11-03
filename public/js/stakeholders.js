@@ -32,7 +32,8 @@ $(document).ready(function(){
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		datumTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
-			url: ''
+			url: $('#stakeholder-autocomplete').attr('source-url'),
+			wildcard: '{name}'
 		}
 	});
 
@@ -41,7 +42,7 @@ $(document).ready(function(){
 		null,
 		{
 			name: 'stakeholder',
-			display: 'value',
+			display: 'name',
 			source: stakeholdersList
 		}
 	);
