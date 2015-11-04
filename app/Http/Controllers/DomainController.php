@@ -99,6 +99,14 @@ class DomainController extends Controller
      */
     public function update(Request $request, $domain)
     {
+        $this->validate($request,
+            [
+                'name' => 'array',
+                'name.ro' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
+                'name.en' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
+                'parent_id' => 'required|integer'
+            ]);
+
         $this->fillDomain($domain, $request);
         $domain->save();
 
