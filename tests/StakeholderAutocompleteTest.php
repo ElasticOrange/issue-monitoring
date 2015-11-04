@@ -54,17 +54,19 @@ class StakeholderAutocompleteTest extends TestCase
 		$stakeholder->delete();
 	}
 
-	public function testStakeholderSave()
+	public function testStakeholdersConnectedSave()
 	{
 		$stakeholder_data = $this->stakeholderData();
 
 		// Create a few stakeholders to connect the main one with
 		$stakeholders_connected = [];
 		for ($i = 0; $i < rand(3, 5); $i++) {
+			$sc_data = $this->stakeholderData();
+
 			$stakeholder_response_aux = $this->call(
 				'POST',
 				action('StakeholderController@store'),
-				$this->stakeholderData()
+				$sc_data
 			);
 
 			$this->assertEquals(
@@ -76,7 +78,6 @@ class StakeholderAutocompleteTest extends TestCase
 			$stakeholders_connected[] = $stakeholder_aux;
 		}
 
-		$stakeholder_data['stakeholders_connected'] = [];
 		foreach ($stakeholders_connected as $sc) {
 			$stakeholder_data['stakeholders_connected'][] = $sc->id;
 		}
@@ -87,8 +88,6 @@ class StakeholderAutocompleteTest extends TestCase
 			$stakeholder_data
 		);
 
-		print_r($stakeholder_data);
-
 		// We need to test the connected stakeholders and remove this stakeholder
 		$stakeholder_generated_data = json_decode($response->getContent());
 		$stakeholder = Stakeholder::find($stakeholder_generated_data->id);
@@ -96,7 +95,7 @@ class StakeholderAutocompleteTest extends TestCase
 		// Check if the main stakeholder is connected to the other stakeholders
 		$connected_stakeholders = $stakeholder_data['stakeholders_connected'];
 		$stakeholders_connected_found = [];
-		foreach ($stakeholder->stakeholders_connected as $sc) {
+		foreach ($stakeholder->stakeholdersConnected as $sc) {
 			$stakeholders_connected_found[] = $sc->id;
 		}
 		$this->assertEquals(
@@ -114,4 +113,5 @@ class StakeholderAutocompleteTest extends TestCase
 			$sc->delete();
 		}
 	}
+
 }

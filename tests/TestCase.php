@@ -36,6 +36,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 			'name' => $this->faker->name,
 			'type' => 'persoana',
 			'site' => $this->faker->url,
+			'stakeholders_connected' => [],
 			'_token' => csrf_token()
 		];
 

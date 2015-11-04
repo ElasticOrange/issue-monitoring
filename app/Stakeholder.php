@@ -66,11 +66,11 @@ class Stakeholder extends Model
 			$this->translateOrNew($locale)->position = $request->get('position')[$locale];
 		}
 
-		if ($request->get('stakeholders_connected')) {
+		$this->save();
+
+		if (count($request->get('stakeholders_connected'))) {
 			$this->stakeholdersConnected()->sync($request->get('stakeholders_connected'));
 		}
-
-		$this->save();
 	}
 
 	public function sections()
@@ -125,11 +125,11 @@ class Stakeholder extends Model
 
 	public function stakeholdersConnected()
 	{
-		return $this->belongsToMany(
+		return $one_way = $this->belongsToMany(
 			'Issue\Stakeholder',
 			'stakeholders_connected',
 			'stakeholder_id',
 			'stakeholder_connected_id'
-		)->orWhere('stakeholder_connected_id', $this->id);
+		);
 	}
 }

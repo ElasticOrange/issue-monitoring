@@ -184,7 +184,16 @@
 <div class="panel panel-success">
 	<div class="panel-heading">Stakeholderi conectati</div>
 	<div class="list-group" id="connected-stakeholders-container">
-
+		@foreach ($stakeholder->stakeholdersConnected as $stakeholder_connected)
+			<div class="list-group-item" stakeholder-id="{{ $stakeholder_connected->id }}">
+				<a class="badge" connected-stakeholder-delete="{{ $stakeholder_connected->id }}">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+				</a>
+				<h4 class="list-group-item-heading">{{ $stakeholder_connected->name }}</h4>
+				<p class="list-group-item-text"></p>
+				<input type="hidden" name="stakeholders_connected[]" value="{{ $stakeholder_connected->id }}" />
+			</div>
+		@endforeach
 	</div>
 </div>
 
