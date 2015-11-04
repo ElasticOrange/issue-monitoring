@@ -17,7 +17,30 @@
         dataAdapter.dataBind();
         var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{name: 'name', map: 'label'}]);
         records[0].expanded = true;
-        tree.jqxTree({source: records, height: 300, width: '100%'});
+
+        tree.jqxTree({source: records, height: '300px', width: '100%', allowDrag: true, allowDrop: true
+            , dragStart: function (item) {
+                if (item.id == 1)
+                    return false;
+            }
+        });
+
+        tree.on('dragEnd', function () {
+            var item = getSelectedDomain();
+
+            var request = $.ajax({
+                async: false,
+                type: "GET",
+                url: "/backend/domain/" + item.id + "/changeparent",
+                data: {parent_id: item.parentId}
+            });
+            request.done(function(data) {
+                console.error("result", data);
+                tree.jqxTree('selectItem',  getTreeItemById(tree, item.id));
+                tree.jqxTree('expandItem', item);
+            })
+        });
+
         $(document).on('click', '#editDomain', function (event) {
             $('#myModal').modal('show');
             ajaxGetDomainNameForEdit();
@@ -56,6 +79,19 @@
 
     function ajaxGetDomainNameForEdit() {
         var domain = getSelectedDomain();
+
+        if (!domain) {
+            alert("Nu se poate modifica");
+            $('#myModal').modal('hide');
+            return false;
+        }
+
+        if (domain.level == 0) {
+            alert("Nu se poate modifica");
+            $('#myModal').modal('hide');
+            return false;
+        }
+
         $.ajax({
             async: false,
             type: "GET",

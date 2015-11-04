@@ -18,9 +18,9 @@ class DomainController extends Controller
      */
     public function index()
     {
-        $domain = Domain::all();
+        $domains = Domain::all();
 
-        return view('admin.backend.domains.list', ['domain' => $domain]);
+        return view('admin.backend.domains.list', ['domains' => $domains]);
     }
 
     public function getTree()
@@ -100,6 +100,14 @@ class DomainController extends Controller
     public function update(Request $request, $domain)
     {
         $this->fillDomain($domain, $request);
+        $domain->save();
+
+        return $domain;
+    }
+
+    public function changeParent($domain, Request $request)
+    {
+        $domain->parent_id = $request->input('parent_id');
         $domain->save();
 
         return $domain;
