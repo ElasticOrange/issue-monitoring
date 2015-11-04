@@ -114,4 +114,56 @@ class StakeholderAutocompleteTest extends TestCase
 		}
 	}
 
+	public function testStakeholdersConnectedSaved_AreVisible_OnTheOtherSide()
+	{
+		$stakeholder_data = $this->stakeholderData();
+
+		// Create a few stakeholders to connect the main one with
+		$stakeholders_connected = [];
+		for ($i = 0; $i < rand(3, 5); $i++) {
+			$sc_data = $this->stakeholderData();
+
+			$stakeholder_response_aux = $this->call(
+				'POST',
+				action('StakeholderController@store'),
+				$sc_data
+			);
+
+			$this->assertEquals(
+				200,
+				$stakeholder_response_aux->status()
+			);
+			$stakeholder_response_data = json_decode($stakeholder_response_aux->getContent());
+			$stakeholder_aux = Stakeholder::find($stakeholder_response_data->id);
+			$stakeholders_connected[] = $stakeholder_aux;
+		}
+
+		foreach ($stakeholders_connected as $sc) {
+			$stakeholder_data['stakeholders_connected'][] = $sc->id;
+		}
+
+		$response = $this->call(
+			'POST',
+			action('StakeholderController@store'),
+			$stakeholder_data
+		);
+
+		// We need to test the connected stakeholders and remove this stakeholder
+		$stakeholder_generated_data = json_decode($response->getContent());
+		$stakeholder = Stakeholder::find($stakeholder_generated_data->id);
+
+		// Check if the main stakeholder is connected to the other stakeholders
+		$connected_stakeholders = $stakeholder_data['stakeholders_connected'];
+		$stakeholders_connected_found = [];
+		foreach ($stakeholder->stakeholdersConnected as $sc) {
+			$found_stakeholder = $sc->stakeholdersConnected->where('id', $stakeholder->id)->count();
+			$this->assertEquals(1, $found_stakeholder);
+		}
+
+		// Cleanup
+		$stakeholder->delete();
+		foreach ($stakeholders_connected as $sc) {
+			$sc->delete();
+		}
+	}
 }
