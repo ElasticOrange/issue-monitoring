@@ -13,7 +13,7 @@
 				  data-ajax="true"
 				  success-message="Document adaugat"
 				  error-message="Eroare"
-				  success-url="/backend/document/{id}/edit"
+				  success-url="{{action('DocumentController@index')}}"
 			>
 				@include('admin.backend.documents.form')
 				<div class="form-actions">

@@ -13,7 +13,7 @@
 				  data-ajax="true"
 				  success-message="Document salvat cu succes"
 				  error-message="Eroare"
-				  success-url="/backend/document"
+				  success-url="{{action('DocumentController@index')}}"
 					>
 				<input name="_method" type="hidden" value="PUT">
 				@include('admin.backend.documents.form')
