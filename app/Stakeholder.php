@@ -68,12 +68,8 @@ class Stakeholder extends Model
 
 		$this->save();
 
-		// Add stakeholders for the other side
-		//$current_stakeholders_connected = $this->stakeholdersConnected();
-		//$current_stakeholders_connected->
-
 		// Add stakeholders for this one
-		if (count($request->get('stakeholders_connected'))) {
+		if ($request->get('stakeholders_connected')) {
 			$this->stakeholdersConnectedOfMine()->sync($request->get('stakeholders_connected'));
 		}
 	}
