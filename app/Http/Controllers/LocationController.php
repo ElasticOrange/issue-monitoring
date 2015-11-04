@@ -96,8 +96,16 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(LocationRequest $request, $location)
+    public function update(Request $request, $location)
     {
+        $this->validate($request,
+            [
+                'name' => 'array',
+                'name.ro' => 'required|string|unique:location_translations,name,' . $location->id . ',location_id',
+                'name.en' => 'required|string|unique:location_translations,name,' . $location->id . ',location_id',
+                'parent_id' => 'required|integer'
+            ]);
+
         $this->fillLocation($location, $request);
         $location->save();
 

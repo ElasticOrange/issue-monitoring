@@ -25,8 +25,8 @@ class LocationRequest extends Request
     {
         return [
             'name' => 'array',
-            'name.ro' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
-            'name.en' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
+            'name.ro' => 'required|string|unique:location_translations,name',
+            'name.en' => 'required|string|unique:location_translations,name',
             'parent_id' => 'required|integer'
         ];
     }
