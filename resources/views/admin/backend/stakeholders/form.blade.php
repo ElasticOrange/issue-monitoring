@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-danger delete_section" id="{{ $section->id }}">Sterge Sectiune</button>
+                <button type="button" class="btn btn-danger delete_section" id="{{ $section->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge Sectiune</button>
             </div>
             <hr>
         </div>
