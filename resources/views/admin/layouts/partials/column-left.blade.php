@@ -24,6 +24,9 @@
             <li>
                 <a href="/backend/stakeholder"><i class="fa fa-user fa-fw"></i> Stakeholders</a>
             </li>
+            <li>
+                <a href="/backend/location"><i class="fa fa-location-arrow fa-fw"></i> Locations</a>
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
