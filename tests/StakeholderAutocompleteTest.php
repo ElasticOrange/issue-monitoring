@@ -56,17 +56,29 @@ class StakeholderAutocompleteTest extends TestCase
 
 	public function testStakeholderSave()
 	{
-		$stakeholder_data = [
-			'name' => $this->faker->name,
-			'type' => 'persoana',
-			'site' => $this->faker->url,
-			'_token' => csrf_token()
-		];
+		$stakeholder_data = $this->stakeholderData();
 
-		foreach (Config::get('app.all_locales') as $locale) {
-			$stakeholder_data['contact'][$locale] = $this->faker->text;
-			$stakeholder_data['profile'][$locale] = $this->faker->text;
-			$stakeholder_data['position'][$locale] = $this->faker->text;
+		// Create a few stakeholders to connect the main one with
+		$stakeholders_connected = [];
+		for ($i = 0; $i < rand(3, 5); $i++) {
+			$stakeholder_response_aux = $this->call(
+				'POST',
+				action('StakeholderController@store'),
+				$this->stakeholderData()
+			);
+
+			$this->assertEquals(
+				200,
+				$stakeholder_response_aux->status()
+			);
+			$stakeholder_response_data = json_decode($stakeholder_response_aux->getContent());
+			$stakeholder_aux = Stakeholder::find($stakeholder_response_data->id);
+			$stakeholders_connected[] = $stakeholder_aux;
+		}
+
+		$stakeholder_data['stakeholders_connected'] = [];
+		foreach ($stakeholders_connected as $sc) {
+			$stakeholder_data['stakeholders_connected'][] = $sc->id;
 		}
 
 		$response = $this->call(
@@ -75,7 +87,31 @@ class StakeholderAutocompleteTest extends TestCase
 			$stakeholder_data
 		);
 
+		print_r($stakeholder_data);
+
 		// We need to test the connected stakeholders and remove this stakeholder
-		echo $response->getContent();
+		$stakeholder_generated_data = json_decode($response->getContent());
+		$stakeholder = Stakeholder::find($stakeholder_generated_data->id);
+
+		// Check if the main stakeholder is connected to the other stakeholders
+		$connected_stakeholders = $stakeholder_data['stakeholders_connected'];
+		$stakeholders_connected_found = [];
+		foreach ($stakeholder->stakeholders_connected as $sc) {
+			$stakeholders_connected_found[] = $sc->id;
+		}
+		$this->assertEquals(
+			0,
+			count(array_diff($stakeholders_connected_found, $stakeholder_data['stakeholders_connected']))
+		);
+		$this->assertEquals(
+			0,
+			count(array_diff($stakeholder_data['stakeholders_connected'], $stakeholders_connected_found))
+		);
+
+		// Cleanup
+		$stakeholder->delete();
+		foreach ($stakeholders_connected as $sc) {
+			$sc->delete();
+		}
 	}
 }

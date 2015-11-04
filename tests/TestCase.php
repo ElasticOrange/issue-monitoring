@@ -29,4 +29,22 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
 		Session::start();
 	}
+
+	public function stakeholderData()
+	{
+		$stakeholder_data = [
+			'name' => $this->faker->name,
+			'type' => 'persoana',
+			'site' => $this->faker->url,
+			'_token' => csrf_token()
+		];
+
+		foreach (Config::get('app.all_locales') as $locale) {
+			$stakeholder_data['contact'][$locale] = $this->faker->text;
+			$stakeholder_data['profile'][$locale] = $this->faker->text;
+			$stakeholder_data['position'][$locale] = $this->faker->text;
+		}
+
+		return $stakeholder_data;
+	}
 }
