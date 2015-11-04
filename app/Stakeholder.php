@@ -68,10 +68,13 @@ class Stakeholder extends Model
 
 		$this->save();
 
-		// Add stakeholders for this one
-		if ($request->get('stakeholders_connected')) {
-			$this->stakeholdersConnectedOfMine()->sync($request->get('stakeholders_connected'));
+		// Refresh connected stakeholders
+		$stakeholders_connected = $request->get('stakeholders_connected');
+		if ($stakeholders_connected == null) {
+			$stakeholders_connected = [];
 		}
+		$this->stakeholdersConnectedOfThem()->sync([]);
+		$this->stakeholdersConnectedOfMine()->sync($stakeholders_connected);
 	}
 
 	public function sections()
