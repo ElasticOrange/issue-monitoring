@@ -74,10 +74,8 @@ class Stakeholder extends Model
 
 		// Add stakeholders for this one
 		if (count($request->get('stakeholders_connected'))) {
-			$this->stakeholdersConnected()->sync($request->get('stakeholders_connected'));
+			$this->stakeholdersConnectedOfMine()->sync($request->get('stakeholders_connected'));
 		}
-
-
 	}
 
 	public function sections()
@@ -130,13 +128,46 @@ class Stakeholder extends Model
 		return $instance->where('public_code', $code)->firstOrFail();
 	}
 
-	public function stakeholdersConnected()
+	public function stakeholdersConnectedOfMine()
 	{
-		return $one_way = $this->belongsToMany(
+		return $this->belongsToMany(
 			'Issue\Stakeholder',
 			'stakeholders_connected',
 			'stakeholder_id',
 			'stakeholder_connected_id'
 		);
+	}
+
+	public function stakeholdersConnectedOfThem()
+	{
+		return $this->belongsToMany(
+			'Issue\Stakeholder',
+			'stakeholders_connected',
+			'stakeholder_connected_id',
+			'stakeholder_id'
+		);
+	}
+
+	public function getStakeholdersConnectedAttribute()
+	{
+		if (! array_key_exists('stakeholders_connected', $this->relations)) {
+			$this->loadStakeholdersConnected();
+		}
+
+		return $this->getRelation('stakeholders_connected');
+	}
+
+	protected function loadStakeholdersConnected()
+	{
+		if (! array_key_exists('stakeholders_connected', $this->relations)) {
+			$stakeholders_connected = $this->mergeStakeholdersConnected();
+
+			$this->setRelation('stakeholders_connected', $stakeholders_connected);
+		}
+	}
+
+	protected function mergeStakeholdersConnected()
+	{
+		return $this->stakeholdersConnectedOfMine->merge($this->stakeholdersConnectedOfThem);
 	}
 }

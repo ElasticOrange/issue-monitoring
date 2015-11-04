@@ -95,7 +95,7 @@ class StakeholderAutocompleteTest extends TestCase
 		// Check if the main stakeholder is connected to the other stakeholders
 		$connected_stakeholders = $stakeholder_data['stakeholders_connected'];
 		$stakeholders_connected_found = [];
-		foreach ($stakeholder->stakeholdersConnected as $sc) {
+		foreach ($stakeholder->stakeholdersConnectedOfMine as $sc) {
 			$stakeholders_connected_found[] = $sc->id;
 		}
 		$this->assertEquals(
