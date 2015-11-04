@@ -22,7 +22,9 @@ class CreateLocationsTable extends Migration
             $table->increments('id');
             $table->integer('location_id')->unsigned();
             $table->string('locale', 3)->index();
+
             $table->string('name');
+
             $table->unique(['location_id','locale']);
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
         });

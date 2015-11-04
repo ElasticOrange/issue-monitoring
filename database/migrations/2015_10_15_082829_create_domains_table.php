@@ -17,11 +17,14 @@ class CreateDomainsTable extends Migration
             $table->integer('parent_id');
             $table->timestamps();
         });
+
         Schema::create('domain_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('domain_id')->unsigned();
             $table->string('locale', 3)->index();
+
             $table->string('name');
+
             $table->unique(['domain_id','locale']);
             $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
         });

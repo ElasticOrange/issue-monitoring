@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\Location;
+use Issue\Http\Requests\LocationRequest;
 
 class LocationController extends Controller
 {
@@ -21,6 +22,24 @@ class LocationController extends Controller
         return view('admin.backend.location.list', ['locations' => $locations]);
     }
 
+    public function getTree()
+    {
+        $locations = Location::all();
+        return $locations;
+    }
+
+    private function fillLocation($location, $request) {
+        $input = $request->all();
+        $location->parent_id = $input['parent_id'];
+
+        foreach (['ro', 'en'] as $locale)
+        {
+            $location->translateOrNew($locale)->name = $input['name'][$locale];
+        }
+
+        return $location;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +47,9 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        $location = new Location;
+
+        return view('admin.backend.location.create', ['location' => $location]);
     }
 
     /**
@@ -37,9 +58,13 @@ class LocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LocationRequest $request)
     {
-        //
+        $location = new Location;
+        $this->fillLocation($location, $request);
+        $location->save();
+
+        return $location;
     }
 
     /**
@@ -59,9 +84,9 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($location)
     {
-        //
+        return view('admin.backend.location.edit', ['location' => $location]);
     }
 
     /**
@@ -71,9 +96,20 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LocationRequest $request, $location)
     {
-        //
+        $this->fillLocation($location, $request);
+        $location->save();
+
+        return $location;
+    }
+
+    public function changeParent($location, Request $request)
+    {
+        $location->parent_id = $request->input('parent_id');
+        $location->save();
+
+        return $location;
     }
 
     /**
@@ -82,8 +118,10 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($location)
     {
-        //
+        $location->delete();
+
+        return $location;
     }
 }

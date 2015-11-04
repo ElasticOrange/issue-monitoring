@@ -25,8 +25,8 @@ class DomainController extends Controller
 
     public function getTree()
     {
-        $domain = Domain::all();
-        return $domain;
+        $domains = Domain::all();
+        return $domains;
     }
 
     private function fillDomain($domain, $request) {
