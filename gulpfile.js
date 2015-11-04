@@ -31,6 +31,7 @@ elixir(function(mix) {
         , 'lodash/lodash.min.js'
         , 'bootstrap/dist/js/bootstrap.min.js'
         , 'metisMenu/dist/metisMenu.js'
+        , 'ckeditor/ckeditor.js'
         , 'startbootstrap-sb-admin-2/dist/js/sb-admin-2.js'
         , 'datatables/media/js/jquery.dataTables.min.js'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
@@ -77,6 +78,10 @@ elixir(function(mix) {
             'resources/assets/bower/datatables/media/images/',
             'public/build/images/'
         )
+    .copy(
+    		'resources/assets/bower/ckeditor',
+    		'public/build/js/ckeditor'
+    	)
 	.version([
 			  'css/all.css'
 			, 'js/all.js'

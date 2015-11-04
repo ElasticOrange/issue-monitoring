@@ -35,14 +35,14 @@
         <div class="form-group">
             <label class="col-md-2 control-label">Profil</label>
             <div class="col-md-8">
-                <textarea name="profile[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
+                <textarea name="profile[ro]" class="form-control" rows="3" id="editor1">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">Pozitie si apartenenta</label>
             <div class="col-md-8">
-                <textarea name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
+                <textarea name="position[ro]" class="form-control" rows="3" id="editor2">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
             </div>
         </div>
 
@@ -60,14 +60,14 @@
         <div class="form-group">
             <label class="col-md-2 control-label">Profile</label>
             <div class="col-md-8">
-                <textarea name="profile[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+                <textarea name="profile[en]" class="form-control" rows="3" id="editor3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2 control-label">Position and affiliation</label>
             <div class="col-md-8">
-                <textarea name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+                <textarea name="position[en]" class="form-control" rows="3" id="editor4">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
             </div>
         </div>
 
@@ -180,4 +180,3 @@
         </label>
     </div>
 </div>
-

@@ -34,6 +34,7 @@
     </div>
 
     <!-- Bootstrap Core CSS -->
+    <script> var CKEDITOR_BASEPATH = '/build/js/ckeditor/'</script>
     <script src="{{ elixir('js/all.js') }}"></script>
     <script type="text/javascript" src="/js/global.js"></script>
     @yield('js')
