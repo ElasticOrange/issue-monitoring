@@ -34,9 +34,10 @@
 										<td>{{ $stakeholder->contact }}</td>
 										<td>{{ $stakeholder->type }}</td>
 										<td  class="text-center">
-										@if($stakeholder->filePoza)
-										<img src="{{ action('UploadedFileController@downloadFile', [$stakeholder->filePoza->file_name]) }}" width="100px" alt=""></td>
-										@endif
+											@if($stakeholder->filePoza)
+												<img src="{{ action('UploadedFileController@downloadFile', [$stakeholder->filePoza->file_name]) }}" width="100px" height="100px" alt="">
+											@endif
+										</td>
 										<td class="text-center">
 											<input  type="checkbox"
 													name="published"

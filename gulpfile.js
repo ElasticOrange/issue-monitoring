@@ -31,6 +31,7 @@ elixir(function(mix) {
         , 'lodash/lodash.min.js'
         , 'bootstrap/dist/js/bootstrap.min.js'
         , 'metisMenu/dist/metisMenu.js'
+        , 'ckeditor/ckeditor.js'
         , 'startbootstrap-sb-admin-2/dist/js/sb-admin-2.js'
         , 'datatables/media/js/jquery.dataTables.min.js'
         , 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
@@ -47,38 +48,42 @@ elixir(function(mix) {
         , 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
         ], 'public/js/all.js', bowerDir)
 /*    .scripts([
-			  '../customJs/deleteDocument.js'
-			, '../customJs/ajaxForms.js'
-			, '../customJs/jqxtreeActivation.js'
-			, '../customJs/datatableTranslated.js'
-			, '../customJs/SetPublishedAjax.js'
-			]
-			, 'public/js/custom.js'
-			, bowerDir)*/
-	.styles(
-			[
-				  'style.css'
-				, 'app.css'
-			]
-			, 'public/css/all.css'
-			, 'public/css/'
-		)
-	.copy(
-		   'resources/assets/bower/font-awesome/fonts/',
-		   'public/build/fonts/'
-		   )
-	.copy(
-		   'resources/assets/bower/bootstrap/dist/fonts/',
-		   'public/build/fonts/'
-		   )
-	.copy(
-			'resources/assets/bower/jqwidgets/jqwidgets/styles/images/',
-			'public/build/css/images/'
-		)
-	.copy(
-			'resources/assets/bower/datatables/media/images/',
-			'public/build/images/'
-		)
+              '../customJs/deleteDocument.js'
+            , '../customJs/ajaxForms.js'
+            , '../customJs/jqxtreeActivation.js'
+            , '../customJs/datatableTranslated.js'
+            , '../customJs/SetPublishedAjax.js'
+            ]
+            , 'public/js/custom.js'
+            , bowerDir)*/
+    .styles(
+            [
+                  'style.css'
+                , 'app.css'
+            ]
+            , 'public/css/all.css'
+            , 'public/css/'
+        )
+    .copy(
+           'resources/assets/bower/font-awesome/fonts/',
+           'public/build/fonts/'
+           )
+    .copy(
+           'resources/assets/bower/bootstrap/dist/fonts/',
+           'public/build/fonts/'
+           )
+    .copy(
+            'resources/assets/bower/jqwidgets/jqwidgets/styles/images/',
+            'public/build/css/images/'
+        )
+    .copy(
+            'resources/assets/bower/datatables/media/images/',
+            'public/build/images/'
+        )
+    .copy(
+    		'resources/assets/bower/ckeditor',
+    		'public/build/js/ckeditor'
+    	)
 	.version([
 			  'css/all.css'
 			, 'js/all.js'
