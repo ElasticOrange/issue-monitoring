@@ -20,7 +20,7 @@
 				data-ajax="true"
 				success-message="Stakeholder adaugat"
 				error-message="Eroare"
-				success-url="/backend/stakeholder/{id}/edit"
+				success-url="{{action('StakeholderController@index')}}"
 		>
 			@include('admin.backend.stakeholders.form')
 			<div class="form-group">

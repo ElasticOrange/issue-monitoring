@@ -20,6 +20,7 @@
 				data-ajax="true"
 				success-message="Stakeholder salvat"
 				error-message="Eroare"
+				success-url="{{action('StakeholderController@index')}}"
 		>
 			<input type="hidden" name="_method" value="PUT"/>
 			@include('admin.backend.stakeholders.form')
