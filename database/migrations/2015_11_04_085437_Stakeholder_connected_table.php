@@ -27,6 +27,6 @@ class StakeholderConnectedTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('stakeholders_connected');
+		Schema::dropIfExists('stakeholders_connected');
 	}
 }
