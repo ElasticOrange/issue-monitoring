@@ -7,31 +7,48 @@
 <div class="tab-content">
 	<div class="tab-pane active" id="news_ro">
 		<div class="form-group">
-			<label class="col-md-3">Titlu</label>
-			<input type="text" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
-			<label class="col-md-3">Descriere</label>
-			<textarea name="description[ro]" class="form-control" rows="3">{{ $news->translateOrNew('ro')->description}}</textarea>
+			<label class="col-md-2 control-label">Titlu</label>
+			<div class="col-md-8">
+				<input type="text" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-2 control-label">Descriere</label>
+			<div class="col-md-8">
+				<textarea name="description[ro]" class="form-control" rows="3">{{ $news->translateOrNew('ro')->description}}</textarea>
+			</div>
 		</div>
 	</div>
+
 	<div class="tab-pane" id="news_en">
 		<div class="form-group">
-			<label class="col-md-3">Title</label>
-			<input type="text" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
-			<label class="col-md-3">Description</label>
-			<textarea name="description[en]" class="form-control" rows="3">{{ $news->translateOrNew('en')->description}}</textarea>
+			<label class="col-md-2 control-label">Title</label>
+			<div class="col-md-8">
+				<input type="text" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-2 control-label">Description</label>
+			<div class="col-md-8">
+				<textarea name="description[en]" class="form-control" rows="3">{{ $news->translateOrNew('en')->description}}</textarea>
+			</div>
 		</div>
 	</div>
 </div>
 
+<hr>
+
 <div class="form-group">
-	<label class="col-md-3">Tag-uri</label>
-	<textarea name="tags" class="form-control" rows="2"></textarea>
+	<label class="col-md-2 control-label">Tag-uri</label>
+	<div class="col-md-8">
+		<textarea name="tags" class="form-control" rows="2"></textarea>
+	</div>
 </div>
 
 <div class="form-group">
 	<label class="col-md-2 control-label">Data</label>
 	<div class="col-md-8">
-		<input type="text" date-widget="true" name="init_at" class="form-control" value="{{ $news->date ? $news->date->format('d-m-Y') : '' }}"/>
+		<input type="text" date-widget="true" name="date_init" class="form-control" value="{{ $news->date ? $news->date->format('d-m-Y') : '' }}"/>
 		<input type="hidden" name="date">
 	</div>
 </div>
@@ -39,7 +56,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Link</label>
 	<div class="col-md-8">
-		<input type="text" name="link" class="form-control" value="{{ $news->link }}"></input>
+		<input type="text" name="link" class="form-control" value="{{ $news->link }}" placeholder="Ex: http://www.google.ro"></input>
 	</div>
 </div>
 
@@ -56,7 +73,7 @@
 		</div>
 	</div>
 	<div class="col-md-2">
-		<a href="/backend/news/create"><button type="button" class="btn btn-default form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
+		<a href="/backend/news/create"><button type="button" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
 	</div>
 	<div class="col-md-offset-2 col-md-8">
 	<textarea name="tags" class="form-control" rows="2"></textarea>
@@ -77,7 +94,7 @@
 		</div>
 	</div>
 	<div class="col-md-2">
-		<a href="/backend/news/create"><button type="button" class="btn btn-default form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
+		<a href="/backend/news/create"><button type="button" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
 	</div>
 	<div class="col-md-offset-2 col-md-8">
 	<textarea name="tags" class="form-control" rows="2"></textarea>
@@ -97,7 +114,7 @@
 		</div>
 	</div>
 	<div class="col-md-2">
-		<a href="/backend/news/create"><button type="button" class="btn btn-default form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
+		<a href="/backend/news/create"><button type="button" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
 	</div>
 	<div class="col-md-offset-2 col-md-8">
 	<textarea name="tags" class="form-control" rows="2"></textarea>
