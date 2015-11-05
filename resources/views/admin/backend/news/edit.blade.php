@@ -24,6 +24,14 @@
 		>
 			<input name="_method" type="hidden" value="PUT"/>
 			@include('admin.backend.news.form')
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Link public</label>
+				<div class="col-md-8 control-label" style="text-align: left">
+					<a href="{{ action("NewsController@show", [$news->public_code]) }}" target="_blank">{{ action("NewsController@show", [$news->public_code]) }}</a>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="col-sm-4" style="margin-top:25px;">
 					<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salveaza schimbari</button>

@@ -105,21 +105,15 @@
 </div>
 
 <div class="form-group">
-	<label class="col-md-2 control-label">Link public</label>
-	<div class="col-md-8">
-		<input type="text" name="site" class="form-control"></input>
+	<div class="checkbox col-md-8 col-md-offset-1">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($news->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
 	</div>
 </div>
-
-<div class="checkbox col-md-8 col-md-offset-1">
-	<label>
-		<input  type="checkbox"
-				value="1"
-				name="published"
-				@if($news->published)
-					checked="checked"
-				@endif
-		/>Publica
-	</label>
-</div>
-
