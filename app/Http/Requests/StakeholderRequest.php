@@ -33,7 +33,8 @@ class StakeholderRequest extends Request
 			'position.ro' => 'string',
 			'position.en' => 'string',
 			'site' => 'url',
-			'published' => 'boolean'
+			'published' => 'boolean',
+			'poza_file' => 'image'
 		];
 	}
 }
