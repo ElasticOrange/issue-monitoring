@@ -15,7 +15,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("input[data-action=publish-stakeholder").click(function(){
+	$("input[data-action=publish-stakeholder]").click(function(){
 		var request = $.ajax({
 			url: $(this).attr('update-url'),
 			data: {
@@ -109,16 +109,19 @@ $(document).ready(function(){
 		$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 	});
 
-	$('.stakeholder-type select').change(function(){
+	$('[stakeholder-type=true] select').change(function(){
 		if($(this).val() == 'organizatie'){
-			$('.stakeholder-cv').css({'display':'none'});
+			$('[stakeholder-cv=true]').css({'display':'none'});
+			$('[stakeholder-position=true]').css({'display':'none'});
 		}
 		else{
-			$('.stakeholder-cv').css({'display':'block'});
+			$('[stakeholder-cv=true]').css({'display':'block'});
+			$('[stakeholder-position=true]').css({'display':'block'});
 		}
 	});
 
-	if($('.stakeholder-type select').val() == 'organizatie'){
-		$('.stakeholder-cv').css({'display':'none'});
+	if($('[stakeholder-type=true] select').val() == 'organizatie'){
+		$('[stakeholder-cv=true]').css({'display':'none'});
+		$('[stakeholder-position=true]').css({'display':'none'});
 	}
 });

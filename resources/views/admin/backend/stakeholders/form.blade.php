@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<div class="form-group stakeholder-type">
+<div class="form-group" stakeholder-type="true">
     <label class="col-md-2 control-label">Telefon</label>
     <div class="col-md-8">
         <input type="text" name="telephone" class="form-control" value="{{ $stakeholder->telephone }}"/>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" stakeholder-position="true">
             <label class="col-md-2 control-label">Pozitie si apartenenta</label>
             <div class="col-md-8">
                 <textarea 	name="position[ro]"
@@ -104,7 +104,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" stakeholder-position="true">
             <label class="col-md-2 control-label">Position and affiliation</label>
             <div class="col-md-8">
                 <textarea 	name="position[en]"
