@@ -44,6 +44,7 @@ elixir(function(mix) {
 		, 'moment/locale/ro.js'
 		, 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
 		, 'typeahead.js/dist/typeahead.bundle.min.js'
+		, 'ckeditor/ckeditor.js'
 		], 'public/js/all.js', bowerDir)
 /*    .scripts([
 			  '../customJs/deleteDocument.js'
@@ -78,6 +79,10 @@ elixir(function(mix) {
 			'resources/assets/bower/datatables/media/images/',
 			'public/build/images/'
 		)
+	.copy(
+           'resources/assets/bower/ckeditor',
+           'public/build/js/ckeditor'
+       )
 	.version([
 			  'css/all.css'
 			, 'js/all.js'

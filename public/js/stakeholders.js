@@ -27,7 +27,7 @@ $(document).ready(function(){
 			console.error("ajaxresult",data);
 		});
 	});
-
+/*
 	CKEDITOR.replace( 'editor1',{
 		toolbar:
 		[
@@ -66,6 +66,7 @@ $(document).ready(function(){
 			{name: 'links', items: ['Link','Unlink']},
 			{name: 'about', items: ['About']}
 		]
+	});*/
 
 	var stakeholdersList = new Bloodhound({
 		queryTokenizer: Bloodhound.tokenizers.whitespace,

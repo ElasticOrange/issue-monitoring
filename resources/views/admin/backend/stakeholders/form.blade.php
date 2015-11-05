@@ -16,62 +16,90 @@
 	</div>
 </div>
 
+<div class="form-group">
+    <label class="col-md-2 control-label">Email</label>
+    <div class="col-md-8">
+        <input type="text" name="email" class="form-control" value="{{ $stakeholder->email }}"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label">Tel</label>
+    <div class="col-md-8">
+        <input type="text" name="telephone" class="form-control" value="{{ $stakeholder->telephone }}"/>
+    </div>
+</div>
+
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#ro" data-toggle="tab">RO</a></li>
 	<li><a href="#en" data-toggle="tab">EN</a></li>
 </ul>
 
 <div class="tab-content">
-	<br/>
-	<div class="tab-pane active" id="ro">
+    <br/>
+    <div class="tab-pane active" id="ro">
 
-		<div class="form-group">
-			<label class="col-md-2 control-label">Contact</label>
-			<div class="col-md-8">
-				<textarea name="contact[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->contact }}</textarea>
-			</div>
-		</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Adresa</label>
+            <div class="col-md-8">
+                <input type="text" name="address[ro]" class="form-control" value="{{ $stakeholder->translateOrNew('ro')->address }}">
+            </div>
+        </div>
 
-		<div class="form-group">
-			<label class="col-md-2 control-label">Profil</label>
-			<div class="col-md-8">
-				<textarea name="profile[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
-			</div>
-		</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Alte detalii</label>
+            <div class="col-md-8">
+                <textarea name="other_details[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->other_details }}</textarea>
+            </div>
+        </div>
 
-		<div class="form-group">
-			<label class="col-md-2 control-label">Pozitie si apartenenta</label>
-			<div class="col-md-8">
-				<textarea name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
-			</div>
-		</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Profil</label>
+            <div class="col-md-8">
+                <textarea name="profile[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->profile }}</textarea>
+            </div>
+        </div>
 
-	</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Pozitie si apartenenta</label>
+            <div class="col-md-8">
+                <textarea name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
+            </div>
+        </div>
 
-	<div class="tab-pane" id="en">
+    </div>
 
-		<div class="form-group">
-			<label class="col-md-2 control-label">Contact</label>
-			<div class="col-md-8">
-				<textarea name="contact[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->contact }}</textarea>
-			</div>
-		</div>
+    <div class="tab-pane" id="en">
 
-		<div class="form-group">
-			<label class="col-md-2 control-label">Profile</label>
-			<div class="col-md-8">
-				<textarea name="profile[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
-			</div>
-		</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Address</label>
+            <div class="col-md-8">
+                <input type="text" name="address[en]" class="form-control" value="{{ $stakeholder->translateOrNew('en')->address }}">
+            </div>
+        </div>
 
-		<div class="form-group">
-			<label class="col-md-2 control-label">Position and affiliation</label>
-			<div class="col-md-8">
-				<textarea name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
-			</div>
-		</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Other details</label>
+            <div class="col-md-8">
+                <textarea name="other_details[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->other_details }}</textarea>
+            </div>
+        </div>
 
-	</div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Profile</label>
+            <div class="col-md-8">
+                <textarea name="profile[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Position and affiliation</label>
+            <div class="col-md-8">
+                <textarea name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <hr>
