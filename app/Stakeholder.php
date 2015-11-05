@@ -34,6 +34,8 @@ class Stakeholder extends Model
         $this->name = $request->get('name');
         $this->type = $request->get('type');
         $this->site = $request->get('site');
+        $this->email = $request->get('email');
+        $this->telephone = $request->get('telephone');
         $this->published = $request->get('published') == true;
         if ( ! $this->public_code) {
             $this->public_code = $this->createPublicCode();
@@ -62,7 +64,8 @@ class Stakeholder extends Model
 
         foreach (\Config::get('app.all_locales') as $locale)
         {
-            $this->translateOrNew($locale)->contact = $request->get('contact')[$locale];
+            $this->translateOrNew($locale)->address = $request->get('address')[$locale];
+            $this->translateOrNew($locale)->other_details = $request->get('other_details')[$locale];
             $this->translateOrNew($locale)->profile = $request->get('profile')[$locale];
             $this->translateOrNew($locale)->position = $request->get('position')[$locale];
         }
