@@ -1,3 +1,4 @@
+
 <?php
 
 namespace Issue\Http\Controllers;
@@ -76,34 +77,6 @@ class DocumentController extends Controller
 		return view('admin.backend.documents.edit', ['document' => $document]);
 	}
 
-	private function fillDocument($document, $request) {
-		$input = $request->all();
-		Storage::makeDirectory(DOCUMENTS_LOCATION);
-
-		$document->init_at = $input['date'];
-		if (! $document->public_code) {
-			$document->public_code = $document->createPublicCode();
-		}
-		$document->public = true;
-
-		if ($request->file('file')){
-			if ($document->file) {
-				$document->file->delete();
-			}
-
-			$file = new UploadedFile;
-			$file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
-			$file->document()->save($document);
-		}
-
-		foreach (['ro', 'en'] as $locale)
-		{
-			$document->translateOrNew($locale)->description = $input['description'][$locale];
-		}
-
-		return $document;
-	}
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -114,7 +87,6 @@ class DocumentController extends Controller
 	public function update(Request $request, $document)
 	{
 		$this->fillDocument($document, $request);
-		$document->save();
 
 		return $document;
 	}

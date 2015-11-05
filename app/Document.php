@@ -3,6 +3,10 @@
 namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
+use Storage;
+
+const DOCUMENTS_LOCATION = '/documents/';
+
 class Document extends Model
 {
 	use \Dimsav\Translatable\Translatable;
@@ -31,5 +35,33 @@ class Document extends Model
 
 		return $instance->where('public_code', $code)->firstOrFail();
 	}
+
+    public function fillDocument($document, $request) {
+        $input = $request->all();
+        Storage::makeDirectory(DOCUMENTS_LOCATION);
+
+        $document->init_at = $input['date'];
+        if (! $document->public_code) {
+            $document->public_code = $document->createPublicCode();
+        }
+        $document->public = true;
+
+        if ($request->file('file')){
+            if ($document->file) {
+                $document->file->delete();
+            }
+
+            $file = new UploadedFile;
+            $file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
+            $file->document()->save($document);
+        }
+
+        foreach (['ro', 'en'] as $locale)
+        {
+            $document->translateOrNew($locale)->description = $input['description'][$locale];
+        }
+
+        $this->save();
+    }
 
 }
