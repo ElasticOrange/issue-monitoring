@@ -34,8 +34,12 @@
 
 			<div class="form-group">
 				<div class="col-sm-4" style="margin-top:25px;">
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salveaza schimbari</button>
-					<a href="{{ action('StakeholderController@index') }}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Inapoi la lista</button></a>
+					<button class="btn btn-primary">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Salveaza schimbari
+					</button>
+					<a href="{{ action('StakeholderController@index') }}" class="btn btn-info">
+						<span class="glyphicon glyphicon-th-list"></span> Inapoi la lista
+					</a>
 				</div>
 				<div class="col-sm-2 col-sm-offset-6" style="margin-top:25px;">
 					<a href="{{ action("StakeholderController@destroy", [$stakeholder]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>

@@ -21,7 +21,8 @@ class Stakeholder extends Model
 
 	protected $guarded = ['id'];
 
-	public function createPublicCode() {
+	public function createPublicCode()
+	{
 		do {
 			$public_code = str_random(40);
 		} while ($this->where('public_code', $public_code)->count() > 0);
@@ -35,7 +36,8 @@ class Stakeholder extends Model
 		$this->type = $request->get('type');
 		$this->site = $request->get('site');
 		$this->published = $request->get('published') == true;
-		if ( ! $this->public_code) {
+
+		if (! $this->public_code) {
 			$this->public_code = $this->createPublicCode();
 		}
 
@@ -49,7 +51,6 @@ class Stakeholder extends Model
 			$this->fileCv()->associate($cvFile);
 		}
 
-
 		if ($request->file('poza_file')) {
 			if ($this->filePoza) {
 				$this->filePoza()->delete();
@@ -60,14 +61,26 @@ class Stakeholder extends Model
 			$this->filePoza()->associate($pozaFile);
 		}
 
-		foreach (\Config::get('app.all_locales') as $locale)
-		{
+		foreach (\Config::get('app.all_locales') as $locale) {
 			$this->translateOrNew($locale)->contact = $request->get('contact')[$locale];
 			$this->translateOrNew($locale)->profile = $request->get('profile')[$locale];
 			$this->translateOrNew($locale)->position = $request->get('position')[$locale];
 		}
 
 		$this->save();
+
+		// Refresh connected stakeholders
+		if (!$request->get('stakeholders_connected')) {
+			$stakeholders_connected = [];
+		} else {
+			$stakeholders_connected = $request->get('stakeholders_connected');
+		}
+
+		// Detach connected stakeholders
+		foreach ($this->stakeholdersConnectedOfThem as $scof) {
+			$this->stakeholdersConnectedOfThem()->detach($scof->id);
+		}
+		$this->stakeholdersConnectedOfMine()->sync($stakeholders_connected);
 	}
 
 	public function sections()
@@ -79,14 +92,12 @@ class Stakeholder extends Model
 	{
 		$currentSections = $this->sections()->get();
 
-		if ( ! is_array($sections)) {
+		if (! is_array($sections)) {
 			$sections = [];
 		}
 
-		foreach($currentSections as $currentSection)
-		{
-			if( ! array_key_exists($currentSection->id, $sections))
-			{
+		foreach ($currentSections as $currentSection) {
+			if (! array_key_exists($currentSection->id, $sections)) {
 				$currentSection->delete();
 				continue;
 			}
@@ -115,10 +126,53 @@ class Stakeholder extends Model
 		return $this->belongsTo('Issue\UploadedFile', 'uploaded_poza_id');
 	}
 
-
-	public static function getByPublicCode($code) {
+	public static function getByPublicCode($code)
+	{
 		$instance = new static;
 
 		return $instance->where('public_code', $code)->firstOrFail();
+	}
+
+	public function stakeholdersConnectedOfMine()
+	{
+		return $this->belongsToMany(
+			'Issue\Stakeholder',
+			'stakeholders_connected',
+			'stakeholder_id',
+			'stakeholder_connected_id'
+		);
+	}
+
+	public function stakeholdersConnectedOfThem()
+	{
+		return $this->belongsToMany(
+			'Issue\Stakeholder',
+			'stakeholders_connected',
+			'stakeholder_connected_id',
+			'stakeholder_id'
+		);
+	}
+
+	public function getStakeholdersConnectedAttribute()
+	{
+		if (! array_key_exists('stakeholders_connected', $this->relations)) {
+			$this->loadStakeholdersConnected();
+		}
+
+		return $this->getRelation('stakeholders_connected');
+	}
+
+	protected function loadStakeholdersConnected()
+	{
+		if (! array_key_exists('stakeholders_connected', $this->relations)) {
+			$stakeholders_connected = $this->mergeStakeholdersConnected();
+
+			$this->setRelation('stakeholders_connected', $stakeholders_connected);
+		}
+	}
+
+	protected function mergeStakeholdersConnected()
+	{
+		return $this->stakeholdersConnectedOfMine->merge($this->stakeholdersConnectedOfThem);
 	}
 }

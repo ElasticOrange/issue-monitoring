@@ -180,3 +180,47 @@
 		</label>
 	</div>
 </div>
+
+<!-- Connected stakeholders autocomplete -->
+<div class="form-group">
+	<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
+	<input
+		id="stakeholder-autocomplete"
+		source-url="{{ action('StakeholderController@queryList') }}/?name={name}"
+		type="text"
+		placeholder="Nume"
+		class="form-control"
+	/>
+</div>
+
+<!-- Connected stakeholders list -->
+@include('admin.backend.stakeholders.connected-stakeholder')
+<div class="panel panel-success">
+	<div class="panel-heading">Stakeholderi conectati</div>
+	<div class="list-group" id="connected-stakeholders-container">
+		@foreach ($stakeholder->stakeholdersConnected as $stakeholder_connected)
+			<div class="list-group-item" stakeholder-id="{{ $stakeholder_connected->id }}">
+				<a class="badge" connected-stakeholder-delete="{{ $stakeholder_connected->id }}">
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+				</a>
+				<h4 class="list-group-item-heading">{{ $stakeholder_connected->name }}</h4>
+				<p class="list-group-item-text"></p>
+				<input type="hidden" name="stakeholders_connected[]" value="{{ $stakeholder_connected->id }}" />
+			</div>
+		@endforeach
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="checkbox col-md-10 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($stakeholder->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
+	</div>
+</div>

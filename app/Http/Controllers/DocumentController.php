@@ -1,7 +1,6 @@
-
 <?php
-
 namespace Issue\Http\Controllers;
+
 use Issue\Document;
 use Issue\UploadedFile;
 use Illuminate\Http\Request;

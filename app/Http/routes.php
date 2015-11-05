@@ -30,6 +30,7 @@ Route::resource('/backend/domain', 'DomainController', ['except' => ['edit', 'de
 
 Route::get('/backend/stakeholder/{stakeholder}/delete', 'StakeholderController@destroy');
 Route::get('/backend/stakeholder/{public_code}/show', 'StakeholderController@show');
+Route::get('/backend/stakeholder/query-list', 'StakeholderController@queryList');
 Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['destroy', 'show']]);
 Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderController@setPublished');
 

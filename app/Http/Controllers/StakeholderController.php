@@ -1,15 +1,16 @@
 <?php
 
 namespace Issue\Http\Controllers;
+
 use Issue\Stakeholder;
 use Issue\Section;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Issue\Http\Requests;
 use Issue\Http\Requests\StakeholderRequest;
 use Issue\Http\Controllers\Controller;
 use Issue\UploadedFile;
 use Storage;
-
 
 class StakeholderController extends Controller
 {
@@ -112,5 +113,19 @@ class StakeholderController extends Controller
 		$stakeholder->published = $request->input('published') == 'true';
 		$stakeholder->save();
 		return ['result' => true];
+	}
+
+	/**
+	 * Query the list of stakeholders for autocomplete purposes
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function queryList(Request $request)
+	{
+		$queryName = $request->get('name');
+
+		$stakeholders = Stakeholder::where('name', 'like', '%'. $queryName .'%')->get();
+
+		return response()->json($stakeholders);
 	}
 }
