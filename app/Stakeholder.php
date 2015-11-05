@@ -69,11 +69,16 @@ class Stakeholder extends Model
 		$this->save();
 
 		// Refresh connected stakeholders
-		$stakeholders_connected = $request->get('stakeholders_connected');
-		if ($stakeholders_connected == null) {
+		if (!$request->get('stakeholders_connected')) {
 			$stakeholders_connected = [];
+		} else {
+			$stakeholders_connected = $request->get('stakeholders_connected');
 		}
-		$this->stakeholdersConnectedOfThem()->sync([]);
+
+		// Detach connected stakeholders
+		foreach ($this->stakeholdersConnectedOfThem as $scof) {
+			$this->stakeholdersConnectedOfThem()->detach($scof->id);
+		}
 		$this->stakeholdersConnectedOfMine()->sync($stakeholders_connected);
 	}
 

@@ -166,4 +166,79 @@ class StakeholderAutocompleteTest extends TestCase
 			$sc->delete();
 		}
 	}
+
+	public function testStakeholdersConnected_RemovesOne_TheOthersAreStillThere()
+	{
+		// Initial state
+		// a-->b
+		// a-->c
+		// b-->d
+		// Remove a-->c, result should be
+		// a-->b
+		// b-->d
+
+		$a_data = $this->stakeholderData();
+		$a = Stakeholder::create($a_data);
+
+		$b_data = $this->stakeholderData();
+		$b = Stakeholder::create($b_data);
+
+		$c_data = $this->stakeholderData();
+		$c = Stakeholder::create($c_data);
+
+		$d_data = $this->stakeholderData();
+		$d = Stakeholder::create($d_data);
+
+		// Connect a-->b, a-->c
+		$a_data['stakeholders_connected'] = [$b->id, $c->id];
+		$response = $this->call(
+			'PUT',
+			action('StakeholderController@update', [$a]),
+			$a_data
+		);
+		$this->assertEquals(
+			200,
+			$response->status()
+		);
+
+		// Connect b-->d
+		$b_data['stakeholders_connected'] = [$d->id];
+		$response = $this->call(
+			'PUT',
+			action('StakeholderController@update', [$b]),
+			$b_data
+		);
+
+		// Check a-x->b
+		$b_found = false;
+		foreach ($a->stakeholdersConnected as $sc) {
+			if ($sc->id == $b->id) {
+				$b_found = true;
+			}
+		}
+		$this->assertFalse($b_found);
+
+		// Check a-->c
+		$c_found = false;
+		foreach ($a->stakeholdersConnected as $sc) {
+			if ($sc->id == $c->id) {
+				$c_found = true;
+			}
+		}
+		$this->assertTrue($c_found);
+
+		// Check b-->d
+		$d_found = false;
+		foreach ($b->stakeholdersConnected as $sc) {
+			if ($sc->id == $d->id) {
+				$d_found = true;
+			}
+		}
+		$this->assertTrue($d_found);
+
+		$a->delete();
+		$b->delete();
+		$c->delete();
+		$d->delete();
+	}
 }
