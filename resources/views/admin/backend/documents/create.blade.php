@@ -6,14 +6,14 @@
 	<br /><br /><br />
 	<div class="row">
 		<div class="col-md-12">
-			<form action="/backend/document"
-				class="form-horizontal"
-				method="POST"
-				enctype="multipart/form-data"
-				data-ajax="true"
-				success-message="Document adaugat"
-				error-message="Eroare"
-				success-url="/backend/document/{id}/edit"
+	        <form action="/backend/document"
+				  class="form-horizontal"
+				  method="POST"
+				  enctype="multipart/form-data"
+				  data-ajax="true"
+				  success-message="Document adaugat"
+				  error-message="Eroare"
+				  success-url="{{ action('DocumentController@index') }}"
 			>
 				@include('admin.backend.documents.form')
 				<div class="form-actions">
@@ -23,7 +23,6 @@
 						</div>
 					</div>
 				</div>
-
 			</form>
 		</div>
 	</div>

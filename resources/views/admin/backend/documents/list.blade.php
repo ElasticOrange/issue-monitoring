@@ -27,7 +27,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($documents as $key=>$item)
+							@foreach ($documents as $item)
 								<tr class="gradeA odd" role="row">
 									<td>{{ $item->description }}</td>
 									<td class="text-center">
@@ -46,12 +46,8 @@
 									</td>
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
 									<td class="text-center">
-										<a href="/backend/document/{{ $item->id }}/edit" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-										<form method="POST" action="/backend/document/{{ $item->id }}" style="display: inline-block;">
-											<input type="hidden" name="_token" value="{{ csrf_token() }}">
-											<input name="_method" type="hidden" value="DELETE">
-											<button class="btn btn-danger" title="Delete" data-confirm="true" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
-										</form>
+										<a href="{{ action('StakeholderController@edit', [$item]) }}" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="{{ action('DocumentController@destroy', [$item]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 									</td>
 								</tr>
 							@endforeach

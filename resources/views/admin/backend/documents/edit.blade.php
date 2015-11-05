@@ -7,14 +7,14 @@
 	<div class="row">
 		<div class="col-md-12">
 			<form action="/backend/document/{{ $document->id }}"
-				class="form-horizontal"
-				method="POST"
-				enctype="multipart/form-data"
-				data-ajax="true"
-				success-message="Document salvat cu succes"
-				error-message="Eroare"
-				success-url="/backend/document"
-				>
+				  class="form-horizontal"
+				  method="POST"
+				  enctype="multipart/form-data"
+				  data-ajax="true"
+				  success-message="Document salvat cu succes"
+				  error-message="Eroare"
+				  success-url="{{ action('DocumentController@index') }}"
+			>
 				<input name="_method" type="hidden" value="PUT">
 				@include('admin.backend.documents.form')
 

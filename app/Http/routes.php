@@ -10,12 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/', 'DocumentController@index');
 
 Route::controller('/admin', 'AdminDashboardController');
 
 Route::get('/backend/document/{public_code}/show', 'DocumentController@show');
+Route::get('/backend/document/{document}/delete', 'DocumentController@destroy');
 Route::resource('/backend/document', 'DocumentController', ['except' => ['show']]);
-Route::get('/', 'DocumentController@index');
+
 
 Route::get('/file/{fileName}', 'UploadedFileController@downloadFile');
 
