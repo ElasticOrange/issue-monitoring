@@ -23,8 +23,8 @@
     </div>
 </div>
 
-<div class="form-group">
-    <label class="col-md-2 control-label">Tel</label>
+<div class="form-group stakeholder-type">
+    <label class="col-md-2 control-label">Telefon</label>
     <div class="col-md-8">
         <input type="text" name="telephone" class="form-control" value="{{ $stakeholder->telephone }}"/>
     </div>

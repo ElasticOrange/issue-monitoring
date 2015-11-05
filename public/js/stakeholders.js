@@ -108,4 +108,17 @@ $(document).ready(function(){
 		var connected_stakeholder_id = $(this).attr('connected-stakeholder-delete');
 		$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 	});
+
+	$('.stakeholder-type select').change(function(){
+		if($(this).val() == 'organizatie'){
+			$('.stakeholder-cv').css({'display':'none'});
+		}
+		else{
+			$('.stakeholder-cv').css({'display':'block'});
+		}
+	});
+
+	if($('.stakeholder-type select').val() == 'organizatie'){
+		$('.stakeholder-cv').css({'display':'none'});
+	}
 });
