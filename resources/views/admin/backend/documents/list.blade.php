@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-    <a href="/backend/document/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</a>
+	<a href="/backend/document/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</a>
 </div>
 
 <div class="row">

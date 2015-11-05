@@ -30,14 +30,14 @@ class CreateDomainsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('domain_translations');
-        Schema::dropIfExists('domains');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('domain_translations');
+		Schema::dropIfExists('domains');
+	}
 }

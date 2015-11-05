@@ -9,10 +9,10 @@ use Issue\UploadedFile;
 
 class UploadedFileController extends Controller
 {
-    public function downloadFile($fileName)
-    {
-        $entry = UploadedFile::where('file_name', $fileName)->firstOrFail();
+	public function downloadFile($fileName)
+	{
+		$entry = UploadedFile::where('file_name', $fileName)->firstOrFail();
 
-        return response()->download(storage_path() . $entry->folder . $entry->file_name, $entry->original_file_name);
-    }
+		return response()->download(storage_path() . $entry->folder . $entry->file_name, $entry->original_file_name);
+	}
 }

@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('stakeholder', 'Issue\Stakeholder');
         $router->model('section', 'Issue\Section');
         $router->model('location', 'Issue\Location');
+        $router->model('news', 'Issue\News');
     }
 
     /**

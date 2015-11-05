@@ -36,3 +36,7 @@ Route::get('/backend/location/{location}/edit', 'LocationController@edit');
 Route::get('/backend/location/{location}/changeparent', 'LocationController@changeParent');
 Route::get('/backend/location/{location}/delete', 'LocationController@destroy');
 Route::resource('/backend/location', 'LocationController', ['except' => ['edit', 'destroy']]);
+
+Route::get('/backend/news/{news}/delete', 'NewsController@destroy');
+Route::get('/backend/news/{public_code}/show', 'NewsController@show');
+Route::resource('/backend/news', 'NewsController', ['except' =>['show', 'destroy']]);

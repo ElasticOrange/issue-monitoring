@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Domain extends Model
 {
-    use \Dimsav\Translatable\Translatable;
+	use \Dimsav\Translatable\Translatable;
 
-    public $translatedAttributes = ['name'];
+	public $translatedAttributes = ['name'];
 
-    protected $guarded = ['id'];
-    protected $fillable = ['parent_id'];
+	protected $guarded = ['id'];
+	protected $fillable = ['parent_id'];
 }

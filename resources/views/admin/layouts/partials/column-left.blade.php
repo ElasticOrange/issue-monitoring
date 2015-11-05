@@ -27,8 +27,9 @@
             <li>
                 <a href="/backend/location"><i class="fa fa-location-arrow fa-fw"></i> Locations</a>
             </li>
-        </ul>
-    </div>
-    <!-- /.sidebar-collapse -->
+			<li>
+				<a href="/backend/news"><i class="fa fa-newspaper-o fa-fw"></i> News</a>
+			</li>
+		</ul>
+	</div>
 </div>
-<!-- /.navbar-static-side -->

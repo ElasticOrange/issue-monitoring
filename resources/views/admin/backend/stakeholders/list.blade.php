@@ -19,12 +19,12 @@
 						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
-									<th  class="text-center" style="width: 180px;">Nume</th>
-									<th  class="text-center" style="width: 180x;">Contact</th>
-									<th  class="text-center" style="width: 180x;">Tip</th>
-									<th  class="text-center" style="width: 120px;">Foto</th>
-									<th  class="text-center" style="width: 180px;">Publicat</th>
-									<th  class="text-center" style="width: 200px;">Actiuni</th>
+									<th class="text-center" style="width: 180px;">Nume</th>
+									<th class="text-center" style="width: 180x;">Contact</th>
+									<th class="text-center" style="width: 180x;">Tip</th>
+									<th class="text-center" style="width: 120px;">Foto</th>
+									<th class="text-center" style="width: 180px;">Publicat</th>
+									<th class="text-center" style="width: 200px;">Actiuni</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -33,7 +33,10 @@
 										<td>{{ $stakeholder->name }}</td>
 										<td>{{ $stakeholder->contact }}</td>
 										<td>{{ $stakeholder->type }}</td>
-										<td  class="text-center"><img src="{{ action('UploadedFileController@downloadFile', [$stakeholder->filePoza->file_name]) }}" width="100px" alt=""></td>
+										<td  class="text-center">
+										@if($stakeholder->filePoza)
+										<img src="{{ action('UploadedFileController@downloadFile', [$stakeholder->filePoza->file_name]) }}" width="100px" alt=""></td>
+										@endif
 										<td class="text-center">
 											<input  type="checkbox"
 													name="published"

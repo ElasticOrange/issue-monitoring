@@ -1,6 +1,5 @@
 (function(){
     var tree;
-    var domainForm;
 
     $(document).ready(function () {
         tree = $('#domainTree');

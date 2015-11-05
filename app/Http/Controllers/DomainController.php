@@ -10,63 +10,63 @@ use Issue\Http\Requests\DomainRequest;
 
 class DomainController extends Controller
 {
-    use \Dimsav\Translatable\Translatable;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $domains = Domain::all();
+	use \Dimsav\Translatable\Translatable;
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		$domain = Domain::all();
 
-        return view('admin.backend.domains.list', ['domains' => $domains]);
-    }
+		return view('admin.backend.domains.list', ['domain' => $domain]);
+	}
 
-    public function getTree()
-    {
-        $domains = Domain::all();
-        return $domains;
-    }
+	public function getTree()
+	{
+		$domain = Domain::all();
+		return $domain;
+	}
 
-    private function fillDomain($domain, $request) {
-        $input = $request->all();
-        $domain->parent_id = $input['parent_id'];
+	private function fillDomain($domain, $request) {
+		$input = $request->all();
+		$domain->parent_id = $input['parent_id'];
 
-        foreach (['ro', 'en'] as $locale)
-        {
-            $domain->translateOrNew($locale)->name = $input['name'][$locale];
-        }
+		foreach (['ro', 'en'] as $locale)
+		{
+			$domain->translateOrNew($locale)->name = $input['name'][$locale];
+		}
 
-        return $domain;
-    }
+		return $domain;
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $domain = new Domain;
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		$domain = new Domain;
 
-        return view('admin.backend.domains.create', ['domain' => $domain]);
-    }
+		return view('admin.backend.domains.create', ['domain' => $domain]);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(DomainRequest $request)
-    {
-        $domain = new Domain;
-        $this->fillDomain($domain, $request);
-        $domain->save();
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(DomainRequest $request)
+	{
+		$domain = new Domain;
+		$this->fillDomain($domain, $request);
+		$domain->save();
 
-        return $domain;
-    }
+		return $domain;
+	}
 
     /**
      * Display the specified resource.

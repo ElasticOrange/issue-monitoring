@@ -4,7 +4,7 @@ namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SectionTranslation extends Model
+class NewsTranslation extends Model
 {
 	public $timestamps = false;
 

@@ -13,104 +13,104 @@ use Storage;
 
 class StakeholderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $stakeholders = Stakeholder::all();
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		$stakeholders = Stakeholder::all();
 
-        return view('admin.backend.stakeholders.list', ['stakeholders' => $stakeholders]);
-    }
+		return view('admin.backend.stakeholders.list', ['stakeholders' => $stakeholders]);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $stakeholder = new Stakeholder;
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		$stakeholder = new Stakeholder;
 
-        return view('admin.backend.stakeholders.create', ['stakeholder' => $stakeholder]);
-    }
+		return view('admin.backend.stakeholders.create', ['stakeholder' => $stakeholder]);
+	}
 
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StakeholderRequest $request)
-    {
-        $stakeholder = new Stakeholder;
-        $stakeholder->setAll($request);
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(StakeholderRequest $request)
+	{
+		$stakeholder = new Stakeholder;
+		$stakeholder->setAll($request);
 
-        $stakeholder->syncSections($request->input('section'));
+		$stakeholder->syncSections($request->input('section'));
 
-        return $stakeholder;
-    }
+		return $stakeholder;
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($code)
-    {
-        $stakeholder = Stakeholder::getByPublicCode($code);
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($code)
+	{
+		$stakeholder = Stakeholder::getByPublicCode($code);
 
-        return $this->edit($stakeholder);
-    }
+		return $this->edit($stakeholder);
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($stakeholder)
-    {
-        return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder, 'sections' => $stakeholder->sections()->get()]);
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($stakeholder)
+	{
+		return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder, 'sections' => $stakeholder->sections()->get()]);
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(StakeholderRequest $request, $stakeholder)
-    {
-        $stakeholder->setAll($request);
-        $stakeholder->syncSections($request->input('section'));
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(StakeholderRequest $request, $stakeholder)
+	{
+		$stakeholder->setAll($request);
+		$stakeholder->syncSections($request->input('section'));
 
-        return $stakeholder;
-    }
+		return $stakeholder;
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($stakeholder)
-    {
-        $stakeholder -> delete();
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($stakeholder)
+	{
+		$stakeholder -> delete();
 
-        return redirect()->action('StakeholderController@index');
-    }
+		return redirect()->action('StakeholderController@index');
+	}
 
-    public function setPublished($stakeholder, Request $request)
-    {
-        $stakeholder->published = $request->input('published') == 'true';
-        $stakeholder->save();
-        return ['result' => true];
-    }
+	public function setPublished($stakeholder, Request $request)
+	{
+		$stakeholder->published = $request->input('published') == 'true';
+		$stakeholder->save();
+		return ['result' => true];
+	}
 }

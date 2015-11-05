@@ -47,38 +47,38 @@ elixir(function(mix) {
         , 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
         ], 'public/js/all.js', bowerDir)
 /*    .scripts([
-              '../customJs/deleteDocument.js'
-            , '../customJs/ajaxForms.js'
-            , '../customJs/jqxtreeActivation.js'
-            , '../customJs/datatableTranslated.js'
-            , '../customJs/SetPublishedAjax.js'
-            ]
-            , 'public/js/custom.js'
-            , bowerDir)*/
-    .styles(
-            [
-                  'style.css'
-                , 'app.css'
-            ]
-            , 'public/css/all.css'
-            , 'public/css/'
-        )
-    .copy(
-           'resources/assets/bower/font-awesome/fonts/',
-           'public/build/fonts/'
-           )
-    .copy(
-           'resources/assets/bower/bootstrap/dist/fonts/',
-           'public/build/fonts/'
-           )
-    .copy(
-            'resources/assets/bower/jqwidgets/jqwidgets/styles/images/',
-            'public/build/css/images/'
-        )
-    .copy(
-            'resources/assets/bower/datatables/media/images/',
-            'public/build/images/'
-        )
+			  '../customJs/deleteDocument.js'
+			, '../customJs/ajaxForms.js'
+			, '../customJs/jqxtreeActivation.js'
+			, '../customJs/datatableTranslated.js'
+			, '../customJs/SetPublishedAjax.js'
+			]
+			, 'public/js/custom.js'
+			, bowerDir)*/
+	.styles(
+			[
+				  'style.css'
+				, 'app.css'
+			]
+			, 'public/css/all.css'
+			, 'public/css/'
+		)
+	.copy(
+		   'resources/assets/bower/font-awesome/fonts/',
+		   'public/build/fonts/'
+		   )
+	.copy(
+		   'resources/assets/bower/bootstrap/dist/fonts/',
+		   'public/build/fonts/'
+		   )
+	.copy(
+			'resources/assets/bower/jqwidgets/jqwidgets/styles/images/',
+			'public/build/css/images/'
+		)
+	.copy(
+			'resources/assets/bower/datatables/media/images/',
+			'public/build/images/'
+		)
 	.version([
 			  'css/all.css'
 			, 'js/all.js'
