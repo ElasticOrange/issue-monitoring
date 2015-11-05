@@ -27,4 +27,13 @@ $(document).ready(function(){
 			console.error("ajaxresult",data);
 		});
 	});
+
+	$('.stakeholder-type select').change(function(){
+		if($(this).val() == 'organizatie'){
+			$('.stakeholder-cv').css({'display':'none'});
+		}
+		else{
+			$('.stakeholder-cv').css({'display':'block'});
+		}
+	});
 });

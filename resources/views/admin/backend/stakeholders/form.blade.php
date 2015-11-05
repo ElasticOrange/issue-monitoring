@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group stakeholder-type">
     <label class="col-md-2 control-label">Tip</label>
     <div class="col-md-8">
         <select class="form-control" name="type">
@@ -135,7 +135,7 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group stakeholder-cv">
     <label class="col-md-2 control-label">CV</label>
     <div class="col-md-8">
         <label>
