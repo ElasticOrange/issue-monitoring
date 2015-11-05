@@ -62,7 +62,6 @@ class StakeholderAutocompleteTest extends TestCase
 		$stakeholders_connected = [];
 		for ($i = 0; $i < rand(3, 5); $i++) {
 			$sc_data = $this->stakeholderData();
-
 			$stakeholder_response_aux = $this->call(
 				'POST',
 				action('StakeholderController@store'),

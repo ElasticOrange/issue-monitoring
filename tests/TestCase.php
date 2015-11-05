@@ -35,13 +35,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 		$stakeholder_data = [
 			'name' => $this->faker->name,
 			'type' => 'persoana',
+			'email' => $this->faker->email,
 			'site' => $this->faker->url,
+			'telephone' => $this->faker->text,
 			'stakeholders_connected' => [],
 			'_token' => csrf_token()
 		];
 
 		foreach (Config::get('app.all_locales') as $locale) {
-			$stakeholder_data['contact'][$locale] = $this->faker->text;
+			$stakeholder_data['address'][$locale] = $this->faker->text;
+			$stakeholder_data['other_details'][$locale] = $this->faker->text;
 			$stakeholder_data['profile'][$locale] = $this->faker->text;
 			$stakeholder_data['position'][$locale] = $this->faker->text;
 		}
