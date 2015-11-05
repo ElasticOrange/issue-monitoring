@@ -36,4 +36,8 @@ $(document).ready(function(){
 			$('.stakeholder-cv').css({'display':'block'});
 		}
 	});
+
+	if($('.stakeholder-type select').val() == 'organizatie'){
+		$('.stakeholder-cv').css({'display':'none'});
+	}
 });
