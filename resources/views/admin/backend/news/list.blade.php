@@ -10,19 +10,13 @@
 
 	<div class="row">
 		<div class="form-group">
-			<div class="col-lg-10">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Go!</button>
-					</span>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<a href="/backend/news/create"><button class="btn btn-default form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
+			<div class="col-md-2">
+				<a href="/backend/news/create"><button class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
 			</div>
 		</div>
 	</div>
+
+	<br>
 
 	<div class="row">
 		<div class="col-lg-12">

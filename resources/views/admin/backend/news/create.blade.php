@@ -25,8 +25,8 @@
 			@include('admin.backend.news.form')
 			<div class="form-group">
 				<div class="col-sm-4" style="margin-top:25px;">
-					<button class="btn btn-primary">Salveaza schimbari</button>
-					<a href="/backend/news/"<button class="btn btn-info">Inapoi la lista</button></a>
+					<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salveaza schimbari</button>
+					<a href="/backend/news/"<button class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Inapoi la lista</button></a>
 				</div>
 			</div>
 		</form>
