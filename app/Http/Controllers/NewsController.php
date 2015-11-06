@@ -5,6 +5,7 @@ namespace Issue\Http\Controllers;
 use Issue\News;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
+use Issue\Http\Requests\NewsRequest;
 use Issue\Http\Controllers\Controller;
 use Storage;
 
@@ -40,7 +41,7 @@ class NewsController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(NewsRequest $request)
 	{
 		$news = new News;
 		$news->setAll($request);
@@ -79,7 +80,7 @@ class NewsController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $news)
+	public function update(NewsRequest $request, $news)
 	{
 		$news -> setAll($request);
 

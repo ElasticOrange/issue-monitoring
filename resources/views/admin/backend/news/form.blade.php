@@ -48,7 +48,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Data</label>
 	<div class="col-md-8">
-		<input type="text" date-widget="true" name="init_at" class="form-control" value="{{ $news->date ? $news->date->format('d-m-Y') : '' }}"/>
+		<input type="text" date-widget="true" name="date_init" class="form-control" value="{{ $news->date ? $news->date->format('d-m-Y') : '' }}"/>
 		<input type="hidden" name="date">
 	</div>
 </div>
@@ -56,7 +56,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Link</label>
 	<div class="col-md-8">
-		<input type="text" name="link" class="form-control" value="{{ $news->link }}"></input>
+		<input type="text" name="link" class="form-control" value="{{ $news->link }}" placeholder="Ex: http://www.google.ro"></input>
 	</div>
 </div>
 
