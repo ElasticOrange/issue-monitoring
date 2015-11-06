@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="form-group stakeholder-type">
+<div class="form-group" stakeholder-type="true">
     <label class="col-md-2 control-label">Tip</label>
     <div class="col-md-8">
         <select class="form-control" name="type">
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" stakeholder-position="true">
             <label class="col-md-2 control-label">Pozitie si apartenenta</label>
             <div class="col-md-8">
                 <textarea name="position[ro]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('ro')->position }}</textarea>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" stakeholder-position="true">
             <label class="col-md-2 control-label">Position and affiliation</label>
             <div class="col-md-8">
                 <textarea name="position[en]" class="form-control" rows="3">{{ $stakeholder->translateOrNew('en')->profile }}</textarea>
@@ -135,7 +135,7 @@
     </div>
 </div>
 
-<div class="form-group stakeholder-cv">
+<div class="form-group" stakeholder-cv="true">
     <label class="col-md-2 control-label">CV</label>
     <div class="col-md-8">
         <label>
