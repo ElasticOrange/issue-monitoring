@@ -24,7 +24,6 @@ $(document).ready(function(){
 			method:'get'
 		});
 		request.done(function(data){
-			console.error("ajaxresult",data);
 		});
 	});
 

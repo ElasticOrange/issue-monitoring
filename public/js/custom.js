@@ -81,7 +81,7 @@ function generateLaravelErrorList(errorList) {
 
 		_.forEach(messageList, function(errorMessage) {
 			resultHtml += '<li>' + errorMessage + '</li>';
-		})
+		});
 	});
 
 	return '<ul>' + resultHtml + '</ul>';
@@ -253,7 +253,6 @@ $(document).ready(function(){
 			method:'get'
 		});
 		request.done(function(data){
-			console.error("ajaxresult",data);
 		});
 	});
 });

@@ -40,6 +40,7 @@ elixir(function(mix) {
 		, 'jqwidgets/jqwidgets/jqxscrollbar.js'
 		, 'jqwidgets/jqwidgets/jqxpanel.js'
 		, 'jqwidgets/jqwidgets/jqxtree.js'
+		, 'jqwidgets/jqwidgets/jqxdragdrop.js'
 		, 'moment/min/moment.min.js'
 		, 'moment/locale/ro.js'
 		, 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
@@ -80,9 +81,9 @@ elixir(function(mix) {
 			'public/build/images/'
 		)
 	.copy(
-           'resources/assets/bower/ckeditor',
-           'public/build/js/ckeditor'
-       )
+		   'resources/assets/bower/ckeditor',
+		   'public/build/js/ckeditor'
+	   )
 	.version([
 			  'css/all.css'
 			, 'js/all.js'
