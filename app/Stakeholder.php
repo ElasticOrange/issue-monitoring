@@ -3,6 +3,7 @@
 namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
+use Issue\Stakeholder;
 
 const CV_LOCATION = '/cv/';
 const POZA_LOCATION = '/poza/';
@@ -177,5 +178,14 @@ class Stakeholder extends Model
 	protected function mergeStakeholdersConnected()
 	{
 		return $this->stakeholdersConnectedOfMine->merge($this->stakeholdersConnectedOfThem);
+	}
+
+	public function connectedNews()
+	{
+		return $this->belongsToMany(
+			'Issue\Stakeholder',
+			'news_stakeholder',
+			'news_id'
+		);
 	}
 }
