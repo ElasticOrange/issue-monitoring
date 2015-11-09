@@ -46,8 +46,7 @@ class DocumentController extends Controller
 	public function store(DocumentRequest $request)
 	{
 		$document = new Document;
-		$this->fillDocument($document, $request);
-		$document->save();
+		$document->fillDocument($request);
 
 		return $document;
 	}
@@ -85,7 +84,7 @@ class DocumentController extends Controller
 	 */
 	public function update(Request $request, $document)
 	{
-		$this->fillDocument($document, $request);
+		$document->fillDocument($request);
 
 		return $document;
 	}

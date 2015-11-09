@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-	<a href="/backend/document/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</a>
+	<a href="{{ action('DocumentController@create') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga Document</a>
 </div>
 
 <div class="row">
@@ -46,7 +46,7 @@
 									</td>
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
 									<td class="text-center">
-										<a href="{{ action('StakeholderController@edit', [$item]) }}" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="{{ action('DocumentController@edit', [$item]) }}" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
 										<a href="{{ action('DocumentController@destroy', [$item]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 									</td>
 								</tr>

@@ -22,7 +22,8 @@ class Document extends Model
 		return $this->belongsTo('Issue\UploadedFile', 'uploaded_file_id');
 	}
 
-	public function createPublicCode() {
+	public function createPublicCode()
+	{
 		do {
 			$public_code = str_random(40);
 		} while ($this->where('public_code', $public_code)->count() > 0);
@@ -30,38 +31,38 @@ class Document extends Model
 		return $public_code;
 	}
 
-	public static function getByPublicCode($code) {
+	public static function getByPublicCode($code)
+	{
 		$instance = new static;
 
 		return $instance->where('public_code', $code)->firstOrFail();
 	}
 
-    public function fillDocument($document, $request) {
-        $input = $request->all();
-        Storage::makeDirectory(DOCUMENTS_LOCATION);
+	public function fillDocument($request)
+	{
+		Storage::makeDirectory(DOCUMENTS_LOCATION);
 
-        $document->init_at = $input['date'];
-        if (! $document->public_code) {
-            $document->public_code = $document->createPublicCode();
-        }
-        $document->public = true;
+		$this->init_at = $request->get('date');
 
-        if ($request->file('file')){
-            if ($document->file) {
-                $document->file->delete();
-            }
+		if (! $this->public_code) {
+			$this->public_code = $this->createPublicCode();
+		}
+		$this->public = true;
 
-            $file = new UploadedFile;
-            $file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
-            $file->document()->save($document);
-        }
+		if ($request->file('file')) {
+			if ($this->file) {
+				$this->file->delete();
+			}
 
-        foreach (['ro', 'en'] as $locale)
-        {
-            $document->translateOrNew($locale)->description = $input['description'][$locale];
-        }
+			$file = new UploadedFile;
+			$file->storeFile(DOCUMENTS_LOCATION, $request->file('file'));
+			$this->file()->associate($file);
+		}
 
-        $this->save();
-    }
+		foreach (\Config::get('app.all_locales') as $locale) {
+			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
+		}
 
+		$this->save();
+	}
 }
