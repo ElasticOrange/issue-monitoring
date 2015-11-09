@@ -21,7 +21,7 @@ Route::get('/file/{fileName}', 'UploadedFileController@downloadFile');
 
 Route::get('/getTree', 'DomainController@getTree');
 Route::get('/backend/domain/{domain}/edit', 'DomainController@edit');
-Route::get('/backend/domain/{domain}/changeparent', 'DomainController@changeParent');
+Route::get('/backend/domain/{domain}/change-parent', 'DomainController@changeParent');
 Route::get('/backend/domain/{domain}/delete', 'DomainController@destroy');
 Route::resource('/backend/domain', 'DomainController', ['except' => ['edit', 'destroy']]);
 
