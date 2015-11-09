@@ -43,8 +43,7 @@ elixir(function(mix) {
 		, 'moment/min/moment.min.js'
 		, 'moment/locale/ro.js'
 		, 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
-		// Typeahead.js
-		, 'typeahead.js/dist/typeahead.bundle.min.js'		
+		, 'typeahead.js/dist/typeahead.bundle.min.js'
 		], 'public/js/all.js', bowerDir)
 /*    .scripts([
 			  '../customJs/deleteDocument.js'
