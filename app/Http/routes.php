@@ -33,7 +33,7 @@ Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderContro
 
 Route::get('/getLocationTree', 'LocationController@getTree');
 Route::get('/backend/location/{location}/edit', 'LocationController@edit');
-Route::get('/backend/location/{location}/changeparent', 'LocationController@changeParent');
+Route::get('/backend/location/{location}/change-parent', 'LocationController@changeParent');
 Route::get('/backend/location/{location}/delete', 'LocationController@destroy');
 Route::resource('/backend/location', 'LocationController', ['except' => ['edit', 'destroy']]);
 

@@ -34,7 +34,6 @@
 				data: {parent_id: item.parentId}
 			});
 			request.done(function(data) {
-				console.error("result", data);
 				tree.jqxTree('selectItem',  getTreeItemById(tree, item.id));
 				tree.jqxTree('expandItem', item);
 			})
