@@ -51,4 +51,22 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
 		return $stakeholder_data;
 	}
+
+	public function newsData()
+	{
+		$news_data = [
+			// 'date' => $this->faker->date,
+			'link' => $this->faker->url,
+			'published' => $this->faker->email,
+			'public_code' => $this->faker->url,
+			'_token' => csrf_token()
+		];
+
+		foreach (Config::get('app.all_locales') as $locale) {
+			$news_data['title'][$locale] = $this->faker->text;
+			$news_data['description'][$locale] = $this->faker->text;
+		}
+
+		return $news_data;
+	}
 }
