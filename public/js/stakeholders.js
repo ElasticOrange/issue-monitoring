@@ -9,7 +9,7 @@ $(document).ready(function(){
 
 	$(document).on('click', '.delete_section', function() {
 		var selected_id = $(this).attr("id");
-		var result = confirm("Sigur doriti sa stergeti sectiunea?")
+		var result = confirm("Sigur doriti sa stergeti sectiunea?");
 		if (result) {
 			$('#section'+selected_id).remove();
 		}

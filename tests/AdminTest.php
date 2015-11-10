@@ -1,4 +1,5 @@
 <?php
+namespace Tests;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -30,13 +31,6 @@ class AdminTest extends TestCase
 	public function testDocumentsListView()
 	{
 		$response = $this->call('GET', '/backend/document');
-
-		$this->assertEquals(200, $response->status());
-	}
-
-	public function testDocumentsCreateView()
-	{
-		$response = $this->call('GET', '/backend/document/create');
 
 		$this->assertEquals(200, $response->status());
 	}

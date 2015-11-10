@@ -8,6 +8,7 @@ use Issue\Http\Requests;
 use Issue\Http\Requests\NewsRequest;
 use Issue\Http\Controllers\Controller;
 use Storage;
+use Issue\Stakeholder;
 
 class NewsController extends Controller
 {
@@ -82,7 +83,7 @@ class NewsController extends Controller
 	 */
 	public function update(NewsRequest $request, $news)
 	{
-		$news -> setAll($request);
+		$news->setAll($request);
 
 		return $news;
 	}
@@ -95,8 +96,16 @@ class NewsController extends Controller
 	 */
 	public function destroy($news)
 	{
-		$news -> delete();
+		$news->delete();
 
 		return redirect()->action('NewsController@index');
+	}
+
+	public function queryStakeholder(Request $request)
+	{
+		$queryStakeholderName = $request->input('name');
+		$stakeholders = Stakeholder::where('name', 'like', '%'. $queryStakeholderName .'%')->get();
+
+		return $stakeholders;
 	}
 }

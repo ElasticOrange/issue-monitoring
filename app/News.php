@@ -41,8 +41,13 @@ class News extends Model
 			$this->translateOrNew($locale)->title = $request->get('title')[$locale];
 			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
 		}
-
 		$this->save();
+
+		if (!$request->get('stakeholders_connected')) {
+			$stakeholders_connected = [];
+		} else {
+			$stakeholders_connected = $request->get('stakeholders_connected');
+		}
 	}
 
 	public static function getByPublicCode($code)

@@ -70,7 +70,6 @@ class Stakeholder extends Model
 			$this->translateOrNew($locale)->profile = $request->get('profile')[$locale];
 			$this->translateOrNew($locale)->position = $request->get('position')[$locale];
 		}
-
 		$this->save();
 
 		// Refresh connected stakeholders
