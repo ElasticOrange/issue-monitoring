@@ -181,10 +181,6 @@ class Stakeholder extends Model
 
 	public function connectedNews()
 	{
-		return $this->belongsToMany(
-			'Issue\Stakeholder',
-			'news_stakeholder',
-			'news_id'
-		);
+		return $this->belongsToMany('Issue\News');
 	}
 }

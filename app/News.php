@@ -41,13 +41,15 @@ class News extends Model
 			$this->translateOrNew($locale)->title = $request->get('title')[$locale];
 			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
 		}
-		$this->save();
 
 		if (!$request->get('stakeholders_connected')) {
 			$stakeholders_connected = [];
 		} else {
 			$stakeholders_connected = $request->get('stakeholders_connected');
 		}
+		$this->save();
+
+		$this->connectedStakeholders()->sync($stakeholders_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -57,12 +59,8 @@ class News extends Model
 		return $instance->where('public_code', $code)->firstOrFail();
 	}
 
-	public function connectedStakeholder()
+	public function connectedStakeholders()
 	{
-		return $this->belongsToMany(
-			'Issue\News',
-			'news_stakeholder',
-			'stakeholder_id'
-		);
+		return $this->belongsToMany('Issue\Stakeholder');
 	}
 }

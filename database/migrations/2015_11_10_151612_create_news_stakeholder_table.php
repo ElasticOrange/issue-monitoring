@@ -14,8 +14,13 @@ class CreateNewsStakeholderTable extends Migration
 	{
 		Schema::create('news_stakeholder', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer('news_id')->unsigned();
-			$table->integer('stakeholder_id')->unsigned();
+
+			$table->integer('news_id')->unsigned()->index();
+			$table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
+
+			$table->integer('stakeholder_id')->unsigned()->index();
+			$table->foreign('stakeholder_id')->references('id')->on('stakeholders')->onDelete('cascade');
+
 			$table->timestamps();
 		});
 	}
