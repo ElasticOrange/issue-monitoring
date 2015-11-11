@@ -115,6 +115,23 @@
 </div>
 
 <div class="form-group">
+	<div class="col-md-2 text-right">
+		<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
+	</div>
+	<div class="col-md-8">
+		<div class="input-group">
+			<input
+				id="domain-autocomplete"
+				source-url="{{ action('NewsController@queryDomain') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
+		</div>
+	</div>
+</div>
+
+<div class="form-group">
 	<div class="checkbox col-md-8 col-md-offset-1">
 		<label>
 			<input  type="checkbox"

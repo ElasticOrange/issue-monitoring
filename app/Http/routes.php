@@ -43,4 +43,5 @@ Route::resource('/backend/location', 'LocationController', ['except' => ['edit',
 Route::get('/backend/news/{news}/delete', 'NewsController@destroy');
 Route::get('/backend/news/{public_code}/show', 'NewsController@show');
 Route::get('/backend/news/query-stakeholder', 'NewsController@queryStakeholder');
+Route::get('/backend/news/query-domain', 'NewsController@queryDomain');
 Route::resource('/backend/news', 'NewsController', ['except' =>['show', 'destroy']]);

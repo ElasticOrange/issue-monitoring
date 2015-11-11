@@ -8,6 +8,7 @@ use Issue\Http\Requests;
 use Issue\Http\Requests\NewsRequest;
 use Issue\Http\Controllers\Controller;
 use Storage;
+use Issue\Domain;
 use Issue\Stakeholder;
 
 class NewsController extends Controller
@@ -107,5 +108,13 @@ class NewsController extends Controller
 		$stakeholders = Stakeholder::where('name', 'like', '%'. $queryStakeholderName .'%')->get();
 
 		return $stakeholders;
+	}
+
+	public function queryDomain(Request $request)
+	{
+		$queryDomainName = $request->input('name');
+		$domains = Domain::listsTranslations('name')->where('name', 'like', '%'. $queryDomainName .'%')->get();
+
+		return $domains;
 	}
 }
