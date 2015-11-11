@@ -11,8 +11,9 @@ class News extends Model
 	protected $guarded = ['id'];
 
 	protected $fillable = [
-		'title',
-		'description',
+		'date',
+		'link',
+		'published',
 	];
 
 	public $dates = ['date','init_at'];

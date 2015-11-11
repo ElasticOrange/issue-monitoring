@@ -55,10 +55,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 	public function newsData()
 	{
 		$news_data = [
-			// 'date' => $this->faker->date,
 			'link' => $this->faker->url,
-			'published' => $this->faker->email,
+			'published' => 1,
 			'public_code' => $this->faker->url,
+			'stakeholders_connected' => [],
 			'_token' => csrf_token()
 		];
 

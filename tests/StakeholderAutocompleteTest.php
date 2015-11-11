@@ -201,6 +201,7 @@ class StakeholderAutocompleteTest extends TestCase
 		);
 
 		// Connect b-->d
+		// a will not be connected to b anymore
 		$b_data['stakeholders_connected'] = [$d->id];
 		$response = $this->call(
 			'PUT',

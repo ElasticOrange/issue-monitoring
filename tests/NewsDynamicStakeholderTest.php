@@ -73,10 +73,7 @@ class NewsDynamicStakeholderTest extends TestCase
 		// Initial state
 		// a-->b
 		// a-->c
-		// d-->e
 		// Remove a-->c, result should be
-		// a-->b
-		// d-->e
 
 		$a_news = $this->newsData();
 		$a = News::create($a_news);
@@ -87,12 +84,6 @@ class NewsDynamicStakeholderTest extends TestCase
 		$c_stakeholder = $this->stakeholderData();
 		$c = Stakeholder::create($c_stakeholder);
 
-		$d_news = $this->newsData();
-		$d = News::create($d_news);
-
-		$e_stakeholder = $this->stakeholderData();
-		$d = Stakeholder::create($e_stakeholder);
-
 		// Connect a-->b, a-->c
 		$a_news['stakeholders_connected'] = [$b->id, $c->id];
 		$response = $this->call(
@@ -100,49 +91,40 @@ class NewsDynamicStakeholderTest extends TestCase
 			action('NewsController@update', [$a]),
 			$a_news
 		);
+
 		$this->assertEquals(
 			200,
 			$response->status()
 		);
 
-		// Connect d-->e
-		$d_news['stakeholders_connected'] = [$e->id];
+		//news a won't be connected with stakeholder c
+		$a_news['stakeholders_connected'] = [$b->id];
 		$response = $this->call(
 			'PUT',
-			action('NewsController@update', [$d]),
-			$d_news
+			action('NewsController@update', [$a]),
+			$a_news
 		);
 
-		// Check a-x->b
-		$b_found = false;
-		foreach ($a->stakeholdersConnected as $sc) {
-			if ($sc->id == $b->id) {
-				$b_found = true;
-			}
-		}
-		$this->assertFalse($b_found);
-
-		// Check a-->c
+		// Check a-x->c
 		$c_found = false;
-		foreach ($a->stakeholdersConnected as $sc) {
+		foreach ($a->connectedStakeholders as $sc) {
 			if ($sc->id == $c->id) {
 				$c_found = true;
 			}
 		}
-		$this->assertTrue($c_found);
+		$this->assertFalse($c_found);
 
-		// Check b-->d
-		$d_found = false;
-		foreach ($b->stakeholdersConnected as $sc) {
-			if ($sc->id == $d->id) {
-				$d_found = true;
+		// Check a-->c
+		$b_found = false;
+		foreach ($a->connectedStakeholders as $sc) {
+			if ($sc->id == $b->id) {
+				$b_found = true;
 			}
 		}
-		$this->assertTrue($d_found);
+		$this->assertTrue($b_found);
 
-		$a->delete();
-		$b->delete();
 		$c->delete();
-		$d->delete();
+		$b->delete();
+		$a->delete();
 	}
 }
