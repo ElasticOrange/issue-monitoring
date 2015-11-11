@@ -80,47 +80,6 @@
 	</div>
 </div>
 
-
-<div class="form-group">
-	<div class="col-md-2 text-right">
-		<label class="control-label">Stakeholderi</label>
-	</div>
-	<div class="col-md-8">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Search for...">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">Go!</button>
-			</span>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<a href="/backend/news/create"><button type="button" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
-	</div>
-	<div class="col-md-offset-2 col-md-8">
-	<textarea name="tags" class="form-control" rows="2"></textarea>
-	</div>
-</div>
-
-<div class="form-group">
-	<div class="col-md-2 text-right">
-		<label class="control-label">Domenii</label>
-	</div>
-	<div class="col-md-8">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Search for...">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">Go!</button>
-			</span>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<a href="/backend/news/create"><button type="button" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
-	</div>
-	<div class="col-md-offset-2 col-md-8">
-	<textarea name="tags" class="form-control" rows="2"></textarea>
-	</div>
-</div>
-
 <div class="form-group">
 	<div class="col-md-2 text-right">
 		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>

@@ -64,4 +64,9 @@ class News extends Model
 	{
 		return $this->belongsToMany('Issue\Stakeholder');
 	}
+
+	public function connectedDomains()
+	{
+		return $this->belongsToMany('Issue\Domain');
+	}
 }

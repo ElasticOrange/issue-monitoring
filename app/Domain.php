@@ -12,4 +12,9 @@ class Domain extends Model
 
 	protected $guarded = ['id'];
 	protected $fillable = ['parent_id'];
+
+	public function connectedNews()
+	{
+		return $this->belongsToMany('Issue\News');
+	}
 }
