@@ -122,18 +122,24 @@
 </div>
 
 <div class="form-group">
-	<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
-	<input
-		id="stakeholder-autocomplete"
-		source-url="{{ action('NewsController@queryStakeholder') }}/?name={name}"
-		type="text"
-		placeholder="Nume"
-		class="form-control"
-	/>
+	<div class="col-md-2 text-right">
+		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
+	</div>
+	<div class="col-md-8">
+		<div class="input-group">
+			<input
+				id="stakeholder-autocomplete"
+				source-url="{{ action('NewsController@queryStakeholder') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
+		</div>
+	</div>
 </div>
 
 @include('admin.backend.stakeholders.connected-stakeholder')
-<div class="panel panel-success">
+<div class="panel panel-success col-md-8 col-md-offset-2">
 	<div class="panel-heading">Stakeholderi conectati</div>
 	<div class="list-group" id="connected-stakeholders-container">
 		@foreach ($news->connectedStakeholders as $stakeholder_connected)
