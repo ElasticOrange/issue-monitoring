@@ -14,8 +14,12 @@ class StakeholderConnectedTable extends Migration
 	{
 		Schema::create('stakeholders_connected', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer('stakeholder_id')->unsigned();
-			$table->integer('stakeholder_connected_id')->unsigned();
+
+			$table->integer('stakeholder_id')->unsigned()->index();
+			$table->foreign('stakeholder_id')->references('id')->on('stakeholders')->onDelete('cascade');
+
+			$table->integer('stakeholder_connected_id')->unsigned()->index();
+
 			$table->timestamps();
 		});
 	}
