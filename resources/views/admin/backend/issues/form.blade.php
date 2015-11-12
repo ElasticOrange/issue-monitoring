@@ -196,7 +196,7 @@
 		<div class="panel panel-success col-md-8 col-md-offset-2">
 			<div class="panel-heading">Stiri/declaratii conectate</div>
 			<div class="list-group" id="connected-news-container">
-				@foreach ($issue->connectednews as $news_connected)
+				@foreach ($issue->connectedNews as $news_connected)
 					<div class="list-group-item" news-id="{{ $news_connected->id }}">
 						<a class="badge" connected-news-delete="{{ $news_connected->id }}">
 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
@@ -204,6 +204,42 @@
 						<h4 class="list-group-item-heading">{{ $news_connected->title }}</h4>
 						<p class="list-group-item-text"></p>
 						<input type="hidden" name="news_connected[]" value="{{ $news_connected->id }}" />
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-2 text-right">
+			<label for="issue-autocomplete" class="control-label">Initiative relevante</label>
+		</div>
+		<div class="col-md-8">
+			<div class="input-group">
+				<input
+					id="issue-autocomplete"
+					source-url="{{ action('IssueController@queryIssue') }}/?name={name}"
+					type="text"
+					placeholder="Nume"
+					class="form-control"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		@include('admin.backend.issues.connected-issue')
+		<div class="panel panel-success col-md-8 col-md-offset-2">
+			<div class="panel-heading">Initiative conectate</div>
+			<div class="list-group" id="connected-issues-container">
+				@foreach ($issue->issuesConnected as $issue_connected)
+					<div class="list-group-item" issue-id="{{ $issue_connected->id }}">
+						<a class="badge" connected-issue-delete="{{ $issue_connected->id }}">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+						</a>
+						<h4 class="list-group-item-heading">{{ $issue_connected->name }}</h4>
+						<p class="list-group-item-text"></p>
+						<input type="hidden" name="issues_connected[]" value="{{ $issue_connected->id }}" />
 					</div>
 				@endforeach
 			</div>

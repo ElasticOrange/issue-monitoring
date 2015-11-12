@@ -3,6 +3,7 @@
 namespace Issue\Http\Controllers;
 
 use Issue\Issue;
+use Issue\IssueTranslation;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
@@ -155,6 +156,29 @@ class IssueController extends Controller
 			$result[] = [
 				'id' => $n->id,
 				'name' => $n->title,
+			];
+		}
+
+		return $result;
+	}
+
+	public function queryIssue(Request $request)
+	{
+		$queryIssueName = $request->input('name');
+
+		$issueIds = IssueTranslation::where('name', 'like', '%'.$queryIssueName.'%')
+										->where('locale', \App::getLocale())
+										->lists('issue_id');
+		$issues = Issue::whereIn('id', $issueIds)
+							->with(['translations'])
+							->get();
+
+		$result = [];
+
+		foreach ($issues as $issue) {
+			$result[] = [
+				'id' => $issue->id,
+				'name' => $issue->name,
 			];
 		}
 
