@@ -69,4 +69,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
 		return $news_data;
 	}
+
+	public function domainData()
+	{
+		$domain_data = [
+			'parent_id' => 1,
+			'_token' =>csrf_token()
+		];
+
+		foreach (Config::get('app.all_locales') as $locale) {
+			$domain_data['name'][$locale] = $this->faker->name;
+		}
+
+		return $domain_data;
+	}
 }

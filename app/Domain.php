@@ -17,4 +17,9 @@ class Domain extends Model
 	{
 		return $this->belongsToMany('Issue\News');
 	}
+
+	public function parent()
+	{
+		return $this->belongsTo('Issue\Domain', 'parent_id');
+	}
 }

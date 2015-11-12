@@ -28,12 +28,12 @@ class DomainController extends Controller
 		return $domain;
 	}
 
-	private function fillDomain($domain, $request) {
+	private function fillDomain($domain, $request)
+	{
 		$input = $request->all();
 		$domain->parent_id = $input['parent_id'];
 
-		foreach (['ro', 'en'] as $locale)
-		{
+		foreach (['ro', 'en'] as $locale) {
 			$domain->translateOrNew($locale)->name = $input['name'][$locale];
 		}
 
@@ -67,69 +67,71 @@ class DomainController extends Controller
 		return $domain;
 	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		//
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($domain)
-    {
-        return view('admin.backend.domains.edit', ['domain' => $domain]);
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($domain)
+	{
+		return view('admin.backend.domains.edit', ['domain' => $domain]);
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $domain)
-    {
-        $this->validate($request,
-            [
-                'name' => 'array',
-                'name.ro' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
-                'name.en' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
-                'parent_id' => 'required|integer'
-            ]);
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $domain)
+	{
+		$this->validate(
+			$request,
+			[
+				'name' => 'array',
+				'name.ro' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
+				'name.en' => 'required|string|unique:domain_translations,name,' . $domain->id . ',domain_id',
+				'parent_id' => 'required|integer'
+			]
+		);
 
-        $this->fillDomain($domain, $request);
-        $domain->save();
+			$this->fillDomain($domain, $request);
+			$domain->save();
 
-        return $domain;
-    }
+		return $domain;
+	}
 
-    public function changeParent($domain, Request $request)
-    {
-        $domain->parent_id = $request->input('parent_id');
-        $domain->save();
+	public function changeParent($domain, Request $request)
+	{
+		$domain->parent_id = $request->input('parent_id');
+		$domain->save();
 
-        return $domain;
-    }
+		return $domain;
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($domain)
-    {
-        $domain->delete();
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($domain)
+	{
+		$domain->delete();
 
-        return $domain;
-    }
+		return $domain;
+	}
 }

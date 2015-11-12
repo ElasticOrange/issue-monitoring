@@ -97,20 +97,22 @@
 	</div>
 </div>
 
-@include('admin.backend.stakeholders.connected-stakeholder')
-<div class="panel panel-success col-md-8 col-md-offset-2">
-	<div class="panel-heading">Stakeholderi conectati</div>
-	<div class="list-group" id="connected-stakeholders-container">
-		@foreach ($news->connectedStakeholders as $stakeholder_connected)
-			<div class="list-group-item" stakeholder-id="{{ $stakeholder_connected->id }}">
-				<a class="badge" connected-stakeholder-delete="{{ $stakeholder_connected->id }}">
-					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
-				</a>
-				<h4 class="list-group-item-heading">{{ $stakeholder_connected->name }}</h4>
-				<p class="list-group-item-text"></p>
-				<input type="hidden" name="stakeholders_connected[]" value="{{ $stakeholder_connected->id }}" />
-			</div>
-		@endforeach
+<div class="form-group">
+	@include('admin.backend.news.connected-stakeholder')
+	<div class="panel panel-success col-md-8 col-md-offset-2">
+		<div class="panel-heading">Stakeholderi conectati</div>
+		<div class="list-group" id="connected-stakeholders-container">
+			@foreach ($news->connectedStakeholders as $stakeholder_connected)
+				<div class="list-group-item" stakeholder-id="{{ $stakeholder_connected->id }}">
+					<a class="badge" connected-stakeholder-delete="{{ $stakeholder_connected->id }}">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+					</a>
+					<h4 class="list-group-item-heading">{{ $stakeholder_connected->name }}</h4>
+					<p class="list-group-item-text"></p>
+					<input type="hidden" name="stakeholders_connected[]" value="{{ $stakeholder_connected->id }}" />
+				</div>
+			@endforeach
+		</div>
 	</div>
 </div>
 
@@ -127,6 +129,26 @@
 				placeholder="Nume"
 				class="form-control"
 			/>
+		</div>
+	</div>
+</div>
+
+<div class="form-group">
+	@include('admin.backend.news.connected-domain')
+	<div class="panel panel-success col-md-8 col-md-offset-2">
+		<div class="panel-heading">Domenii conectate</div>
+		<div class="list-group" id="connected-domains-container">
+			@foreach ($news->connectedDomains as $domain_connected)
+			{{ $domain_connected->parent->name }}
+				<div class="list-group-item" domain-id="{{ $domain_connected->id }}">
+					<a class="badge" connected-domain-delete="{{ $domain_connected->id }}">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+					</a>
+					<h4 class="list-group-item-heading">{{ $domain_connected->name }}</h4>
+					<p class="list-group-item-text"></p>
+					<input type="hidden" name="domains_connected[]" value="{{ $domain_connected->id }}" />
+				</div>
+			@endforeach
 		</div>
 	</div>
 </div>

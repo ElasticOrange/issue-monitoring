@@ -48,9 +48,16 @@ class News extends Model
 		} else {
 			$stakeholders_connected = $request->get('stakeholders_connected');
 		}
+
+		if (!$request->get('domains_connected')) {
+			$domains_connected = [];
+		} else {
+			$domains_connected = $request->get('domains_connected');
+		}
 		$this->save();
 
 		$this->connectedStakeholders()->sync($stakeholders_connected);
+		$this->connectedDomains()->sync($domains_connected);
 	}
 
 	public static function getByPublicCode($code)
