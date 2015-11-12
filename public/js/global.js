@@ -255,7 +255,8 @@ $(document).ready(function() {
 				"last": "Ultimul"
 			},
 			"sEmptyTable": "Nu exista nicio inregistrare"
-		}
+		},
+		stateSave: true
 	});
 
 	var dateWidgets = $('[date-widget=true]').datetimepicker({
