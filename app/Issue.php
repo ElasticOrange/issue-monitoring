@@ -47,9 +47,16 @@ class Issue extends Model
 			$domains_connected = $request->get('domains_connected');
 		}
 
+		if (!$request->get('stakeholders_connected')) {
+			$stakeholders_connected = [];
+		} else {
+			$stakeholders_connected = $request->get('stakeholders_connected');
+		}
+
 		$this->save();
 
 		$this->connectedDomains()->sync($domains_connected);
+		$this->connectedStakeholders()->sync($stakeholders_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -62,5 +69,10 @@ class Issue extends Model
 	public function connectedDomains()
 	{
 		return $this->belongsToMany('Issue\Domain');
+	}
+
+	public function connectedStakeholders()
+	{
+		return $this->belongsToMany('Issue\Stakeholder');
 	}
 }

@@ -11,6 +11,7 @@ use Storage;
 use Issue\Domain;
 use Issue\DomainTranslation;
 use Issue\News;
+use Issue\Stakeholder;
 
 class IssueController extends Controller
 {
@@ -125,5 +126,14 @@ class IssueController extends Controller
 		}
 
 		return $result;
+	}
+
+	public function queryStakeholder(Request $request)
+	{
+		$queryStakeholderName = $request->get('name');
+
+		$stakeholders = Stakeholder::where('name', 'like', '%'.$queryStakeholderName.'%')->get();
+
+		return $stakeholders;
 	}
 }

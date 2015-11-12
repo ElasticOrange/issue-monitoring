@@ -183,4 +183,9 @@ class Stakeholder extends Model
 	{
 		return $this->belongsToMany('Issue\News');
 	}
+
+	public function connectedIssues()
+	{
+		return $this->belongsToMany('Issue\Issue');
+	}
 }

@@ -101,7 +101,7 @@
 		</div>
 
 	</div>
-	
+
 	<div class="form-group">
 		<div class="col-md-2 text-right">
 			<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
@@ -132,6 +132,42 @@
 						<h4 class="list-group-item-heading">{{ $domain_connected->name }}</h4>
 						<p class="list-group-item-text"></p>
 						<input type="hidden" name="domains_connected[]" value="{{ $domain_connected->id }}" />
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-2 text-right">
+			<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
+		</div>
+		<div class="col-md-8">
+			<div class="input-group">
+				<input
+					id="stakeholder-autocomplete"
+					source-url="{{ action('IssueController@queryStakeholder') }}/?name={name}"
+					type="text"
+					placeholder="Nume"
+					class="form-control"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		@include('admin.backend.issues.connected-stakeholder')
+		<div class="panel panel-success col-md-8 col-md-offset-2">
+			<div class="panel-heading">Stakeholderi conectati</div>
+			<div class="list-group" id="connected-stakeholders-container">
+				@foreach ($issue->connectedStakeholders as $stakeholder_connected)
+					<div class="list-group-item" stakeholder-id="{{ $stakeholder_connected->id }}">
+						<a class="badge" connected-stakeholder-delete="{{ $stakeholder_connected->id }}">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+						</a>
+						<h4 class="list-group-item-heading">{{ $stakeholder_connected->name }}</h4>
+						<p class="list-group-item-text"></p>
+						<input type="hidden" name="stakeholders_connected[]" value="{{ $stakeholder_connected->id }}" />
 					</div>
 				@endforeach
 			</div>
