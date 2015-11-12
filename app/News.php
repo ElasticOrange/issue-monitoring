@@ -55,6 +55,8 @@ class News extends Model
 			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
 		}
 
+		$this->save();
+
 		if (!$request->get('stakeholders_connected')) {
 			$stakeholders_connected = [];
 		} else {
@@ -68,7 +70,6 @@ class News extends Model
 		} else {
 			$domains_connected = $request->get('domains_connected');
 		}
-		$this->save();
 
 		$this->connectedDomains()->sync($domains_connected);
 
