@@ -107,15 +107,13 @@
 			<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
 		</div>
 		<div class="col-md-8">
-			<div class="input-group">
-				<input
-					id="domain-autocomplete"
-					source-url="{{ action('IssueController@queryDomain') }}/?name={name}"
-					type="text"
-					placeholder="Nume"
-					class="form-control"
-				/>
-			</div>
+			<input
+				id="domain-autocomplete"
+				source-url="{{ action('IssueController@queryDomain') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
 		</div>
 	</div>
 
@@ -143,15 +141,13 @@
 			<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
 		</div>
 		<div class="col-md-8">
-			<div class="input-group">
-				<input
-					id="stakeholder-autocomplete"
-					source-url="{{ action('IssueController@queryStakeholder') }}/?name={name}"
-					type="text"
-					placeholder="Nume"
-					class="form-control"
-				/>
-			</div>
+			<input
+				id="stakeholder-autocomplete"
+				source-url="{{ action('IssueController@queryStakeholder') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
 		</div>
 	</div>
 
@@ -179,15 +175,13 @@
 			<label for="initiator-autocomplete" class="control-label">Initiatori cu care este conectat</label>
 		</div>
 		<div class="col-md-8">
-			<div class="input-group">
-				<input
-					id="initiator-autocomplete"
-					source-url="{{ action('IssueController@queryInitiator') }}/?name={name}"
-					type="text"
-					placeholder="Nume"
-					class="form-control"
-				/>
-			</div>
+			<input
+				id="initiator-autocomplete"
+				source-url="{{ action('IssueController@queryInitiator') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
 		</div>
 	</div>
 
@@ -215,15 +209,13 @@
 			<label for="news-autocomplete" class="control-label">Stiri/declaratii cu care este conectat</label>
 		</div>
 		<div class="col-md-8">
-			<div class="input-group">
-				<input
-					id="news-autocomplete"
-					source-url="{{ action('IssueController@queryNews') }}/?name={name}"
-					type="text"
-					placeholder="Nume"
-					class="form-control"
-				/>
-			</div>
+			<input
+				id="news-autocomplete"
+				source-url="{{ action('IssueController@queryNews') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
 		</div>
 	</div>
 

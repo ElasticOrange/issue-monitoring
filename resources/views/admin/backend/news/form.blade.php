@@ -74,15 +74,13 @@
 		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
 	</div>
 	<div class="col-md-8">
-		<div class="input-group">
-			<input
-				id="stakeholder-autocomplete"
-				source-url="{{ action('NewsController@queryStakeholder') }}/?name={name}"
-				type="text"
-				placeholder="Nume"
-				class="form-control"
-			/>
-		</div>
+		<input
+			id="stakeholder-autocomplete"
+			source-url="{{ action('NewsController@queryStakeholder') }}/?name={name}"
+			type="text"
+			placeholder="Nume"
+			class="form-control"
+		/>
 	</div>
 </div>
 
@@ -110,15 +108,13 @@
 		<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
 	</div>
 	<div class="col-md-8">
-		<div class="input-group">
-			<input
-				id="domain-autocomplete"
-				source-url="{{ action('NewsController@queryDomain') }}/?name={name}"
-				type="text"
-				placeholder="Nume"
-				class="form-control"
-			/>
-		</div>
+		<input
+			id="domain-autocomplete"
+			source-url="{{ action('NewsController@queryDomain') }}/?name={name}"
+			type="text"
+			placeholder="Nume"
+			class="form-control"
+		/>
 	</div>
 </div>
 
@@ -146,15 +142,13 @@
 		<label for="tag-autocomplete" class="control-label">Taguri</label>
 	</div>
 	<div class="col-md-8">
-		<div class="input-group">
-			<input
-				id="tag-autocomplete"
-				source-url="{{ action('NewsController@queryTag') }}/?name={name}"
-				type="text"
-				placeholder="Nume"
-				class="form-control"
-			/>
-		</div>
+		<input
+			id="tag-autocomplete"
+			source-url="{{ action('NewsController@queryTag') }}/?name={name}"
+			type="text"
+			placeholder="Nume"
+			class="form-control"
+		/>
 	</div>
 </div>
 

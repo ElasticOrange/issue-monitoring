@@ -241,15 +241,13 @@
 		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
 	</div>
 	<div class="col-md-8">
-		<div class="input-group">
-			<input
-				id="stakeholder-autocomplete"
-				source-url="{{ action('StakeholderController@queryList') }}/?name={name}"
-				type="text"
-				placeholder="Nume"
-				class="form-control"
-			/>
-		</div>
+		<input
+			id="stakeholder-autocomplete"
+			source-url="{{ action('StakeholderController@queryList') }}/?name={name}"
+			type="text"
+			placeholder="Nume"
+			class="form-control"
+		/>
 	</div>
 </div>
 
