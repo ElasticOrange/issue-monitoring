@@ -140,6 +140,9 @@ function submitGenericAjaxForm(form) {
 
 	if($('input[type=file]').length) {
 		_.forEach($('input[type=file]'), function(fileInput) {
+			if (! fileInput.files[0]) {
+				return;
+			}
 			formData.append($(fileInput).attr('name'), fileInput.files[0]);
 		});
 	}
