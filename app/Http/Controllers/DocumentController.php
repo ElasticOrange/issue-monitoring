@@ -75,6 +75,7 @@ class DocumentController extends Controller
 		return view('admin.backend.documents.edit', ['document' => $document]);
 	}
 
+
 	/**
 	 * Update the specified resource in storage.
 	 *
