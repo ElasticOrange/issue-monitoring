@@ -25,8 +25,8 @@ class DomainRequest extends Request
     {
         return [
             'name' => 'array',
-            'name.ro' => 'required|string|unique:domain_translations,name',
-            'name.en' => 'required|string|unique:domain_translations,name',
+            'name.ro' => 'required|string|alpha_dash|unique:domain_translations,name',
+            'name.en' => 'required|string|alpha_dash|unique:domain_translations,name',
             'parent_id' => 'required|integer'
         ];
     }
