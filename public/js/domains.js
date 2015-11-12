@@ -30,7 +30,7 @@
 			var request = $.ajax({
 				async: false,
 				type: "GET",
-				url: "/backend/domain/" + item.id + "/changeparent",
+				url: "/backend/domain/" + item.id + "/change-parent",
 				data: {parent_id: item.parentId}
 			});
 			request.done(function(data) {
