@@ -173,4 +173,40 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="form-group">
+		<div class="col-md-2 text-right">
+			<label for="news-autocomplete" class="control-label">Stiri/declaratii cu care este conectat</label>
+		</div>
+		<div class="col-md-8">
+			<div class="input-group">
+				<input
+					id="news-autocomplete"
+					source-url="{{ action('IssueController@queryNews') }}/?name={name}"
+					type="text"
+					placeholder="Nume"
+					class="form-control"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		@include('admin.backend.issues.connected-news')
+		<div class="panel panel-success col-md-8 col-md-offset-2">
+			<div class="panel-heading">Stiri/declaratii conectate</div>
+			<div class="list-group" id="connected-news-container">
+				@foreach ($issue->connectednews as $news_connected)
+					<div class="list-group-item" news-id="{{ $news_connected->id }}">
+						<a class="badge" connected-news-delete="{{ $news_connected->id }}">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+						</a>
+						<h4 class="list-group-item-heading">{{ $news_connected->title }}</h4>
+						<p class="list-group-item-text"></p>
+						<input type="hidden" name="news_connected[]" value="{{ $news_connected->id }}" />
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
 </div>

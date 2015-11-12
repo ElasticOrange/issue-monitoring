@@ -8,9 +8,10 @@ use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests\IssueRequest;
 use Storage;
+use Issue\News;
+use Issue\NewsTranslation;
 use Issue\Domain;
 use Issue\DomainTranslation;
-use Issue\News;
 use Issue\Stakeholder;
 
 class IssueController extends Controller
@@ -130,10 +131,33 @@ class IssueController extends Controller
 
 	public function queryStakeholder(Request $request)
 	{
-		$queryStakeholderName = $request->get('name');
+		$queryStakeholderName = $request->input('name');
 
 		$stakeholders = Stakeholder::where('name', 'like', '%'.$queryStakeholderName.'%')->get();
 
 		return $stakeholders;
+	}
+
+	public function queryNews(Request $request)
+	{
+		$queryNewsName = $request->input('name');
+
+		$newsIds = NewsTranslation::where('title', 'like', '%'.$queryNewsName.'%')
+										->where('locale', \App::getLocale())
+										->lists('news_id');
+		$news = News::whereIn('id', $newsIds)
+							->with(['translations'])
+							->get();
+
+		$result = [];
+
+		foreach ($news as $n) {
+			$result[] = [
+				'id' => $n->id,
+				'name' => $n->title,
+			];
+		}
+
+		return $result;
 	}
 }
