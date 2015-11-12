@@ -271,7 +271,8 @@ $(document).ready(function() {
 
 	$('input[type=file]')
 		.change(function() {
-			$(this).parent().find('.selected-file').html(getFileNameFromPath($(this).val()));
+			var fileName = getFileNameFromPath($(this).val());
+			$(this).parent().find('.selected-file').html(fileName).attr('title', fileName);
 		});
 
 	$(document).on('click', '[confirm]', function(ev) {

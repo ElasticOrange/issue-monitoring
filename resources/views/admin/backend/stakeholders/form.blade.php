@@ -183,7 +183,7 @@
 	<label class="col-md-2 control-label">CV</label>
 	<div class="col-md-8">
 		<label>
-			<span class="btn btn-primary selected-file">Incarca fisier</span>
+			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
 			<input type="file" name="cv_file" class="hidden"/>
 		</label>
 		@if($stakeholder->fileCv)
@@ -199,7 +199,7 @@
 	<label class="col-md-2 control-label">Poza</label>
 	<div class="col-md-8">
 		<label>
-			<span class="btn btn-primary selected-file">Incarca fisier</span>
+			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
 			<input type="file" name="poza_file" class="hidden"/>
 		</label>
 		@if($stakeholder->filePoza)

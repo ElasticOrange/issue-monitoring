@@ -64,7 +64,7 @@
 	<label class="col-md-2 control-label">Document</label>
 	<div class="col-md-8">
 		<label>
-			<span class="btn btn-primary selected-file">Incarca fisier</span>
+			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
 			<input type="file" name="document_file" class="hidden"/>
 		</label>
 		@if($news->fileDocument)
