@@ -101,4 +101,40 @@
 		</div>
 
 	</div>
+	
+	<div class="form-group">
+		<div class="col-md-2 text-right">
+			<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
+		</div>
+		<div class="col-md-8">
+			<div class="input-group">
+				<input
+					id="domain-autocomplete"
+					source-url="{{ action('IssueController@queryDomain') }}/?name={name}"
+					type="text"
+					placeholder="Nume"
+					class="form-control"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		@include('admin.backend.issues.connected-domain')
+		<div class="panel panel-success col-md-8 col-md-offset-2">
+			<div class="panel-heading">Domenii conectate</div>
+			<div class="list-group" id="connected-domains-container">
+				@foreach ($issue->connectedDomains as $domain_connected)
+					<div class="list-group-item" domain-id="{{ $domain_connected->id }}">
+						<a class="badge" connected-domain-delete="{{ $domain_connected->id }}">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+						</a>
+						<h4 class="list-group-item-heading">{{ $domain_connected->name }}</h4>
+						<p class="list-group-item-text"></p>
+						<input type="hidden" name="domains_connected[]" value="{{ $domain_connected->id }}" />
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
 </div>

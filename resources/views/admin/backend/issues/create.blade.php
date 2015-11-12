@@ -15,7 +15,7 @@
 	<div class="col-md-12">
 		<form 	class="form-horizontal"
 				method="POST"
-				action="{{ action("IssueController@store") }}"
+				action="{{ action('IssueController@store', [$issue]) }}"
 				enctype="multipart/form-data"
 				data-ajax="true"
 				success-message="Initiativa adaugata"

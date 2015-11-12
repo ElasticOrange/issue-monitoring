@@ -41,7 +41,15 @@ class Issue extends Model
 			$this->translateOrNew($locale)->status = $request->get('status')[$locale];
 		}
 
+		if (!$request->get('domains_connected')) {
+			$domains_connected = [];
+		} else {
+			$domains_connected = $request->get('domains_connected');
+		}
+
 		$this->save();
+
+		$this->connectedDomains()->sync($domains_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -49,5 +57,10 @@ class Issue extends Model
 		$instance = new static;
 
 		return $instance->where('public_code', $code)->firstOrFail();
+	}
+
+	public function connectedDomains()
+	{
+		return $this->belongsToMany('Issue\Domain');
 	}
 }

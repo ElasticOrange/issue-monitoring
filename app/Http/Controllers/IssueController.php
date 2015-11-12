@@ -8,6 +8,9 @@ use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests\IssueRequest;
 use Storage;
+use Issue\Domain;
+use Issue\DomainTranslation;
+use Issue\News;
 
 class IssueController extends Controller
 {
@@ -98,5 +101,29 @@ class IssueController extends Controller
 		$issue -> delete();
 
 		return redirect()->action('IssueController@index');
+	}
+
+	public function queryDomain(Request $request)
+	{
+		$queryDomainName = $request->input('name');
+
+		$domainIds = DomainTranslation::where('name', 'like', '%'.$queryDomainName.'%')
+										->where('locale', \App::getLocale())
+										->lists('domain_id');
+		$domains = Domain::whereIn('id', $domainIds)
+							->where('parent_id', '>', 0)
+							->with(['translations', 'parent'])
+							->get();
+
+		$result = [];
+
+		foreach ($domains as $domain) {
+			$result[] = [
+				'id' => $domain->id,
+				'name' => (($domain->parent->id > 1) ? $domain->parent->name." - " : "").$domain->name,
+			];
+		}
+
+		return $result;
 	}
 }

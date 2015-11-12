@@ -139,7 +139,6 @@
 		<div class="panel-heading">Domenii conectate</div>
 		<div class="list-group" id="connected-domains-container">
 			@foreach ($news->connectedDomains as $domain_connected)
-			{{ $domain_connected->parent->name }}
 				<div class="list-group-item" domain-id="{{ $domain_connected->id }}">
 					<a class="badge" connected-domain-delete="{{ $domain_connected->id }}">
 						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge

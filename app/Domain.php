@@ -22,4 +22,9 @@ class Domain extends Model
 	{
 		return $this->belongsTo('Issue\Domain', 'parent_id');
 	}
+
+	public function connectedIssues()
+	{
+		return $this->belongsToMany('Issue\Issue');
+	}
 }
