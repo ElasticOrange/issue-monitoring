@@ -61,25 +61,20 @@
 </div>
 
 <div class="form-group">
-	<div class="col-md-2 text-right">
-		<label class="control-label">Documente</label>
-	</div>
+	<label class="col-md-2 control-label">Document</label>
 	<div class="col-md-8">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Search for...">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="button">Go!</button>
-			</span>
-		</div>
-	</div>
-	<div class="col-md-2">
-		<a href="/backend/news/create"><button type="button" class="btn btn-primary form-control"><span class="glyphicon glyphicon-plus"></span> Adauga</button></a>
-	</div>
-	<div class="col-md-offset-2 col-md-8">
-	<textarea name="tags" class="form-control" rows="2"></textarea>
+		<label>
+			<span class="btn btn-primary selected-file">Incarca fisier</span>
+			<input type="file" name="document_file" class="hidden"/>
+		</label>
+		@if($news->fileDocument)
+			<a href="{{ action( "UploadedFileController@downloadFile" , [$news->fileDocument->file_name]) }}" target="_blank">
+				<i class="fa fa-file-pdf-o"></i>
+				{{ $news->fileDocument->original_file_name }}
+			</a>
+		@endif
 	</div>
 </div>
-
 
 <div class="form-group">
 	<div class="col-md-2 text-right">
