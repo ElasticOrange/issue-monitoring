@@ -12,15 +12,13 @@ class UploadedFile extends Model
 	{
 		Storage::makeDirectory($directory);
 
-		if(! $uploadedFile)
-		{
+		if (! $uploadedFile) {
 			return false;
 		}
 
-		do
-		{
+		do {
 			$this->file_name = str_random(40);
-		} while(UploadedFile::where('file_name', $this->file_name)->count() > 0);
+		} while (UploadedFile::where('file_name', $this->file_name)->count() > 0);
 
 		$this->folder = $directory;
 		$this->original_file_name = $uploadedFile->getClientOriginalName();
@@ -39,5 +37,10 @@ class UploadedFile extends Model
 	public function stakeholder()
 	{
 		return $this->hasOne('Issue\Stakeholder');
+	}
+
+	public function news()
+	{
+		return $this->hasOne('Issue\News');
 	}
 }
