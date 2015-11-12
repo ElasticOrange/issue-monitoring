@@ -63,3 +63,10 @@ input[type=file].hidden {
 .panel-success {
 	padding: 0px;
 }
+
+.ellipsis{
+	width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
