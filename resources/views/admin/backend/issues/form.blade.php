@@ -102,6 +102,8 @@
 
 	</div>
 
+	<hr/>
+
 	<div class="form-group">
 		<div class="col-md-2 text-right">
 			<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
@@ -135,6 +137,8 @@
 			</div>
 		</div>
 	</div>
+
+	<hr/>
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
@@ -170,6 +174,8 @@
 		</div>
 	</div>
 
+	<hr/>
+
 	<div class="form-group">
 		<div class="col-md-2 text-right">
 			<label for="initiator-autocomplete" class="control-label">Initiatori cu care este conectat</label>
@@ -203,6 +209,8 @@
 			</div>
 		</div>
 	</div>
+
+	<hr/>
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
@@ -238,20 +246,20 @@
 		</div>
 	</div>
 
+	<hr/>
+
 	<div class="form-group">
 		<div class="col-md-2 text-right">
 			<label for="issue-autocomplete" class="control-label">Initiative relevante</label>
 		</div>
 		<div class="col-md-8">
-			<div class="input-group">
-				<input
-					id="issue-autocomplete"
-					source-url="{{ action('IssueController@queryIssue') }}/?name={name}"
-					type="text"
-					placeholder="Nume"
-					class="form-control"
-				/>
-			</div>
+			<input
+				id="issue-autocomplete"
+				source-url="{{ action('IssueController@queryIssue') }}/?name={name}"
+				type="text"
+				placeholder="Nume"
+				class="form-control"
+			/>
 		</div>
 	</div>
 

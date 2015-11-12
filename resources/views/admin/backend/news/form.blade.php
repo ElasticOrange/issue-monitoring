@@ -70,6 +70,22 @@
 </div>
 
 <div class="form-group">
+	<div class="checkbox col-md-8 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($news->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
+	</div>
+</div>
+
+<hr/>
+
+<div class="form-group">
 	<div class="col-md-2 text-right">
 		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
 	</div>
@@ -102,6 +118,8 @@
 		</div>
 	</div>
 </div>
+
+<hr/>
 
 <div class="form-group">
 	<div class="col-md-2 text-right">
@@ -137,6 +155,8 @@
 	</div>
 </div>
 
+<hr/>
+
 <div class="form-group">
 	<div class="col-md-2 text-right">
 		<label for="tag-autocomplete" class="control-label">Taguri</label>
@@ -171,16 +191,3 @@
 	</div>
 </div>
 
-<div class="form-group">
-	<div class="checkbox col-md-8 col-md-offset-1">
-		<label>
-			<input  type="checkbox"
-					value="1"
-					name="published"
-					@if($news->published)
-						checked="checked"
-					@endif
-			/>Publica
-		</label>
-	</div>
-</div>
