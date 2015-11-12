@@ -112,6 +112,7 @@ class StakeholderController extends Controller
 	{
 		$stakeholder->published = $request->input('published') == 'true';
 		$stakeholder->save();
+		
 		return ['result' => true];
 	}
 

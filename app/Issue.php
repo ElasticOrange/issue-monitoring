@@ -42,6 +42,42 @@ class Issue extends Model
 		}
 
 		$this->save();
+
+		if (!$request->get('domains_connected')) {
+			$domains_connected = [];
+		} else {
+			$domains_connected = $request->get('domains_connected');
+		}
+
+		$this->connectedDomains()->sync($domains_connected);
+
+		if (!$request->get('stakeholders_connected')) {
+			$stakeholders_connected = [];
+		} else {
+			$stakeholders_connected = $request->get('stakeholders_connected');
+		}
+
+		$this->connectedStakeholders()->sync($stakeholders_connected);
+
+		if (!$request->get('news_connected')) {
+			$news_connected = [];
+		} else {
+			$news_connected = $request->get('news_connected');
+		}
+
+		$this->connectedNews()->sync($news_connected);
+
+		if (!$request->get('issues_connected')) {
+			$issues_connected = [];
+		} else {
+			$issues_connected = $request->get('issues_connected');
+		}
+
+		foreach ($this->issuesConnectedOfThem as $icof) {
+			$this->issuesConnectedOfThem()->detach($icof->id);
+		}
+
+		$this->issuesConnectedOfMine()->sync($issues_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -49,5 +85,63 @@ class Issue extends Model
 		$instance = new static;
 
 		return $instance->where('public_code', $code)->firstOrFail();
+	}
+
+	public function connectedDomains()
+	{
+		return $this->belongsToMany('Issue\Domain');
+	}
+
+	public function connectedStakeholders()
+	{
+		return $this->belongsToMany('Issue\Stakeholder');
+	}
+
+	public function connectedNews()
+	{
+		return $this->belongsToMany('Issue\News');
+	}
+
+	public function issuesConnectedOfMine()
+	{
+		return $this->belongsToMany(
+			'Issue\Issue',
+			'issues_connected',
+			'issue_id',
+			'issue_connected_id'
+		);
+	}
+
+	public function issuesConnectedOfThem()
+	{
+		return $this->belongsToMany(
+			'Issue\Issue',
+			'issues_connected',
+			'issue_connected_id',
+			'issue_id'
+		);
+	}
+
+	public function getIssuesConnectedAttribute()
+	{
+		if (! array_key_exists('issues_connected', $this->relations)) {
+			$this->loadIssuesConnected();
+		}
+
+		return $this->getRelation('issues_connected');
+	}
+
+	protected function loadIssuesConnected()
+	{
+		if (! array_key_exists('issues_connected', $this->relations)) {
+			$issues_connected = $this->mergeIssuesConnected();
+
+			$this->setRelation('issues_connected', $issues_connected);
+		}
+	}
+
+	protected function mergeIssuesConnected()
+	{
+		return $this->issuesConnectedOfMine->merge($this->issuesConnectedOfThem);
 	}
 }

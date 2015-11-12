@@ -3,6 +3,7 @@
 namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
+use Issue\Stakeholder;
 
 const CV_LOCATION = '/cv/';
 const POZA_LOCATION = '/poza/';
@@ -69,7 +70,6 @@ class Stakeholder extends Model
 			$this->translateOrNew($locale)->profile = $request->get('profile')[$locale];
 			$this->translateOrNew($locale)->position = $request->get('position')[$locale];
 		}
-
 		$this->save();
 
 		// Refresh connected stakeholders
@@ -177,5 +177,15 @@ class Stakeholder extends Model
 	protected function mergeStakeholdersConnected()
 	{
 		return $this->stakeholdersConnectedOfMine->merge($this->stakeholdersConnectedOfThem);
+	}
+
+	public function connectedNews()
+	{
+		return $this->belongsToMany('Issue\News');
+	}
+
+	public function connectedIssues()
+	{
+		return $this->belongsToMany('Issue\Issue');
 	}
 }

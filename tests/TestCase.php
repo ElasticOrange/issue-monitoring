@@ -51,4 +51,36 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
 		return $stakeholder_data;
 	}
+
+	public function newsData()
+	{
+		$news_data = [
+			'link' => $this->faker->url,
+			'published' => 1,
+			'public_code' => $this->faker->url,
+			'stakeholders_connected' => [],
+			'_token' => csrf_token()
+		];
+
+		foreach (Config::get('app.all_locales') as $locale) {
+			$news_data['title'][$locale] = $this->faker->text;
+			$news_data['description'][$locale] = $this->faker->text;
+		}
+
+		return $news_data;
+	}
+
+	public function domainData()
+	{
+		$domain_data = [
+			'parent_id' => 1,
+			'_token' =>csrf_token()
+		];
+
+		foreach (Config::get('app.all_locales') as $locale) {
+			$domain_data['name'][$locale] = $this->faker->name;
+		}
+
+		return $domain_data;
+	}
 }

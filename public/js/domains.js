@@ -17,8 +17,8 @@
 		var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{name: 'name', map: 'label'}]);
 		records[0].expanded = true;
 
-		tree.jqxTree({source: records, height: '300px', width: '100%', allowDrag: true, allowDrop: true
-			, dragStart: function (item) {
+		tree.jqxTree({source: records, height: '300px', width: '100%', allowDrag: true, allowDrop: true,
+			dragStart: function (item) {
 				if (item.id == 1)
 					return false;
 			}
@@ -36,7 +36,7 @@
 			request.done(function(data) {
 				tree.jqxTree('selectItem',  getTreeItemById(tree, item.id));
 				tree.jqxTree('expandItem', item);
-			})
+			});
 		});
 
 		$(document).on('click', '#editDomain', function (event) {
@@ -61,7 +61,7 @@
 			return false;
 		}
 
-		if (domain.level == 0) {
+		if (domain.level === 0) {
 			return false;
 		}
 
@@ -84,7 +84,7 @@
 			return false;
 		}
 
-		if (domain.level == 0) {
+		if (domain.level === 0) {
 			alert("Nu se poate modifica");
 			$('#myModal').modal('hide');
 			return false;

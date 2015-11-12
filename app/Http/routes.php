@@ -42,8 +42,17 @@ Route::resource('/backend/location', 'LocationController', ['except' => ['edit',
 
 Route::get('/backend/news/{news}/delete', 'NewsController@destroy');
 Route::get('/backend/news/{public_code}/show', 'NewsController@show');
-Route::resource('/backend/news', 'NewsController', ['except' =>['show', 'destroy']]);
+Route::get('/backend/news/query-stakeholder', 'NewsController@queryStakeholder');
+Route::get('/backend/news/query-domain', 'NewsController@queryDomain');
+Route::get('/backend/news/query-tag', 'NewsController@queryTag');
+Route::resource('/backend/news', 'NewsController', ['except' => ['show', 'destroy']]);
 
-Route::get('backend/issue/{issue}/delete', 'IssueController@destroy');
-Route::get('backend/issue/{public_code}/show', 'IssueController@show');
-Route::resource('/backend/issue', 'IssueController', ['except' =>['show', 'destroy']]);
+Route::get('/backend/issue/{issue}/delete', 'IssueController@destroy');
+Route::get('/backend/issue/{public_code}/show', 'IssueController@show');
+Route::get('/backend/issue/query-domain', 'IssueController@queryDomain');
+Route::get('/backend/issue/query-stakeholder', 'IssueController@queryStakeholder');
+Route::get('/backend/issue/query-news', 'IssueController@queryNews');
+Route::get('/backend/issue/query-issue', 'IssueController@queryIssue');
+Route::resource('/backend/issue', 'IssueController', ['except' => ['show', 'destroy']]);
+
+Route::post('/backend/tag', 'TagController@store');

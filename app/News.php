@@ -13,8 +13,9 @@ class News extends Model
 	protected $guarded = ['id'];
 
 	protected $fillable = [
-		'title',
-		'description',
+		'date',
+		'link',
+		'published',
 	];
 
 	public $dates = ['date','init_at'];
@@ -54,7 +55,30 @@ class News extends Model
 			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
 		}
 
+		if (!$request->get('stakeholders_connected')) {
+			$stakeholders_connected = [];
+		} else {
+			$stakeholders_connected = $request->get('stakeholders_connected');
+		}
+
+		$this->connectedStakeholders()->sync($stakeholders_connected);
+
+		if (!$request->get('domains_connected')) {
+			$domains_connected = [];
+		} else {
+			$domains_connected = $request->get('domains_connected');
+		}
 		$this->save();
+
+		$this->connectedDomains()->sync($domains_connected);
+
+		if (!$request->get('tags_connected')) {
+			$tags_connected = [];
+		} else {
+			$tags_connected = $request->get('tags_connected');
+		}
+
+		$this->connectedTags()->sync($tags_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -67,5 +91,25 @@ class News extends Model
 	public function fileDocument()
 	{
 		return $this->belongsTo('Issue\UploadedFile', 'uploaded_document_id');
+	}
+
+	public function connectedStakeholders()
+	{
+		return $this->belongsToMany('Issue\Stakeholder');
+	}
+
+	public function connectedDomains()
+	{
+		return $this->belongsToMany('Issue\Domain');
+	}
+
+	public function connectedIssues()
+	{
+		return $this->belongsToMany('Issue\Issue');
+	}
+
+	public function connectedTags()
+	{
+		return $this->belongsToMany('Issue\Tag');
 	}
 }

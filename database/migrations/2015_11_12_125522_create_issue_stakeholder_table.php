@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class StakeholderConnectedTable extends Migration
+class CreateIssueStakeholderTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class StakeholderConnectedTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('stakeholders_connected', function (Blueprint $table) {
+		Schema::create('issue_stakeholder', function (Blueprint $table) {
 			$table->increments('id');
+
+			$table->integer('issue_id')->unsigned()->index();
+			$table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
 
 			$table->integer('stakeholder_id')->unsigned()->index();
 			$table->foreign('stakeholder_id')->references('id')->on('stakeholders')->onDelete('cascade');
-
-			$table->integer('stakeholder_connected_id')->unsigned()->index();
 
 			$table->timestamps();
 		});
@@ -31,6 +32,6 @@ class StakeholderConnectedTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('stakeholders_connected');
+		Schema::dropIfExists('issue_stakeholder');
 	}
 }

@@ -8,6 +8,10 @@ use Issue\Http\Requests;
 use Issue\Http\Requests\NewsRequest;
 use Issue\Http\Controllers\Controller;
 use Storage;
+use Issue\Tag;
+use Issue\Domain;
+use Issue\DomainTranslation;
+use Issue\Stakeholder;
 
 class NewsController extends Controller
 {
@@ -82,7 +86,7 @@ class NewsController extends Controller
 	 */
 	public function update(NewsRequest $request, $news)
 	{
-		$news -> setAll($request);
+		$news->setAll($request);
 
 		return $news;
 	}
@@ -95,8 +99,49 @@ class NewsController extends Controller
 	 */
 	public function destroy($news)
 	{
-		$news -> delete();
+		$news->delete();
 
 		return redirect()->action('NewsController@index');
+	}
+
+	public function queryStakeholder(Request $request)
+	{
+		$queryStakeholderName = $request->input('name');
+		$stakeholders = Stakeholder::where('name', 'like', '%'. $queryStakeholderName .'%')->get();
+
+		return $stakeholders;
+	}
+
+	public function queryDomain(Request $request)
+	{
+		$queryDomainName = $request->input('name');
+
+		$domainIds = DomainTranslation::where('name', 'like', '%'.$queryDomainName.'%')
+										->where('locale', \App::getLocale())
+										->lists('domain_id');
+		$domains = Domain::whereIn('id', $domainIds)
+							->where('parent_id', '>', 0)
+							->with(['translations', 'parent'])
+							->get();
+
+		$result = [];
+
+		foreach ($domains as $domain) {
+			$result[] = [
+				'id' => $domain->id,
+				'name' => (($domain->parent->id > 1) ? $domain->parent->name." - " : "").$domain->name,
+			];
+		}
+
+		return $result;
+	}
+
+	public function queryTag(Request $request)
+	{
+		$queryTagName = $request->input('name');
+
+		$tags = Tag::where('name', 'like', '%'. $queryTagName .'%')->get();
+
+		return $tags;
 	}
 }
