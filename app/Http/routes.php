@@ -43,3 +43,7 @@ Route::resource('/backend/location', 'LocationController', ['except' => ['edit',
 Route::get('/backend/news/{news}/delete', 'NewsController@destroy');
 Route::get('/backend/news/{public_code}/show', 'NewsController@show');
 Route::resource('/backend/news', 'NewsController', ['except' =>['show', 'destroy']]);
+
+Route::get('backend/issue/{issue}/delete', 'IssueController@destroy');
+Route::get('backend/issue/{public_code}/show', 'IssueController@show');
+Route::resource('/backend/issue', 'IssueController', ['except' =>['show', 'destroy']]);
