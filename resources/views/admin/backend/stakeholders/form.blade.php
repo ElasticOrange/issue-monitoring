@@ -9,7 +9,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Tip</label>
 	<div class="col-md-8">
-		<select class="form-control" name="type">
+		<select class="form-control" name="type" stakeholder-type="true">
 			<option value="persoana">persoana</option>
 			<option value="organizatie" @if($stakeholder->type === 'organizatie') selected="selected" @endif>organizatie</option>
 		</select>
@@ -27,6 +27,45 @@
 	<label class="col-md-2 control-label">Telefon</label>
 	<div class="col-md-8">
 		<input type="text" name="telephone" class="form-control" value="{{ $stakeholder->telephone }}"/>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-md-2 control-label">Site/blog</label>
+	<div class="col-md-8">
+		<input type="text" name="site" class="form-control" value="{{ $stakeholder->site }}"></input>
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-md-2 control-label">CV</label>
+	<div class="col-md-8">
+		<label>
+			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
+			<input type="file" name="cv_file" class="hidden"/>
+		</label>
+		@if($stakeholder->fileCv)
+			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->fileCv->file_name]) }}" target="_blank">
+				<i class="fa fa-file-pdf-o"></i>
+				{{ $stakeholder->fileCv->original_file_name }}
+			</a>
+		@endif
+	</div>
+</div>
+
+<div class="form-group">
+	<label class="col-md-2 control-label">Poza</label>
+	<div class="col-md-8">
+		<label>
+			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
+			<input type="file" name="poza_file" class="hidden"/>
+		</label>
+		@if($stakeholder->filePoza)
+			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->filePoza->file_name]) }}" target="_blank">
+				<i class="fa fa-file-pdf-o"></i>
+				{{ $stakeholder->filePoza->original_file_name }}
+			</a>
+		@endif
 	</div>
 </div>
 
@@ -173,43 +212,29 @@
 <hr/>
 
 <div class="form-group">
-	<label class="col-md-2 control-label">Site/blog</label>
-	<div class="col-md-8">
-		<input type="text" name="site" class="form-control" value="{{ $stakeholder->site }}"></input>
+	<div class="checkbox col-md-10 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($stakeholder->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
 	</div>
 </div>
 
-<div class="form-group">
-	<label class="col-md-2 control-label">CV</label>
-	<div class="col-md-8">
-		<label>
-			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
-			<input type="file" name="cv_file" class="hidden"/>
-		</label>
-		@if($stakeholder->fileCv)
-			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->fileCv->file_name]) }}" target="_blank">
-				<i class="fa fa-file-pdf-o"></i>
-				{{ $stakeholder->fileCv->original_file_name }}
-			</a>
-		@endif
+@if($stakeholder->public_code)
+	<div class="form-group">
+		<label class="col-md-2 control-label">Link public</label>
+		<div class="col-md-8 control-label" style="text-align: left">
+			<a href="{{ action("StakeholderController@show", [$stakeholder->public_code]) }}" target="_blank">{{ action("StakeholderController@show", [$stakeholder->public_code]) }}</a>
+		</div>
 	</div>
-</div>
+@endif
 
-<div class="form-group">
-	<label class="col-md-2 control-label">Poza</label>
-	<div class="col-md-8">
-		<label>
-			<span class="btn btn-primary selected-file ellipsis">Incarca fisier</span>
-			<input type="file" name="poza_file" class="hidden"/>
-		</label>
-		@if($stakeholder->filePoza)
-			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->filePoza->file_name]) }}" target="_blank">
-				<i class="fa fa-file-pdf-o"></i>
-				{{ $stakeholder->filePoza->original_file_name }}
-			</a>
-		@endif
-	</div>
-</div>
+<hr/>
 
 <div class="form-group">
 	<div class="col-md-2 text-right">
@@ -244,19 +269,5 @@
 				</div>
 			@endforeach
 		</div>
-	</div>
-</div>
-
-<div class="form-group">
-	<div class="checkbox col-md-10 col-md-offset-2">
-		<label>
-			<input  type="checkbox"
-					value="1"
-					name="published"
-					@if($stakeholder->published)
-						checked="checked"
-					@endif
-			/>Publica
-		</label>
 	</div>
 </div>

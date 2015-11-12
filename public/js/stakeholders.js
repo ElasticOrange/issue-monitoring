@@ -108,19 +108,19 @@ $(document).ready(function(){
 		$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 	});
 
-	$('[stakeholder-type=true] select').change(function(){
+	$('[stakeholder-type=true]').change(function(){
 		if($(this).val() == 'organizatie'){
-			$('[stakeholder-cv=true]').css({'display':'none'});
-			$('[stakeholder-position=true]').css({'display':'none'});
+			$('[stakeholder-cv=true]').hide();
+			$('[stakeholder-position=true]').hide();
 		}
 		else{
-			$('[stakeholder-cv=true]').css({'display':'block'});
-			$('[stakeholder-position=true]').css({'display':'block'});
+			$('[stakeholder-cv=true]').show();
+			$('[stakeholder-position=true]').show();
 		}
 	});
 
 	if($('[stakeholder-type=true] select').val() == 'organizatie'){
-		$('[stakeholder-cv=true]').css({'display':'none'});
-		$('[stakeholder-position=true]').css({'display':'none'});
+		$('[stakeholder-cv=true]').hide();
+		$('[stakeholder-position=true]').hide();
 	}
 });
