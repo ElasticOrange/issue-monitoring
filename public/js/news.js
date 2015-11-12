@@ -119,5 +119,29 @@
 			var connected_tag_id = $(this).attr('connected-tag-delete');
 			$('[tag-id=' + connected_tag_id + ']').remove();
 		});
+
+		$(document).on('keypress', '#tag-autocomplete', function(e) {
+			if(e.which == 13) {
+				e.preventDefault();
+				var templateData;
+
+				var template = _.template($('#connected-tag-template').html());
+
+				var request = $.ajax({
+					url: '/backend/tag',
+					type: 'post',
+					data: {name: $('#tag-autocomplete').typeahead('val')},
+				});
+				request.done(function(data) {
+					templateData = {
+						'id': data.id,
+						'name': data.name
+					};
+					$('#connected-tags-container').append(template(templateData));
+					$('#tag-autocomplete').typeahead('val', '');
+				});
+
+			}
+		});
 	});
 })();
