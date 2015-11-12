@@ -8,6 +8,7 @@ use Issue\Http\Requests;
 use Issue\Http\Requests\NewsRequest;
 use Issue\Http\Controllers\Controller;
 use Storage;
+use Issue\Tag;
 use Issue\Domain;
 use Issue\DomainTranslation;
 use Issue\Stakeholder;
@@ -133,5 +134,14 @@ class NewsController extends Controller
 		}
 
 		return $result;
+	}
+
+	public function queryTag(Request $request)
+	{
+		$queryTagName = $request->input('name');
+
+		$tags = Tag::where('name', 'like', '%'. $queryTagName .'%')->get();
+
+		return $tags;
 	}
 }

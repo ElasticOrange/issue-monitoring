@@ -49,6 +49,8 @@ class News extends Model
 			$stakeholders_connected = $request->get('stakeholders_connected');
 		}
 
+		$this->connectedStakeholders()->sync($stakeholders_connected);
+
 		if (!$request->get('domains_connected')) {
 			$domains_connected = [];
 		} else {
@@ -56,8 +58,15 @@ class News extends Model
 		}
 		$this->save();
 
-		$this->connectedStakeholders()->sync($stakeholders_connected);
 		$this->connectedDomains()->sync($domains_connected);
+
+		if (!$request->get('tags_connected')) {
+			$tags_connected = [];
+		} else {
+			$tags_connected = $request->get('tags_connected');
+		}
+
+		$this->connectedTags()->sync($tags_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -80,5 +89,10 @@ class News extends Model
 	public function connectedIssues()
 	{
 		return $this->belongsToMany('Issue\Issue');
+	}
+
+	public function connectedTags()
+	{
+		return $this->belongsToMany('Issue\Tag');
 	}
 }
