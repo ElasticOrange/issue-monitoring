@@ -119,7 +119,7 @@ $(document).ready(function(){
 		}
 	});
 
-	if($('[stakeholder-type=true] select').val() == 'organizatie'){
+	if($('[stakeholder-type=true]').val() == 'organizatie'){
 		$('[stakeholder-cv=true]').hide();
 		$('[stakeholder-position=true]').hide();
 	}
