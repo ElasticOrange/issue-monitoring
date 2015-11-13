@@ -38,7 +38,9 @@
 									<tr class='gradeA odd' role="row">
 										<td>{{ $news->title }}</td>
 										<td>{{ $news->date->format('d-m-Y') }}</td>
-										<td></td>
+										<td>
+											<a href="{{ $news->link }}" target="_blank">{{ $news->link }}</a>
+										</td>
 										<td></td>
 										<td class="text-center">
 											<a href="{{ action('NewsController@edit', [$news])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
