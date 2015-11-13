@@ -34,17 +34,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($news as $news)
+								@foreach($news as $n)
 									<tr class='gradeA odd' role="row">
-										<td>{{ $news->title }}</td>
-										<td>{{ $news->date->format('d-m-Y') }}</td>
+										<td>{{ $n->title }}</td>
+										<td>{{ $n->date->format('d-m-Y') }}</td>
 										<td>
-											<a href="{{ $news->link }}" target="_blank">{{ $news->link }}</a>
+											<a href="{{ $n->link }}" target="_blank">{{ $n->link }}</a>
 										</td>
-										<td></td>
+										<td>
+											@foreach ($n->connectedTags as $tag)
+												{{ $tag->name }}
+											@endforeach
+										</td>
 										<td class="text-center">
-											<a href="{{ action('NewsController@edit', [$news])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href=" {{ action('NewsController@destroy', [$news]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+											<a href="{{ action('NewsController@edit', [$n])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+											<a href=" {{ action('NewsController@destroy', [$n]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 										</td>
 									</tr>
 								@endforeach

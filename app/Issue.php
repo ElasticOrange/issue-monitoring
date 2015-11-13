@@ -78,6 +78,14 @@ class Issue extends Model
 		}
 
 		$this->issuesConnectedOfMine()->sync($issues_connected);
+
+		if (!$request->get('initiators_connected')) {
+			$initiators_connected = [];
+		} else {
+			$initiators_connected = $request->get('initiators_connected');
+		}
+
+		$this->connectedInitiatorsStakeholders()->sync($initiators_connected);
 	}
 
 	public static function getByPublicCode($code)
@@ -143,5 +151,15 @@ class Issue extends Model
 	protected function mergeIssuesConnected()
 	{
 		return $this->issuesConnectedOfMine->merge($this->issuesConnectedOfThem);
+	}
+
+	public function connectedInitiatorsStakeholders()
+	{
+		return $this->belongsToMany(
+		'Issue\Stakeholder',
+		'initiator_issue',
+		'issue_id',
+		'initiator_id'
+		);
 	}
 }

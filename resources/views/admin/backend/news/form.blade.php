@@ -39,13 +39,6 @@
 <hr>
 
 <div class="form-group">
-	<label class="col-md-2 control-label">Tag-uri</label>
-	<div class="col-md-8">
-		<textarea name="tags" class="form-control" rows="2"></textarea>
-	</div>
-</div>
-
-<div class="form-group">
 	<label class="col-md-2 control-label">Data</label>
 	<div class="col-md-8">
 		<input type="text" date-widget="true" name="date_init" class="form-control" value="{{ $news->date ? $news->date->format('d-m-Y') : '' }}"/>

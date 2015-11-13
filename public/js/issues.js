@@ -219,5 +219,45 @@
 			var connected_issue_id = $(this).attr('connected-issue-delete');
 			$('[issue-id=' + connected_issue_id + ']').remove();
 		});
+
+		var initiatorsList = new Bloodhound({
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: $('#initiator-autocomplete').attr('source-url'),
+				wildcard: '{name}',
+				transform: function (response) {
+					return _.filter(response, function(item){
+						return $('[initiator-id=' + item.id + ']').length === 0;
+					});
+				}
+			}
+		});
+
+		$('#initiator-autocomplete').typeahead(
+			null,
+			{
+				name: 'initiator',
+				display: 'name',
+				source: initiatorsList
+			}
+		);
+
+		$('#initiator-autocomplete').bind(
+			'typeahead:select',
+			function(event, suggestion) {
+				$(this).typeahead('val', '');
+
+				var template = _.template($('#connected-initiator-template').html());
+				var compiled_template = template(suggestion);
+
+				$('#connected-initiators-container').append(compiled_template);
+			}
+		);
+
+		$('#connected-initiators-container').on('click', '[connected-initiator-delete]', function() {
+			var connected_initiator_id = $(this).attr('connected-initiator-delete');
+			$('[initiator-id=' + connected_initiator_id + ']').remove();
+		});
 	});
 })();

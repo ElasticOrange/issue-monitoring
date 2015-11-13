@@ -53,6 +53,7 @@ Route::get('/backend/issue/query-domain', 'IssueController@queryDomain');
 Route::get('/backend/issue/query-stakeholder', 'IssueController@queryStakeholder');
 Route::get('/backend/issue/query-news', 'IssueController@queryNews');
 Route::get('/backend/issue/query-issue', 'IssueController@queryIssue');
+Route::get('/backend/issue/query-initiator', 'IssueController@queryInitiator');
 Route::resource('/backend/issue', 'IssueController', ['except' => ['show', 'destroy']]);
 
 Route::post('/backend/tag', 'TagController@store');

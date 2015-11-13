@@ -25,7 +25,7 @@ class ChangeDocumentUploadOnNews extends Migration
 	public function down()
 	{
 		Schema::table('news', function ($table) {
-			$table->dropColumn('uploaded_document');
+			$table->dropColumn('uploaded_document_id');
 		});
 	}
 }

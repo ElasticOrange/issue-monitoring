@@ -139,6 +139,15 @@ class IssueController extends Controller
 		return $stakeholders;
 	}
 
+	public function queryInitiator(Request $request)
+	{
+		$queryInitiatorName = $request->input('name');
+
+		$initiators = Stakeholder::where('name', 'like', '%'.$queryInitiatorName.'%')->get();
+
+		return $initiators;
+	}
+
 	public function queryNews(Request $request)
 	{
 		$queryNewsName = $request->input('name');

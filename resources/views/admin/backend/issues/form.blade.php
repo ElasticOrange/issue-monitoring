@@ -176,6 +176,42 @@
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
+			<label for="initiator-autocomplete" class="control-label">Initiatori cu care este conectat</label>
+		</div>
+		<div class="col-md-8">
+			<div class="input-group">
+				<input
+					id="initiator-autocomplete"
+					source-url="{{ action('IssueController@queryInitiator') }}/?name={name}"
+					type="text"
+					placeholder="Nume"
+					class="form-control"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		@include('admin.backend.issues.connected-initiator')
+		<div class="panel panel-success col-md-8 col-md-offset-2">
+			<div class="panel-heading">Initiatori conectati</div>
+			<div class="list-group" id="connected-initiators-container">
+				@foreach ($issue->connectedInitiatorsStakeholders as $initiator_connected)
+					<div class="list-group-item" initiator-id="{{ $initiator_connected->id }}">
+						<a class="badge" connected-initiator-delete="{{ $initiator_connected->id }}">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+						</a>
+						<h4 class="list-group-item-heading">{{ $initiator_connected->name }}</h4>
+						<p class="list-group-item-text"></p>
+						<input type="hidden" name="initiators_connected[]" value="{{ $initiator_connected->id }}" />
+					</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-2 text-right">
 			<label for="news-autocomplete" class="control-label">Stiri/declaratii cu care este conectat</label>
 		</div>
 		<div class="col-md-8">

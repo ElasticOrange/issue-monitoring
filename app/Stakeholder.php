@@ -188,4 +188,14 @@ class Stakeholder extends Model
 	{
 		return $this->belongsToMany('Issue\Issue');
 	}
+
+	public function connectedInitiatorsIssues()
+	{
+		return $this->belongsToMany(
+		'Issue\Stakeholder',
+		'initiator_issue',
+		'initiator_id',
+		'issue_id'
+		);
+	}
 }
