@@ -25,8 +25,8 @@ class DomainRequest extends Request
     {
         return [
             'name' => 'array',
-            'name.ro' => 'required|string|unique:domain_translations,name',
-            'name.en' => 'required|string|unique:domain_translations,name',
+            'name.ro' => ['regex:/^[a-z0-9 -]*$/i','required','string','unique:domain_translations,name,'.$this->domain->id.',domain_id'],
+            'name.en' => ['regex:/^[a-z0-9 -]*$/i','required','string','unique:domain_translations,name,'.$this->domain->id.',domain_id'],
             'parent_id' => 'required|integer'
         ];
     }
