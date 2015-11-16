@@ -106,7 +106,7 @@
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
-			<label for="domain-autocomplete" class="control-label">Domenii cu care este conectat</label>
+			<label for="domain-autocomplete" class="control-label">Domenii</label>
 		</div>
 		<div class="col-md-8">
 			<input
@@ -142,7 +142,7 @@
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
-			<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
+			<label for="stakeholder-autocomplete" class="control-label">Stakeholderi</label>
 		</div>
 		<div class="col-md-8">
 			<input
@@ -178,7 +178,7 @@
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
-			<label for="initiator-autocomplete" class="control-label">Initiatori cu care este conectat</label>
+			<label for="initiator-autocomplete" class="control-label">Initiatori</label>
 		</div>
 		<div class="col-md-8">
 			<input
@@ -214,7 +214,7 @@
 
 	<div class="form-group">
 		<div class="col-md-2 text-right">
-			<label for="news-autocomplete" class="control-label">Stiri/declaratii cu care este conectat</label>
+			<label for="news-autocomplete" class="control-label">Stiri/declaratii</label>
 		</div>
 		<div class="col-md-8">
 			<input

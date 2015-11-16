@@ -213,7 +213,7 @@
 
 <div class="form-group">
 	<div class="col-md-2 text-right">
-		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
+		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi</label>
 	</div>
 	<div class="col-md-8">
 		<input
