@@ -25,11 +25,11 @@ class IssueRequest extends Request
 	{
 		return [
 			'name' => 'array',
-			'name.ro' => 'required|string',
-			'name.en' => 'required|string',
+			'name.ro' => 'required|string|max:1000',
+			'name.en' => 'required|string|max:1000',
 			'description' => 'array',
-			'description.ro' => 'string',
-			'description.en' => 'string',
+			'description.ro' => 'string|max:1000',
+			'description.en' => 'string|max:1000',
 			'impact' => 'array',
 			'impact.ro' => 'string',
 			'impact.en' => 'string',
