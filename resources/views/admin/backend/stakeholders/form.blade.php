@@ -212,31 +212,6 @@
 <hr/>
 
 <div class="form-group">
-	<div class="checkbox col-md-10 col-md-offset-2">
-		<label>
-			<input  type="checkbox"
-					value="1"
-					name="published"
-					@if($stakeholder->published)
-						checked="checked"
-					@endif
-			/>Publica
-		</label>
-	</div>
-</div>
-
-@if($stakeholder->public_code)
-	<div class="form-group">
-		<label class="col-md-2 control-label">Link public</label>
-		<div class="col-md-8 control-label" style="text-align: left">
-			<a href="{{ action("StakeholderController@show", [$stakeholder->public_code]) }}" target="_blank">{{ action("StakeholderController@show", [$stakeholder->public_code]) }}</a>
-		</div>
-	</div>
-@endif
-
-<hr/>
-
-<div class="form-group">
 	<div class="col-md-2 text-right">
 		<label for="stakeholder-autocomplete" class="control-label">Stakeholderi cu care este conectat</label>
 	</div>
@@ -269,3 +244,30 @@
 		</div>
 	</div>
 </div>
+
+<hr/>
+
+<div class="form-group">
+	<div class="checkbox col-md-10 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($stakeholder->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
+	</div>
+</div>
+
+@if($stakeholder->public_code)
+	<div class="form-group">
+		<label class="col-md-2 control-label">Link public</label>
+		<div class="col-md-8 control-label" style="text-align: left">
+			<a href="{{ action("StakeholderController@show", [$stakeholder->public_code]) }}" target="_blank">{{ action("StakeholderController@show", [$stakeholder->public_code]) }}</a>
+		</div>
+	</div>
+@endif
+
+<hr/>

@@ -7,6 +7,7 @@
 <div class="tab-content">
 	<div class="tab-pane active" id="news_ro">
 		<div class="form-group">
+			<br/>
 			<label class="col-md-2 control-label">Titlu</label>
 			<div class="col-md-8">
 				<input type="text" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
@@ -22,6 +23,7 @@
 
 	<div class="tab-pane" id="news_en">
 		<div class="form-group">
+			<br/>
 			<label class="col-md-2 control-label">Title</label>
 			<div class="col-md-8">
 				<input type="text" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
@@ -66,20 +68,6 @@
 				{{ $news->fileDocument->original_file_name }}
 			</a>
 		@endif
-	</div>
-</div>
-
-<div class="form-group">
-	<div class="checkbox col-md-8 col-md-offset-2">
-		<label>
-			<input  type="checkbox"
-					value="1"
-					name="published"
-					@if($news->published)
-						checked="checked"
-					@endif
-			/>Publica
-		</label>
 	</div>
 </div>
 
@@ -191,3 +179,21 @@
 	</div>
 </div>
 
+<hr/>
+
+
+<div class="form-group">
+	<div class="checkbox col-md-8 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($news->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
+	</div>
+</div>
+
+<hr/>
