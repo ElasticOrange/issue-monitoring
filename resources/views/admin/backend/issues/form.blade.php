@@ -282,3 +282,37 @@
 		</div>
 	</div>
 </div>
+
+<hr/>
+
+<div class="form-group">
+	<div class="checkbox col-md-10 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="archived"
+					@if($issue->archived)
+						checked="checked"
+					@endif
+			/>Arhivat
+		</label>
+	</div>
+</div>
+
+<hr/>
+
+<div class="form-group">
+	<div class="checkbox col-md-10 col-md-offset-2">
+		<label>
+			<input  type="checkbox"
+					value="1"
+					name="published"
+					@if($issue->published)
+						checked="checked"
+					@endif
+			/>Publica
+		</label>
+	</div>
+</div>
+
+<hr/>

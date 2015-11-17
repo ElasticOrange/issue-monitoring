@@ -193,4 +193,12 @@ class IssueController extends Controller
 
 		return $result;
 	}
+
+	public function setPublished($issue, Request $request)
+	{
+		$issue->published = $request->input('published') == 'true';
+		$issue->save();
+
+		return ['result' => true];
+	}
 }

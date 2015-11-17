@@ -25,6 +25,7 @@
 									<th class="text-center" style="width: 180x;">Tip</th>
 									<th class="text-center" style="width: 120px;">Nume</th>
 									<th class="text-center" style="width: 180px;">Status</th>
+									<th class="text-center" style="width: 20px;">Publicat</th>
 									<th class="text-center" style="width: 200px;">Actiuni</th>
 								</tr>
 							</thead>
@@ -41,6 +42,15 @@
 										<td></td>
 										<td>{{ $issue->name }}</td>
 										<td>{!! $issue->status !!}</td>
+										<td class="text-center">
+											<input  type="checkbox"
+													name="published"
+													data-id="{{ $issue->id }}"
+													data-action="publish-issue"
+													update-url="{{ action("IssueController@setPublished",[$issue]) }}"
+													@if($issue->published) checked="checked" @endif
+											/>
+										</td>
 										<td class="text-center">
 										<div class="row">
 											<a href="{{ action('IssueController@edit', [$issue])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
