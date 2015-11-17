@@ -38,7 +38,7 @@
 										<td class="text-center">
 										<div class="row">
 											<a href="{{ action('IssueController@edit', [$issue])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href=" {{ action('IssueController@destroy', [$issue]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+											<a href=" {{ action('IssueController@destroy', [$issue]) }}" class="btn btn-danger delete-button"><span class="glyphicon glyphicon-trash"></span></a>
 										</div>
 										</td>
 									</tr>

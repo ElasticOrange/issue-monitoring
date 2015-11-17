@@ -35,7 +35,7 @@
 					</a>
 				</div>
 				<div class="col-sm-2 col-sm-offset-6" style="margin-top:25px;">
-					<a href="{{ action("StakeholderController@destroy", [$stakeholder]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
+					<a href="{{ action("StakeholderController@destroy", [$stakeholder]) }}" class="btn btn-danger delete-button"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
 				</div>
 			</div>
 		</form>

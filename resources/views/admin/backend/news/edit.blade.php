@@ -38,7 +38,7 @@
 					<a href="{{ action('NewsController@index') }}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Inapoi la lista</button></a>
 				</div>
 				<div class="col-sm-2 col-sm-offset-6" style="margin-top:25px;">
-				<a href="{{ action("NewsController@destroy", [$news]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
+				<a href="{{ action("NewsController@destroy", [$news]) }}" class="btn btn-danger delete-button"><span class="glyphicon glyphicon-trash"></span> Sterge</a>
 				</div>
 			</div>
 		</form>

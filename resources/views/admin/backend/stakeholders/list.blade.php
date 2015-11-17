@@ -50,7 +50,7 @@
 										<td class="text-center">
 										<div class="row">
 											<a href="{{ action('StakeholderController@edit', [$stakeholder])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href=" {{ action('StakeholderController@destroy', [$stakeholder]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+											<a href=" {{ action('StakeholderController@destroy', [$stakeholder]) }}" class="btn btn-danger delete-button"><span class="glyphicon glyphicon-trash"></span></a>
 										</div>
 										</td>
 									</tr>

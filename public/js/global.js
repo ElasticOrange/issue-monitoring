@@ -88,32 +88,32 @@ function getKeyFromPlaceholder(placeholder) {
 }
 
 function fillPlaceholdersInString(string, data) {
-    if(!_.isString(string)) {
-        console.error('fillPlaceholdersInString(): string parameter should be of string type', string);
-        return;
-    }
+	if(!_.isString(string)) {
+		console.error('fillPlaceholdersInString(): string parameter should be of string type', string);
+		return;
+	}
 
-    if (!_.isPlainObject(data)) {
-        console.error('fillPlaceholdersInString(): data should be an object', data);
-        return string;
-    }
+	if (!_.isPlainObject(data)) {
+		console.error('fillPlaceholdersInString(): data should be an object', data);
+		return string;
+	}
 
-    var placeholders = string.match(/\{([a-z0-9\-_]+)\}/gi);
-    var resultString = string;
+	var placeholders = string.match(/\{([a-z0-9\-_]+)\}/gi);
+	var resultString = string;
 
-    if (!placeholders || !placeholders.length) {
-        return resultString;
-    }
+	if (!placeholders || !placeholders.length) {
+		return resultString;
+	}
 
-    _.forEach(placeholders, function(placeholder) {
-        var regex = new RegExp(placeholder, 'g');
-        var key = getKeyFromPlaceholder(placeholder);
-        if (placeholder && data[key]) {
-            resultString = resultString.replace(regex, data[key]);
-        }
-    });
+	_.forEach(placeholders, function(placeholder) {
+		var regex = new RegExp(placeholder, 'g');
+		var key = getKeyFromPlaceholder(placeholder);
+		if (placeholder && data[key]) {
+			resultString = resultString.replace(regex, data[key]);
+		}
+	});
 
-    return resultString;
+	return resultString;
 }
 
 function showLoader() {
@@ -286,5 +286,16 @@ $(document).ready(function() {
 		}
 	});
 
-});
+	$(document).on('click', '.delete-button', function(ev) {
+		if(confirm('Vrei sa stergi acesta intrare ?'))
+		{
+			return true;
+		}
+		else
+		{
+			ev.preventDefault();
+			return false;
+		}
+	});
 
+});

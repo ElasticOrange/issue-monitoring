@@ -47,7 +47,7 @@
 									<td class="center">{{ $item->init_at->format('d-m-Y') }}</td>
 									<td class="text-center">
 										<a href="{{ action('DocumentController@edit', [$item]) }}" title="Edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-										<a href="{{ action('DocumentController@destroy', [$item]) }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+										<a href="{{ action('DocumentController@destroy', [$item]) }}" class="btn btn-danger delete-button"><span class="glyphicon glyphicon-trash"></span></a>
 									</td>
 								</tr>
 							@endforeach
