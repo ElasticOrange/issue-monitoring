@@ -16,7 +16,7 @@
 		<div class="form-group">
 			<label class="col-md-2 control-label">Descriere</label>
 			<div class="col-md-8">
-				<textarea name="description[ro]" class="form-control" rows="3">{{ $news->translateOrNew('ro')->description}}</textarea>
+				<textarea name="description[ro]" id="editor1" class="form-control" rows="3">{{ $news->translateOrNew('ro')->description}}</textarea>
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 		<div class="form-group">
 			<label class="col-md-2 control-label">Description</label>
 			<div class="col-md-8">
-				<textarea name="description[en]" class="form-control" rows="3">{{ $news->translateOrNew('en')->description}}</textarea>
+				<textarea name="description[en]" id="editor2" class="form-control" rows="3">{{ $news->translateOrNew('en')->description}}</textarea>
 			</div>
 		</div>
 	</div>
