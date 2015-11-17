@@ -26,7 +26,7 @@ class DocumentRequest extends Request
 		return [
 			'title' => 'array',
 			'title.ro' => 'required|string',
-			'title.en' => 'required|string',
+			'title.en' => 'string',
 			'init_at' => 'date',
 			'file' => 'required|max:10000',
 		];

@@ -26,7 +26,7 @@ class NewsRequest extends Request
 		return [
 			'title' => 'array',
 			'title.ro' => 'required|string|max:1000',
-			'title.en' => 'required|string|max:1000',
+			'title.en' => 'string|max:1000',
 			'description' => 'array',
 			'description.ro' => 'string|max:1000',
 			'description.en' => 'string|max:1000',
