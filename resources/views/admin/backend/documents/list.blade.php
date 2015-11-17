@@ -29,7 +29,7 @@
 						<tbody>
 							@foreach ($documents as $item)
 								<tr class="gradeA odd" role="row">
-									<td>{{ $item->description }}</td>
+									<td>{{ $item->title }}</td>
 									<td class="text-center">
 										@if($item->file)
 											<a href="{{ action('UploadedFileController@downloadFile', [$item->file->file_name]) }}" target="_blank" title="{{ $item->file->original_file_name }}">

@@ -24,9 +24,9 @@ class DocumentRequest extends Request
 	public function rules()
 	{
 		return [
-			'description' => 'array',
-			'description.ro' => 'required|string',
-			'description.en' => 'required|string',
+			'title' => 'array',
+			'title.ro' => 'required|string',
+			'title.en' => 'required|string',
 			'init_at' => 'date',
 			'file' => 'required|max:10000',
 		];

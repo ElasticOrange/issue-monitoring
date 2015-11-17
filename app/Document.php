@@ -11,7 +11,7 @@ class Document extends Model
 {
 	use \Dimsav\Translatable\Translatable;
 
-	public $translatedAttributes = ['description'];
+	public $translatedAttributes = ['title'];
 
 	public $dates = ['init_at'];
 
@@ -60,7 +60,7 @@ class Document extends Model
 		}
 
 		foreach (\Config::get('app.all_locales') as $locale) {
-			$this->translateOrNew($locale)->description = $request->get('description')[$locale];
+			$this->translateOrNew($locale)->title = $request->get('title')[$locale];
 		}
 
 		$this->save();

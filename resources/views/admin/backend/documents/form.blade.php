@@ -2,13 +2,13 @@
 <div class="form-group">
 	<label class="col-md-3 control-label">Titlu</label>
 	<div class="col-md-7">
-		<textarea id="content" name="description[ro]" class="form-control" rows="3">{{ $document->translateOrNew('ro')->description }}</textarea>
+		<textarea id="content" name="title[ro]" class="form-control" rows="3">{{ $document->translateOrNew('ro')->title }}</textarea>
 	</div>
 </div>
 <div class="form-group">
 	<label class="col-md-3 control-label">Title</label>
 	<div class="col-md-7">
-		<textarea id="encontent" name="description[en]" class="form-control" rows="3">{{ $document->translateOrNew('en')->description }}</textarea>
+		<textarea id="encontent" name="title[en]" class="form-control" rows="3">{{ $document->translateOrNew('en')->title }}</textarea>
 	</div>
 </div>
 <div class="form-group text-left">
@@ -33,4 +33,3 @@
 		<input type="hidden" name="date">
 	</div>
 </div>
-
