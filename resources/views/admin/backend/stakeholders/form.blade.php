@@ -1,6 +1,6 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="form-group">
-	<label class="col-md-2 control-label">Nume</label>
+	<label class="col-md-2 control-label">Nume complet</label>
 	<div class="col-md-8">
 		<input type="text" name="name" class="form-control" value="{{ $stakeholder->name }}"/>
 	</div>
