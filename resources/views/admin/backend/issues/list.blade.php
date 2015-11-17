@@ -19,7 +19,8 @@
 						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
-									<th class="text-center" style="width: 180px;">Domeniu - subdomeniu</th>
+									<th class="text-center" style="width: 20px;">Id</th>
+									<th class="text-center" style="width: 160px;">Domeniu - subdomeniu</th>
 									<th class="text-center" style="width: 180x;">Categorie</th>
 									<th class="text-center" style="width: 180x;">Tip</th>
 									<th class="text-center" style="width: 120px;">Nume</th>
@@ -30,7 +31,12 @@
 							<tbody>
 								@foreach ($issues as $issue)
 									<tr class="gradeA odd" role="row">
-										<td></td>
+										<td>{{ $issue->id }}</td>
+										<td>
+											@foreach ($issue->connectedDomains as $domain)
+												{{ $domain->name }}
+											@endforeach
+										</td>
 										<td></td>
 										<td></td>
 										<td>{{ $issue->name }}</td>

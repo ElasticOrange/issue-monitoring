@@ -19,17 +19,19 @@
 						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
-									<th class="text-center" style="width: 180px;">Nume</th>
+									<th class="text-center" style="width: 20px;">Id</th>
+									<th class="text-center" style="width: 480px;">Nume</th>
 									<th class="text-center" style="width: 180x;">Contact</th>
 									<th class="text-center" style="width: 180x;">Tip</th>
-									<th class="text-center" style="width: 120px;">Foto</th>
-									<th class="text-center" style="width: 180px;">Publicat</th>
-									<th class="text-center" style="width: 200px;">Actiuni</th>
+									<th class="text-center" style="width: 110px;">Foto</th>
+									<th class="text-center" style="width: 20px;">Publicat</th>
+									<th class="text-center" style="width: 80px;">Actiuni</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($stakeholders as $stakeholder)
 									<tr class="gradeA odd" role="row">
+										<td>{{ $stakeholder->id }}</td>
 										<td>{{ $stakeholder->name }}</td>
 										<td>{{ $stakeholder->contact }}</td>
 										<td>{{ $stakeholder->type }}</td>

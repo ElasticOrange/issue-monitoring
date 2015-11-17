@@ -26,16 +26,18 @@
 						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
-									<th  class="text-center" style="width: 180px;">Titlu</th>
-									<th  class="text-center" style="width: 180x;">Data</th>
-									<th  class="text-center" style="width: 180x;">Sursa</th>
-									<th  class="text-center" style="width: 120px;">Taguri</th>
-									<th  class="text-center" style="width: 200px;">Actiuni</th>
+									<th  class="text-center" style="width: 20px;">Id</th>
+									<th  class="text-center" style="width: 480px;">Titlu</th>
+									<th  class="text-center" style="width: 80x;">Data</th>
+									<th  class="text-center" style="width: 80x;">Sursa</th>
+									<th  class="text-center" style="width: 40px;">Taguri</th>
+									<th  class="text-center" style="width: 80px;">Actiuni</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach($news as $n)
 									<tr class='gradeA odd' role="row">
+										<td>{{ $n->id }}</td>
 										<td>{{ $n->title }}</td>
 										<td>{{ $n->date->format('d-m-Y') }}</td>
 										<td>

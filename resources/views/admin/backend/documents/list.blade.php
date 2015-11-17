@@ -19,16 +19,18 @@
 					<table class="table table-striped table-bordered table-hover" data-table="true">
 						<thead>
 							<tr role="row">
-								<th style="width: 200px;">Titlu</th>
+								<th style="width: 20px;">Id</th>
+								<th style="width: 320px;">Titlu</th>
 								<th style="width: 80px;">Document</th>
 								<th style="width: 80px;">Link</th>
-								<th style="width: 120px;">Data</th>
-								<th style="width: 182px;">Actiuni</th>
+								<th style="width: 80px;">Data</th>
+								<th style="width: 80px;">Actiuni</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($documents as $item)
 								<tr class="gradeA odd" role="row">
+									<td>{{ $item->id }}</td>
 									<td>{{ $item->title }}</td>
 									<td class="text-center">
 										@if($item->file)
