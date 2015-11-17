@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-	<div class="col-lg-12 text-center">
+	<div class="col-lg-12 text-left">
 		<h1 class="page-header">Domenii</h1>
 	</div>
 </div>
