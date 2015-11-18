@@ -13,10 +13,17 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-6">
-							<input type="search" class="form-control" placeholder="Search here">
-							<br />
+							<input
+								id="location-autocomplete"
+								source-url="{{ action('LocationController@queryLocation') }}/?name={name}"
+								type="text"
+								placeholder="Cauta locatie"
+								class="form-control"
+							/>
 						</div>
 					</div>
+					<br />
+
 					<div class="row">
 						<div class="col-lg-6">
 							<button type="submit" class="btn btn-primary" id="addLocation" data-toggle="modal" data-modal="true" data-target="#myModal">

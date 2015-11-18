@@ -17,7 +17,7 @@
 							id="domain-autocomplete"
 							source-url="{{ action('DomainController@queryDomain') }}/?name={name}"
 							type="text"
-							placeholder="Nume"
+							placeholder="Cauta domeniu"
 							class="form-control"
 						/>
 					</div>

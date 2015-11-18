@@ -41,6 +41,7 @@ Route::get('/getLocationTree', 'LocationController@getTree');
 Route::get('/backend/location/{location}/edit', 'LocationController@edit');
 Route::get('/backend/location/{location}/change-parent', 'LocationController@changeParent');
 Route::get('/backend/location/{location}/delete', 'LocationController@destroy');
+Route::get('/backend/location/query-location', 'LocationController@queryLocation');
 Route::resource('/backend/location', 'LocationController', ['except' => ['edit', 'destroy']]);
 
 Route::get('/backend/news/{news}/delete', 'NewsController@destroy');

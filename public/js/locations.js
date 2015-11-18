@@ -53,6 +53,37 @@
 		$(document).on('click', '#deleteLocation', function(ev) {
 			setIdForDeleteAction();
 		});
+
+		var locationsList = new Bloodhound({
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: $('#location-autocomplete').attr('source-url'),
+				wildcard: '{name}',
+				transform: function (response) {
+					return _.filter(response, function(item){
+						return $('[location-id=' + item.id + ']').length === 0;
+					});
+				}
+			}
+		});
+
+		$('#location-autocomplete').typeahead(
+			null,
+			{
+				name: 'location',
+				display: 'name',
+				source: locationsList
+			}
+		);
+
+		$('#location-autocomplete').bind(
+			'typeahead:select',
+			function(event, suggestion) {
+				tree.jqxTree('selectItem', getTreeItemById(tree, suggestion.id));
+				var element = tree.jqxTree('getSelectedItem');
+				tree.jqxTree('expandItem', element);
+		});
 	});
 
 	function setIdForDeleteAction() {

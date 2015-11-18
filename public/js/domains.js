@@ -82,7 +82,7 @@
 				tree.jqxTree('selectItem', getTreeItemById(tree, suggestion.id));
 				var element = tree.jqxTree('getSelectedItem');
 				tree.jqxTree('expandItem', element);
-			});
+		});
 
 	});
 
