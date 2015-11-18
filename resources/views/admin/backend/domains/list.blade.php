@@ -13,10 +13,17 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-6">
-						<input type="search" class="form-control" placeholder="Search here">
-						<br />
+						<input
+							id="domain-autocomplete"
+							source-url="{{ action('DomainController@queryDomain') }}/?name={name}"
+							type="text"
+							placeholder="Nume"
+							class="form-control"
+						/>
 					</div>
 				</div>
+				<br/>
+
 				<div class="row">
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary" id="addDomain" data-toggle="modal" data-modal="true" data-target="#myModal">

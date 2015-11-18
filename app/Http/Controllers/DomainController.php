@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\Domain;
+use Issue\DomainTranslation;
 use Issue\Http\Requests\DomainRequest;
 
 class DomainController extends Controller
@@ -133,5 +134,29 @@ class DomainController extends Controller
 		$domain->delete();
 
 		return $domain;
+	}
+
+	public function queryDomain(Request $request)
+	{
+		$queryDomainName = $request->input('name');
+
+		$domainIds = DomainTranslation::where('name', 'like', '%'.$queryDomainName.'%')
+										->where('locale', \App::getLocale())
+										->lists('domain_id');
+		$domains = Domain::whereIn('id', $domainIds)
+							->where('parent_id', '>', 0)
+							->with(['translations', 'parent'])
+							->get();
+
+		$result = [];
+
+		foreach ($domains as $domain) {
+			$result[] = [
+				'id' => $domain->id,
+				'name' => (($domain->parent->id > 1) ? $domain->parent->name." - " : "").$domain->name,
+			];
+		}
+
+		return $result;
 	}
 }

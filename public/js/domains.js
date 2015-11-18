@@ -52,6 +52,38 @@
 		$(document).on('click', '#deleteDomain', function(ev) {
 			setIdForDeleteAction();
 		});
+
+		var domainsList = new Bloodhound({
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: $('#domain-autocomplete').attr('source-url'),
+				wildcard: '{name}',
+				transform: function (response) {
+					return _.filter(response, function(item){
+						return $('[domain-id=' + item.id + ']').length === 0;
+					});
+				}
+			}
+		});
+
+		$('#domain-autocomplete').typeahead(
+			null,
+			{
+				name: 'domain',
+				display: 'name',
+				source: domainsList
+			}
+		);
+
+		$('#domain-autocomplete').bind(
+			'typeahead:select',
+			function(event, suggestion) {
+				tree.jqxTree('selectItem', getTreeItemById(tree, suggestion.id));
+				var element = tree.jqxTree('getSelectedItem');
+				tree.jqxTree('expandItem', element);
+			});
+
 	});
 
 	function setIdForDeleteAction() {
