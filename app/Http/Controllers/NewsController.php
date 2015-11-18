@@ -144,4 +144,13 @@ class NewsController extends Controller
 
 		return $tags;
 	}
+
+	public function deleteFile($news)
+	{
+		if ($news->fileDocument) {
+			$news->fileDocument->delete();
+		}
+
+		return $news;
+	}
 }

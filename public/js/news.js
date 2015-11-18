@@ -164,5 +164,17 @@
 
 			}
 		});
+
+		$(document).on('click', '[delete-file=true]', function(ev) {
+			ev.preventDefault();
+			var request = $.ajax({
+				url: $(this).attr('href'),
+				method: 'GET'
+			});
+			request.done(function() {
+				$('[file-show=true]').text('');
+				$('[delete-file=true]').hide();
+			});
+		});
 	});
 })();

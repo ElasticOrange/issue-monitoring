@@ -29,6 +29,12 @@ class UploadedFile extends Model
 		return true;
 	}
 
+	public function delete()
+	{
+		File::delete(storage_path() . $this->folder . $this->file_name);
+		parent::delete();
+	}
+
 	public function document()
 	{
 		return $this->hasOne('Issue\Document');

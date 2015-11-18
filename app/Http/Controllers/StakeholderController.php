@@ -112,7 +112,7 @@ class StakeholderController extends Controller
 	{
 		$stakeholder->published = $request->input('published') == 'true';
 		$stakeholder->save();
-		
+
 		return ['result' => true];
 	}
 
@@ -128,5 +128,24 @@ class StakeholderController extends Controller
 		$stakeholders = Stakeholder::where('name', 'like', '%'. $queryName .'%')->get();
 
 		return response()->json($stakeholders);
+	}
+
+
+	public function deleteFileCv($stakeholder)
+	{
+		if ($stakeholder->fileCv) {
+			$stakeholder->fileCv->delete();
+		}
+
+		return $stakeholder;
+	}
+
+	public function deleteFilePoza($stakeholder)
+	{
+		if ($stakeholder->filePoza) {
+			$stakeholder->filePoza->delete();
+		}
+
+		return $stakeholder;
 	}
 }

@@ -123,4 +123,28 @@ $(document).ready(function(){
 		$('[stakeholder-cv=true]').hide();
 		$('[stakeholder-position=true]').hide();
 	}
+
+	$(document).on('click', '[delete-cv=true]', function(ev) {
+		ev.preventDefault();
+		var request = $.ajax({
+			url: $(this).attr('href'),
+			method: 'GET'
+		});
+		request.done(function() {
+			$('[file-cv=true]').text('');
+			$('[delete-cv=true]').hide();
+		});
+	});
+
+	$(document).on('click', '[delete-poza=true]', function(ev) {
+		ev.preventDefault();
+		var request = $.ajax({
+			url: $(this).attr('href'),
+			method: 'GET'
+		});
+		request.done(function() {
+			$('[file-poza=true]').text('');
+			$('[delete-poza=true]').hide();
+		});
+	});
 });

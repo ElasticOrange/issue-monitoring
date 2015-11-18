@@ -63,9 +63,16 @@
 			<input type="file" name="document_file" class="hidden"/>
 		</label>
 		@if($news->fileDocument)
-			<a href="{{ action( "UploadedFileController@downloadFile" , [$news->fileDocument->file_name]) }}" target="_blank">
+			<a href="{{ action( "UploadedFileController@downloadFile" , [$news->fileDocument->file_name]) }}" file-show="true" target="_blank">
 				<i class="fa fa-file-pdf-o"></i>
 				{{ $news->fileDocument->original_file_name }}
+			</a>
+			<a href="{{ action('NewsController@deleteFile', [$news])}}"
+				delete-file="true"
+				class="delete-button"
+				style="margin-left: 10px;"
+			>
+				<span class="glyphicon glyphicon-remove" style="color:red;" title="Sterge fisier"></span>
 			</a>
 		@endif
 	</div>

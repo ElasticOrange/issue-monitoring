@@ -31,6 +31,8 @@ Route::resource('/backend/domain', 'DomainController', ['except' => ['edit', 'de
 Route::get('/backend/stakeholder/{stakeholder}/delete', 'StakeholderController@destroy');
 Route::get('/backend/stakeholder/{public_code}/show', 'StakeholderController@show');
 Route::get('/backend/stakeholder/query-list', 'StakeholderController@queryList');
+Route::get('/backend/stakeholder/{stakeholder}/deleteFileCv', 'StakeholderController@deleteFileCv');
+Route::get('/backend/stakeholder/{stakeholder}/deleteFilePoza', 'StakeholderController@deleteFilePoza');
 Route::resource('/backend/stakeholder', 'StakeholderController', ['except' =>['destroy', 'show']]);
 Route::get('/backend/stakeholder/{stakeholder}/setPublished', 'StakeholderController@setPublished');
 
@@ -45,6 +47,7 @@ Route::get('/backend/news/{public_code}/show', 'NewsController@show');
 Route::get('/backend/news/query-stakeholder', 'NewsController@queryStakeholder');
 Route::get('/backend/news/query-domain', 'NewsController@queryDomain');
 Route::get('/backend/news/query-tag', 'NewsController@queryTag');
+Route::get('/backend/news/{news}/deleteFile', 'NewsController@deleteFile');
 Route::resource('/backend/news', 'NewsController', ['except' => ['show', 'destroy']]);
 
 Route::get('/backend/issue/{issue}/delete', 'IssueController@destroy');

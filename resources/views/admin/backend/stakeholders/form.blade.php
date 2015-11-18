@@ -45,9 +45,16 @@
 			<input type="file" name="cv_file" class="hidden"/>
 		</label>
 		@if($stakeholder->fileCv)
-			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->fileCv->file_name]) }}" target="_blank">
+			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->fileCv->file_name]) }}" file-cv="true" target="_blank">
 				<i class="fa fa-file-pdf-o"></i>
 				{{ $stakeholder->fileCv->original_file_name }}
+			</a>
+			<a href="{{ action('StakeholderController@deleteFileCv', [$stakeholder])}}"
+				delete-cv="true"
+				class="delete-button"
+				style="margin-left: 10px;"
+			>
+				<span class="glyphicon glyphicon-remove" style="color:red;" title="Sterge fisier"></span>
 			</a>
 		@endif
 	</div>
@@ -61,9 +68,16 @@
 			<input type="file" name="poza_file" class="hidden"/>
 		</label>
 		@if($stakeholder->filePoza)
-			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->filePoza->file_name]) }}" target="_blank">
+			<a href="{{ action( "UploadedFileController@downloadFile" , [$stakeholder->filePoza->file_name]) }}" file-poza="true" target="_blank">
 				<i class="fa fa-file-pdf-o"></i>
 				{{ $stakeholder->filePoza->original_file_name }}
+			</a>
+			<a href="{{ action('StakeholderController@deleteFilePoza', [$stakeholder])}}"
+				delete-poza="true"
+				class="delete-button"
+				style="margin-left: 10px;"
+			>
+				<span class="glyphicon glyphicon-remove" style="color:red;" title="Sterge fisier"></span>
 			</a>
 		@endif
 	</div>
