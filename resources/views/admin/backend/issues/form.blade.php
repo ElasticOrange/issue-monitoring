@@ -329,6 +329,50 @@
 
 	<div class="tab-pane active" id="flux">
 		<!-- flux starts here -->
-		
+		<div id="locatii-container">
+			@include('admin.backend.issues.location-template')
+			<!-- <div class="locatie" style="background-color: #ddd">
+				<div class="form-group">
+					<div class="location">
+						<label class="control-label col-sm-2">Locatie:</label>
+						<div class="col-sm-4">
+							<input class="form-control" name="location[][name]"/>
+						</div>
+						<div class="col-sm-1">
+							<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="locatie" style="background-color: #ddd">
+				<div class="form-group">
+					<div class="location">
+						<label class="control-label col-sm-2">Locatie:</label>
+						<div class="col-sm-4">
+							<input class="form-control" name="location[][name]"/>
+						</div>
+						<div class="col-sm-1">
+							<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="locatie" style="background-color: #ddd">
+				<div class="form-group">
+					<div class="location">
+						<label class="control-label col-sm-2">Locatie:</label>
+						<div class="col-sm-4">
+							<input class="form-control" name="location[][name]"/>
+						</div>
+						<div class="col-sm-1">
+							<button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+
+		<button type="button" class="btn btn-primary add_location"><span class="glyphicon glyphicon-plus"></span> Adauga locatie</button>
 	</div>
+
 </div>

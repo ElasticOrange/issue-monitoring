@@ -14,6 +14,8 @@ use Issue\NewsTranslation;
 use Issue\Domain;
 use Issue\DomainTranslation;
 use Issue\Stakeholder;
+use Issue\Location;
+use Issue\LocationTranslation;
 
 class IssueController extends Controller
 {
@@ -88,6 +90,7 @@ class IssueController extends Controller
 	 */
 	public function update(Request $request, $issue)
 	{
+		dd($request->all());
 		$issue->setAll($request);
 
 		return $issue;
@@ -200,5 +203,29 @@ class IssueController extends Controller
 		$issue->save();
 
 		return ['result' => true];
+	}
+
+	public function queryLocation(Request $request)
+	{
+		$queryLocationName = $request->input('name');
+
+		$locationIds = LocationTranslation::where('name', 'like', '%'.$queryLocationName.'%')
+										->where('locale', \App::getLocale())
+										->lists('location_id');
+		$locations = Location::whereIn('id', $locationIds)
+							->where('parent_id', '>', 0)
+							->with(['translations', 'parent'])
+							->get();
+
+		$result = [];
+
+		foreach ($locations as $location) {
+			$result[] = [
+				'id' => $location->id,
+				'name' => (($location->parent->id > 1) ? $location->parent->name." - " : "").$location->name,
+			];
+		}
+
+		return $result;
 	}
 }

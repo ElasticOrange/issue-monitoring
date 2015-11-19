@@ -25,6 +25,7 @@ elixir(function(mix) {
 		, 'jqwidgets/jqwidgets/styles/jqx.base.css'
 		, 'datatables/media/css/dataTables.bootstrap.css'
 		, 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
+		, 'jquery-ui/themes/smoothness/jquery-ui.css'
 		] , 'public/css/style.css', bowerDir)
 	.scripts([
 		  'jquery/dist/jquery.min.js'
@@ -46,6 +47,7 @@ elixir(function(mix) {
 		, 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
 		, 'typeahead.js/dist/typeahead.bundle.min.js'
 		, 'ckeditor/ckeditor.js'
+		, 'jquery-ui/jquery-ui.js'
 		], 'public/js/all.js', bowerDir)
 /*    .scripts([
 			  '../customJs/deleteDocument.js'

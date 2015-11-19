@@ -89,6 +89,17 @@ class Issue extends Model
 		}
 
 		$this->connectedInitiatorsStakeholders()->sync($initiators_connected);
+
+// 		if (!$request->get('location')) {
+// 			$flux_location = [];
+// 		} else {
+// 			$flux_location = $request->get('location');
+// 			foreach ($flux_location as $key => $value) {
+// 				$flux_location_id[] = $key;
+// 			}
+// 		}
+// dd($flux_location);
+// 		$this->connectedLocationStep()->sync($flux_location_id);
 	}
 
 	public static function getByPublicCode($code)
@@ -163,6 +174,16 @@ class Issue extends Model
 		'initiator_issue',
 		'issue_id',
 		'initiator_id'
+		);
+	}
+
+	public function connectedLocationStep()
+	{
+		$this->belongsToMany(
+		'Issue\LocationStep',
+		'location_steps',
+		'issue_id',
+		'location_id'
 		);
 	}
 }

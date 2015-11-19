@@ -272,5 +272,58 @@
 			var connected_initiator_id = $(this).attr('connected-initiator-delete');
 			$('[initiator-id=' + connected_initiator_id + ']').remove();
 		});
+
+
+		$( "#locatii-container" ).sortable({
+			revert: false
+		});
+
+		var compiled = _.template($('#location_template').html());
+
+		var locationsList = new Bloodhound({
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: "/backend/issue/query-location/?name={name}",
+				wildcard: '{name}',
+				transform: function (response) {
+					return _.filter(response, function(item){
+						console.error('item', item);
+						return $('[stakeholer-id=' + item.id + ']').length === 0;
+					});
+				}
+			}
+		});
+
+		$(document).on('click', '.add_location', function(){
+			var template_populated= compiled({
+				'id': _.uniqueId('new-')
+			});
+			var container = $('#locatii-container').append(template_populated);
+			var locationInput = container.find('[location-name=true]:last');
+
+			locationInput.typeahead(
+				null,
+				{
+					name: 'location',
+					display: 'name',
+					source: locationsList
+				}
+			);
+
+			locationInput.bind(
+				'typeahead:select',
+				function(event, suggestion) {
+					cosole.log('gata?');
+			});
+		});
+
+		$(document).on('click', '.delete_location', function() {
+			var selected_id = $(this).attr("delete-id");
+			var result = confirm("Sigur doriti sa stergeti locatia?");
+			if (result) {
+				$('#'+selected_id).remove();
+			}
+		});
 	});
 })();
