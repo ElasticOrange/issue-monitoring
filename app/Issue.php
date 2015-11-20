@@ -89,17 +89,39 @@ class Issue extends Model
 		}
 
 		$this->connectedInitiatorsStakeholders()->sync($initiators_connected);
+	}
 
-// 		if (!$request->get('location')) {
-// 			$flux_location = [];
-// 		} else {
-// 			$flux_location = $request->get('location');
-// 			foreach ($flux_location as $key => $value) {
-// 				$flux_location_id[] = $key;
-// 			}
-// 		}
-// dd($flux_location);
-// 		$this->connectedLocationStep()->sync($flux_location_id);
+
+	public function syncLocations($locations)
+	{
+		$currentLocations = $this->locationSteps()->get();
+		if (! is_array($locations)) {
+			$locations = [];
+		}
+
+		$index = 0;
+		foreach ($locations as $id => $location) {
+			$index++;
+			$locations[$id]['step_order'] = $index;
+		}
+
+		foreach ($currentLocations as $currentLocation) {
+			if (! array_key_exists($currentLocation->id, $locations)) {
+				$currentLocation->delete();
+				continue;
+			}
+			// $currentLocation->fill($currentLocation);
+			$currentLocation->save($currentLocation);
+			unset($locations[$currentLocation->id]);
+		}
+
+		foreach ($locations as $locationData) {
+			$newLocation = new LocationStep;
+			$newLocation->fill($locationData);
+			$this->locationSteps()->save($newLocation);
+		}
+
+		return true;
 	}
 
 	public static function getByPublicCode($code)
@@ -177,13 +199,8 @@ class Issue extends Model
 		);
 	}
 
-	public function connectedLocationStep()
+	public function locationSteps()
 	{
-		$this->belongsToMany(
-		'Issue\LocationStep',
-		'location_steps',
-		'issue_id',
-		'location_id'
-		);
+		return $this->hasMany('Issue\LocationStep');
 	}
 }

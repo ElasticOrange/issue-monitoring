@@ -53,6 +53,7 @@ class IssueController extends Controller
 	{
 		$issue = new Issue;
 		$issue->setAll($request);
+		$issue->syncLocations($request->input('location'));
 
 		return $issue;
 	}
@@ -90,8 +91,9 @@ class IssueController extends Controller
 	 */
 	public function update(Request $request, $issue)
 	{
-		dd($request->all());
+		// dd($request->all());
 		$issue->setAll($request);
+		$issue->syncLocations($request->input('location'));
 
 		return $issue;
 	}

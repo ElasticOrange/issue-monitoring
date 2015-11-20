@@ -8,6 +8,7 @@
 					source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
 					location-name="true"
 					/>
+				<input type="hidden" name="id"/>
 			</div>
 		</div>
 

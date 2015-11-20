@@ -25,7 +25,7 @@
 			@include('admin.backend.issues.form')
 			<div class="form-group">
 				<div class="col-sm-4" style="margin-top:25px;">
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salveaza</button>
+					<button class="btn btn-primary" save-button="true"><span class="glyphicon glyphicon-floppy-disk"></span> Salveaza</button>
 					<a href="{{ action('IssueController@index') }}"<button class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Inapoi la lista</button></a>
 				</div>
 			</div>

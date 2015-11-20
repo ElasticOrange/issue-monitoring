@@ -289,6 +289,7 @@
 				transform: function (response) {
 					return _.filter(response, function(item){
 						console.error('item', item);
+						$('#locatii-container').find('input[type=hidden]:last').val(item.id);
 						return $('[stakeholer-id=' + item.id + ']').length === 0;
 					});
 				}
@@ -301,6 +302,7 @@
 			});
 			var container = $('#locatii-container').append(template_populated);
 			var locationInput = container.find('[location-name=true]:last');
+			console.log(locationInput);
 
 			locationInput.typeahead(
 				null,
@@ -314,7 +316,7 @@
 			locationInput.bind(
 				'typeahead:select',
 				function(event, suggestion) {
-					cosole.log('gata?');
+					console.log('gata?');
 			});
 		});
 

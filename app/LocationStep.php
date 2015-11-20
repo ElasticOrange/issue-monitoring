@@ -8,13 +8,13 @@ class LocationStep extends Model
 {
 	protected $guarded = ['id'];
 
-	public function connectedIssueFlux()
+	public function issueFlux()
 	{
-		$this->belongsToMany(
-		'Issue\Issue',
-		'location_steps',
-		'location_id',
-		'issue_id'
-		);
+		return $this->belongsTo('Issue\Issue');
+	}
+
+	public function locationFlux()
+	{
+		return $this->belongsTo('Issue\Location');
 	}
 }

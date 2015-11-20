@@ -105,6 +105,7 @@ $(document).ready(function(){
 
 	$('#connected-stakeholders-container').on('click', '[connected-stakeholder-delete]', function() {
 		var connected_stakeholder_id = $(this).attr('connected-stakeholder-delete');
+		console.log(connected_stakeholder_id);
 		$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 	});
 
