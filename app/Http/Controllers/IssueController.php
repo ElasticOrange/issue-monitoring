@@ -91,7 +91,6 @@ class IssueController extends Controller
 	 */
 	public function update(Request $request, $issue)
 	{
-		// dd($request->all());
 		$issue->setAll($request);
 		$issue->syncLocations($request->input('location'));
 

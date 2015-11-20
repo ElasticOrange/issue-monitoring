@@ -13,7 +13,7 @@ class Issue extends Model
 	protected $fillable = [
 		'name',
 		'description',
-		'imapct',
+		'impact',
 		'status'
 	];
 

@@ -7,8 +7,11 @@
 					name="location[<%= id%>][name]"
 					source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
 					location-name="true"
-					/>
-				<input type="hidden" name="id"/>
+				/>
+				<input type="hidden"
+					name="location[<%= id%>][location_id]"
+					value=""
+				/>
 			</div>
 		</div>
 

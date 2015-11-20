@@ -288,9 +288,7 @@
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
-						console.error('item', item);
-						$('#locatii-container').find('input[type=hidden]:last').val(item.id);
-						return $('[stakeholer-id=' + item.id + ']').length === 0;
+						return $('[location-id=' + item.id + ']').length === 0;
 					});
 				}
 			}
@@ -316,7 +314,8 @@
 			locationInput.bind(
 				'typeahead:select',
 				function(event, suggestion) {
-					console.log('gata?');
+					$('#locatii-container').find('input[type=hidden]:last').val(suggestion.id);
+
 			});
 		});
 
