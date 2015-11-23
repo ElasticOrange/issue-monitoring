@@ -4,5 +4,8 @@
 		<input placeholder="Durata estimata" name="estimated_duration"/>
 		<input placeholder="Inceput la" name="start_date"/>
 		<input placeholder="Finalizat la" name="end_date"/>
+
+		<button type="button" class="btn btn-danger delete_step" delete-id="step-<%= id%>"><span class="glyphicon glyphicon-trash"></span></button>
+		<hr>
 	</div>
 </script>

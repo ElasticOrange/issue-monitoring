@@ -342,7 +342,7 @@
 			var selected_id = $(this).attr("delete-id");
 			var result = confirm("Sigur doriti sa stergeti locatia?");
 			if (result) {
-				$('#'+selected_id).remove();
+				$('#' + selected_id).remove();
 			}
 		});
 
@@ -353,6 +353,14 @@
 				'id': _.uniqueId('new-')
 			});
 			var container = $(this).parent().parent().find('#flowstep').append(steptemplate_populated);
+		});
+
+		$(document).on('click', '.delete_step', function() {
+			var selected_id = $(this).attr("delete-id");
+			var result = confirm("Sigur doriti sa stergeti locatia?");
+			if (result) {
+				$('#' + selected_id).remove();
+			}
 		});
 	});
 })();
