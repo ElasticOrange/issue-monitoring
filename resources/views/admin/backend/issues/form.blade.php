@@ -327,13 +327,37 @@
 		<hr/>
 	</div>
 
-	<div class="tab-pane active" id="flux">
+	<div class="tab-pane" id="flux">
 		<!-- flux starts here -->
 		<div id="locatii-container">
+			@if(isset($locations))
+				@foreach($locations as $location)
+				<div class="location" id="location{{ $location->id }}">
+					<div class="form-group">
+						<label class="control-label col-sm-2">Locatie:</label>
+						<div class="col-sm-4">
+							<input class="form-control"
+								name="location[{{ $location->id }}][name]"
+								source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
+								location-name="true"
+								value="{{ $location->locationFlux->name }}"
+							/>
+							<input type="hidden"
+								name="location[{{ $location->id }}][location_id]"
+								value="{{ $location->location_id }}"
+							/>
+						</div>
+					</div>
+
+					<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $location->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
+					<hr>
+				</div>
+				@endforeach
+			@endif
 			@include('admin.backend.issues.location-template')
 		</div>
-
 		<button type="button" class="btn btn-primary add_location"><span class="glyphicon glyphicon-plus"></span> Adauga locatie</button>
+
 	</div>
 
 </div>

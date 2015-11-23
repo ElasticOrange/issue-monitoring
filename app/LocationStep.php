@@ -21,6 +21,6 @@ class LocationStep extends Model
 
 	public function locationFlux()
 	{
-		return $this->belongsTo('Issue\Location');
+		return $this->belongsTo('Issue\Location', 'location_id');
 	}
 }

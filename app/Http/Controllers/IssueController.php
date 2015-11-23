@@ -79,7 +79,9 @@ class IssueController extends Controller
 	 */
 	public function edit($issue)
 	{
-		return view('admin.backend.issues.edit', ['issue' => $issue]);
+		$locationSteps = $issue->locationSteps()->orderBy('step_order', 'asc')->get();
+
+		return view('admin.backend.issues.edit', ['issue' => $issue, 'locations' => $locationSteps]);
 	}
 
 	/**
