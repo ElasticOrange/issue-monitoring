@@ -344,5 +344,11 @@
 				$('#'+selected_id).remove();
 			}
 		});
+
+		var compiledStep = _.template($('#flowstep_template').html());
+
+		$(document).on('click', '.add_flowstep', function(e){
+			var container = $(e.target).parent().prepend(compiledStep);
+		});
 	});
 })();
