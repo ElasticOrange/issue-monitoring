@@ -16,7 +16,6 @@ class CreateLocationStepsTable extends Migration
 			$table->increments('id');
 
 			$table->integer('location_id')->unsigned()->index();
-			$table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
 
 			$table->integer('issue_id')->unsigned()->index();
 			$table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');

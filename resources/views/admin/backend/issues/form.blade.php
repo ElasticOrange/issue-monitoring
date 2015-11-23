@@ -348,16 +348,18 @@
 							/>
 						</div>
 					</div>
+					<br/>
 
-					<div id="flowstep">
+					<div id="flowstep" class="connectedSortable" style="min-height: 15px; background-color: yellow; margin-bot: 5px;">
 						@include('admin.backend.issues.flowstep-template')
 					</div>
+					<br/>
 
 					<div class="form-group">
 						<button type="button" class="btn btn-primary add_flowstep"><span class="glyphicon glyphicon-plus"></span> Adauga pas</button>
 					</div>
 					<br/><br/>
-					
+
 					<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $location->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
 					<hr>
 				</div>

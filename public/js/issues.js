@@ -274,9 +274,10 @@
 		});
 
 
-		$( "#locatii-container" ).sortable({
-			revert: false
-		});
+		$( '#locatii-container').sortable();
+		$( "#locatii-container .location #flowstep" ).sortable({
+			connectWith: ".connectedSortable"
+		}).disableSelection();
 
 		var compiled = _.template($('#location_template').html());
 
@@ -347,8 +348,11 @@
 
 		var compiledStep = _.template($('#flowstep_template').html());
 
-		$(document).on('click', '.add_flowstep', function(e){
-			var container = $(e.target).parent().prepend(compiledStep);
+		$(document).on('click', '.add_flowstep', function(){
+			var steptemplate_populated= compiledStep({
+				'id': _.uniqueId('new-')
+			});
+			var container = $(this).parent().parent().find('#flowstep').append(steptemplate_populated);
 		});
 	});
 })();
