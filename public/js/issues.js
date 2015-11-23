@@ -300,7 +300,6 @@
 			});
 			var container = $('#locatii-container').append(template_populated);
 			var locationInput = container.find('[location-name=true]:last');
-			console.log(locationInput);
 
 			locationInput.typeahead(
 				null,
@@ -318,6 +317,25 @@
 
 			});
 		});
+
+		$('#locatii-container [location-name=true]').one('click', function(){
+			$(this).typeahead(
+				null,
+				{
+					name: 'location',
+					display: 'name',
+					source: locationsList
+				}
+			);
+
+			$(this).bind(
+				'typeahead:select',
+				function(event, suggestion) {
+					$('#locatii-container').find('input[type=hidden]:last').val(suggestion.id);
+
+			});
+		});
+
 
 		$(document).on('click', '.delete_location', function() {
 			var selected_id = $(this).attr("delete-id");

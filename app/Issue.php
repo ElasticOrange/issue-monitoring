@@ -105,7 +105,7 @@ class Issue extends Model
 			$index++;
 			$locations[$id]['step_order'] = $index;
 		}
-// dd($locations);
+
 		foreach ($currentLocations as $currentLocation) {
 			if (! array_key_exists($currentLocation->id, $locations)) {
 				$currentLocation->delete();
