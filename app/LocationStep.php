@@ -23,4 +23,10 @@ class LocationStep extends Model
 	{
 		return $this->belongsTo('Issue\Location', 'location_id');
 	}
+
+
+	public function steps()
+	{
+		return $this->hasMany('Issue\FlowStep');
+	}
 }

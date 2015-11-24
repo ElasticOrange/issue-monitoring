@@ -276,7 +276,22 @@
 
 		$( '#locatii-container').sortable();
 		$( "#locatii-container .location #flowstep" ).sortable({
-			connectWith: ".connectedSortable"
+			connectWith: ".connectedSortable",
+			stop: function( event, ui ) {
+				var strParentId = ui.item.parent().parent().find('[location-name=true]:last').attr('name');
+				var parentId = strParentId.match(/\d+/g);
+				console.log(parentId[0]);
+				// $(this).attr('name').replace(/(\d+)/i, parentId);
+				var object = ui.item.parent().find('div.step :input');
+				for (var i = 0; i < 4; i++) {
+					// $(object[i]).attr('name').replace(/(\d+)/i, parentId);
+					$(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
+					// console.log(oldName);
+					// console.log(a);
+				}
+				// console.log(object);
+				// console.log(event.target);
+			}
 		}).disableSelection();
 
 		var compiled = _.template($('#location_template').html());
@@ -349,10 +364,15 @@
 		var compiledStep = _.template($('#flowstep_template').html());
 
 		$(document).on('click', '.add_flowstep', function(){
+			var getLocationId = $(this).parent().parent().find('[location-name=true]:last').attr('name');
+			var setLocationId = getLocationId.match(/\d+/g);
+
 			var steptemplate_populated= compiledStep({
-				'id': _.uniqueId('new-')
+				'id': _.uniqueId('new-'),
+				'location_id': setLocationId
 			});
 			var container = $(this).parent().parent().find('#flowstep').append(steptemplate_populated);
+
 		});
 
 		$(document).on('click', '.delete_step', function() {

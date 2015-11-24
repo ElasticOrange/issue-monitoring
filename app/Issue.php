@@ -94,7 +94,6 @@ class Issue extends Model
 
 	public function syncLocations($locations)
 	{
-		// dd($locations);
 		$currentLocations = $this->locationSteps()->get();
 		if (! is_array($locations)) {
 			$locations = [];
@@ -193,10 +192,10 @@ class Issue extends Model
 	public function connectedInitiatorsStakeholders()
 	{
 		return $this->belongsToMany(
-		'Issue\Stakeholder',
-		'initiator_issue',
-		'issue_id',
-		'initiator_id'
+			'Issue\Stakeholder',
+			'initiator_issue',
+			'issue_id',
+			'initiator_id'
 		);
 	}
 

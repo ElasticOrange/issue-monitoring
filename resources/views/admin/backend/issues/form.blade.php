@@ -350,7 +350,7 @@
 					</div>
 					<br/>
 
-					<div id="flowstep" class="connectedSortable" style="min-height: 15px; background-color: yellow; margin-bot: 5px;">
+					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
 						@include('admin.backend.issues.flowstep-template')
 					</div>
 					<br/>
