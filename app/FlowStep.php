@@ -10,10 +10,15 @@ class FlowStep extends Model
 
 	public $dates = ['start_date', 'end_date'];
 
-	protected $fillable = ['flow_name'];
+	protected $fillable = ['flow_name', 'estimated_duration', 'location_step_id', 'flowstep_order'];
 
-	public function locations()
+	public function flowstepsInLocation()
 	{
 		return $this->belongsTo('Issue\locationStep', 'location_step_id');
+	}
+
+	public function issueStep()
+	{
+		return $this->belongsTo('Issue\Issue');
 	}
 }

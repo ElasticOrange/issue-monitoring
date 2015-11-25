@@ -351,6 +351,18 @@
 					<br/>
 
 					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
+						@foreach ($location->stepsLocationStep()->orderBy('flowstep_order', 'asc')->get() as $step)
+							<div class="step connectedSortable" style="margin-top: 15px;" id="step{{ $step->id }}">
+								<input name="step[{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
+								<input type="number" name="step[{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
+								<input type="text" name="step[{{ $step->id }}][start_date]" value="{{ $step->start_date->format('d-m-Y') }}"/>
+								<input type="text" name="step[{{ $step->id }}][end_date]" value="{{ $step->end_date->format('d-m-Y') }}"/>
+								<input type="hidden" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
+
+								<button type="button" class="btn btn-danger delete_step" delete-id="step{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
+								<hr>
+							</div>
+						@endforeach
 						@include('admin.backend.issues.flowstep-template')
 					</div>
 					<br/>

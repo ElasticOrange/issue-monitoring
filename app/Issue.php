@@ -95,6 +95,7 @@ class Issue extends Model
 	public function syncLocations($locations)
 	{
 		$currentLocations = $this->locationSteps()->get();
+
 		if (! is_array($locations)) {
 			$locations = [];
 		}
@@ -110,6 +111,7 @@ class Issue extends Model
 				$currentLocation->delete();
 				continue;
 			}
+
 			$currentLocation->fill($locations[$currentLocation->id]);
 			$currentLocation->save();
 			unset($locations[$currentLocation->id]);
@@ -121,6 +123,39 @@ class Issue extends Model
 			$this->locationSteps()->save($newLocation);
 		}
 
+		return true;
+	}
+
+	public function syncSteps($steps)
+	{
+		$currentSteps = $this->loadSteps()->get();
+
+		if (! is_array($steps)) {
+			$steps = [];
+		}
+
+		$count = 0;
+		foreach ($steps as $id => $step) {
+			$count++;
+			$steps[$id]['flowstep_order'] = $count;
+		}
+
+		foreach ($currentSteps as $currentStep) {
+			if (! array_key_exists($currentStep->id, $steps)) {
+				$currentStep->delete();
+				continue;
+			}
+
+			$currentStep->fill($steps[$currentStep->id]);
+			$currentStep->save();
+			unset($steps[$currentStep->id]);
+		}
+
+		foreach ($steps as $stepData) {
+			$newLocationStep = new FlowStep;
+			$newLocationStep->fill($stepData);
+			$this->loadSteps()->save($newLocationStep);
+		}
 		return true;
 	}
 
@@ -202,5 +237,10 @@ class Issue extends Model
 	public function locationSteps()
 	{
 		return $this->hasMany('Issue\LocationStep');
+	}
+
+	public function loadSteps()
+	{
+		return $this->hasMany('Issue\FlowStep');
 	}
 }

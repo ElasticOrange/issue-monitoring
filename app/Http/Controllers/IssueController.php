@@ -16,6 +16,7 @@ use Issue\DomainTranslation;
 use Issue\Stakeholder;
 use Issue\Location;
 use Issue\LocationTranslation;
+use Issue\LocationStep;
 
 class IssueController extends Controller
 {
@@ -82,7 +83,13 @@ class IssueController extends Controller
 	{
 		$locationSteps = $issue->locationSteps()->orderBy('step_order', 'asc')->get();
 
-		return view('admin.backend.issues.edit', ['issue' => $issue, 'locations' => $locationSteps]);
+		return view(
+			'admin.backend.issues.edit',
+			[
+				'issue' => $issue,
+				'locations' => $locationSteps,
+			 ]
+		);
 	}
 
 	/**
@@ -96,6 +103,7 @@ class IssueController extends Controller
 	{
 		$issue->setAll($request);
 		$issue->syncLocations($request->input('location'));
+		$issue->syncSteps($request->input('step'));
 
 		return $issue;
 	}

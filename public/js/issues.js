@@ -280,17 +280,9 @@
 			stop: function( event, ui ) {
 				var strParentId = ui.item.parent().parent().find('[location-name=true]:last').attr('name');
 				var parentId = strParentId.match(/\d+/g);
-				console.log(parentId[0]);
-				// $(this).attr('name').replace(/(\d+)/i, parentId);
-				var object = ui.item.parent().find('div.step :input');
-				for (var i = 0; i < 4; i++) {
-					// $(object[i]).attr('name').replace(/(\d+)/i, parentId);
-					$(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
-					// console.log(oldName);
-					// console.log(a);
-				}
-				// console.log(object);
-				// console.log(event.target);
+				console.log(parentId);
+				var object = ui.item.parent().find('div.step :input[type=hidden]');
+				$(object).attr('value', parentId);
 			}
 		}).disableSelection();
 
@@ -363,6 +355,7 @@
 
 		var compiledStep = _.template($('#flowstep_template').html());
 
+
 		$(document).on('click', '.add_flowstep', function(){
 			var getLocationId = $(this).parent().parent().find('[location-name=true]:last').attr('name');
 			var setLocationId = getLocationId.match(/\d+/g);
@@ -372,6 +365,19 @@
 				'location_id': setLocationId
 			});
 			var container = $(this).parent().parent().find('#flowstep').append(steptemplate_populated);
+			$(this).parent().parent().find('div.step input[type=hidden]:last').val(setLocationId);
+
+			var dateWidgets = $('[date-widget=true]').datetimepicker({
+				locale: 'ro',
+				format: 'L',
+				defaultDate: moment()
+			});
+			$(this).parent().parent().find('div.step input[name=date]').val(moment().format("YYYY-MM-DD"));
+			dateWidgets.on('dp.change', function () {
+				var d = $(this).data("DateTimePicker").date();
+				var e = d.format("YYYY-MM-DD");
+				$(this).parent().parent().find('div.step').val(e);
+			});
 
 		});
 
