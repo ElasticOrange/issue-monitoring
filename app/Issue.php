@@ -122,7 +122,6 @@ class Issue extends Model
 			$newLocation->fill($locationData);
 			$this->locationSteps()->save($newLocation);
 		}
-
 		return true;
 	}
 
@@ -147,6 +146,11 @@ class Issue extends Model
 			}
 
 			$currentStep->fill($steps[$currentStep->id]);
+
+			foreach (\Config::get('app.all_locales') as $locale) {
+				$currentStep->translateOrNew($locale)->observatii = $steps[$currentStep->id]['observatii'][$locale];
+			}
+
 			$currentStep->save();
 			unset($steps[$currentStep->id]);
 		}
@@ -154,8 +158,14 @@ class Issue extends Model
 		foreach ($steps as $stepData) {
 			$newLocationStep = new FlowStep;
 			$newLocationStep->fill($stepData);
+
+			foreach (\Config::get('app.all_locales') as $locale) {
+				$newLocationStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
+			}
+
 			$this->loadSteps()->save($newLocationStep);
 		}
+
 		return true;
 	}
 

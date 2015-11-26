@@ -353,6 +353,7 @@
 					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
 						@foreach ($location->stepsLocationStep()->orderBy('flowstep_order', 'asc')->get() as $step)
 							<div class="step connectedSortable" style="margin-top: 15px;" id="step{{ $step->id }}">
+								<div class="accordion-toggle glyphicon glyphicon-menu-down" data-toggle="collapse" data-target="#collapse{{ $step->id }}" style="margin: 5px;"></div>
 								<input name="step[{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
 								<input type="number" name="step[{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
 
@@ -365,6 +366,36 @@
 								<input type="hidden" location-step="true" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
 								<button type="button" class="btn btn-danger delete_step" delete-id="step{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 								<hr>
+								<div class="accordion-body collapse" id="collapse{{ $step->id }}">
+									<ul class="nav nav-tabs">
+										<li class="active"><a href="#flow-documente{{ $step->id }}" data-toggle="tab">Documente</a></li>
+										<li><a href="#flow-observatii{{ $step->id }}" data-toggle="tab">Observatii</a></li>
+									</ul>
+									<div class="tab-content">
+										<br/>
+										<div class="tab-pane active" id="flow-documente{{ $step->id }}">
+											<br/>
+											gigel documente
+										</div>
+										<div class="tab-pane" id="flow-observatii{{ $step->id }}">
+											<br/>
+											<div class="form-group">
+												<div class="row">
+													<label class="col-md-4 col-md-offset-1">Ro</label>
+													<label class="col-md-4 col-md-offset-1">En</label>
+												</div>
+												<div class="row">
+													<div class="col-md-4 col-md-offset-1">
+														<textarea name="step[{{ $step->id }}][observatii][ro]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('ro')->observatii }}</textarea>
+													</div>
+													<div class="col-md-4 col-md-offset-1">
+														<textarea name="step[{{ $step->id }}][observatii][en]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('en')->observatii }}</textarea>
+													</div>
+												</div>
+											</div><br/>
+										</div>
+									</div>
+								</div>
 							</div>
 						@endforeach
 						@include('admin.backend.issues.flowstep-template')

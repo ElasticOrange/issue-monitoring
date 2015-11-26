@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class FlowStep extends Model
 {
+	use \Dimsav\Translatable\Translatable;
+
 	protected $guarded = ['id'];
+
+	public $translatedAttributes = ['observatii'];
 
 	public $dates = ['start_date', 'end_date'];
 

@@ -28,6 +28,17 @@ class CreateFlowStepsTable extends Migration
 
 			$table->timestamps();
 		});
+
+		Schema::create('flow_step_translations', function (Blueprint $table) {
+			$table->increments('id');
+			$table->integer('flow_step_id')->unsigned();
+			$table->string('locale', 3)->index();
+
+			$table->longText('observatii');
+
+			$table->unique(['flow_step_id','locale']);
+			$table->foreign('flow_step_id')->references('id')->on('flow_steps')->onDelete('cascade');
+		});
 	}
 
 	/**
@@ -37,6 +48,7 @@ class CreateFlowStepsTable extends Migration
 	 */
 	public function down()
 	{
+		Schema::dropIfExists('flow_step_translations');
 		Schema::dropIfExists('flow_steps');
 	}
 }
