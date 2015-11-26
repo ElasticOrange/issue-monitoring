@@ -281,7 +281,7 @@
 				var strParentId = ui.item.parent().parent().find('[location-name=true]:last').attr('name');
 				var parentId = strParentId.match(/\d+/g);
 				console.log(parentId);
-				var object = ui.item.parent().find('div.step :input[type=hidden]');
+				var object = ui.item.parent().find('div.step [location-step=true] ');
 				$(object).attr('value', parentId);
 			}
 		}).disableSelection();
@@ -367,16 +367,30 @@
 			var container = $(this).parent().parent().find('#flowstep').append(steptemplate_populated);
 			$(this).parent().parent().find('div.step input[type=hidden]:last').val(setLocationId);
 
-			var dateWidgets = $('[date-widget=true]').datetimepicker({
+			var firstDateWidgets = $('[startdate-widget=true]').datetimepicker({
 				locale: 'ro',
 				format: 'L',
 				defaultDate: moment()
 			});
-			$(this).parent().parent().find('div.step input[name=date]').val(moment().format("YYYY-MM-DD"));
-			dateWidgets.on('dp.change', function () {
+
+			$(this).parent().parent().find('div.step [startdate-result=true]:last').val(moment().format("YYYY-MM-DD"));
+			firstDateWidgets.on('dp.change', function () {
 				var d = $(this).data("DateTimePicker").date();
 				var e = d.format("YYYY-MM-DD");
-				$(this).parent().parent().find('div.step').val(e);
+				$(this).parent().parent().find('div.step [startdate-result=true]:last').val(e);
+			});
+
+			var secondDateWidgets = $('[enddate-widget=true]').datetimepicker({
+				locale: 'ro',
+				format: 'L',
+				defaultDate: moment()
+			});
+
+			$(this).parent().parent().find('div.step [enddate-result=true]:last').val(moment().format("YYYY-MM-DD"));
+			secondDateWidgets.on('dp.change', function () {
+				var d = $(this).data("DateTimePicker").date();
+				var e = d.format("YYYY-MM-DD");
+				$(this).parent().parent().find('div.step [enddate-result=true]:last').val(e);
 			});
 
 		});

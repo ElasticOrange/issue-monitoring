@@ -10,7 +10,14 @@ class FlowStep extends Model
 
 	public $dates = ['start_date', 'end_date'];
 
-	protected $fillable = ['flow_name', 'estimated_duration', 'location_step_id', 'flowstep_order'];
+	protected $fillable = [
+		'flow_name',
+		'estimated_duration',
+		'location_step_id',
+		'flowstep_order',
+		'start_date',
+		'end_date'
+	];
 
 	public function flowstepsInLocation()
 	{

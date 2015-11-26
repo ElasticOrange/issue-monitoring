@@ -355,10 +355,14 @@
 							<div class="step connectedSortable" style="margin-top: 15px;" id="step{{ $step->id }}">
 								<input name="step[{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
 								<input type="number" name="step[{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
-								<input type="text" name="step[{{ $step->id }}][start_date]" value="{{ $step->start_date->format('d-m-Y') }}"/>
-								<input type="text" name="step[{{ $step->id }}][end_date]" value="{{ $step->end_date->format('d-m-Y') }}"/>
-								<input type="hidden" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
 
+								<input type="text" startdate-widget="true" name="start_date" value="{{ $step->start_date->format('d-m-Y') }}"/>
+								<input type="hidden" startdate-result="true" name="step[{{ $step->id }}][start_date]" />
+
+								<input type="text" enddate-widget="true" name="end_date" value="{{ $step->end_date->format('d-m-Y') }}"/>
+								<input type="hidden" enddate-result="true" name="step[{{ $step->id }}][end_date]" />
+
+								<input type="hidden" location-step="true" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
 								<button type="button" class="btn btn-danger delete_step" delete-id="step{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 								<hr>
 							</div>
