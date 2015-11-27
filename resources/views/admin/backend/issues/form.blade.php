@@ -330,43 +330,58 @@
 	<div class="tab-pane" id="flux">
 		<!-- flux starts here -->
 		<div id="locatii-container">
-			@if(isset($locations))
-				@foreach($locations as $location)
-				<div class="location" id="location{{ $location->id }}">
+			@if(isset($locationSteps))
+				@foreach($locationSteps as $locationStep)
+				<div class="location" id="location{{ $locationStep->id }}">
 					<div class="form-group">
 						<label class="control-label col-sm-2">Locatie:</label>
 						<div class="col-sm-4">
 							<input class="form-control"
-								name="location[{{ $location->id }}][name]"
+								name="location[{{ $locationStep->id }}][name]"
 								source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
 								location-name="true"
-								value="{{ $location->locationFlux->name }}"
+								value="{{ $locationStep->locationFlux->name }}"
 							/>
 							<input type="hidden"
-								name="location[{{ $location->id }}][location_id]"
-								value="{{ $location->location_id }}"
+								name="location[{{ $locationStep->id }}][location_id]"
+								value="{{ $locationStep->location_id }}"
 							/>
 						</div>
 					</div>
 					<br/>
 
 					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
-						@foreach ($location->stepsLocationStep()->orderBy('flowstep_order', 'asc')->get() as $step)
+						@foreach ($locationStep->stepsLocationStep()->orderBy('flowstep_order', 'asc')->get() as $step)
 							<div class="step connectedSortable" style="margin-top: 15px;" id="step{{ $step->id }}">
-								<div class="accordion-toggle glyphicon glyphicon-menu-down" data-toggle="collapse" data-target="#collapse{{ $step->id }}" style="margin: 5px;"></div>
-								<input name="step[{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
-								<input type="number" name="step[{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
-
-								<input type="text" startdate-widget="true" name="start_date" value="{{ $step->start_date->format('d-m-Y') }}"/>
-								<input type="hidden" startdate-result="true" name="step[{{ $step->id }}][start_date]" />
-
-								<input type="text" enddate-widget="true" name="end_date" value="{{ $step->end_date->format('d-m-Y') }}"/>
-								<input type="hidden" enddate-result="true" name="step[{{ $step->id }}][end_date]" />
-
-								<input type="hidden" location-step="true" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
-								<button type="button" class="btn btn-danger delete_step" delete-id="step{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
-								<hr>
+								<div class="row">
+									<div class="col-sm-1">
+										<div class="accordion-toggle glyphicon glyphicon-menu-down"
+											data-toggle="collapse"
+											data-target="#collapse{{ $step->id }}"
+											style="margin-top: -10px;margin-left: 20px;padding: 20px 40px 20px 40px;">
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<input class="form-control" name="step[{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
+									</div>
+									<div class="col-sm-1">
+										<input class="form-control" type="number" name="step[{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
+									</div>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" startdate-widget="true" name="start_date" value="{{ $step->start_date->format('d-m-Y') }}"/>
+										<input type="hidden" startdate-result="true" name="step[{{ $step->id }}][start_date]" />
+									</div>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" enddate-widget="true" name="end_date" value="{{ $step->end_date->format('d-m-Y') }}"/>
+										<input type="hidden" enddate-result="true" name="step[{{ $step->id }}][end_date]" />
+									</div>
+									<div class="col-sm-1">
+										<input type="hidden" location-step="true" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
+										<button type="button" class="btn btn-danger delete_step" delete-id="step{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
+									</div>
+								</div>
 								<div class="accordion-body collapse" id="collapse{{ $step->id }}">
+								<hr>
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="#flow-documente{{ $step->id }}" data-toggle="tab">Documente</a></li>
 										<li><a href="#flow-observatii{{ $step->id }}" data-toggle="tab">Observatii</a></li>
@@ -375,7 +390,38 @@
 										<br/>
 										<div class="tab-pane active" id="flow-documente{{ $step->id }}">
 											<br/>
-											gigel documente
+											<div class="row">
+												<div class="col-lg-10 col-lg-offset-1">
+													<input
+														id="document-autocomplete"
+														source-url="{{ action('IssueController@queryDocument') }}/?name={name}"
+														type="text"
+														placeholder="Cauta document"
+														class="form-control"
+													/>
+												</div>
+											</div>
+											<br/>
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>Titlu</th>
+														<th style="width: 35%;">Fisier</th>
+														<th style="width: 10%;">Data</th>
+														<th style="width: 10%;">Nr Inregistrare</th>
+														<th style="width: 5%;">Actiuni</th>
+													</tr>
+												</thead>
+												<tbody id="autocomplete-document">
+													<tr>
+														<th>
+															Niciun document adaugat
+														</th>
+													</tr>
+													@include('admin.backend.issues.connected-documents')
+												</tbody>
+											</table>
+											<hr>
 										</div>
 										<div class="tab-pane" id="flow-observatii{{ $step->id }}">
 											<br/>
@@ -398,6 +444,7 @@
 								</div>
 							</div>
 						@endforeach
+
 						@include('admin.backend.issues.flowstep-template')
 					</div>
 					<br/>
@@ -407,7 +454,7 @@
 					</div>
 					<br/><br/>
 
-					<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $location->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
+					<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
 					<hr>
 				</div>
 				@endforeach

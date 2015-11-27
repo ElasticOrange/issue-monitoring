@@ -15,6 +15,8 @@ use Issue\Domain;
 use Issue\DomainTranslation;
 use Issue\Stakeholder;
 use Issue\Location;
+use Issue\Document;
+use Issue\DocumentTranslation;
 use Issue\LocationTranslation;
 use Issue\LocationStep;
 
@@ -87,7 +89,7 @@ class IssueController extends Controller
 			'admin.backend.issues.edit',
 			[
 				'issue' => $issue,
-				'locations' => $locationSteps,
+				'locationSteps' => $locationSteps,
 			 ]
 		);
 	}
@@ -239,5 +241,18 @@ class IssueController extends Controller
 		}
 
 		return $result;
+	}
+
+	public function queryDocument(Request $request)
+	{
+		$queryDocumentName = $request->input('name');
+
+		$documentIds = DocumentTranslation::where('title', 'like', '%'.$queryDocumentName.'%')
+										->where('locale', \App::getLocale())
+										->lists('document_id');
+		$documents = Document::whereIn('id', $documentIds)
+							->get();
+
+		return $documents;
 	}
 }

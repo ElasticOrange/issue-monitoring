@@ -162,7 +162,6 @@ class Issue extends Model
 			foreach (\Config::get('app.all_locales') as $locale) {
 				$newLocationStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
 			}
-
 			$this->loadSteps()->save($newLocationStep);
 		}
 
@@ -252,5 +251,10 @@ class Issue extends Model
 	public function loadSteps()
 	{
 		return $this->hasMany('Issue\FlowStep');
+	}
+
+	public function connectedDocuments()
+	{
+		return $this->belongsToMany('Issue\Document');
 	}
 }

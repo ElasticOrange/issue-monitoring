@@ -32,4 +32,9 @@ class FlowStep extends Model
 	{
 		return $this->belongsTo('Issue\Issue');
 	}
+
+	public function connectedFlowStepDocuments()
+	{
+		return $this->belongsTo('Issue\Document');
+	}
 }

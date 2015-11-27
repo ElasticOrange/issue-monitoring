@@ -402,5 +402,48 @@
 				$('#' + selected_id).remove();
 			}
 		});
+
+		var documentsList = new Bloodhound({
+			queryTokenizer: Bloodhound.tokenizers.whitespace,
+			datumTokenizer: Bloodhound.tokenizers.whitespace,
+			remote: {
+				url: $('#document-autocomplete').attr('source-url'),
+				wildcard: '{name}',
+				transform: function (response) {
+					return _.filter(response, function(item){
+						return $('[document-id=' + item.id + ']').length === 0;
+					});
+				}
+			}
+		});
+
+		$('#document-autocomplete').typeahead(
+			null,
+			{
+				name: 'document',
+				display: 'title',
+				source: documentsList
+			}
+		);
+
+		$('#document-autocomplete').bind(
+			'typeahead:select',
+			function(event, suggestion) {
+				console.log(suggestion);
+				$(this).typeahead('val', '');
+
+				var template = _.template($('#connected-document-template').html());
+				var compiled_template = template(
+					{
+						'id': _.uniqueId('new-'),
+						'title': suggestion.title,
+						'fisier': suggestion.uploaded_file_id,
+						'date': suggestion.init_at
+					}
+				);
+
+				$('#autocomplete-document').append(compiled_template);
+			}
+		);
 	});
 })();

@@ -65,4 +65,14 @@ class Document extends Model
 
 		$this->save();
 	}
+
+	public function connectedDocumentIssues()
+	{
+		return $this->belongsToMany('Issue\Issue');
+	}
+
+	public function connectedDocumentsFlowStep()
+	{
+		return $this->hasMany('Issue\FlowStep');
+	}
 }

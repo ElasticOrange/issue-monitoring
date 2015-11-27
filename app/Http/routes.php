@@ -60,6 +60,7 @@ Route::get('/backend/issue/query-news', 'IssueController@queryNews');
 Route::get('/backend/issue/query-issue', 'IssueController@queryIssue');
 Route::get('/backend/issue/query-initiator', 'IssueController@queryInitiator');
 Route::get('/backend/issue/query-location', 'IssueController@queryLocation');
+Route::get('/backend/issue/query-document', 'IssueController@queryDocument');
 Route::get('/backend/issue/{issue}/setPublished', 'IssueController@setPublished');
 Route::resource('/backend/issue', 'IssueController', ['except' => ['show', 'destroy']]);
 
