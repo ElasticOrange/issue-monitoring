@@ -347,6 +347,9 @@
 								value="{{ $locationStep->location_id }}"
 							/>
 						</div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
+						</div>
 					</div>
 					<br/>
 
@@ -421,7 +424,6 @@
 													@include('admin.backend.issues.connected-documents')
 												</tbody>
 											</table>
-											<hr>
 										</div>
 										<div class="tab-pane" id="flow-observatii{{ $step->id }}">
 											<br/>
@@ -440,21 +442,18 @@
 												</div>
 											</div><br/>
 										</div>
+										<hr>
 									</div>
 								</div>
 							</div>
 						@endforeach
-
 						@include('admin.backend.issues.flowstep-template')
 					</div>
 					<br/>
-
 					<div class="form-group">
 						<button type="button" class="btn btn-primary add_flowstep"><span class="glyphicon glyphicon-plus"></span> Adauga pas</button>
 					</div>
 					<br/><br/>
-
-					<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
 					<hr>
 				</div>
 				@endforeach

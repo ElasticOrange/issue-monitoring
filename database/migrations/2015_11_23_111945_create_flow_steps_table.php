@@ -18,7 +18,6 @@ class CreateFlowStepsTable extends Migration
 			$table->integer('estimated_duration');
 			$table->timestamp('start_date');
 			$table->timestamp('end_date');
-			$table->longText('document_id');
 
 			$table->integer('location_step_id')->unsigned()->index();
 
