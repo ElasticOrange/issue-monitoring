@@ -340,7 +340,7 @@
 								name="location[{{ $locationStep->id }}][name]"
 								source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
 								location-name="true"
-								value="{{ $locationStep->locationFlux->name }}"
+								value="{{ $locationStep->location->name }}"
 							/>
 							<input type="hidden"
 								name="location[{{ $locationStep->id }}][location_id]"
@@ -354,14 +354,35 @@
 					<br/>
 
 					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
-						@foreach ($locationStep->stepsLocationStep()->orderBy('flowstep_order', 'asc')->get() as $step)
+						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
 							<div class="step connectedSortable" style="margin-top: 15px;" id="step{{ $step->id }}">
 								<div class="row">
 									<div class="col-sm-1">
-										<div class="accordion-toggle glyphicon glyphicon-menu-down"
+										<label></label>
+									</div>
+									<div class="col-sm-4">
+										<label>Stadiu procedural</label>
+									</div>
+									<div class="col-sm-1">
+										<label>Durata</label>
+									</div>
+									<div class="col-sm-2">
+										<label>Inceput la</label>
+									</div>
+									<div class="col-sm-2">
+										<label>Finalizat la</label>
+									</div>
+									<div class="col-sm-1">
+										<label>Actiuni</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-1">
+										<div class="accordion-toggle"
 											data-toggle="collapse"
 											data-target="#collapse{{ $step->id }}"
 											style="margin-top: -10px;margin-left: 20px;padding: 20px 40px 20px 40px;">
+											<span class="glyphicon glyphicon-menu-down"></span>
 										</div>
 									</div>
 									<div class="col-sm-4">

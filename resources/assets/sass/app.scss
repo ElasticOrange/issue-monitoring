@@ -74,3 +74,11 @@ input[type=file].hidden {
 .twitter-typeahead {
 	width: 100%;
 }
+
+span.glyphicon.glyphicon-menu-down {
+	transform: rotate(-90deg);
+}
+
+.rotate-bot {
+	transform: rotate(0deg) !important;
+}

@@ -14,17 +14,17 @@ class LocationStep extends Model
 		'step_order'
 	];
 
-	public function issueFlux()
+	public function issue()
 	{
 		return $this->belongsTo('Issue\Issue');
 	}
 
-	public function locationFlux()
+	public function location()
 	{
 		return $this->belongsTo('Issue\Location', 'location_id');
 	}
 
-	public function stepsLocationStep()
+	public function flowsteps()
 	{
 		return $this->hasMany('Issue\FlowStep');
 	}

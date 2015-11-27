@@ -94,7 +94,7 @@ class Issue extends Model
 
 	public function syncLocations($locations)
 	{
-		$currentLocations = $this->locationSteps()->get();
+		$currentLocations = $this->locationsteps()->get();
 
 		if (! is_array($locations)) {
 			$locations = [];
@@ -120,14 +120,14 @@ class Issue extends Model
 		foreach ($locations as $locationData) {
 			$newLocation = new LocationStep;
 			$newLocation->fill($locationData);
-			$this->locationSteps()->save($newLocation);
+			$this->locationsteps()->save($newLocation);
 		}
 		return true;
 	}
 
 	public function syncSteps($steps)
 	{
-		$currentSteps = $this->loadSteps()->get();
+		$currentSteps = $this->flowsteps()->get();
 
 		if (! is_array($steps)) {
 			$steps = [];
@@ -162,7 +162,7 @@ class Issue extends Model
 			foreach (\Config::get('app.all_locales') as $locale) {
 				$newLocationStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
 			}
-			$this->loadSteps()->save($newLocationStep);
+			$this->flowsteps()->save($newLocationStep);
 		}
 
 		return true;
@@ -243,17 +243,17 @@ class Issue extends Model
 		);
 	}
 
-	public function locationSteps()
+	public function locationsteps()
 	{
 		return $this->hasMany('Issue\LocationStep');
 	}
 
-	public function loadSteps()
+	public function flowsteps()
 	{
 		return $this->hasMany('Issue\FlowStep');
 	}
 
-	public function connectedDocuments()
+	public function document()
 	{
 		return $this->belongsToMany('Issue\Document');
 	}

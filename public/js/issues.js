@@ -445,5 +445,9 @@
 				$('#autocomplete-document').append(compiled_template);
 			}
 		);
+
+		$(document).on('click', '[data-toggle=collapse]', function() {
+			$(this).find('span.glyphicon-menu-down').toggleClass('rotate-bot');
+		});
 	});
 })();

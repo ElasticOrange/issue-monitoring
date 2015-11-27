@@ -2,10 +2,31 @@
 	<div class="step connectedSortable" style="margin-top: 15px;" id="step-<%= id%>">
 		<div class="row">
 			<div class="col-sm-1">
-				<div class="accordion-toggle glyphicon glyphicon-menu-down"
+				<label></label>
+			</div>
+			<div class="col-sm-4">
+				<label>Stadiu procedural</label>
+			</div>
+			<div class="col-sm-1">
+				<label>Durata</label>
+			</div>
+			<div class="col-sm-2">
+				<label>Inceput la</label>
+			</div>
+			<div class="col-sm-2">
+				<label>Finalizat la</label>
+			</div>
+			<div class="col-sm-1">
+				<label>Actiuni</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1">
+				<div class="accordion-toggle"
 					data-toggle="collapse"
 					data-target="#collapse-<%= id%>"
 					style="margin-top: -10px;margin-left: 20px;padding: 20px 40px 20px 40px;">
+					<span class="glyphicon glyphicon-menu-down"></span>
 				</div>
 			</div>
 			<div class="col-sm-4">
