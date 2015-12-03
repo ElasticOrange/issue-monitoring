@@ -40,7 +40,7 @@ class CreateIssuesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('issues_translations');
+		Schema::drop('issue_translations');
 		Schema::drop('issues');
 	}
 }

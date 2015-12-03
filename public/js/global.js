@@ -67,7 +67,7 @@ function generateLaravelErrorList(errorList) {
 
 		_.forEach(messageList, function(errorMessage) {
 			resultHtml += '<li>' + errorMessage + '</li>';
-		})
+		});
 	});
 
 	return '<ul>' + resultHtml + '</ul>';
@@ -206,7 +206,7 @@ function submitAjaxForm(form) {
 	});
 
 	request.fail(function(error) {
-		var title = '<strong>' + ($(form).attr('error-message') || 'Error:')  + '</strong><br/>'
+		var title = '<strong>' + ($(form).attr('error-message') || 'Error:')  + '</strong><br/>';
 		var message = title + generateLaravelErrorList(error.responseJSON);
 
 		showErrorMessage(message);

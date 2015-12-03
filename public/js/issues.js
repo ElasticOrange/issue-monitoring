@@ -274,19 +274,23 @@
 		});
 
 
-		$( '#locatii-container').sortable();
-		$( "#locatii-container .location #flowstep" ).sortable({
+		$( '#locations-container').sortable();
+		$( "#locations-container .location #flowstep" ).sortable({
 			connectWith: ".connectedSortable",
 			stop: function( event, ui ) {
 				var strParentId = ui.item.parent().parent().find('[location-name=true]:last').attr('name');
 				var parentId = strParentId.match(/\d+/g);
-				console.log(parentId);
-				var object = ui.item.parent().find('div.step [location-step=true] ');
-				$(object).attr('value', parentId);
+				// console.log(parentId);
+				// var object = ui.item.parent().find('div.step [location-step=true] ');
+				// $(object).attr('value', parentId);
+
+				var object = ui.item.parent().find('div.step :input');
+				for (var i = 0; i < 4; i++) {
+					$(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
+				}
 			}
 		}).disableSelection();
 
-		var compiled = _.template($('#location_template').html());
 
 		var locationsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -302,12 +306,8 @@
 			}
 		});
 
-		$(document).on('click', '.add_location', function(){
-			var template_populated= compiled({
-				'id': _.uniqueId('new-')
-			});
-			var container = $('#locatii-container').append(template_populated);
-			var locationInput = container.find('[location-name=true]:last');
+		function initEventLocation(location) {
+			var locationInput = $('[save-id-to=location-id-' + location + ']');
 
 			locationInput.typeahead(
 				null,
@@ -321,76 +321,76 @@
 			locationInput.bind(
 				'typeahead:select',
 				function(event, suggestion) {
-					$('#locatii-container').find('input[type=hidden]:last').val(suggestion.id);
-
+					$('#location-id-' + location).val(suggestion.id);
 			});
+		}
+
+		$(document).on('click', '.add_location', function(){
+			var locationTemplate = _.template($('#location_template').html());
+			var locationId = _.uniqueId('new-');
+
+			var populateLocationTemplate = locationTemplate({
+				'id': locationId
+			});
+
+			$('#locations-container').append(populateLocationTemplate);
+
+			initEventLocation('location-' + locationId);
 		});
 
-		$('#locatii-container [location-name=true]').one('click', function(){
-			$(this).typeahead(
-				null,
-				{
-					name: 'location',
-					display: 'name',
-					source: locationsList
-				}
-			);
-
-			$(this).bind(
-				'typeahead:select',
-				function(event, suggestion) {
-					$('#locatii-container').find('input[type=hidden]:last').val(suggestion.id);
-
-			});
+		$('#locations-container .location').each(function() {
+			initEventLocation(this.id);
 		});
-
 
 		$(document).on('click', '.delete_location', function() {
-			var selected_id = $(this).attr("delete-id");
-			var result = confirm("Sigur doriti sa stergeti locatia?");
-			if (result) {
-				$('#' + selected_id).remove();
+			var selectedId = $(this).attr("delete-id");
+			if (confirm("Sigur doriti sa stergeti locatia?")) {
+				$('#' + selectedId).remove();
 			}
 		});
 
-		var compiledStep = _.template($('#flowstep_template').html());
 
-
+//FlowSteps
 		$(document).on('click', '.add_flowstep', function(){
-			var getLocationId = $(this).parent().parent().find('[location-name=true]:last').attr('name');
-			var setLocationId = getLocationId.match(/\d+/g);
+			var stepTemplate = _.template($('#flowstep_template').html());
+			var stepId = _.uniqueId('new-');
 
-			var steptemplate_populated= compiledStep({
-				'id': _.uniqueId('new-'),
+			var getLocationId = $(this).parent().parent().find('[location-name=true]:last').attr('name');
+			var setLocationId = getLocationId.match(/\d+/g);//primesc id din template
+
+			var populateStepTemplate = stepTemplate({ //nume var
+				'id': stepId,
 				'location_id': setLocationId
 			});
-			var container = $(this).parent().parent().find('#flowstep').append(steptemplate_populated);
-			$(this).parent().parent().find('div.step input[type=hidden]:last').val(setLocationId);
 
-			var firstDateWidgets = $('[startdate-widget=true]').datetimepicker({
+			$(this).parent().parent().find('#flowstep').append(populateStepTemplate);
+
+			$('#step-id-step-' + stepId).val(setLocationId); //nu ar trebui sa fie
+
+			var startDateWidgets = $('#startdate-widget-' + stepId).datetimepicker({
 				locale: 'ro',
 				format: 'L',
 				defaultDate: moment()
 			});
 
-			$(this).parent().parent().find('div.step [startdate-result=true]:last').val(moment().format("YYYY-MM-DD"));
-			firstDateWidgets.on('dp.change', function () {
+			$('#startdate-result-' + stepId).val(moment().format("YYYY-MM-DD"));
+			startDateWidgets.on('dp.change', function () {
 				var d = $(this).data("DateTimePicker").date();
-				var e = d.format("YYYY-MM-DD");
-				$(this).parent().parent().find('div.step [startdate-result=true]:last').val(e);
+				var e = d.format("DD-MM-YYYY");
+				$('#startdate-result-' + stepId).val(e);
 			});
 
-			var secondDateWidgets = $('[enddate-widget=true]').datetimepicker({
+			var endDateWidgets = $('#enddate-widget-' + stepId).datetimepicker({
 				locale: 'ro',
 				format: 'L',
 				defaultDate: moment()
 			});
 
-			$(this).parent().parent().find('div.step [enddate-result=true]:last').val(moment().format("YYYY-MM-DD"));
-			secondDateWidgets.on('dp.change', function () {
+			$('#enddate-result-' + stepId).val(moment().format("YYYY-MM-DD"));
+			endDateWidgets.on('dp.change', function () {
 				var d = $(this).data("DateTimePicker").date();
 				var e = d.format("YYYY-MM-DD");
-				$(this).parent().parent().find('div.step [enddate-result=true]:last').val(e);
+				$('#enddate-result-' + stepId).val(e);
 			});
 
 		});
@@ -403,6 +403,7 @@
 			}
 		});
 
+//Documents
 		var documentsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -429,7 +430,6 @@
 		$('#document-autocomplete').bind(
 			'typeahead:select',
 			function(event, suggestion) {
-				console.log(suggestion);
 				$(this).typeahead('val', '');
 
 				var template = _.template($('#connected-document-template').html());

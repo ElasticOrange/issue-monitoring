@@ -1,5 +1,5 @@
 <script type="text/template" id="flowstep_template">
-	<div class="step connectedSortable" style="margin-top: 15px;" id="step-<%= id%>">
+	<div class="step connectedSortable" style="margin-top: 15px;" id="location[<%= location_id%>][flow_steps]-<%= id%>">
 		<div class="row">
 			<div class="col-sm-1">
 				<label></label>
@@ -30,29 +30,35 @@
 				</div>
 			</div>
 			<div class="col-sm-4">
-				<input class="form-control" placeholder="Stadiu procedural" name="step[<%= id%>][flow_name]"/>
+				<input class="form-control" placeholder="Stadiu procedural" name="location[<%= location_id%>][flow_steps][<%= id%>][flow_name]"/>
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control" type="number" placeholder="Durata" name="step[<%= id%>][estimated_duration]"/>
+				<input class="form-control" type="number" placeholder="Durata" name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"/>
 			</div>
 			<div class="col-sm-2">
-				<input class="form-control" type="text" startdate-widget="true" placeholder="Inceput la" />
-				<input type="hidden" startdate-result="true" name="step[<%= id%>][start_date]" />
+				<input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" />
+				<input type="hidden" id="startdate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][start_date]" />
 			</div>
 			<div class="col-sm-2">
-				<input class="form-control" type="text" enddate-widget="true" placeholder="Finalizat la" />
-				<input type="hidden" enddate-result="true" name="step[<%= id%>][end_date]" />
+				<input class="form-control" type="text" id="enddate-widget-<%= id%>" placeholder="Finalizat la" />
+				<input type="hidden" id="enddate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][end_date]" />
 			</div>
 			<div class="col-sm-1">
-				<input type="hidden" location-step="true" name="step[<%= id%>][location_step_id]"/>
-				<button type="button" class="btn btn-danger delete_step" delete-id="step-<%= id%>"><span class="glyphicon glyphicon-trash"></span></button>
+				<input type="hidden" id="step-id-step-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][location_step_id]"/>
+				<button type="button" class="btn btn-danger delete_step" delete-id="location[<%= location_id%>][flow_steps]-<%= id%>">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
 			</div>
 		</div>
 		<div class="accordion-body collapse" id="collapse-<%= id%>">
 		<hr>
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#flow-documente-<%= id%>" data-toggle="tab">Documente</a></li>
-				<li><a href="#flow-observatii-<%= id%>" data-toggle="tab">Observatii</a></li>
+				<li class="active">
+					<a href="#flow-documente-<%= id%>" data-toggle="tab">Documente</a>
+				</li>
+				<li>
+					<a href="#flow-observatii-<%= id%>" data-toggle="tab">Observatii</a>
+				</li>
 			</ul>
 			<div class="tab-content">
 				<br/>
@@ -98,10 +104,20 @@
 						</div>
 						<div class="row">
 							<div class="col-md-4 col-md-offset-1">
-								<textarea name="step[<%= id%>][observatii][ro]" class="form-control" style="resize: none;" rows="6" cols="20"></textarea>
+								<textarea name="location[<%= location_id%>][flow_steps][<%= id%>][observatii][ro]"
+									class="form-control"
+									style="resize: none;"
+									rows="6"
+									cols="20">
+								</textarea>
 							</div>
 							<div class="col-md-4 col-md-offset-1">
-								<textarea name="step[<%= id%>][observatii][en]" class="form-control" style="resize: none;" rows="6" cols="20"></textarea>
+								<textarea name="location[<%= location_id%>][flow_steps][<%= id%>][observatii][en]"
+									class="form-control"
+									style="resize: none;"
+									rows="6"
+									cols="20">
+								</textarea>
 							</div>
 						</div>
 					</div><br/>

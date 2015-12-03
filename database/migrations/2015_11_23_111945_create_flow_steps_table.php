@@ -21,9 +21,6 @@ class CreateFlowStepsTable extends Migration
 
 			$table->integer('location_step_id')->unsigned()->index();
 
-			$table->integer('issue_id')->unsigned();
-			$table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
-
 			$table->integer('flowstep_order')->unsigned();
 
 			$table->timestamps();

@@ -113,7 +113,10 @@ class Issue extends Model
 			}
 
 			$currentLocation->fill($locations[$currentLocation->id]);
-			$currentLocation->save();
+			$this->locationsteps()->save($currentLocation);
+			if (array_key_exists('flow_steps', $locations[$currentLocation->id])) {
+				$currentLocation->syncSteps($locations[$currentLocation->id]['flow_steps']);
+			}
 			unset($locations[$currentLocation->id]);
 		}
 
@@ -121,50 +124,11 @@ class Issue extends Model
 			$newLocation = new LocationStep;
 			$newLocation->fill($locationData);
 			$this->locationsteps()->save($newLocation);
-		}
-		return true;
-	}
-
-	public function syncSteps($steps)
-	{
-		$currentSteps = $this->flowsteps()->get();
-
-		if (! is_array($steps)) {
-			$steps = [];
-		}
-
-		$count = 0;
-		foreach ($steps as $id => $step) {
-			$count++;
-			$steps[$id]['flowstep_order'] = $count;
-		}
-
-		foreach ($currentSteps as $currentStep) {
-			if (! array_key_exists($currentStep->id, $steps)) {
-				$currentStep->delete();
-				continue;
+			// dd($locationData);
+			if (array_key_exists('flow_steps', $locationData)) {
+				$newLocation->syncSteps($locationData['flow_steps']);
 			}
-
-			$currentStep->fill($steps[$currentStep->id]);
-
-			foreach (\Config::get('app.all_locales') as $locale) {
-				$currentStep->translateOrNew($locale)->observatii = $steps[$currentStep->id]['observatii'][$locale];
-			}
-
-			$currentStep->save();
-			unset($steps[$currentStep->id]);
 		}
-
-		foreach ($steps as $stepData) {
-			$newLocationStep = new FlowStep;
-			$newLocationStep->fill($stepData);
-
-			foreach (\Config::get('app.all_locales') as $locale) {
-				$newLocationStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
-			}
-			$this->flowsteps()->save($newLocationStep);
-		}
-
 		return true;
 	}
 

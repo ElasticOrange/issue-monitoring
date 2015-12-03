@@ -5,17 +5,28 @@
 			<div class="col-sm-4">
 				<input class="form-control"
 					name="location[<%= id%>][name]"
+					save-id-to="location-id-location-<%= id%>"
 					source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
 					location-name="true"
 				/>
 				<input type="hidden"
+					id="location-id-location-<%= id%>"
 					name="location[<%= id%>][location_id]"
 					value=""
 				/>
 			</div>
 			<div class="col-sm-2">
-				<button type="button" class="btn btn-danger delete_location" delete-id="location-<%= id%>"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
+				<button type="button" class="btn btn-danger delete_location" delete-id="location-<%= id%>">
+					<span class="glyphicon glyphicon-trash"></span> Sterge locatie
+				</button>
 			</div>
+		</div>
+		<div class="form-group">
+			<button type="button"
+				class="btn btn-primary add_flowstep"
+				location-id="<%= id%>">
+				<span class="glyphicon glyphicon-plus"></span> Adauga pas
+			</button>
 		</div>
 
 		<hr>

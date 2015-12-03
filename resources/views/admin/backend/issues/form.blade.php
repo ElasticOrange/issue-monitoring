@@ -329,10 +329,10 @@
 
 	<div class="tab-pane" id="flux">
 		<!-- flux starts here -->
-		<div id="locatii-container">
+		<div id="locations-container">
 			@if(isset($locationSteps))
 				@foreach($locationSteps as $locationStep)
-				<div class="location" id="location{{ $locationStep->id }}">
+				<div class="location" id="location-{{ $locationStep->id }}">
 					<div class="form-group">
 						<label class="control-label col-sm-2">Locatie:</label>
 						<div class="col-sm-4">
@@ -341,21 +341,23 @@
 								source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
 								location-name="true"
 								value="{{ $locationStep->location->name }}"
+								save-id-to="location-id-location-{{ $locationStep->id }}"
 							/>
 							<input type="hidden"
 								name="location[{{ $locationStep->id }}][location_id]"
 								value="{{ $locationStep->location_id }}"
+								id="location-id-location-{{ $locationStep->id }}"
 							/>
 						</div>
 						<div class="col-sm-2">
-							<button type="button" class="btn btn-danger delete_location" delete-id="location{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
+							<button type="button" class="btn btn-danger delete_location" delete-id="location-{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
 						</div>
 					</div>
 					<br/>
 
 					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
-							<div class="step connectedSortable" style="margin-top: 15px;" id="step{{ $step->id }}">
+							<div class="step connectedSortable" style="margin-top: 15px;" id="location-[{{ $locationStep->id }}][flow_steps]{{ $step->id }}">
 								<div class="row">
 									<div class="col-sm-1">
 										<label></label>
@@ -386,22 +388,22 @@
 										</div>
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control" name="step[{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
+										<input class="form-control" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
 									</div>
 									<div class="col-sm-1">
-										<input class="form-control" type="number" name="step[{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
+										<input class="form-control" type="number" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
 									</div>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" startdate-widget="true" name="start_date" value="{{ $step->start_date->format('d-m-Y') }}"/>
-										<input type="hidden" startdate-result="true" name="step[{{ $step->id }}][start_date]" />
+										<input type="hidden" startdate-result="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]" />
 									</div>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" enddate-widget="true" name="end_date" value="{{ $step->end_date->format('d-m-Y') }}"/>
-										<input type="hidden" enddate-result="true" name="step[{{ $step->id }}][end_date]" />
+										<input type="hidden" enddate-result="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]" />
 									</div>
 									<div class="col-sm-1">
-										<input type="hidden" location-step="true" name="step[{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
-										<button type="button" class="btn btn-danger delete_step" delete-id="step{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
+										<input type="hidden" location-step="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
+										<button type="button" class="btn btn-danger delete_step" delete-id="location[{{ $locationStep->id }}][flow_steps]{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 									</div>
 								</div>
 								<div class="accordion-body collapse" id="collapse{{ $step->id }}">
@@ -455,10 +457,10 @@
 												</div>
 												<div class="row">
 													<div class="col-md-4 col-md-offset-1">
-														<textarea name="step[{{ $step->id }}][observatii][ro]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('ro')->observatii }}</textarea>
+														<textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][ro]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('ro')->observatii }}</textarea>
 													</div>
 													<div class="col-md-4 col-md-offset-1">
-														<textarea name="step[{{ $step->id }}][observatii][en]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('en')->observatii }}</textarea>
+														<textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][en]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('en')->observatii }}</textarea>
 													</div>
 												</div>
 											</div><br/>

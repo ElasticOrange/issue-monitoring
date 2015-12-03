@@ -54,7 +54,7 @@ class IssueController extends Controller
 	 */
 	public function store(IssueRequest $request)
 	{
-
+// dd($request->input('location'));
 		$issue = new Issue;
 		$issue->setAll($request);
 		$issue->syncLocations($request->input('location'));
@@ -83,7 +83,7 @@ class IssueController extends Controller
 	 */
 	public function edit($issue)
 	{
-		$locationSteps = $issue->locationSteps()->orderBy('step_order', 'asc')->get();
+		$locationSteps = $issue->locationsteps()->orderBy('step_order', 'asc')->get();
 
 		return view(
 			'admin.backend.issues.edit',
@@ -103,9 +103,11 @@ class IssueController extends Controller
 	 */
 	public function update(Request $request, $issue)
 	{
+		// dd($request->all());
+
+		$locationsData = $request->input('location');
 		$issue->setAll($request);
-		$issue->syncLocations($request->input('location'));
-		$issue->syncSteps($request->input('step'));
+		$issue->syncLocations($locationsData);
 
 		return $issue;
 	}
