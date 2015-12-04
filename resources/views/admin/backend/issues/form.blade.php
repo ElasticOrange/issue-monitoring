@@ -450,7 +450,7 @@
 																	</a>
 																@endif
 															</td>
-															<td>{{ $document->init_at }}</td>
+															<td>{{ $document->init_at->format('d-m-Y') }}</td>
 															<td></td>
 															<td>
 																<a href="{{ action('DocumentController@edit', [$document]) }}" target="_blank" title="Edit">

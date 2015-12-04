@@ -254,6 +254,17 @@ class IssueController extends Controller
 		$documents = Document::whereIn('id', $documentIds)
 							->get();
 
-		return $documents;
+		$result = [];
+		foreach ($documents as $document) {
+			$result[] = [
+				'id' => $document->id,
+				'title' => $document->title,
+				'file' => $document->file->original_file_name,
+				'data' => $document->init_at->format('d-m-Y'),
+				'file_name' => $document->file->file_name
+			];
+		}
+
+		return $result;
 	}
 }

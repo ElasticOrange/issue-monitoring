@@ -431,19 +431,23 @@
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
+				console.log(suggestion);
 
-				var template = _.template($('#connected-document-template').html());
-				var compiled_template = template(
+				var documentsTemplate = _.template($('#connected-document-template').html());
+				var populateDocumentsTemplate = documentsTemplate(
 					{
 						'id': _.uniqueId('new-'),
 						'location_id': _.uniqueId('new-'),
+						'docId': suggestion.id,
 						'title': suggestion.title,
-						'fisier': suggestion.uploaded_file_id,
-						'date': suggestion.init_at
+						'file': suggestion.file,
+						'date': suggestion.data,
+						'fileName': suggestion.file_name,
 					}
 				);
+				console.log(populateDocumentsTemplate);
 
-				$('#autocomplete-document').append(compiled_template);
+				$('#autocomplete-document').append(populateDocumentsTemplate);
 			}
 		);
 
