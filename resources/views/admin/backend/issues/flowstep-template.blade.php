@@ -108,16 +108,14 @@
 									class="form-control"
 									style="resize: none;"
 									rows="6"
-									cols="20">
-								</textarea>
+									cols="20"></textarea>
 							</div>
 							<div class="col-md-4 col-md-offset-1">
 								<textarea name="location[<%= location_id%>][flow_steps][<%= id%>][observatii][en]"
 									class="form-control"
 									style="resize: none;"
 									rows="6"
-									cols="20">
-								</textarea>
+									cols="20"></textarea>
 							</div>
 						</div>
 					</div><br/>

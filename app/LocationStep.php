@@ -51,11 +51,16 @@ class LocationStep extends Model
 
 			$currentStep->fill($steps[$currentStep->id]);
 
-			foreach (\Config::get('app.all_locales') as $locale) {
-				$currentStep->translateOrNew($locale)->observatii = $steps[$currentStep->id]['observatii'][$locale];
+			if (array_key_exists('observatii', $steps[$currentStep->id])) {
+				foreach (\Config::get('app.all_locales') as $locale) {
+					$currentStep->translateOrNew($locale)->observatii = $steps[$currentStep->id]['observatii'][$locale];
+				}
 			}
 
 			$this->flowsteps()->save($currentStep);
+			if (array_key_exists('document_id', $steps[$currentStep->id])) {
+				$currentStep->syncStepDocuments($steps[$currentStep->id]['document_id']);
+			}
 			unset($steps[$currentStep->id]);
 		}
 
@@ -63,10 +68,16 @@ class LocationStep extends Model
 			$newFlowStep = new FlowStep;
 			$newFlowStep->fill($stepData);
 
-			foreach (\Config::get('app.all_locales') as $locale) {
-				$newFlowStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
+			if (array_key_exists('observatii', $stepData)) {
+				foreach (\Config::get('app.all_locales') as $locale) {
+					$newFlowStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
+				}
 			}
 			$this->flowsteps()->save($newFlowStep);
+
+			if (array_key_exists('document_id', $stepData)) {
+				$newFlowStep->syncStepDocuments($stepData['document_id']);
+			}
 		}
 
 		return true;

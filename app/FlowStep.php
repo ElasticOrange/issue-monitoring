@@ -33,8 +33,21 @@ class FlowStep extends Model
 		return $this->belongsTo('Issue\Issue');
 	}
 
-	public function connectedFlowStepDocuments()
+	public function documents()
 	{
-		return $this->belongsTo('Issue\Document');
+		return $this->belongsToMany(
+			'Issue\Document',
+			'document_flow_step',
+			'flow_step_id',
+			'document_id'
+		);
+	}
+
+	public function syncStepDocuments($documents)
+	{
+
+		$this->documents()->sync($documents);
+
+		return true;
 	}
 }

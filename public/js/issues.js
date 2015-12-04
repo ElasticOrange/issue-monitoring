@@ -436,6 +436,7 @@
 				var compiled_template = template(
 					{
 						'id': _.uniqueId('new-'),
+						'location_id': _.uniqueId('new-'),
 						'title': suggestion.title,
 						'fisier': suggestion.uploaded_file_id,
 						'date': suggestion.init_at

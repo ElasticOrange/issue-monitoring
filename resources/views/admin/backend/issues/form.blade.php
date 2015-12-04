@@ -394,11 +394,11 @@
 										<input class="form-control" type="number" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" startdate-widget="true" name="start_date" value="{{ $step->start_date->format('d-m-Y') }}"/>
+										<input type="text" class="form-control" startdate-widget="true" value="{{ $step->start_date->format('d-m-Y') }}"/>
 										<input type="hidden" startdate-result="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]" />
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" enddate-widget="true" name="end_date" value="{{ $step->end_date->format('d-m-Y') }}"/>
+										<input type="text" class="form-control" enddate-widget="true" value="{{ $step->end_date->format('d-m-Y') }}"/>
 										<input type="hidden" enddate-result="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]" />
 									</div>
 									<div class="col-sm-1">

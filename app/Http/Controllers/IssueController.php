@@ -54,7 +54,6 @@ class IssueController extends Controller
 	 */
 	public function store(IssueRequest $request)
 	{
-// dd($request->input('location'));
 		$issue = new Issue;
 		$issue->setAll($request);
 		$issue->syncLocations($request->input('location'));
