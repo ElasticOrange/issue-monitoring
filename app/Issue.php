@@ -114,9 +114,11 @@ class Issue extends Model
 
 			$currentLocation->fill($locations[$currentLocation->id]);
 			$this->locationsteps()->save($currentLocation);
-			if (array_key_exists('flow_steps', $locations[$currentLocation->id])) {
-				$currentLocation->syncSteps($locations[$currentLocation->id]['flow_steps']);
+			if (! array_key_exists('flow_steps', $locations[$currentLocation->id])) {
+				$locations[$currentLocation->id]['flow_steps'] = [];
 			}
+			$currentLocation->syncSteps($locations[$currentLocation->id]['flow_steps']);
+
 			unset($locations[$currentLocation->id]);
 		}
 
@@ -126,8 +128,9 @@ class Issue extends Model
 			$this->locationsteps()->save($newLocation);
 
 			if (array_key_exists('flow_steps', $locationData)) {
-				$newLocation->syncSteps($locationData['flow_steps']);
+				$locationData['flow_steps'] = [];
 			}
+			$newLocation->syncSteps($locationData['flow_steps']);
 		}
 		return true;
 	}

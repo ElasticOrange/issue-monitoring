@@ -1,5 +1,5 @@
 <script type="text/template" id="flowstep_template">
-	<div class="step connectedSortable" style="margin-top: 15px;" id="location[<%= location_id%>][flow_steps]-<%= id%>">
+	<div class="step connectedSortable" style="margin-top: 15px;" id="location-<%= location_id%>-flow_steps-<%= id%>">
 		<div class="row">
 			<div class="col-sm-1">
 				<label></label>
@@ -45,7 +45,7 @@
 			</div>
 			<div class="col-sm-1">
 				<input type="hidden" id="step-id-step-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][location_step_id]"/>
-				<button type="button" class="btn btn-danger delete_step" delete-id="location[<%= location_id%>][flow_steps]-<%= id%>">
+				<button type="button" class="btn btn-danger delete_step" delete-id="location-<%= location_id%>-flow_steps-<%= id%>">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</div>

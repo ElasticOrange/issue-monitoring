@@ -21,7 +21,7 @@ class LocationStep extends Model
 
 	public function location()
 	{
-		return $this->belongsTo('Issue\Location', 'location_id');
+		return $this->belongsTo('Issue\Location');
 	}
 
 	public function flowsteps()
@@ -42,7 +42,6 @@ class LocationStep extends Model
 			$index++;
 			$steps[$id]['flowstep_order'] = $index;
 		}
-
 		foreach ($currentSteps as $currentStep) {
 			if (! array_key_exists($currentStep->id, $steps)) {
 				$currentStep->delete();

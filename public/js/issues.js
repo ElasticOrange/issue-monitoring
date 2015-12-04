@@ -277,16 +277,16 @@
 		$( '#locations-container').sortable();
 		$( "#locations-container .location #flowstep" ).sortable({
 			connectWith: ".connectedSortable",
-			stop: function( event, ui ) {
-				var strParentId = ui.item.parent().parent().find('[location-name=true]:last').attr('name');
-				var parentId = strParentId.match(/\d+/g);
-				// console.log(parentId);
-				// var object = ui.item.parent().find('div.step [location-step=true] ');
-				// $(object).attr('value', parentId);
+			stop: function(event, ui) {
 
-				var object = ui.item.parent().find('div.step :input');
-				for (var i = 0; i < 4; i++) {
-					$(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
+				var strParentId = ui.item.parents('.location').attr('id');
+				var parentId = strParentId.match(/\d+/g);
+
+				var object = $(ui.item).find(':input');
+				for (var i = 0; i < object.length; i++) {
+					if($(object[i]).attr('name')) {
+						$(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
+					}
 				}
 			}
 		}).disableSelection();

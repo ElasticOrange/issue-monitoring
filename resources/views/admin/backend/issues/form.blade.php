@@ -357,7 +357,7 @@
 
 					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
-							<div class="step connectedSortable" style="margin-top: 15px;" id="location-[{{ $locationStep->id }}][flow_steps]{{ $step->id }}">
+							<div class="step connectedSortable" style="margin-top: 15px;" id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}">
 								<div class="row">
 									<div class="col-sm-1">
 										<label></label>
@@ -403,7 +403,7 @@
 									</div>
 									<div class="col-sm-1">
 										<input type="hidden" location-step="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
-										<button type="button" class="btn btn-danger delete_step" delete-id="location[{{ $locationStep->id }}][flow_steps]{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
+										<button type="button" class="btn btn-danger delete_step" delete-id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 									</div>
 								</div>
 								<div class="accordion-body collapse" id="collapse{{ $step->id }}">
