@@ -447,6 +447,11 @@
 			}
 		);
 
+		$('#autocomplete-document').on('click', '[connected-document-delete]', function() {
+			var connectedDocumentId = $(this).attr('connected-document-delete');
+			$('#' + connectedDocumentId).remove();
+		});
+
 		$(document).on('click', '[data-toggle=collapse]', function() {
 			$(this).find('span.glyphicon-menu-down').toggleClass('rotate-bot');
 		});

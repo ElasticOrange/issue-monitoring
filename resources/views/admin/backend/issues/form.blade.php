@@ -439,14 +439,40 @@
 													</tr>
 												</thead>
 												<tbody id="autocomplete-document">
-													<tr>
-														<th>
-															Niciun document adaugat
-														</th>
-													</tr>
+													@foreach($step->documents()->get() as $document)
+														<tr id="document-{{ $document->id }}">
+															<th>{{ $document->title }}</th>
+															<td>
+																@if($document->file)
+																	<a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank">
+																		<i class="fa fa-file-pdf-o"></i>
+																		{{ $document->file->original_file_name }}
+																	</a>
+																@endif
+															</td>
+															<td>{{ $document->init_at }}</td>
+															<td></td>
+															<td>
+																<a href="{{ action('DocumentController@edit', [$document]) }}" target="_blank" title="Edit">
+																	<span class="glyphicon glyphicon-pencil" style="margin-right: 15px;"></span>
+																</a>
+																<a class="badge" connected-document-delete="document-{{ $document->id }}">
+																	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+																</a>
+															</td>
+															<input type="hidden"
+															name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][document_id][]"
+															value="{{ $document->id }}" />
+														</tr>
+													@endforeach
 													@include('admin.backend.issues.connected-documents')
 												</tbody>
 											</table>
+											<hr>
+
+											<a href="{{ action('DocumentController@create') }}" class="btn btn-primary" target="_blank" style="margin-left: 10px;">
+												<span class="glyphicon glyphicon-plus"></span> Adauga Document
+											</a>
 										</div>
 										<div class="tab-pane" id="flow-observatii{{ $step->id }}">
 											<br/>
@@ -465,7 +491,7 @@
 												</div>
 											</div><br/>
 										</div>
-										<hr>
+										<br />
 									</div>
 								</div>
 							</div>
