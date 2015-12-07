@@ -127,7 +127,7 @@ class Issue extends Model
 			$newLocation->fill($locationData);
 			$this->locationsteps()->save($newLocation);
 
-			if (array_key_exists('flow_steps', $locationData)) {
+			if (! array_key_exists('flow_steps', $locationData)) {
 				$locationData['flow_steps'] = [];
 			}
 			$newLocation->syncSteps($locationData['flow_steps']);

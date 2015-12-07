@@ -508,6 +508,7 @@
 				@endforeach
 			@endif
 			@include('admin.backend.issues.location-template')
+			@include('admin.backend.issues.flowstep-template')
 		</div>
 		<button type="button" class="btn btn-primary add_location"><span class="glyphicon glyphicon-plus"></span> Adauga locatie</button>
 

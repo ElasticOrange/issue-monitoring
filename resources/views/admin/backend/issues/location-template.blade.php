@@ -21,14 +21,15 @@
 				</button>
 			</div>
 		</div>
-		<div class="form-group">
-			<button type="button"
-				class="btn btn-primary add_flowstep"
-				location-id="<%= id%>">
-				<span class="glyphicon glyphicon-plus"></span> Adauga pas
-			</button>
-		</div>
 
+		<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
+		</div><br/>
+
+		<button type="button"
+			class="btn btn-primary add_flowstep"
+			location-id="<%= id%>">
+			<span class="glyphicon glyphicon-plus"></span> Adauga pas
+		</button>
 		<hr>
 	</div>
 </script>

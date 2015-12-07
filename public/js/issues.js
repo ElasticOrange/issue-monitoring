@@ -355,17 +355,19 @@
 			var stepTemplate = _.template($('#flowstep_template').html());
 			var stepId = _.uniqueId('new-');
 
-			var getLocationId = $(this).parent().parent().find('[location-name=true]:last').attr('name');
-			var setLocationId = getLocationId.match(/\d+/g);//primesc id din template
+			var getLocationId = $(this).parent().find('input[location-name]');
+			getLocationId = $(getLocationId[1]).attr('name');
 
-			var populateStepTemplate = stepTemplate({ //nume var
+			var setLocationId = getLocationId.match(/\[([a-z-0-9]*)\]/i);
+
+			var populateStepTemplate = stepTemplate({
 				'id': stepId,
-				'location_id': setLocationId
+				'location_id': setLocationId[1]
 			});
 
-			$(this).parent().parent().find('#flowstep').append(populateStepTemplate);
+			$(this).parent().find('#flowstep').append(populateStepTemplate);
 
-			$('#step-id-step-' + stepId).val(setLocationId); //nu ar trebui sa fie
+			$('#step-id-step-' + stepId).val('['+setLocationId[1]+']');
 
 			var startDateWidgets = $('#startdate-widget-' + stepId).datetimepicker({
 				locale: 'ro',
