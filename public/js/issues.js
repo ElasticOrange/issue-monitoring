@@ -390,7 +390,7 @@
 			});
 		}
 
-		$(document).on('click', '.add_flowstep', function(){
+		$(document).on('click', '.add_flowstep', function() {
 			var stepTemplate = _.template($('#flowstep_template').html());
 			var stepId = _.uniqueId('new-');
 
@@ -405,6 +405,7 @@
 
 			var edit = 0;
 			initFlowStepDate(stepId, edit);
+			initDocumentsTypeahead(stepId, locationId);
 		});
 
 		$('.location-step').each(function() {
@@ -413,63 +414,71 @@
 			initFlowStepDate(stepId, edit);
 		});
 
+		$('.documente').each(function() {
+			var stepId = $(this).attr('doc-step-id');
+			var locationId = $(this).attr('doc-location-id');
+			initDocumentsTypeahead(stepId, locationId);
+		});
+
 		$(document).on('click', '.delete_step', function() {
 			var selected_id = $(this).attr("delete-id");
-			var result = confirm("Sigur doriti sa stergeti locatia?");
-			if (result) {
+			if (confirm("Sigur doriti sa stergeti locatia?")) {
 				$('#' + selected_id).remove();
 			}
 		});
 
 //Documents
-		var documentsList = new Bloodhound({
-			queryTokenizer: Bloodhound.tokenizers.whitespace,
-			datumTokenizer: Bloodhound.tokenizers.whitespace,
-			remote: {
-				url: $('#document-autocomplete').attr('source-url'),
-				wildcard: '{name}',
-				transform: function (response) {
-					return _.filter(response, function(item){
-						return $('[document-id=' + item.id + ']').length === 0;
-					});
-				}
-			}
-		});
-
-		$('#document-autocomplete').typeahead(
-			null,
-			{
-				name: 'document',
-				display: 'title',
-				source: documentsList
-			}
-		);
-
-		$('#document-autocomplete').bind(
-			'typeahead:select',
-			function(event, suggestion) {
-				$(this).typeahead('val', '');
-
-				var documentsTemplate = _.template($('#connected-document-template').html());
-				var populateDocumentsTemplate = documentsTemplate(
-					{
-						'id': _.uniqueId('new-'),
-						'location_id': _.uniqueId('new-'),
-						'docId': suggestion.id,
-						'title': suggestion.title,
-						'file': suggestion.file,
-						'date': suggestion.data,
-						'fileName': suggestion.file_name,
+		function initDocumentsTypeahead(stepId, locationId) {
+			var documentsList = new Bloodhound({
+				queryTokenizer: Bloodhound.tokenizers.whitespace,
+				datumTokenizer: Bloodhound.tokenizers.whitespace,
+				remote: {
+					url: $('#document-autocomplete-' + stepId).attr('source-url'),
+					wildcard: '{name}',
+					transform: function (response) {
+						return _.filter(response, function(item){
+							return $('[document-id=' + item.id + ']').length === 0;
+						});
 					}
-				);
+				}
+			});
 
-				$('#autocomplete-document').append(populateDocumentsTemplate);
+			$('#document-autocomplete-' + stepId).typeahead(
+				null,
+				{
+					name: 'document',
+					display: 'title',
+					source: documentsList
+				}
+			);
+
+			$('#document-autocomplete-' + stepId).bind(
+				'typeahead:select',
+				function(event, suggestion) {
+					$(this).typeahead('val', '');
+
+					var documentsTemplate = _.template($('#connected-document-template').html());
+					var populateDocumentsTemplate = documentsTemplate(
+						{
+							'id': stepId,
+							'location_id': locationId,
+							'docId': suggestion.id,
+							'title': suggestion.title,
+							'file': suggestion.file,
+							'date': suggestion.data,
+							'fileName': suggestion.file_name
+						}
+					);
+					$('#autocomplete-document-' + stepId).append(populateDocumentsTemplate);
+				}
+			);
+		}
+
+		$(document).on('click', '.delete_document', function() {
+			var selected_id = $(this).attr("connected-document-delete");
+			if (confirm("Doriti sa stergeti documentul?")) {
+				$('#' + selected_id).remove();
 			}
-		);
-
-		$('#autocomplete-document').on('click', '[connected-document-delete]', function() {
-			var connectedDocumentId = $(this).attr('connected-document-delete');
-			$('#' + connectedDocumentId).remove();
 		});
 
 		$(document).on('click', '[data-toggle=collapse]', function() {

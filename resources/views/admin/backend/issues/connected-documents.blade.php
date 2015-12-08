@@ -13,7 +13,7 @@
 			<a href="/backend/document/<%= docId%>/edit" target="_blank" title="Edit">
 				<span class="glyphicon glyphicon-pencil" style="margin-right: 15px;"></span>
 			</a>
-			<a class="badge" connected-document-delete="document-<%= id %>">
+			<a class="badge delete_document" connected-document-delete="document-<%= id %>">
 				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 			</a>
 		</td>

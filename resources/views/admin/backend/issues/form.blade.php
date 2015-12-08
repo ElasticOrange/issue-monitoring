@@ -428,11 +428,13 @@
 											<div class="row">
 												<div class="col-lg-10 col-lg-offset-1">
 													<input
-														id="document-autocomplete"
+														id="document-autocomplete-{{ $step->id }}"
 														source-url="{{ action('IssueController@queryDocument') }}/?name={name}"
 														type="text"
 														placeholder="Cauta document"
-														class="form-control"
+														class="form-control documente"
+														doc-step-id="{{ $step->id }}"
+														doc-location-id="{{ $locationStep->id }}"
 													/>
 												</div>
 											</div>
@@ -447,7 +449,7 @@
 														<th style="width: 5%;">Actiuni</th>
 													</tr>
 												</thead>
-												<tbody id="autocomplete-document">
+												<tbody id="autocomplete-document-{{ $step->id }}">
 													@foreach($step->documents()->get() as $document)
 														<tr id="document-{{ $document->id }}">
 															<th>{{ $document->title }}</th>
@@ -465,7 +467,7 @@
 																<a href="{{ action('DocumentController@edit', [$document]) }}" target="_blank" title="Edit">
 																	<span class="glyphicon glyphicon-pencil" style="margin-right: 15px;"></span>
 																</a>
-																<a class="badge" connected-document-delete="document-{{ $document->id }}">
+																<a class="badge delete_document" connected-document-delete="document-{{ $document->id }}">
 																	<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 																</a>
 															</td>
@@ -474,7 +476,6 @@
 															value="{{ $document->id }}" />
 														</tr>
 													@endforeach
-													@include('admin.backend.issues.connected-documents')
 												</tbody>
 											</table>
 											<hr>
@@ -518,6 +519,7 @@
 			@endif
 			@include('admin.backend.issues.location-template')
 			@include('admin.backend.issues.flowstep-template')
+			@include('admin.backend.issues.connected-documents')
 		</div>
 		<button type="button" class="btn btn-primary add_location"><span class="glyphicon glyphicon-plus"></span> Adauga locatie</button>
 

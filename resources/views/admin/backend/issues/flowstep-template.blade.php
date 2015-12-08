@@ -67,11 +67,13 @@
 					<div class="row">
 						<div class="col-lg-10 col-lg-offset-1">
 							<input
-								id="document-autocomplete"
+								id="document-autocomplete-<%= id%>"
 								source-url="{{ action('IssueController@queryDocument') }}/?name={name}"
 								type="text"
 								placeholder="Cauta document"
-								class="form-control"
+								class="form-control documente"
+								doc-step-id="<%= id%>"
+								doc-location-id="<%= location_id%>"
 							/>
 						</div>
 					</div>
@@ -86,7 +88,7 @@
 								<th style="width: 5%;">Actiuni</th>
 							</tr>
 						</thead>
-						<tbody id="autocomplete-document">
+						<tbody id="autocomplete-document-<%= id%>">
 							<tr>
 								<th>
 									Niciun document adaugat
