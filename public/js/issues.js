@@ -275,7 +275,7 @@
 
 
 		$( '#locations-container').sortable();
-		$( "#locations-container .location #flowstep" ).sortable({
+		$( "#locations-container .location .step" ).sortable({
 			connectWith: ".connectedSortable",
 			stop: function(event, ui) {
 
@@ -351,50 +351,66 @@
 
 
 //FlowSteps
+		function initFlowStepDate(flowStepId, edit) {
+			var startDateWidgets = $('#startdate-widget-' + flowStepId).datetimepicker({
+				locale: 'ro',
+				format: 'L',
+				defaultDate: moment()
+			});
+
+			if(edit == 0) {
+				$('#startdate-result-' + flowStepId).val(moment().format("YYYY-MM-DD"));
+			}
+			else {
+				$('#startdate-result-' + flowStepId).val(($('#startdate-widget-' + flowStepId).val()).split(".").reverse().join("-"));
+			}
+
+			startDateWidgets.on('dp.change', function () {
+				var d = $(this).data("DateTimePicker").date();
+				var e = d.format("YYYY-MM-DD");
+				$('#startdate-result-' + flowStepId).val(e);
+			});
+
+			var endDateWidgets = $('#enddate-widget-' + flowStepId).datetimepicker({
+				locale: 'ro',
+				format: 'L',
+				defaultDate: moment()
+			});
+
+			if(edit == 0) {
+				$('#enddate-result-' + flowStepId).val(moment().format("YYYY-MM-DD"));
+			}
+			else {
+				$('#enddate-result-' + flowStepId).val(($('#enddate-widget-' + flowStepId).val()).split(".").reverse().join("-"));
+			}
+			endDateWidgets.on('dp.change', function () {
+				var d = $(this).data("DateTimePicker").date();
+				var e = d.format("YYYY-MM-DD");
+				$('#enddate-result-' + flowStepId).val(e);
+			});
+		}
+
 		$(document).on('click', '.add_flowstep', function(){
 			var stepTemplate = _.template($('#flowstep_template').html());
 			var stepId = _.uniqueId('new-');
 
-			var getLocationId = $(this).parent().find('input[location-name]');
-			getLocationId = $(getLocationId[1]).attr('name');
-
-			var setLocationId = getLocationId.match(/\[([a-z-0-9]*)\]/i);
+			var locationId = $(this).attr('location-id');
 
 			var populateStepTemplate = stepTemplate({
 				'id': stepId,
-				'location_id': setLocationId[1]
+				'location_id': locationId
 			});
 
-			$(this).parent().find('#flowstep').append(populateStepTemplate);
+			$('#flow-container-' + locationId).append(populateStepTemplate);
 
-			$('#step-id-step-' + stepId).val('['+setLocationId[1]+']');
+			var edit = 0;
+			initFlowStepDate(stepId, edit);
+		});
 
-			var startDateWidgets = $('#startdate-widget-' + stepId).datetimepicker({
-				locale: 'ro',
-				format: 'L',
-				defaultDate: moment()
-			});
-
-			$('#startdate-result-' + stepId).val(moment().format("YYYY-MM-DD"));
-			startDateWidgets.on('dp.change', function () {
-				var d = $(this).data("DateTimePicker").date();
-				var e = d.format("DD-MM-YYYY");
-				$('#startdate-result-' + stepId).val(e);
-			});
-
-			var endDateWidgets = $('#enddate-widget-' + stepId).datetimepicker({
-				locale: 'ro',
-				format: 'L',
-				defaultDate: moment()
-			});
-
-			$('#enddate-result-' + stepId).val(moment().format("YYYY-MM-DD"));
-			endDateWidgets.on('dp.change', function () {
-				var d = $(this).data("DateTimePicker").date();
-				var e = d.format("YYYY-MM-DD");
-				$('#enddate-result-' + stepId).val(e);
-			});
-
+		$('.location-step').each(function() {
+			var stepId = $(this).attr('step-id');
+			var edit = 1;
+			initFlowStepDate(stepId, edit);
 		});
 
 		$(document).on('click', '.delete_step', function() {
@@ -433,7 +449,6 @@
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
-				console.log(suggestion);
 
 				var documentsTemplate = _.template($('#connected-document-template').html());
 				var populateDocumentsTemplate = documentsTemplate(
@@ -447,7 +462,6 @@
 						'fileName': suggestion.file_name,
 					}
 				);
-				console.log(populateDocumentsTemplate);
 
 				$('#autocomplete-document').append(populateDocumentsTemplate);
 			}

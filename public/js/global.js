@@ -273,34 +273,6 @@ $(document).ready(function() {
 		$('[name=date]').val(e);
 	});
 
-	var firstDateWidgets = $('[startdate-widget=true]').datetimepicker({
-		locale: 'ro',
-		format: 'L',
-		defaultDate: moment()
-	});
-
-	$('[startdate-result=true]').val(moment().format("YYYY-MM-DD"));
-
-	firstDateWidgets.on('dp.change', function () {
-		var d = $(this).data("DateTimePicker").date();
-		var e = d.format("YYYY-MM-DD");
-		$('[startdate-result=true]').val(e);
-	});
-
-	var secondDateWidgets = $('[enddate-widget=true]').datetimepicker({
-		locale: 'ro',
-		format: 'L',
-		defaultDate: moment()
-	});
-
-	$('[enddate-result=true]').val(moment().format("YYYY-MM-DD"));
-
-	secondDateWidgets.on('dp.change', function () {
-		var d = $(this).data("DateTimePicker").date();
-		var e = d.format("YYYY-MM-DD");
-		$('[enddate-result=true]').val(e);
-	});
-
 	$('input[type=file]')
 		.change(function() {
 			var fileName = getFileNameFromPath($(this).val());

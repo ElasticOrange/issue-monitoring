@@ -355,9 +355,13 @@
 					</div>
 					<br/>
 
-					<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
+					<div id="flow-container-{{ $locationStep->id }}" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
-							<div class="step connectedSortable" style="margin-top: 15px;" id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}">
+							<div class="location-step connectedSortable"
+								style="margin-top: 15px;"
+								id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"
+								step-id="{{ $step->id }}"
+								>
 								<div class="row">
 									<div class="col-sm-1">
 										<label></label>
@@ -394,15 +398,20 @@
 										<input class="form-control" type="number" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" startdate-widget="true" value="{{ $step->start_date->format('d-m-Y') }}"/>
-										<input type="hidden" startdate-result="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]" />
+										<input type="text" class="form-control" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>
+										<input type="hidden"
+											id="startdate-result-{{ $step->id }}"
+											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]"
+										/>
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" enddate-widget="true" value="{{ $step->end_date->format('d-m-Y') }}"/>
-										<input type="hidden" enddate-result="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]" />
+										<input type="text" class="form-control" id="enddate-widget-{{ $step->id }}" value="{{ $step->end_date->format('d-m-Y') }}"/>
+										<input type="hidden"
+											id="enddate-result-{{ $step->id }}"
+											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]"
+										/>
 									</div>
 									<div class="col-sm-1">
-										<input type="hidden" location-step="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][location_step_id]" value="{{ $step->location_step_id }}" />
 										<button type="button" class="btn btn-danger delete_step" delete-id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 									</div>
 								</div>
@@ -500,7 +509,7 @@
 					</div>
 					<br/>
 					<div class="form-group">
-						<button type="button" class="btn btn-primary add_flowstep"><span class="glyphicon glyphicon-plus"></span> Adauga pas</button>
+						<button type="button" location-id="{{ $locationStep->id }}" class="btn btn-primary add_flowstep"><span class="glyphicon glyphicon-plus"></span> Adauga pas</button>
 					</div>
 					<br/><br/>
 					<hr>

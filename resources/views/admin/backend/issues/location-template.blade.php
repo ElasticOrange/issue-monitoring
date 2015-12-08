@@ -22,7 +22,7 @@
 			</div>
 		</div>
 
-		<div id="flowstep" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
+		<div id="flow-container-<%= id%>" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
 		</div><br/>
 
 		<button type="button"

@@ -1,5 +1,5 @@
 <script type="text/template" id="flowstep_template">
-	<div class="step connectedSortable" style="margin-top: 15px;" id="location-<%= location_id%>-flow_steps-<%= id%>">
+	<div class="step connectedSortable" style="margin-top: 15px;" step-id="<%= id%>" id="location-<%= location_id%>-flow_steps-<%= id%>">
 		<div class="row">
 			<div class="col-sm-1">
 				<label></label>
