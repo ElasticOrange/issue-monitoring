@@ -57,9 +57,10 @@ class LocationStep extends Model
 			}
 
 			$this->flowsteps()->save($currentStep);
-			if (array_key_exists('document_id', $steps[$currentStep->id])) {
-				$currentStep->syncStepDocuments($steps[$currentStep->id]['document_id']);
+			if (!array_key_exists('document_id', $steps[$currentStep->id])) {
+				$steps[$currentStep->id]['document_id'] = [];
 			}
+			$currentStep->syncStepDocuments($steps[$currentStep->id]['document_id']);
 			unset($steps[$currentStep->id]);
 		}
 
@@ -74,9 +75,10 @@ class LocationStep extends Model
 			}
 			$this->flowsteps()->save($newFlowStep);
 
-			if (array_key_exists('document_id', $stepData)) {
-				$newFlowStep->syncStepDocuments($stepData['document_id']);
+			if (!array_key_exists('document_id', $stepData)) {
+				$stepData['document_id'] = [];
 			}
+			$newFlowStep->syncStepDocuments($stepData['document_id']);
 		}
 
 		return true;
