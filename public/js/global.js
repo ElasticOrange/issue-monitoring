@@ -293,6 +293,7 @@ $(document).ready(function() {
 		}
 		else
 		{
+			ev.stopImmediatePropagation();
 			ev.preventDefault();
 			return false;
 		}

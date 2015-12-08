@@ -344,7 +344,7 @@
 
 		$(document).on('click', '.delete_location', function() {
 			var selectedId = $(this).attr("delete-id");
-			if (confirm("Sigur doriti sa stergeti locatia?")) {
+			if (confirm("Doriti sa stergeti locatia ?")) {
 				$('#' + selectedId).remove();
 			}
 		});
@@ -422,7 +422,7 @@
 
 		$(document).on('click', '.delete_step', function() {
 			var selected_id = $(this).attr("delete-id");
-			if (confirm("Sigur doriti sa stergeti locatia?")) {
+			if (confirm("Doriti sa stergeti pasul ?")) {
 				$('#' + selected_id).remove();
 			}
 		});
@@ -476,7 +476,7 @@
 
 		$(document).on('click', '.delete_document', function() {
 			var selected_id = $(this).attr("connected-document-delete");
-			if (confirm("Doriti sa stergeti documentul?")) {
+			if (confirm("Doriti sa stergeti documentul ?")) {
 				$('#' + selected_id).remove();
 			}
 		});
