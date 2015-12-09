@@ -49,6 +49,9 @@
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</div>
+            <div class="col-sm-1" style="cursor: pointer; cursor: hand; padding: 0;">
+                <span class="step-handle glyphicon glyphicon-move" style="padding: 10px; right: -40px;"></span>
+            </div>
 		</div>
 		<div class="accordion-body collapse panel panel-primary" id="collapse-<%= id%>">
 			<ul class="nav nav-tabs">

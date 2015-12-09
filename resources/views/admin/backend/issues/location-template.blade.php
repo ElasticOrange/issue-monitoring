@@ -20,6 +20,9 @@
 					<span class="glyphicon glyphicon-trash"></span> Sterge locatie
 				</button>
 			</div>
+            <div class="col-sm-1 col-sm-offset-3" style="cursor: pointer; cursor: hand;">
+                <span class="glyphicon glyphicon-move location-handle" style="padding: 10px; right: -40px;"></span>
+            </div>
 		</div><br/>
 
 		<div id="flow-container-<%= id%>" class="panel panel-primary step connectedSortable" style="min-height: 90px;">

@@ -352,9 +352,11 @@
 						<div class="col-sm-2">
 							<button type="button" class="btn btn-danger delete_location" delete-id="location-{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
 						</div>
+                        <div class="col-sm-1 col-sm-offset-3" style="cursor: pointer; cursor: hand;">
+                            <span class="glyphicon glyphicon-move location-handle" style="padding: 10px; right: -40px;"></span>
+                        </div>
 					</div>
 					<br/>
-
 					<div id="flow-container-{{ $locationStep->id }}" class="panel panel-primary step connectedSortable" style="min-height: 90px;" >
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
 							<div class="location-step connectedSortable"
@@ -414,6 +416,9 @@
 									<div class="col-sm-1">
 										<button type="button" class="btn btn-danger delete_step" delete-id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 									</div>
+                                    <div class="col-sm-1" style="cursor: pointer; cursor: hand; padding: 0;">
+                                        <span class="glyphicon glyphicon-move step-handle" style="padding: 10px; right: -40px;"></span>
+                                    </div>
 								</div>
 								<div class="accordion-body collapse panel panel-primary" id="collapse{{ $step->id }}">
                                     <br/>

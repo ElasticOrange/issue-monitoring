@@ -274,7 +274,9 @@
 		});
 
 
-		$( '#locations-container').sortable();
+		$( '#locations-container').sortable({
+            //handle:".location-handle"
+        });
 		$( "#locations-container .location .step" ).sortable({
 			connectWith: ".connectedSortable",
 			stop: function(event, ui) {
