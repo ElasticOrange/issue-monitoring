@@ -510,7 +510,6 @@
 								</div>
 							</div>
 						@endforeach
-						@include('admin.backend.issues.flowstep-template')
 					</div>
 					<br/>
 						<button type="button" location-id="{{ $locationStep->id }}" class="btn btn-primary add_flowstep"><span class="glyphicon glyphicon-plus"></span> Adauga pas</button>

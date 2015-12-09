@@ -275,10 +275,11 @@
 
 
 		$( '#locations-container').sortable({
-            //handle:".location-handle"
+            handle:".location-handle"
         });
 		$( "#locations-container .location .step" ).sortable({
 			connectWith: ".connectedSortable",
+            handle: ".step-handle",
 			stop: function(event, ui) {
 
 				var strParentId = ui.item.parents('.location').attr('id');
