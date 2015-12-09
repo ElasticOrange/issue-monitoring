@@ -416,14 +416,16 @@
                 stop: function(event, ui) {
 
                     var strParentId = ui.item.parents('.location').attr('id');
-                    console.log('strparentid',strParentId);
-                    var parentId = strParentId.match(/\d+/g);
-                    console.log('parentid',parentId);
+                    var parentId = strParentId.match(/(\d+)/g);
 
                     var object = $(ui.item).find(':input');
                     for (var i = 0; i < object.length; i++) {
                         if($(object[i]).attr('name')) {
-                            $(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
+                            var itemNameAttr = $(object[i]).attr('name');
+                            var regexResult =  /(^location\[)([a-z0-9-]+)(\].+)/.exec(itemNameAttr);
+                            var newNameAttr = regexResult[1] + parentId + regexResult[3];
+
+                            $(object[i]).attr('name', newNameAttr);
                         }
                     }
                 }
