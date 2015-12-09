@@ -25,7 +25,7 @@
             </div>
 		</div><br/>
 
-		<div id="flow-container-<%= id%>" class="panel panel-primary step connectedSortable ui-sortable" style="min-height: 90px;">
+		<div id="flow-container-<%= id%>" class="panel panel-primary step-sort connectedSteps" style="min-height: 90px;">
 		</div><br/>
 
 		<button type="button"

@@ -357,9 +357,9 @@
                         </div>
 					</div>
 					<br/>
-					<div id="flow-container-{{ $locationStep->id }}" class="panel panel-primary step connectedSortable" style="min-height: 90px;" >
+					<div id="flow-container-{{ $locationStep->id }}" class="panel panel-primary step-sort connectedSteps" style="min-height: 90px;" >
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
-							<div class="location-step connectedSortable"
+							<div class="location-step"
 								style="margin-top: 15px;"
 								id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"
 								step-id="{{ $step->id }}"

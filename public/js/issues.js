@@ -277,8 +277,8 @@
 		$( '#locations-container').sortable({
             handle:".location-handle"
         });
-		$( "#locations-container .location .step" ).sortable({
-			connectWith: ".connectedSortable",
+		$( "div.step-sort" ).sortable({
+			connectWith: ".connectedSteps",
             handle: ".step-handle",
 			stop: function(event, ui) {
 
@@ -409,6 +409,26 @@
 			var edit = 0;
 			initFlowStepDate(stepId, edit);
 			initDocumentsTypeahead(stepId, locationId);
+
+            $("div.step-sort").sortable({
+                connectWith: ".connectedSteps",
+                handle: ".step-handle",
+                stop: function(event, ui) {
+
+                    var strParentId = ui.item.parents('.location').attr('id');
+                    console.log('strparentid',strParentId);
+                    var parentId = strParentId.match(/\d+/g);
+                    console.log('parentid',parentId);
+
+                    var object = $(ui.item).find(':input');
+                    for (var i = 0; i < object.length; i++) {
+                        if($(object[i]).attr('name')) {
+                            $(object[i]).attr('name', ($(object[i]).attr('name').replace(/(\d+)/i, parentId)));
+                        }
+                    }
+                }
+            }).disableSelection();
+
 		});
 
 		$('.location-step').each(function() {
