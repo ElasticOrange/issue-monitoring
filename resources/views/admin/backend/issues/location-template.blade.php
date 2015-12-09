@@ -1,6 +1,6 @@
 <script type="text/template" id="location_template">
-	<div class="location" id="location-<%= id%>">
-		<div class="form-group">
+	<div class="location panel panel-default" id="location-<%= id%>">
+		<div class="form-group panel-heading" style="margin: 0px;">
 			<label class="control-label col-sm-2">Locatie:</label>
 			<div class="col-sm-4">
 				<input class="form-control"
@@ -20,16 +20,17 @@
 					<span class="glyphicon glyphicon-trash"></span> Sterge locatie
 				</button>
 			</div>
-		</div>
+		</div><br/>
 
-		<div id="flow-container-<%= id%>" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
+		<div id="flow-container-<%= id%>" class="panel panel-primary step connectedSortable" style="min-height: 90px;">
 		</div><br/>
 
 		<button type="button"
 			class="btn btn-primary add_flowstep"
-			location-id="<%= id%>">
+			location-id="<%= id%>"
+            style="margin-bottom: 20px;"
+            >
 			<span class="glyphicon glyphicon-plus"></span> Adauga pas
 		</button>
-		<hr>
 	</div>
 </script>

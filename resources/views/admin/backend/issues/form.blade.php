@@ -332,8 +332,8 @@
 		<div id="locations-container">
 			@if(isset($locationSteps))
 				@foreach($locationSteps as $locationStep)
-				<div class="location" id="location-{{ $locationStep->id }}">
-					<div class="form-group">
+				<div class="location panel panel-default" id="location-{{ $locationStep->id }}">
+					<div class="form-group panel-heading" style="margin: 0px;">
 						<label class="control-label col-sm-2">Locatie:</label>
 						<div class="col-sm-4">
 							<input class="form-control"
@@ -355,7 +355,7 @@
 					</div>
 					<br/>
 
-					<div id="flow-container-{{ $locationStep->id }}" class="step connectedSortable" style="min-height: 15px; border: 1px solid black; margin-bot: 5px;">
+					<div id="flow-container-{{ $locationStep->id }}" class="panel panel-primary step connectedSortable" style="min-height: 90px;" >
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)
 							<div class="location-step connectedSortable"
 								style="margin-top: 15px;"
@@ -415,8 +415,8 @@
 										<button type="button" class="btn btn-danger delete_step" delete-id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 									</div>
 								</div>
-								<div class="accordion-body collapse" id="collapse{{ $step->id }}">
-								<hr>
+								<div class="accordion-body collapse panel panel-primary" id="collapse{{ $step->id }}">
+                                    <br/>
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="#flow-documente{{ $step->id }}" data-toggle="tab">Documente</a></li>
 										<li><a href="#flow-observatii{{ $step->id }}" data-toggle="tab">Observatii</a></li>
@@ -451,7 +451,7 @@
 												</thead>
 												<tbody id="autocomplete-document-{{ $step->id }}">
 													@foreach($step->documents()->get() as $document)
-														<tr id="document-{{ $document->id }}">
+														<tr id="document-{{ $document->id }}" >
 															<th>{{ $document->title }}</th>
 															<td>
 																@if($document->file)
@@ -477,8 +477,7 @@
 														</tr>
 													@endforeach
 												</tbody>
-											</table>
-											<hr>
+											</table><br/><br/>
 
 											<a href="{{ action('DocumentController@create') }}" class="btn btn-primary" target="_blank" style="margin-left: 10px;">
 												<span class="glyphicon glyphicon-plus"></span> Adauga Document
@@ -509,11 +508,8 @@
 						@include('admin.backend.issues.flowstep-template')
 					</div>
 					<br/>
-					<div class="form-group">
 						<button type="button" location-id="{{ $locationStep->id }}" class="btn btn-primary add_flowstep"><span class="glyphicon glyphicon-plus"></span> Adauga pas</button>
-					</div>
 					<br/><br/>
-					<hr>
 				</div>
 				@endforeach
 			@endif
@@ -521,7 +517,12 @@
 			@include('admin.backend.issues.flowstep-template')
 			@include('admin.backend.issues.connected-documents')
 		</div>
-		<button type="button" class="btn btn-primary add_location"><span class="glyphicon glyphicon-plus"></span> Adauga locatie</button>
+		<button type="button"
+                class="btn btn-primary add_location"
+                style="margin-top: 40px;"
+        >
+            <span class="glyphicon glyphicon-plus"></span> Adauga locatie
+        </button>
 
 	</div>
 

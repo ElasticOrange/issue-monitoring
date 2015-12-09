@@ -50,8 +50,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="accordion-body collapse" id="collapse-<%= id%>">
-		<hr>
+		<div class="accordion-body collapse panel panel-primary" id="collapse-<%= id%>">
 			<ul class="nav nav-tabs">
 				<li class="active">
 					<a href="#flow-documente-<%= id%>" data-toggle="tab">Documente</a>
@@ -89,13 +88,12 @@
 							</tr>
 						</thead>
 						<tbody id="autocomplete-document-<%= id%>">
-							<tr>
-								<th>
-									Niciun document adaugat
-								</th>
-							</tr>
 						</tbody>
-					</table>
+					</table><br/><br/>
+
+                    <a href="{{ action('DocumentController@create') }}" class="btn btn-primary" target="_blank" style="margin-left: 10px; margin-bottom: 20px;">
+                        <span class="glyphicon glyphicon-plus"></span> Adauga Document
+                    </a>
 				</div>
 				<div class="tab-pane" id="flow-observatii-<%= id%>">
 					<br/>
