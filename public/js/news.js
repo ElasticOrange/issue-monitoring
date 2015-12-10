@@ -165,6 +165,46 @@
 			}
 		});
 
+        var issuesList = new Bloodhound({
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            datumTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: $('#issue-autocomplete').attr('source-url'),
+                wildcard: '{name}',
+                transform: function (response) {
+                    return _.filter(response, function(item){
+                        return $('[issue-id=' + item.id + ']').length === 0;
+                    });
+                }
+            }
+        });
+
+        $('#issue-autocomplete').typeahead(
+            null,
+            {
+                name: 'issue',
+                display: 'name',
+                source: issuesList
+            }
+        );
+
+        $('#issue-autocomplete').bind(
+            'typeahead:select',
+            function(event, suggestion) {
+                $(this).typeahead('val', '');
+
+                var template = _.template($('#connected-issue-template').html());
+                var compiled_template = template(suggestion);
+
+                $('#connected-issues-container').append(compiled_template);
+            }
+        );
+
+        $('#connected-issues-container').on('click', '[connected-issue-delete]', function() {
+            var connected_issue_id = $(this).attr('connected-issue-delete');
+            $('[issue-id=' + connected_issue_id + ']').remove();
+        });
+
 		$(document).on('click', '[delete-file=true]', function(ev) {
 			ev.preventDefault();
 			var request = $.ajax({

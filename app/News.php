@@ -73,6 +73,14 @@ class News extends Model
 
 		$this->connectedDomains()->sync($domains_connected);
 
+		if (!$request->get('issues_connected')) {
+			$issues_connected = [];
+		} else {
+			$issues_connected = $request->get('issues_connected');
+		}
+
+		$this->connectedIssues()->sync($issues_connected);
+
 		if (!$request->get('tags_connected')) {
 			$tags_connected = [];
 		} else {

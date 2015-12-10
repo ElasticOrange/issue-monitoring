@@ -12,6 +12,8 @@ use Issue\Tag;
 use Issue\Domain;
 use Issue\DomainTranslation;
 use Issue\Stakeholder;
+use Issue\Issue;
+use Issue\IssueTranslation;
 
 class NewsController extends Controller
 {
@@ -153,4 +155,27 @@ class NewsController extends Controller
 
 		return $news;
 	}
+
+    public function queryIssue(Request $request)
+    {
+        $queryIssueName = $request->input('name');
+
+        $issueIds = IssueTranslation::where('name', 'like', '%'.$queryIssueName.'%')
+            ->where('locale', \App::getLocale())
+            ->lists('issue_id');
+        $issues = Issue::whereIn('id', $issueIds)
+            ->with(['translations'])
+            ->get();
+
+        $result = [];
+
+        foreach ($issues as $issue) {
+            $result[] = [
+                'id' => $issue->id,
+                'name' => $issue->name,
+            ];
+        }
+
+        return $result;
+    }
 }

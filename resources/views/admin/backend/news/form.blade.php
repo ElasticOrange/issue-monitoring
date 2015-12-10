@@ -153,6 +153,42 @@
 <hr/>
 
 <div class="form-group">
+    <div class="col-md-2 text-right">
+        <label for="issue-autocomplete" class="control-label">Initiative</label>
+    </div>
+    <div class="col-md-8">
+        <input
+                id="issue-autocomplete"
+                source-url="{{ action('NewsController@queryIssue') }}/?name={name}"
+                type="text"
+                placeholder="Nume"
+                class="form-control"
+                />
+    </div>
+</div>
+
+<div class="form-group">
+    @include('admin.backend.news.connected-issue')
+    <div class="panel panel-success col-md-8 col-md-offset-2">
+        <div class="panel-heading">Initiative conectate</div>
+        <div class="list-group" id="connected-issues-container">
+            @foreach ($news->connectedIssues as $issue_connected)
+                <div class="list-group-item" issue-id="{{ $issue_connected->id }}">
+                    <a class="badge" connected-issue-delete="{{ $issue_connected->id }}">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+                    </a>
+                    <h4 class="list-group-item-heading">{{ $issue_connected->name }}</h4>
+                    <p class="list-group-item-text"></p>
+                    <input type="hidden" name="issues_connected[]" value="{{ $issue_connected->id }}" />
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="form-group">
 	<div class="col-md-2 text-right">
 		<label for="tag-autocomplete" class="control-label">Taguri</label>
 	</div>
