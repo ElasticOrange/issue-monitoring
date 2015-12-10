@@ -21,7 +21,7 @@
 								<tr role="row">
 									<th class="text-center" style="width: 20px;">Id</th>
 									<th class="text-center" style="width: 480px;">Nume</th>
-									<th class="text-center" style="width: 180x;">Contact</th>
+									<th class="text-center" style="width: 180x;">Pozitie si apartenenta</th>
 									<th class="text-center" style="width: 180x;">Tip</th>
 									<th class="text-center" style="width: 110px;">Foto</th>
 									<th class="text-center" style="width: 20px;">Publicat</th>
@@ -33,7 +33,7 @@
 									<tr class="gradeA odd" role="row">
 										<td>{{ $stakeholder->id }}</td>
 										<td>{{ $stakeholder->name }}</td>
-										<td>{{ $stakeholder->contact }}</td>
+										<td>{!! $stakeholder->position !!}</td>
 										<td>{{ $stakeholder->type }}</td>
 										<td  class="text-center">
 											@if($stakeholder->filePoza)
