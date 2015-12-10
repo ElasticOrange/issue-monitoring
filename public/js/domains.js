@@ -17,7 +17,7 @@
 		var records = dataAdapter.getRecordsHierarchy('id', 'parent_id', 'items', [{name: 'name', map: 'label'}]);
 		records[0].expanded = true;
 
-		tree.jqxTree({source: records, height: '300px', width: '100%', allowDrag: true, allowDrop: true,
+		tree.jqxTree({source: records, height: '600px', width: '100%', allowDrag: true, allowDrop: true,
 			dragStart: function (item) {
 				if (item.id == 1)
 					return false;

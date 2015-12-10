@@ -12,7 +12,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<input
 							id="domain-autocomplete"
 							source-url="{{ action('DomainController@queryDomain') }}/?name={name}"
@@ -43,7 +43,7 @@
 				</div>
 				<br/>
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-lg-12">
 						<div id="domainTree"></div>
 					</div>
 				</div>
