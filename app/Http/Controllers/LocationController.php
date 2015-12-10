@@ -103,7 +103,7 @@ class LocationController extends Controller
 			[
 				'name' => 'array',
 				'name.ro' => 'required|string|unique:location_translations,name,' . $location->id . ',location_id',
-				'name.en' => 'required|string|unique:location_translations,name,' . $location->id . ',location_id',
+				'name.en' => 'string|unique:location_translations,name,' . $location->id . ',location_id',
 				'parent_id' => 'required|integer'
 			]);
 

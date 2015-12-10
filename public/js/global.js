@@ -302,4 +302,17 @@ $(document).ready(function() {
 		return false;
 
 	});
+
+
+    function preventEnterToSubmit(selector) {
+        $(selector).keypress(function(event) {
+            if ( event.which == 13 ) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+                return false;
+            }
+        });
+    }
+
+    preventEnterToSubmit('form');
 });

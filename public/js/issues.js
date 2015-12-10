@@ -19,6 +19,7 @@
 				{name: 'basicstyles', items: ['Bold','Italic']},
 				{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 				{name: 'links', items: ['Link','Unlink']},
+                {name: 'styles', items: ['Styles', 'Format']},
 				{name: 'about', items: ['About']}
 			]
 		});
@@ -29,6 +30,7 @@
 				{name: 'basicstyles', items: ['Bold','Italic']},
 				{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 				{name: 'links', items: ['Link','Unlink']},
+                {name: 'styles', items: ['Styles', 'Format']},
 				{name: 'about', items: ['About']}
 			]
 		});
@@ -39,6 +41,7 @@
 				{name: 'basicstyles', items: ['Bold','Italic']},
 				{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 				{name: 'links', items: ['Link','Unlink']},
+                {name: 'styles', items: ['Styles', 'Format']},
 				{name: 'about', items: ['About']}
 			]
 		});
@@ -49,7 +52,8 @@
 				{name: 'basicstyles', items: ['Bold','Italic']},
 				{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 				{name: 'links', items: ['Link','Unlink']},
-				{name: 'about', items: ['About']}
+                {name: 'styles', items: ['Styles', 'Format']},
+                {name: 'about', items: ['About']}
 			]
 		});
 
@@ -59,7 +63,8 @@
 				{name: 'basicstyles', items: ['Bold','Italic']},
 				{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 				{name: 'links', items: ['Link','Unlink']},
-				{name: 'about', items: ['About']}
+                {name: 'styles', items: ['Styles', 'Format']},
+                {name: 'about', items: ['About']}
 			]
 		});
 
@@ -69,7 +74,8 @@
 				{name: 'basicstyles', items: ['Bold','Italic']},
 				{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 				{name: 'links', items: ['Link','Unlink']},
-				{name: 'about', items: ['About']}
+                {name: 'styles', items: ['Styles', 'Format']},
+                {name: 'about', items: ['About']}
 			]
 		});
 

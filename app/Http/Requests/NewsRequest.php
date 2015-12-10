@@ -28,8 +28,8 @@ class NewsRequest extends Request
 			'title.ro' => 'required|string|max:1000',
 			'title.en' => 'string|max:1000',
 			'description' => 'array',
-			'description.ro' => 'string|max:1000',
-			'description.en' => 'string|max:1000',
+			'description.ro' => 'string',
+			'description.en' => 'string',
 			'date_init' => 'date',
 			'link' => 'url',
 			'published' => 'boolean'
