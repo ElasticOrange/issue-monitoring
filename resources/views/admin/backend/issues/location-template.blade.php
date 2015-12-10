@@ -1,27 +1,38 @@
 <script type="text/template" id="location_template">
 	<div class="location panel panel-default" id="location-<%= id%>">
 		<div class="form-group panel-heading" style="margin: 0px;">
-			<label class="control-label col-sm-2">Locatie:</label>
-			<div class="col-sm-4">
-				<input class="form-control"
-					name="location[<%= id%>][name]"
-					save-id-to="location-id-location-<%= id%>"
-					source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
-					location-name="true"
-				/>
-				<input type="hidden"
-					id="location-id-location-<%= id%>"
-					name="location[<%= id%>][location_id]"
-					value=""
-				/>
-			</div>
-			<div class="col-sm-2">
-				<button type="button" class="btn btn-danger delete_location" delete-id="location-<%= id%>">
-					<span class="glyphicon glyphicon-trash"></span> Sterge locatie
-				</button>
-			</div>
-            <div class="col-sm-1 col-sm-offset-3" style="cursor: pointer; cursor: hand;">
-                <span class="glyphicon glyphicon-move location-handle" style="padding: 10px; right: -40px;"></span>
+            <div class="row">
+                <label class="control-label col-sm-2">Locatie:</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                        name="location[<%= id%>][name]"
+                        save-id-to="location-id-location-<%= id%>"
+                        source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
+                        location-name="true"
+                    />
+                    <input type="hidden"
+                        id="location-id-location-<%= id%>"
+                        name="location[<%= id%>][location_id]"
+                        value=""
+                    />
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-danger delete_location" delete-id="location-<%= id%>">
+                        <span class="glyphicon glyphicon-trash"></span> Sterge locatie
+                    </button>
+                </div>
+                <div class="col-sm-1 col-sm-offset-3" style="cursor: pointer; cursor: hand;">
+                    <span class="glyphicon glyphicon-move location-handle" style="padding: 10px; right: -40px;"></span>
+                </div>
+            </div><br/>
+            <div class="row">
+                <label class="control-label col-sm-2">Nr. Inregistrare:</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                           name="location[<%= id%>][nr_inregistrare]"
+                           value=""
+                            />
+                </div>
             </div>
 		</div><br/>
 

@@ -334,28 +334,39 @@
 				@foreach($locationSteps as $locationStep)
 				<div class="location panel panel-default" id="location-{{ $locationStep->id }}">
 					<div class="form-group panel-heading" style="margin: 0px;">
-						<label class="control-label col-sm-2">Locatie:</label>
-						<div class="col-sm-4">
-							<input class="form-control"
-								name="location[{{ $locationStep->id }}][name]"
-								source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
-								location-name="true"
-								value="{{ $locationStep->location->name }}"
-								save-id-to="location-id-location-{{ $locationStep->id }}"
-							/>
-							<input type="hidden"
-								name="location[{{ $locationStep->id }}][location_id]"
-								value="{{ $locationStep->location_id }}"
-								id="location-id-location-{{ $locationStep->id }}"
-							/>
-						</div>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Locatie:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control"
+                                       name="location[{{ $locationStep->id }}][name]"
+                                       source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
+                                       location-name="true"
+                                       value="{{ $locationStep->location->name }}"
+                                       save-id-to="location-id-location-{{ $locationStep->id }}"
+                                        />
+                                <input type="hidden"
+                                       name="location[{{ $locationStep->id }}][location_id]"
+                                       value="{{ $locationStep->location_id }}"
+                                       id="location-id-location-{{ $locationStep->id }}"
+                                        />
+                            </div>
 						<div class="col-sm-2">
-							<button type="button" class="btn btn-danger delete_location" delete-id="location-{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
-						</div>
+                            <button type="button" class="btn btn-danger delete_location" delete-id="location-{{ $locationStep->id }}"><span class="glyphicon glyphicon-trash"></span> Sterge locatie</button>
+                        </div>
                         <div class="col-sm-1 col-sm-offset-3" style="cursor: pointer; cursor: hand;">
                             <span class="glyphicon glyphicon-move location-handle" style="padding: 10px; right: -40px;"></span>
                         </div>
-					</div>
+                        </div><br/>
+                        <div class="row">
+                            <label class="control-label col-sm-2">Nr. Inregistrare:</label>
+                            <div class="col-sm-4">
+                                <input class="form-control"
+                                       name="location[{{ $locationStep->id }}][nr_inregistrare]"
+                                       value="{{ $locationStep->nr_inregistrare }}"
+                                        />
+                            </div>
+                        </div>
+                    </div>
 					<br/>
 					<div id="flow-container-{{ $locationStep->id }}" class="panel panel-primary step-sort connectedSteps" style="min-height: 90px;" >
 						@foreach ($locationStep->flowsteps()->orderBy('flowstep_order', 'asc')->get() as $step)

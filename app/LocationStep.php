@@ -11,7 +11,8 @@ class LocationStep extends Model
 	protected $fillable = [
 		'location_id',
 		'issue_id',
-		'step_order'
+		'step_order',
+        'nr_inregistrare'
 	];
 
 	public function issue()
