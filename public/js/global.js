@@ -277,6 +277,11 @@ $(document).ready(function() {
 		.change(function() {
 			var fileName = getFileNameFromPath($(this).val());
 			$(this).parent().find('.selected-file').html(fileName).attr('title', fileName);
+
+            var input = $(this).parent().find('span.ellipsis');
+            if (input.text() == '') {
+                input.text('Incarca fisier');
+            }
 		});
 
 	$(document).on('click', '[confirm]', function(ev) {
@@ -297,5 +302,4 @@ $(document).ready(function() {
 		return false;
 
 	});
-
 });
