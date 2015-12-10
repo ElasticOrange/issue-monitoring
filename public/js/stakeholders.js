@@ -34,7 +34,8 @@ $(document).ready(function(){
 			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 			{name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
-			{name: 'about', items: ['About']}
+            {name: 'document', items: ['Source']},
+            {name: 'about', items: ['About']}
 		]
 	});
 
@@ -45,7 +46,8 @@ $(document).ready(function(){
 			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 			{name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
-			{name: 'about', items: ['About']}
+            {name: 'document', items: ['Source']},
+            {name: 'about', items: ['About']}
 		]
 	});
 
@@ -56,7 +58,8 @@ $(document).ready(function(){
 			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 			{name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
-			{name: 'about', items: ['About']}
+            {name: 'document', items: ['Source']},
+            {name: 'about', items: ['About']}
 		]
 	});
 
@@ -67,6 +70,7 @@ $(document).ready(function(){
 			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
 			{name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
+            {name: 'document', items: ['Source']},
             {name: 'about', items: ['About']}
 		]
 	});

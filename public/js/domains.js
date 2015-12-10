@@ -129,6 +129,7 @@
 			success: function (data) {
 				$('.modal-content').html(data);
 				$('input[name=parent_id]').attr("value", parseInt(domain.parentId));
+                preventEnterToSubmit('form');
 			}
 		});
 	}
@@ -147,6 +148,7 @@
 			success: function (data) {
 				$('.modal-content').html(data);
 				$('input[name=parent_id]').attr("value", parseInt(domain.id));
+                preventEnterToSubmit('form');
 			}
 		});
 	}

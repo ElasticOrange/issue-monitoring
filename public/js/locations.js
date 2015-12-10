@@ -127,8 +127,9 @@
 			type: "GET",
 			url: "/backend/location/" + location.id + "/edit",
 			success: function (data) {
-				$('.modal-content').html(data);
-				$('input[name=parent_id]').attr("value", parseInt(location.parentId));
+                $('.modal-content').html(data);
+                $('input[name=parent_id]').attr("value", parseInt(location.parentId));
+                preventEnterToSubmit('form');
 			}
 		});
 	}
@@ -147,6 +148,7 @@
 			success: function (data) {
 				$('.modal-content').html(data);
 				$('input[name=parent_id]').attr("value", parseInt(location.id));
+                preventEnterToSubmit('form');
 			}
 		});
 	}

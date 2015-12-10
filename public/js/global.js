@@ -1,6 +1,16 @@
 var $successBox, $errorBox, $warningBox, successBoxTimeout, errorBoxTimeout;
 var LOADER_DELAY = 200;
 
+function preventEnterToSubmit(selector) {
+    $(selector).keypress(function(event) {
+        if ( event.which == 13 ) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return false;
+        }
+    });
+}
+
 function redirect(url, timeout) {
 	if (!timeout) {
 		timeout = 1;
@@ -302,17 +312,6 @@ $(document).ready(function() {
 		return false;
 
 	});
-
-
-    function preventEnterToSubmit(selector) {
-        $(selector).keypress(function(event) {
-            if ( event.which == 13 ) {
-                event.stopImmediatePropagation();
-                event.preventDefault();
-                return false;
-            }
-        });
-    }
 
     preventEnterToSubmit('form');
 });
