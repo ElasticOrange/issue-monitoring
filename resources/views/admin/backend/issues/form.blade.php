@@ -29,7 +29,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Nume</label>
 					<div class="col-md-8">
-						<input type="text" name="name[ro]" class="form-control" value="{{ $issue->translateOrNew('ro')->name }}">
+						<input type="text" prevent-enter="true" name="name[ro]" class="form-control" value="{{ $issue->translateOrNew('ro')->name }}">
 					</div>
 				</div>
 
@@ -72,7 +72,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Name</label>
 					<div class="col-md-8">
-						<input type="text" name="name[en]" class="form-control" value="{{ $issue->translateOrNew('en')->name }}">
+						<input type="text" prevent-enter="true" name="name[en]" class="form-control" value="{{ $issue->translateOrNew('en')->name }}">
 					</div>
 				</div>
 
@@ -124,7 +124,8 @@
 						type="text"
 						placeholder="Nume"
 						class="form-control"
-					/>
+                        prevent-enter="true"
+                            />
 				</div>
 			</div>
 
@@ -160,7 +161,8 @@
 						type="text"
 						placeholder="Nume"
 						class="form-control"
-					/>
+                        prevent-enter="true"
+                            />
 				</div>
 			</div>
 
@@ -196,7 +198,8 @@
 						type="text"
 						placeholder="Nume"
 						class="form-control"
-					/>
+                        prevent-enter="true"
+                            />
 				</div>
 			</div>
 
@@ -232,7 +235,8 @@
 						type="text"
 						placeholder="Nume"
 						class="form-control"
-					/>
+                        prevent-enter="true"
+                            />
 				</div>
 			</div>
 
@@ -268,7 +272,8 @@
 						type="text"
 						placeholder="Nume"
 						class="form-control"
-					/>
+                        prevent-enter="true"
+                            />
 				</div>
 			</div>
 
@@ -343,6 +348,7 @@
                                        location-name="true"
                                        value="{{ $locationStep->location->name }}"
                                        save-id-to="location-id-location-{{ $locationStep->id }}"
+                                       prevent-enter="true"
                                         />
                                 <input type="hidden"
                                        name="location[{{ $locationStep->id }}][location_id]"
@@ -363,6 +369,7 @@
                                 <input class="form-control"
                                        name="location[{{ $locationStep->id }}][nr_inregistrare]"
                                        value="{{ $locationStep->nr_inregistrare }}"
+                                       prevent-enter="true"
                                         />
                             </div>
                         </div>
@@ -405,20 +412,25 @@
 										</div>
 									</div>
 									<div class="col-sm-4">
-										<input class="form-control" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][flow_name]" value="{{ $step->flow_name }}"/>
+										<input class="form-control"
+                                               id="autocomplete-{{ $step->id }}"
+                                               name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][flow_name]"
+                                               value="{{ $step->flow_name }}"
+                                               source-url="{{ action('IssueController@queryStepAutocomplete') }}/?name={name}"
+                                        />
 									</div>
 									<div class="col-sm-1">
-										<input class="form-control" type="number" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
+										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>
+										<input type="text" class="form-control" prevent-enter="true" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>
 										<input type="hidden"
 											id="startdate-result-{{ $step->id }}"
 											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]"
 										/>
 									</div>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" id="enddate-widget-{{ $step->id }}" value="{{ $step->end_date->format('d-m-Y') }}"/>
+										<input type="text" class="form-control" prevent-enter="true" id="enddate-widget-{{ $step->id }}" value="{{ $step->end_date->format('d-m-Y') }}"/>
 										<input type="hidden"
 											id="enddate-result-{{ $step->id }}"
 											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]"
@@ -451,7 +463,8 @@
 														class="form-control documente"
 														doc-step-id="{{ $step->id }}"
 														doc-location-id="{{ $locationStep->id }}"
-													/>
+                                                        prevent-enter="true"
+                                                            />
 												</div>
 											</div>
 											<br/>

@@ -2,7 +2,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Nume complet</label>
 	<div class="col-md-8">
-		<input type="text" name="name" class="form-control" value="{{ $stakeholder->name }}"/>
+		<input type="text" prevent-enter="true" name="name" class="form-control" value="{{ $stakeholder->name }}"/>
 	</div>
 </div>
 
@@ -19,21 +19,21 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Email</label>
 	<div class="col-md-8">
-		<input type="text" name="email" class="form-control" value="{{ $stakeholder->email }}"/>
+		<input type="text" prevent-enter="true" name="email" class="form-control" value="{{ $stakeholder->email }}"/>
 	</div>
 </div>
 
 <div class="form-group" stakeholder-type="true">
 	<label class="col-md-2 control-label">Telefon</label>
 	<div class="col-md-8">
-		<input type="text" name="telephone" class="form-control" value="{{ $stakeholder->telephone }}"/>
+		<input type="text" prevent-enter="true" name="telephone" class="form-control" value="{{ $stakeholder->telephone }}"/>
 	</div>
 </div>
 
 <div class="form-group">
 	<label class="col-md-2 control-label">Site/blog</label>
 	<div class="col-md-8">
-		<input type="text" name="site" class="form-control" value="{{ $stakeholder->site }}"></input>
+		<input type="text" prevent-enter="true" name="site" class="form-control" value="{{ $stakeholder->site }}"></input>
 	</div>
 </div>
 
@@ -95,7 +95,7 @@
 		<div class="form-group">
 			<label class="col-md-2 control-label">Adresa</label>
 			<div class="col-md-8">
-				<input type="text" name="address[ro]" class="form-control" value="{{ $stakeholder->translateOrNew('ro')->address }}">
+				<input type="text" prevent-enter="true" name="address[ro]" class="form-control" value="{{ $stakeholder->translateOrNew('ro')->address }}">
 			</div>
 		</div>
 
@@ -135,7 +135,7 @@
 		<div class="form-group">
 			<label class="col-md-2 control-label">Address</label>
 			<div class="col-md-8">
-				<input type="text" name="address[en]" class="form-control" value="{{ $stakeholder->translateOrNew('en')->address }}">
+				<input type="text" prevent-enter="true" name="address[en]" class="form-control" value="{{ $stakeholder->translateOrNew('en')->address }}">
 			</div>
 		</div>
 
@@ -188,7 +188,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label">Titlu</label>
 						<div class="col-md-8">
-							<input type="text" name="section[{{ $section->id }}][title][ro]" class="form-control" value="{{ $section->translateOrNew('ro')->title }}"></input>
+							<input type="text" prevent-enter="true" name="section[{{ $section->id }}][title][ro]" class="form-control" value="{{ $section->translateOrNew('ro')->title }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -202,7 +202,7 @@
 					<div class="form-group">
 						<label class="col-md-2 control-label">Title</label>
 						<div class="col-md-8">
-							<input type="text" name="section[{{ $section->id }}][title][en]" class="form-control" value="{{ $section->translateOrNew('en')->title }}">
+							<input type="text" prevent-enter="true" name="section[{{ $section->id }}][title][en]" class="form-control" value="{{ $section->translateOrNew('en')->title }}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -236,7 +236,8 @@
 			type="text"
 			placeholder="Nume"
 			class="form-control"
-		/>
+            prevent-enter="true"
+                />
 	</div>
 </div>
 

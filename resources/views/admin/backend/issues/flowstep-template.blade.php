@@ -30,7 +30,12 @@
 				</div>
 			</div>
 			<div class="col-sm-4">
-				<input class="form-control" placeholder="Stadiu procedural" name="location[<%= location_id%>][flow_steps][<%= id%>][flow_name]"/>
+				<input class="form-control"
+                       id="autocomplete-<%= id%>"
+                       placeholder="Stadiu procedural"
+                       name="location[<%= location_id%>][flow_steps][<%= id%>][flow_name]"
+                       source-url="{{ action('IssueController@queryStepAutocomplete') }}/?name={name}"
+                />
 			</div>
 			<div class="col-sm-1">
 				<input class="form-control" type="number" placeholder="Durata" name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"/>

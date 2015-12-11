@@ -323,5 +323,5 @@ $(document).ready(function() {
 
 	});
 
-    //preventEnterToSubmit('form');
+    preventEnterToSubmit('[prevent-enter=true]');
 });

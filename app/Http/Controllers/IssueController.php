@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests\IssueRequest;
+use Issue\StepAutocomplete;
 use Storage;
 use Issue\News;
 use Issue\NewsTranslation;
@@ -265,4 +266,13 @@ class IssueController extends Controller
 
 		return $result;
 	}
+
+    public function queryStepAutocomplete(Request $request)
+    {
+        $queryStepAutocompleteName = $request->input('name');
+
+        $step = StepAutocomplete::where('name', 'like', '%'. $queryStepAutocompleteName .'%')->get();
+
+        return $step;
+    }
 }

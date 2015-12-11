@@ -423,6 +423,57 @@
 			});
 		}
 
+        function initEventStep(stepId) {
+            var stepsAutocompleteList = new Bloodhound({
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: "/backend/issue/query-step-autocomplete/?name={name}",
+                    wildcard: '{name}',
+                    transform: function (response) {
+                        return _.filter(response, function(item){
+                            return $('#autocomplete-' + item.id).length === 0;
+                        });
+                    }
+                }
+            });
+
+            var stepInput = $('#autocomplete-' + stepId);
+
+            stepInput.typeahead(
+                null,
+                {
+                    name: 'stepAutocomplete',
+                    display: 'name',
+                    source: stepsAutocompleteList
+                }
+            );
+
+            typeaheadAutocomplete(stepInput);
+
+            stepInput.bind(
+                'typeahead:select',
+                function(event, suggestion) {
+                    stepInput.val(suggestion.id);
+                });
+
+            $(document).on('keypress', '#autocomplete-' + stepId, function(e) {
+                if(e.which == 13) {
+                    e.preventDefault();
+
+                    var request = $.ajax({
+                        url: '/backend/step-autocomplete',
+                        type: 'post',
+                        data: {name: stepInput.typeahead('val')}
+                    });
+                    request.done(function(data) {
+                        stepInput.val(data.name);
+                    });
+
+                }
+            });
+        }
+
 		$(document).on('click', '.add_flowstep', function() {
 			var stepTemplate = _.template($('#flowstep_template').html());
 			var stepId = _.uniqueId('new-');
@@ -439,6 +490,7 @@
 			var edit = 0;
 			initFlowStepDate(stepId, edit);
 			initDocumentsTypeahead(stepId, locationId);
+            initEventStep(stepId);
 
             $("div.step-sort").sortable({
                 connectWith: ".connectedSteps",
@@ -539,5 +591,6 @@
 		$(document).on('click', '[data-toggle=collapse]', function() {
 			$(this).find('span.glyphicon-menu-down').toggleClass('rotate-bot');
 		});
+
 	});
 })();

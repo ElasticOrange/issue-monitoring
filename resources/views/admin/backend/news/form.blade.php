@@ -10,7 +10,7 @@
 			<br/>
 			<label class="col-md-2 control-label">Titlu</label>
 			<div class="col-md-8">
-				<input type="text" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
+				<input type="text" prevent-enter="true" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -26,7 +26,7 @@
 			<br/>
 			<label class="col-md-2 control-label">Title</label>
 			<div class="col-md-8">
-				<input type="text" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
+				<input type="text" prevent-enter="true" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -51,7 +51,7 @@
 <div class="form-group">
 	<label class="col-md-2 control-label">Link</label>
 	<div class="col-md-8">
-		<input type="text" name="link" class="form-control" value="{{ $news->link }}" placeholder="Ex: http://www.google.ro"></input>
+		<input type="text" prevent-enter="true" name="link" class="form-control" value="{{ $news->link }}" placeholder="Ex: http://www.google.ro"></input>
 	</div>
 </div>
 
@@ -91,7 +91,8 @@
 			type="text"
 			placeholder="Nume"
 			class="form-control"
-		/>
+            prevent-enter="true"
+                />
 	</div>
 </div>
 
@@ -127,7 +128,8 @@
 			type="text"
 			placeholder="Nume"
 			class="form-control"
-		/>
+            prevent-enter="true"
+                />
 	</div>
 </div>
 
@@ -163,6 +165,7 @@
                 type="text"
                 placeholder="Nume"
                 class="form-control"
+                prevent-enter="true"
                 />
     </div>
 </div>
