@@ -85,11 +85,12 @@
 			]
 		});
 
+        var domainAutocomplete = $('#domain-autocomplete');
 		var domainList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#domain-autocomplete').attr('source-url'),
+				url: domainAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -99,7 +100,7 @@
 			}
 		});
 
-		$('#domain-autocomplete').typeahead(
+        domainAutocomplete.typeahead(
 			null,
 			{
 				name: 'domain',
@@ -108,7 +109,9 @@
 			}
 		);
 
-		$('#domain-autocomplete').bind(
+        typeaheadAutocomplete(domainAutocomplete);
+
+        domainAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
@@ -125,11 +128,12 @@
 			$('[domain-id=' + connected_stakeholder_id + ']').remove();
 		});
 
+        var stakeholderAutocomplete = $('#stakeholder-autocomplete');
 		var stakeholdersList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#stakeholder-autocomplete').attr('source-url'),
+				url: stakeholderAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -139,7 +143,7 @@
 			}
 		});
 
-		$('#stakeholder-autocomplete').typeahead(
+		stakeholderAutocomplete.typeahead(
 			null,
 			{
 				name: 'stakeholder',
@@ -148,7 +152,9 @@
 			}
 		);
 
-		$('#stakeholder-autocomplete').bind(
+        typeaheadAutocomplete(stakeholderAutocomplete);
+
+		stakeholderAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
@@ -165,11 +171,13 @@
 			$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 		});
 
+
+        var newsAutocomplete = $('#news-autocomplete');
 		var newsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#news-autocomplete').attr('source-url'),
+				url: newsAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -179,7 +187,7 @@
 			}
 		});
 
-		$('#news-autocomplete').typeahead(
+		newsAutocomplete.typeahead(
 			null,
 			{
 				name: 'news',
@@ -188,7 +196,9 @@
 			}
 		);
 
-		$('#news-autocomplete').bind(
+        typeaheadAutocomplete(newsAutocomplete);
+
+		newsAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
@@ -205,11 +215,12 @@
 			$('[news-id=' + connected_news_id + ']').remove();
 		});
 
+        var issueAutocomplete = $('#issue-autocomplete');
 		var issuesList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#issue-autocomplete').attr('source-url'),
+				url: issueAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -219,7 +230,7 @@
 			}
 		});
 
-		$('#issue-autocomplete').typeahead(
+		issueAutocomplete.typeahead(
 			null,
 			{
 				name: 'issue',
@@ -228,7 +239,9 @@
 			}
 		);
 
-		$('#issue-autocomplete').bind(
+        typeaheadAutocomplete(issueAutocomplete);
+
+		issueAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
@@ -245,11 +258,12 @@
 			$('[issue-id=' + connected_issue_id + ']').remove();
 		});
 
+        var initiatorAutocomplete = $('#initiator-autocomplete');
 		var initiatorsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#initiator-autocomplete').attr('source-url'),
+				url: initiatorAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -259,7 +273,7 @@
 			}
 		});
 
-		$('#initiator-autocomplete').typeahead(
+		initiatorAutocomplete.typeahead(
 			null,
 			{
 				name: 'initiator',
@@ -268,7 +282,9 @@
 			}
 		);
 
-		$('#initiator-autocomplete').bind(
+        typeaheadAutocomplete(initiatorAutocomplete);
+
+		initiatorAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				$(this).typeahead('val', '');
@@ -332,6 +348,8 @@
 					source: locationsList
 				}
 			);
+
+            typeaheadAutocomplete(locationInput);
 
 			locationInput.bind(
 				'typeahead:select',

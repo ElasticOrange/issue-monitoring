@@ -1,6 +1,16 @@
 var $successBox, $errorBox, $warningBox, successBoxTimeout, errorBoxTimeout;
 var LOADER_DELAY = 200;
 
+function typeaheadAutocomplete(selector) {
+    selector.bind('typeahead:render', function() {
+        $(this).parent().find('.tt-selectable:first')
+            .css("background", "#337ab7")
+            .css("color", "#fff")
+            .css("border-radius", "3px")
+            .addClass('tt-cursor');
+    });
+}
+
 function preventEnterToSubmit(selector) {
     $(selector).keypress(function(event) {
         if ( event.which == 13 ) {
@@ -313,5 +323,5 @@ $(document).ready(function() {
 
 	});
 
-    preventEnterToSubmit('form');
+    //preventEnterToSubmit('form');
 });

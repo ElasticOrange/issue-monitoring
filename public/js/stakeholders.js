@@ -75,11 +75,13 @@ $(document).ready(function(){
 		]
 	});
 
+    var stakeholderAutocomplete = $('#stakeholder-autocomplete');
+
 	var stakeholdersList = new Bloodhound({
 		queryTokenizer: Bloodhound.tokenizers.whitespace,
 		datumTokenizer: Bloodhound.tokenizers.whitespace,
 		remote: {
-			url: $('#stakeholder-autocomplete').attr('source-url'),
+			url: stakeholderAutocomplete.attr('source-url'),
 			wildcard: '{name}',
 			transform: function (response) {
 				return _.filter(response, function(item){
@@ -90,16 +92,17 @@ $(document).ready(function(){
 	});
 
 	// Autocomplete for stakeholders
-	$('#stakeholder-autocomplete').typeahead(
-		null,
-		{
-			name: 'stakeholder',
-			display: 'name',
-			source: stakeholdersList
-		}
-	);
+    stakeholderAutocomplete.typeahead(
+        null,
+        {
+        name: 'stakeholder',
+        display: 'name',
+        source: stakeholdersList
+    });
 
-	$('#stakeholder-autocomplete').bind(
+    typeaheadAutocomplete(stakeholderAutocomplete);
+
+    stakeholderAutocomplete.bind(
 		'typeahead:select',
 		function(event, suggestion) {
 			$(this).typeahead('val', '');
