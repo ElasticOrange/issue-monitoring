@@ -53,11 +53,12 @@
 			setIdForDeleteAction();
 		});
 
+        var domainAutocomplete = $('#domain-autocomplete');
 		var domainsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#domain-autocomplete').attr('source-url'),
+				url: domainAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -67,7 +68,7 @@
 			}
 		});
 
-		$('#domain-autocomplete').typeahead(
+		domainAutocomplete.typeahead(
 			null,
 			{
 				name: 'domain',
@@ -76,7 +77,9 @@
 			}
 		);
 
-		$('#domain-autocomplete').bind(
+        typeaheadAutocomplete(domainAutocomplete);
+
+		domainAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				tree.jqxTree('selectItem', getTreeItemById(tree, suggestion.id));

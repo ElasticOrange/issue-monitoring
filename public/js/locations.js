@@ -54,11 +54,12 @@
 			setIdForDeleteAction();
 		});
 
+        var locationAutocomplete = $('#location-autocomplete');
 		var locationsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
 			remote: {
-				url: $('#location-autocomplete').attr('source-url'),
+				url: locationAutocomplete.attr('source-url'),
 				wildcard: '{name}',
 				transform: function (response) {
 					return _.filter(response, function(item){
@@ -68,7 +69,7 @@
 			}
 		});
 
-		$('#location-autocomplete').typeahead(
+		locationAutocomplete.typeahead(
 			null,
 			{
 				name: 'location',
@@ -77,7 +78,9 @@
 			}
 		);
 
-		$('#location-autocomplete').bind(
+        typeaheadAutocomplete(locationAutocomplete);
+
+		locationAutocomplete.bind(
 			'typeahead:select',
 			function(event, suggestion) {
 				tree.jqxTree('selectItem', getTreeItemById(tree, suggestion.id));
