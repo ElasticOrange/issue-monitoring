@@ -520,6 +520,7 @@
 			var stepId = $(this).attr('step-id');
 			var edit = 1;
 			initFlowStepDate(stepId, edit);
+            initEventStep(stepId);
 		});
 
 		$('.documente').each(function() {
