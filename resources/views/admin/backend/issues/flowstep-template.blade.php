@@ -58,7 +58,10 @@
                 <span class="step-handle glyphicon glyphicon-move" style="padding: 10px; right: -40px;"></span>
             </div>
 		</div>
-		<div class="accordion-body collapse panel panel-primary" id="collapse-<%= id%>">
+		<div class="accordion-body collapse panel panel-primary"
+             id="collapse-<%= id%>"
+             style="margin-left: 3px; margin-right: 3px;"
+                >
 			<ul class="nav nav-tabs">
 				<li class="active">
 					<a href="#flow-documente-<%= id%>" data-toggle="tab">Documente</a>

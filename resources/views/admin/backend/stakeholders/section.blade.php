@@ -11,7 +11,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Titlu</label>
 					<div class="col-md-8">
-						<input type="text" name="section[<%- id%>][title][ro]" class="form-control"></input>
+						<input type="text" prevent-enter="true" name="section[<%- id%>][title][ro]" class="form-control"></input>
 					</div>
 				</div>
 				<div class="form-group">
@@ -25,7 +25,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Title</label>
 					<div class="col-md-8">
-						<input type="text" name="section[<%- id%>][title][en]" class="form-control">
+						<input type="text" prevent-enter="true" name="section[<%- id%>][title][en]" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">

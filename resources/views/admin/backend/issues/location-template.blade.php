@@ -9,7 +9,8 @@
                         save-id-to="location-id-location-<%= id%>"
                         source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
                         location-name="true"
-                    />
+                        prevent-enter="true"
+                            />
                     <input type="hidden"
                         id="location-id-location-<%= id%>"
                         name="location[<%= id%>][location_id]"
@@ -31,6 +32,7 @@
                     <input class="form-control"
                            name="location[<%= id%>][nr_inregistrare]"
                            value=""
+                           prevent-enter="true"
                             />
                 </div>
             </div>

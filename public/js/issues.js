@@ -369,6 +369,7 @@
 			$('#locations-container').append(populateLocationTemplate);
 
 			initEventLocation('location-' + locationId);
+            preventEnterToSubmit('[prevent-enter=true]');
 		});
 
 		$('#locations-container .location').each(function() {

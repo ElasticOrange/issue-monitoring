@@ -443,7 +443,10 @@
                                         <span class="glyphicon glyphicon-move step-handle" style="padding: 10px; right: -40px;"></span>
                                     </div>
 								</div>
-								<div class="accordion-body collapse panel panel-primary" id="collapse{{ $step->id }}">
+								<div class="accordion-body collapse panel panel-primary"
+                                     id="collapse{{ $step->id }}"
+                                     style="margin-left: 3px; margin-right: 3px;"
+                                        >
                                     <br/>
 									<ul class="nav nav-tabs">
 										<li class="active"><a href="#flow-documente{{ $step->id }}" data-toggle="tab">Documente</a></li>

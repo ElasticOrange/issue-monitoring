@@ -5,6 +5,8 @@ $(document).ready(function(){
 		var template_populated= compiled({ 'sectionid': _.random(100000, 1000000),
 											'id': _.uniqueId('new-')});
 		$('.sections').append(template_populated);
+        
+        preventEnterToSubmit('[prevent-enter=true]');
 	});
 
 	$(document).on('click', '.delete_section', function() {
