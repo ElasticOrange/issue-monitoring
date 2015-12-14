@@ -1,5 +1,8 @@
 <?php
 
+use Faker;
+use Faker\Factory;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
 	/**
@@ -23,12 +26,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 		return $app;
 	}
 
-	public function setUp()
-	{
-		parent::setUp();
+    public $faker;
 
-		Session::start();
-	}
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->faker = Faker\Factory::create();
+
+        Session::start();
+    }
 
 	public function stakeholderData()
 	{
@@ -83,4 +90,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
 		return $domain_data;
 	}
+
+    public function flowTemplateData()
+    {
+        return [
+            'name' => $this->faker->name
+        ];
+    }
+
+    public function locationStepData()
+    {
+        return [
+            'nr_inregistrare' => $this->faker->text
+        ];
+    }
 }

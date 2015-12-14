@@ -6,20 +6,11 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Issue\Stakeholder;
-use Faker;
-use Faker\Factory;
 use Config;
 
 class StakeholderAutocompleteTest extends TestCase
 {
-	public $faker;
 
-	public function setUp()
-	{
-		parent::setUp();
-
-		$this->faker = Faker\Factory::create();
-	}
 
 	/**
 	 * A basic test example.
