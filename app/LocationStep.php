@@ -30,6 +30,11 @@ class LocationStep extends Model
 		return $this->hasMany('Issue\FlowStep');
 	}
 
+    public function flowTemplate()
+    {
+        return $this->belongsTo('Issue\FlowTemplate', 'flow_template_id');
+    }
+
 	public function syncSteps($steps)
 	{
 		$currentSteps = $this->flowsteps()->get();

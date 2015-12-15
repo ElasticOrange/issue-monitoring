@@ -10,4 +10,8 @@ class FlowTemplate extends Model
         'name'
     ];
 
+    public function locationStep()
+    {
+        return $this->hasMany('Issue\LocationStep');
+    }
 }

@@ -32,6 +32,6 @@ class CreateDocumentFlowStepTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('document_flow_step');
+		Schema::dropIfExists('document_flow_step');
 	}
 }
