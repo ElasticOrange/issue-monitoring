@@ -33,6 +33,9 @@
 			<li>
 				<a href="/backend/issue"><i class="fa fa-archive fa-fw"></i> Issues</a>
 			</li>
+			<li>
+				<a href="/backend/flowtemplate"><i class="fa fa-th"></i> Templates</a>
+			</li>
 		</ul>
 	</div>
 </div>

@@ -26,14 +26,15 @@ class RouteServiceProvider extends ServiceProvider
 	{
 		parent::boot($router);
 
-		$router->model('document', 'Issue\Document');
-		$router->model('domain', 'Issue\Domain');
-		$router->model('stakeholder', 'Issue\Stakeholder');
-		$router->model('section', 'Issue\Section');
-		$router->model('location', 'Issue\Location');
-		$router->model('news', 'Issue\News');
-		$router->model('issue', 'Issue\Issue');
-	}
+        $router->model('document', 'Issue\Document');
+        $router->model('domain', 'Issue\Domain');
+        $router->model('stakeholder', 'Issue\Stakeholder');
+        $router->model('section', 'Issue\Section');
+        $router->model('location', 'Issue\Location');
+        $router->model('news', 'Issue\News');
+        $router->model('issue', 'Issue\Issue');
+        $router->model('flowtemplate', 'Issue\FlowTemplate');
+    }
 
 	/**
 	 * Define the routes for the application.

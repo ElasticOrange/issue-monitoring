@@ -132,4 +132,31 @@ class FlowTemplateModelTest extends TestCase
         $flowTemplate->delete();
 
     }
+
+    public function testCreateFlowTemplate_CheckListView_ForFlowTemplateName()
+    {
+        $flowTemplate = FlowTemplate::create($this->flowTemplateData());
+
+        $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
+
+        $this->visit('/backend/flowtemplate')
+            ->see($flowTemplateCreated->name);
+
+        $flowTemplate->delete();
+    }
+
+    public function testCreateFlowTemplate_CheckListView_DeleteFlowTemplateName()
+    {
+        $flowTemplate = FlowTemplate::create($this->flowTemplateData());
+
+        $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
+
+        $this->visit('/backend/flowtemplate')
+            ->see($flowTemplateCreated->name);
+
+        $flowTemplate->delete();
+
+        $this->visit('/backend/flowtemplate/')
+            ->dontSee($flowTemplateCreated->name);
+    }
 }
