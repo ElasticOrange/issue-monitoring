@@ -61,7 +61,6 @@ class FlowTemplate extends Model
             if (!isset($locationData['location_id']) || $locationData['location_id'] == "") {
                 $newLocation['location_id'] = 1;
             }
-//            dd($newLocation['location_id']);
             $this->locationStep()->save($newLocation);
 
             if (! array_key_exists('flow_steps', $locationData)) {
