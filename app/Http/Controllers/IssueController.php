@@ -20,6 +20,7 @@ use Issue\Document;
 use Issue\DocumentTranslation;
 use Issue\LocationTranslation;
 use Issue\LocationStep;
+use Issue\FlowTemplate;
 
 class IssueController extends Controller
 {
@@ -42,9 +43,10 @@ class IssueController extends Controller
 	 */
 	public function create()
 	{
+        $flowTemplates = FlowTemplate::all();
 		$issue = new Issue;
 
-		return view('admin.backend.issues.create', ['issue' => $issue]);
+		return view('admin.backend.issues.create', ['issue' => $issue, 'flowTemplates' => $flowTemplates]);
 	}
 
 	/**
@@ -83,6 +85,7 @@ class IssueController extends Controller
 	 */
 	public function edit($issue)
 	{
+        $flowTemplates = FlowTemplate::all();
 		$locationSteps = $issue->locationsteps()->orderBy('step_order', 'asc')->get();
 
 		return view(
@@ -90,6 +93,7 @@ class IssueController extends Controller
 			[
 				'issue' => $issue,
 				'locationSteps' => $locationSteps,
+                'flowTemplates' => $flowTemplates
 			 ]
 		);
 	}
@@ -275,4 +279,5 @@ class IssueController extends Controller
 
         return $step;
     }
+
 }

@@ -358,18 +358,25 @@
 			});
 		}
 
-		$(document).on('click', '.add_location', function(){
-			var locationTemplate = _.template($('#location_template').html());
-			var locationId = _.uniqueId('new-');
+        function executeAddLocation(templateName, id, flowTemplateLocationId, flowTemplateNrInregistrare) {
+            var locationTemplate = _.template($(templateName).html());
 
-			var populateLocationTemplate = locationTemplate({
-				'id': locationId
-			});
 
-			$('#locations-container').append(populateLocationTemplate);
+            var populateLocationTemplate = locationTemplate({
+                'id': id,
+                'location_id': flowTemplateLocationId,
+                'nr_inregistrare': flowTemplateNrInregistrare
+            });
 
-			initEventLocation('location-' + locationId);
+            $('#locations-container').append(populateLocationTemplate);
+
+            initEventLocation('location-' + id);
             preventEnterToSubmit('[prevent-enter=true]');
+        }
+
+		$(document).on('click', '.add_location', function(){
+            var id = _.uniqueId('new-');
+            executeAddLocation('#flowTemplate_location_template', id);
 		});
 
 		$('#locations-container .location').each(function() {
@@ -475,22 +482,38 @@
             });
         }
 
+        function executeAddFlowStep(
+            flowTemplateFlowStep,
+            stepId,
+            locationId,
+            flowTemplateFlowName,
+            flowTemplateFlowDuration
+        ) {
+            var stepTemplate = _.template($(flowTemplateFlowStep).html());
+
+            var populateStepTemplate = stepTemplate({
+                'id': stepId,
+                'location_id': locationId,
+                'flow_name': flowTemplateFlowName,
+                'estimated_duration': flowTemplateFlowDuration
+            });
+
+            $('#flow-container-' + locationId).append(populateStepTemplate);
+
+        }
+
 		$(document).on('click', '.add_flowstep', function() {
-			var stepTemplate = _.template($('#flowstep_template').html());
-			var stepId = _.uniqueId('new-');
 
-			var locationId = $(this).attr('location-id');
+            var stepId = _.uniqueId('new-');
+            var locationId = $(this).attr('location-id');
 
-			var populateStepTemplate = stepTemplate({
-				'id': stepId,
-				'location_id': locationId
-			});
+            executeAddFlowStep('#flowstep_template', stepId, locationId);
 
-			$('#flow-container-' + locationId).append(populateStepTemplate);
+            initDocumentsTypeahead(stepId, locationId);
 
-			var edit = 0;
-			initFlowStepDate(stepId, edit);
-			initDocumentsTypeahead(stepId, locationId);
+            var edit = 0;
+            initFlowStepDate(stepId, edit);
+
             initEventStep(stepId);
 
             $("div.step-sort").sortable({
@@ -513,7 +536,6 @@
                     }
                 }
             }).disableSelection();
-
 		});
 
 		$('.location-step').each(function() {
@@ -593,6 +615,46 @@
 		$(document).on('click', '[data-toggle=collapse]', function() {
 			$(this).find('span.glyphicon-menu-down').toggleClass('rotate-bot');
 		});
+
+        $(document).on('click', '.add_template', function() {
+            var flowTemplateId = $(this).parent().find('#add-template');
+
+
+            var request = $.ajax({
+                method: 'get',
+                url: '/backend/flowtemplate/' + flowTemplateId.val() + '/get-full-template'
+            });
+            request.done(function(data) {
+
+                if(! _.isArray(data)) {
+                    return withError('data is not array');
+                }
+
+                _.forEach(data, function(locationStep) {
+                    var id = _.uniqueId('new-');
+
+                    executeAddLocation(
+                        '#flowTemplate_location_template',
+                        id,
+                        locationStep.location_id,
+                        locationStep.nr_inregistrare
+                    );
+
+                    _.forEach(locationStep.flowsteps, function(flowStep) {
+                        var stepId = _.uniqueId('new-');
+
+                        executeAddFlowStep(
+                            '#flowTemplate_flowstep_template',
+                            stepId,
+                            id,
+                            flowStep.flow_name,
+                            flowStep.estimated_duration
+                        );
+                    });
+
+                });
+
+        });
 
 	});
 })();

@@ -106,4 +106,14 @@ class FlowTemplateController extends Controller
 
         return redirect()->action('FlowTemplateController@index');
     }
+
+    public function getFullTemplate($flowTemplate)
+    {
+        $templateLocationStep = $flowTemplate->locationStep()
+                                            ->with('flowsteps')
+                                            ->orderBy('step_order', 'asc')
+                                            ->get();
+
+        return $templateLocationStep;
+    }
 }

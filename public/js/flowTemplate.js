@@ -289,5 +289,6 @@
             $(this).find('span.glyphicon-menu-down').toggleClass('rotate-bot');
         });
 
+
 	});
 })();

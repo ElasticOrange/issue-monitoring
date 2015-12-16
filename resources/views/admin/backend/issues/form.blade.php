@@ -333,6 +333,24 @@
 	</div>
 
 	<div class="tab-pane" id="flux">
+        <div class="row">
+            <label class="control-label col-sm-2">Importa template:</label>
+            <div class="col-sm-6">
+                <select class="form-control" name="" id="add-template" >
+                    <option value=" ">Alege un template</option>
+                    @foreach($flowTemplates as $template)
+                        <option value="{{ $template->id }}">{{ $template->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <button type="button"
+                    class="btn btn-primary add_template"
+                    style="margin-left: 40px;"
+            >
+                <span class="glyphicon glyphicon-plus"></span> Adauga template
+            </button>
+        </div><br /><br />
 		<!-- flux starts here -->
 		<div id="locations-container">
 			@if(isset($locationSteps))
@@ -547,6 +565,8 @@
 			@include('admin.backend.issues.location-template')
 			@include('admin.backend.issues.flowstep-template')
 			@include('admin.backend.issues.connected-documents')
+            @include('admin.backend.issues.flowTemplate_location-template')
+            @include('admin.backend.issues.flowTemplate_flowstep-template')
 		</div>
 		<button type="button"
                 class="btn btn-primary add_location"
