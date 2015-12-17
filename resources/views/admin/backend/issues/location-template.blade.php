@@ -10,6 +10,7 @@
                         source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
                         location-name="true"
                         prevent-enter="true"
+                        value="<%= location_name%>"
                             />
                     <input type="hidden"
                         id="location-id-location-<%= id%>"

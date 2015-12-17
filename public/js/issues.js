@@ -352,12 +352,13 @@
                 });
         }
 
-        function executeAddLocation(id, flowTemplateLocationId, flowTemplateNrInregistrare) {
+        function executeAddLocation(id, flowTemplateLocationName, flowTemplateLocationId, flowTemplateNrInregistrare) {
             var locationTemplate = _.template($('#location_template').html());
 
 
             var populateLocationTemplate = locationTemplate({
                 'id': id,
+                'location_name': flowTemplateLocationName,
                 'location_id': flowTemplateLocationId,
                 'nr_inregistrare': flowTemplateNrInregistrare
             });
@@ -626,6 +627,7 @@
 
                     executeAddLocation(
                         id,
+                        locationStep.location.name,
                         locationStep.location_id,
                         locationStep.nr_inregistrare
                     );

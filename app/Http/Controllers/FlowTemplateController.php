@@ -110,9 +110,9 @@ class FlowTemplateController extends Controller
     public function getFullTemplate($flowTemplate)
     {
         $templateLocationStep = $flowTemplate->locationStep()
-                                            ->with('flowsteps')
-                                            ->orderBy('step_order', 'asc')
-                                            ->get();
+            ->orderBy('step_order', 'asc')
+            ->with(['flowsteps', 'location'])
+            ->get();
 
         return $templateLocationStep;
     }
