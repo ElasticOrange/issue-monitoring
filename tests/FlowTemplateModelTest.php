@@ -13,7 +13,8 @@ class FlowTemplateModelTest extends TestCase
      *
      * @return void
      */
-    public function testCreateFlowTemplate_Returns_Model()
+    /** @test */
+    public function createFlowTemplate_Returns_Model()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
 
@@ -25,7 +26,8 @@ class FlowTemplateModelTest extends TestCase
         $flowTemplate->delete();
     }
 
-    public function testCreateFlowTemplate_WithLocationStep_Attached()
+    /** @test */
+    public function createFlowTemplate_WithLocationStep_Attached()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
         $locationStep = LocationStep::create($this->locationStepData());
@@ -34,13 +36,14 @@ class FlowTemplateModelTest extends TestCase
 
         $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
 
-        $this->assertEquals(1, count($flowTemplateCreated->locationStep));
+        $this->assertCount(1, $flowTemplateCreated->locationStep);
 
         $flowTemplate->delete();
         $locationStep->delete();
     }
 
-    public function testCreateFlowTemplate_WithLocationStepAttached_ThenDeleted()
+    /** @test */
+    public function createFlowTemplate_WithLocationStepAttached_ThenDeleted()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
         $locationStep = LocationStep::create($this->locationStepData());
@@ -49,12 +52,13 @@ class FlowTemplateModelTest extends TestCase
         $locationStep->delete();
 
         $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
-        $this->assertEquals(0, count($flowTemplateCreated->locationStep));
+        $this->assertCount(0, $flowTemplateCreated->locationStep);
 
         $flowTemplate->delete();
     }
 
-    public function testCreateFlowTemplate_WithMultipleLocationStep_Attached()
+    /** @test */
+    public function createFlowTemplate_WithMultipleLocationStep_Attached()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
 
@@ -70,7 +74,7 @@ class FlowTemplateModelTest extends TestCase
 
         $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
 
-        $this->assertEquals(4, count($flowTemplateCreated->locationStep));
+        $this->assertCount(4, $flowTemplateCreated->locationStep);
 
         $locationStep1->delete();
         $locationStep2->delete();
@@ -79,7 +83,8 @@ class FlowTemplateModelTest extends TestCase
         $flowTemplate->delete();
     }
 
-    public function testCreateFlowTemplate_WithMultipleLocationStepAttached_DeleteOneLocationStep()
+    /** @test */
+    public function createFlowTemplate_WithMultipleLocationStepAttached_DeleteOneLocationStep()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
 
@@ -98,7 +103,7 @@ class FlowTemplateModelTest extends TestCase
 
         $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
 
-        $this->assertEquals(2, count($flowTemplateCreated->locationStep));
+        $this->assertCount(2, $flowTemplateCreated->locationStep);
 
         $locationStep2->delete();
         $locationStep4->delete();
@@ -106,7 +111,8 @@ class FlowTemplateModelTest extends TestCase
 
     }
 
-    public function testCreateFlowTemplate_WithMultipleLocationStepAttached_DeleteAllLocationStep()
+    /** @test */
+    public function createFlowTemplate_WithMultipleLocationStepAttached_DeleteAllLocationStep()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
 
@@ -127,13 +133,14 @@ class FlowTemplateModelTest extends TestCase
 
         $flowTemplateCreated = FlowTemplate::find($flowTemplate->id);
 
-        $this->assertEquals(0, count($flowTemplateCreated->locationStep));
+        $this->assertCount(0, $flowTemplateCreated->locationStep);
 
         $flowTemplate->delete();
 
     }
 
-    public function testCreateFlowTemplate_CheckListView_ForFlowTemplateName()
+    /** @test */
+    public function createFlowTemplate_CheckListView_ForFlowTemplateName()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
 
@@ -145,7 +152,8 @@ class FlowTemplateModelTest extends TestCase
         $flowTemplate->delete();
     }
 
-    public function testCreateFlowTemplate_CheckListView_DeleteFlowTemplateName()
+    /** @test */
+    public function createFlowTemplate_CheckListView_DeleteFlowTemplateName()
     {
         $flowTemplate = FlowTemplate::create($this->flowTemplateData());
 

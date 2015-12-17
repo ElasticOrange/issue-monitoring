@@ -14,7 +14,7 @@
                     <input type="hidden"
                         id="location-id-location-<%= id%>"
                         name="location[<%= id%>][location_id]"
-                        value=""
+                        value="<%= location_id%>"
                     />
                 </div>
                 <div class="col-sm-2">
@@ -31,7 +31,7 @@
                 <div class="col-sm-4">
                     <input class="form-control"
                            name="location[<%= id%>][nr_inregistrare]"
-                           value=""
+                           value="<%= nr_inregistrare%>"
                            prevent-enter="true"
                             />
                 </div>

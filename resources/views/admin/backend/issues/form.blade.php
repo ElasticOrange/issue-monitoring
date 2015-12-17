@@ -565,8 +565,6 @@
 			@include('admin.backend.issues.location-template')
 			@include('admin.backend.issues.flowstep-template')
 			@include('admin.backend.issues.connected-documents')
-            @include('admin.backend.issues.flowTemplate_location-template')
-            @include('admin.backend.issues.flowTemplate_flowstep-template')
 		</div>
 		<button type="button"
                 class="btn btn-primary add_location"
