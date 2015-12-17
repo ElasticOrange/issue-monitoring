@@ -68,7 +68,19 @@ Route::resource('/backend/issue', 'IssueController', ['except' => ['show', 'dest
 
 Route::post('/backend/tag', 'TagController@store');
 
-Route::post('/backend/step-autocomplete', 'StepAutocompleteController@store');
+Route::get('/backend/stepautocomplete/{stepautocomplete}/delete', 'StepAutocompleteController@destroy');
+Route::resource(
+    '/backend/stepautocomplete',
+    'StepAutocompleteController',
+    [
+        'except' => [
+            'destroy',
+            'show',
+            'update',
+            'edit'
+            ]
+    ]
+);
 
 Route::get('/backend/flowtemplate/{flowtemplate}/get-full-template', 'FlowTemplateController@getFullTemplate');
 Route::get('/backend/flowtemplate/{flowtemplate}/delete', 'FlowTemplateController@destroy');

@@ -10,6 +10,13 @@ use Issue\Http\Requests\StepAutocompleteRequest;
 
 class StepAutocompleteController extends Controller
 {
+    public function index()
+    {
+        $steps = StepAutocomplete::all();
+
+        return view('admin.backend.step-autocomplete.list', ['steps' => $steps]);
+    }
+
     public function store(StepAutocompleteRequest $request)
     {
         $step = new StepAutocomplete;
@@ -18,5 +25,12 @@ class StepAutocompleteController extends Controller
         $step->save();
 
         return $step;
+    }
+
+    public function destroy($stepautocomplete)
+    {
+        $stepautocomplete->delete();
+
+        return redirect()->action('StepAutocompleteController@index');
     }
 }

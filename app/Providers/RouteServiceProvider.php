@@ -34,6 +34,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('news', 'Issue\News');
         $router->model('issue', 'Issue\Issue');
         $router->model('flowtemplate', 'Issue\FlowTemplate');
+        $router->model('stepautocomplete', 'Issue\StepAutocomplete');
     }
 
 	/**

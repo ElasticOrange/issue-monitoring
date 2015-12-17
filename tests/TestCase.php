@@ -103,4 +103,11 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'nr_inregistrare' => $this->faker->text
         ];
     }
+
+    public function stepAutocompleteData()
+    {
+        return [
+            'name' => $this->faker->text
+        ];
+    }
 }

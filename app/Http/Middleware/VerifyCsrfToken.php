@@ -13,6 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
 	 */
 	protected $except = [
 		"backend/tag",
-		"backend/step-autocomplete"
+		"backend/stepautocomplete"
 	];
 }

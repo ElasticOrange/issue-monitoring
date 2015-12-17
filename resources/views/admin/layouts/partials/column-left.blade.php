@@ -36,6 +36,9 @@
 			<li>
 				<a href="/backend/flowtemplate"><i class="fa fa-th"></i> Templates</a>
 			</li>
+            <li>
+				<a href="{{ action('StepAutocompleteController@index') }}"><i class="fa fa-magic"></i> Stadii procedurale</a>
+			</li>
 		</ul>
 	</div>
 </div>
