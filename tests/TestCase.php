@@ -1,6 +1,5 @@
 <?php
 
-use Faker;
 use Faker\Factory;
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase

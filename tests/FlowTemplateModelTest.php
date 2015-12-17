@@ -167,4 +167,86 @@ class FlowTemplateModelTest extends TestCase
         $this->visit('/backend/flowtemplate/')
             ->dontSee($flowTemplateCreated->name);
     }
+
+    /** @test */
+    public function create_a_flow_template_with_post_and_check_list_view_if_exists()
+    {
+
+        $params = [
+            '_token' => csrf_token(),
+            'name' => $this->faker->name
+        ];
+
+        $this->call('POST', action('FlowTemplateController@store'), $params);
+
+        $this->assertResponseOk();
+
+        $this->visit('/backend/flowtemplate')
+            ->see($params['name']);
+    }
+
+    /** @test */
+    public function create_a_complex_flowtemplate_with_locationsteps_and_flowsteps()
+    {
+        $params = [
+            '_token' => csrf_token(),
+            'name' => $this->faker->name,
+            'location' => [
+                'new-1' => [
+                    'name' => 'Guvern',
+                    'location_id' => 2,
+                    'nr_inregistrare' => $this->faker->text,
+                    'flow_steps' => [
+                        'new-2'=> [
+                            'flow_name' => "pas 1",
+                            'estimated_duration' => "",
+                            'start_date' => "2015-12-17",
+                            'end_date' => "2015-12-17",
+                            'location_step_id' => "",
+                            'observatii' => [
+                                'ro' => "",
+                                'en' => ""
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $this->call('POST', action('FlowTemplateController@store'), $params);
+
+
+        $this->assertResponseOk();
+
+        $deleteLineFromDb = FlowTemplate::where('name', $params['name'])->first();
+        $deleteLineFromDb->delete();
+    }
+
+    /** @test */
+    public function create_a_complex_flowtemplate_with_locationsteps_and_flowsteps_and_edit()
+    {
+        $params = [
+            '_token' => csrf_token(),
+            'name' => $this->faker->name,
+        ];
+
+        $this->call('POST', action('FlowTemplateController@store'), $params);
+        $deleteLineFromDb = FlowTemplate::where('name', $params['name'])->first();
+
+        $this->call('POST',
+            'backend/flowtemplate/'.$deleteLineFromDb->id,
+            [
+                '_method' => 'PUT',
+                '_token' => csrf_token(),
+                'name' => 'Mihai'
+            ]
+        );
+
+        $newName = FlowTemplate::find($deleteLineFromDb->id);
+
+        $this->assertResponseOk();
+        $this->assertNotEquals($params['name'], $newName->name);
+
+        $deleteLineFromDb->delete();
+    }
 }
