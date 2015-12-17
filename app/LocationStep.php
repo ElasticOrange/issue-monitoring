@@ -27,7 +27,7 @@ class LocationStep extends Model
 
 	public function flowsteps()
 	{
-		return $this->hasMany('Issue\FlowStep');
+		return $this->hasMany('Issue\FlowStep')->orderBy('flowstep_order', 'asc');
 	}
 
     public function flowTemplate()
