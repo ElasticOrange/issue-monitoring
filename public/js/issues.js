@@ -498,15 +498,6 @@
 
             $('#flow-container-' + locationId).append(populateStepTemplate);
 
-        }
-
-        $(document).on('click', '.add_flowstep', function () {
-
-            var stepId = _.uniqueId('new-');
-            var locationId = $(this).attr('location-id');
-
-            executeAddFlowStep(stepId, locationId);
-
             initDocumentsTypeahead(stepId, locationId);
 
             var edit = 0;
@@ -533,6 +524,15 @@
                     }
                 }
             }).disableSelection();
+        }
+
+        $(document).on('click', '.add_flowstep', function () {
+
+            var stepId = _.uniqueId('new-');
+            var locationId = $(this).attr('location-id');
+
+            executeAddFlowStep(stepId, locationId);
+
         });
 
         $('.location-step').each(function () {
