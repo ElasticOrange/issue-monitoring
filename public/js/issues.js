@@ -210,6 +210,9 @@
         });
 
         var issueAutocomplete = $('#issue-autocomplete');
+        var roIssueName = $('[name-ro=true]').val();
+        var enIssueName = $('[name-en=true]').val();
+
         var issuesList = new Bloodhound({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -218,6 +221,9 @@
                 wildcard: '{name}',
                 transform: function (response) {
                     return _.filter(response, function (item) {
+                        if (roIssueName == item.name || enIssueName == item.name) {
+                            return withError('Issue is the same with filter result');
+                        }
                         return $('[issue-id=' + item.id + ']').length === 0;
                     });
                 }

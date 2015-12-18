@@ -29,7 +29,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Nume</label>
 					<div class="col-md-8">
-						<input type="text" prevent-enter="true" name="name[ro]" class="form-control" value="{{ $issue->translateOrNew('ro')->name }}">
+						<input type="text" prevent-enter="true" name-ro="true" name="name[ro]" class="form-control" value="{{ $issue->translateOrNew('ro')->name }}">
 					</div>
 				</div>
 
@@ -72,7 +72,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">Name</label>
 					<div class="col-md-8">
-						<input type="text" prevent-enter="true" name="name[en]" class="form-control" value="{{ $issue->translateOrNew('en')->name }}">
+						<input type="text" prevent-enter="true" name-en="true" name="name[en]" class="form-control" value="{{ $issue->translateOrNew('en')->name }}">
 					</div>
 				</div>
 
