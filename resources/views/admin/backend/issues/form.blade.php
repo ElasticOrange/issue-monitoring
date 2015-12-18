@@ -183,7 +183,14 @@
 						@endforeach
 					</div>
 				</div>
-			</div>
+			</div><br/>
+            <div class="row">
+                <div class="form-group">
+                    <div class=" col-sm-4 col-sm-offset-2">
+                    <a href="{{ action('StakeholderController@create') }}" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga stakeholder</a>
+                    </div>
+                </div>
+            </div>
 
 			<hr/>
 
@@ -257,7 +264,14 @@
 						@endforeach
 					</div>
 				</div>
-			</div>
+			</div><br/>
+            <div class="row">
+                <div class="form-group">
+                    <div class=" col-sm-4 col-sm-offset-2">
+                        <a href="{{ action('NewsController@create') }}" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga stire</a>
+                    </div>
+                </div>
+            </div>
 
 			<hr/>
 
