@@ -10,7 +10,11 @@
 			<br/>
 			<label class="col-md-2 control-label">Titlu</label>
 			<div class="col-md-8">
-				<input type="text" prevent-enter="true" name="title[ro]" class="form-control" value="{{ $news->translateOrNew('ro')->title}}">
+				<textarea type="text"
+                       rows="3"
+                       prevent-enter="true"
+                       name="title[ro]"
+                       class="form-control">{{ $news->translateOrNew('ro')->title}}</textarea>
 			</div>
 		</div>
 		<div class="form-group">
@@ -26,7 +30,11 @@
 			<br/>
 			<label class="col-md-2 control-label">Title</label>
 			<div class="col-md-8">
-				<input type="text" prevent-enter="true" name="title[en]" class="form-control" value="{{ $news->translateOrNew('en')->title}}">
+				<textarea type="text"
+                       prevent-enter="true"
+                       rows="3"
+                       name="title[en]"
+                       class="form-control">{{ $news->translateOrNew('en')->title}}</textarea>
 			</div>
 		</div>
 		<div class="form-group">
