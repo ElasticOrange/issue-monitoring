@@ -4,7 +4,7 @@
 <div class="form-group">
 	<label class="control-label col-sm-2">Nume Template:</label>
 	<div class="col-sm-6">
-        <input class="form-control" template-name="true" name="name" value="{{ $flowTemplate->name }}" />
+        <input class="form-control" prevent-enter="true" template-name="true" name="name" value="{{ $flowTemplate->name }}" />
     </div>
 </div><br /><br />
 

@@ -8,7 +8,7 @@
 	</div>
 
 	<div class="form-group">
-		<a href="/backend/flowtemplate/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga template</a>
+		<a href="{{ action('FlowTemplateController@create') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga template</a>
 	</div>
 
 	<div class="row">

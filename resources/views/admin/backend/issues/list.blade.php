@@ -19,14 +19,14 @@
 						<table class="table table-striped table-bordered table-hover" data-table="true">
 							<thead>
 								<tr role="row">
-									<th class="text-center" style="width: 20px;">Id</th>
-									<th class="text-center" style="width: 160px;">Domeniu - subdomeniu</th>
-									<th class="text-center" style="width: 180x;">Categorie</th>
-									<th class="text-center" style="width: 180x;">Tip</th>
-									<th class="text-center" style="width: 120px;">Nume</th>
-									<th class="text-center" style="width: 180px;">Status</th>
-									<th class="text-center" style="width: 20px;">Publicat</th>
-									<th class="text-center" style="width: 200px;">Actiuni</th>
+									<th class="text-center" style="width: 5%;">Id</th>
+									<th class="text-center" style="width: 10%;">Domeniu - subdomeniu</th>
+									<th class="text-center" style="width: 10%;">Categorie</th>
+									<th class="text-center" style="width: 10%;">Tip</th>
+									<th class="text-center" style="width: 50%;">Nume</th>
+									<th class="text-center" style="width: 5%;">Status</th>
+									<th class="text-center" style="width: 5%;">Publicat</th>
+									<th class="text-center" style="width: 5%;">Actiuni</th>
 								</tr>
 							</thead>
 							<tbody>

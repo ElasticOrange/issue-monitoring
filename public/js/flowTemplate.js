@@ -159,7 +159,7 @@
                     e.preventDefault();
 
                     var request = $.ajax({
-                        url: '/backend/step-autocomplete',
+                        url: '/backend/stepautocomplete',
                         type: 'post',
                         data: {name: stepInput.typeahead('val')}
                     });

@@ -24,7 +24,7 @@ class StepAutocompleteRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|string|min:3'
+            'name' => 'required|unique:step_autocompletes,name|string|min:3'
         ];
     }
 }

@@ -24,7 +24,7 @@ class TagRequest extends Request
 	public function rules()
 	{
 		return [
-			'name' => 'required|string|min:3|max:255'
+			'name' => 'required|unique:tags,name|string|min:3|max:255'
 		];
 	}
 }

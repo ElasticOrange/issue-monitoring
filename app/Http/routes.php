@@ -72,14 +72,7 @@ Route::get('/backend/stepautocomplete/{stepautocomplete}/delete', 'StepAutocompl
 Route::resource(
     '/backend/stepautocomplete',
     'StepAutocompleteController',
-    [
-        'except' => [
-            'destroy',
-            'show',
-            'update',
-            'edit'
-            ]
-    ]
+    ['except' => ['destroy', 'show', 'update', 'edit']]
 );
 
 Route::get('/backend/flowtemplate/{flowtemplate}/get-full-template', 'FlowTemplateController@getFullTemplate');
