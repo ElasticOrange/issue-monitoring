@@ -1,5 +1,5 @@
 <script type="text/template" id="location_template">
-	<div class="location panel panel-default" id="location-<%= id%>">
+	<div class="location panel panel-default" id="location-<%= id%>" location-id="<%= id%>">
 		<div class="form-group panel-heading" style="margin: 0px;">
             <div class="row">
                 <label class="control-label col-sm-2">Locatie:</label>

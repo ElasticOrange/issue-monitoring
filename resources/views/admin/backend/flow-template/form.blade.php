@@ -12,7 +12,7 @@
 <div id="locations-container">
     @if(isset($locationSteps))
         @foreach($locationSteps as $locationStep)
-        <div class="location panel panel-default" id="location-{{ $locationStep->id }}">
+        <div class="location panel panel-default" id="location-{{ $locationStep->id }}" location-id="{{ $locationStep->id }}">
             <div class="form-group panel-heading" style="margin: 0px;">
                 <div class="row">
                     <label class="control-label col-sm-2">Locatie:</label>

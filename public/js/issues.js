@@ -519,8 +519,7 @@
                 handle: ".step-handle",
                 stop: function (event, ui) {
 
-                    var strParentId = ui.item.parents('.location').attr('id');
-                    var parentId = strParentId.match(/(\d+)/g);
+                    var parentId = ui.item.parents('.location').attr('location-id');
 
                     var object = $(ui.item).find(':input');
                     for (var i = 0; i < object.length; i++) {
