@@ -38,6 +38,9 @@
 						<form role="form">
 							<fieldset>
 								<div class="form-group">
+									<input class="form-control" placeholder="Name" name="name" type="text" autofocus>
+								</div>
+								<div class="form-group">
 									<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
 								</div>
 								<div class="form-group">

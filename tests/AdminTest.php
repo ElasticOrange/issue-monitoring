@@ -7,9 +7,12 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use Issue\Document;
+use Issue\User;
 
 class AdminTest extends TestCase
 {
+	use DatabaseTransactions;
+	use WithoutMiddleware;
 	/**
 	 * A basic test example.
 	 *
@@ -41,5 +44,14 @@ class AdminTest extends TestCase
 		$response = $this->call('GET', action('DocumentController@create'));
 
 		$this->assertEquals(200, $response->status());
+	}
+
+	/** @test */
+	public function create_a_new_admin_and_check_if_it_was_created()
+	{
+		$user = factory(User::class, 1)->create();
+		$userCreated = User::find($user->id);
+
+		$this->assertEquals($user->id, $userCreated->id);
 	}
 }
