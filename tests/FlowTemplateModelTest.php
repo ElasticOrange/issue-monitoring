@@ -8,6 +8,7 @@ use Issue\LocationStep;
 
 class FlowTemplateModelTest extends TestCase
 {
+    use WithoutMiddleware;
     /**
      * A basic test example.
      *

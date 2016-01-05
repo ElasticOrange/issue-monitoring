@@ -80,14 +80,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/backend/flowtemplate/{flowtemplate}/get-full-template', 'FlowTemplateController@getFullTemplate');
     Route::get('/backend/flowtemplate/{flowtemplate}/delete', 'FlowTemplateController@destroy');
     Route::resource('/backend/flowtemplate', 'FlowTemplateController', ['except' => ['destroy']]);
+
+    Route::get('/users/{users}/delete', 'UserController@destroy');
+    Route::resource('/users', 'UserController', ['except' => ['destroy']]);
 });
 
 
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-Route::get('password/email', 'Auth\PasswordController@getEmail');
-Route::post('password/email', 'Auth\PasswordController@postEmail');
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
+Route::get('/auth/login', 'Auth\AuthController@getLogin');
+Route::post('/auth/login', 'Auth\AuthController@postLogin');
+Route::get('/auth/logout', 'Auth\AuthController@getLogout');
+
+Route::get('/password/email', 'Auth\PasswordController@getEmail');
+Route::post('/password/email', 'Auth\PasswordController@postEmail');
+Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('/password/reset', 'Auth\PasswordController@postReset');

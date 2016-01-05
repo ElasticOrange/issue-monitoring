@@ -7,6 +7,7 @@ use Issue\StepAutocomplete;
 
 class AutocompleteFlowStepTest extends TestCase
 {
+    use WithoutMiddleware;
     /**
      * A basic test example.
      *

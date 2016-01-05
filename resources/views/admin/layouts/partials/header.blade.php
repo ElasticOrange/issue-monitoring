@@ -20,7 +20,7 @@
 			<li class="divider">
 			</li>
 			<li>
-				<a href="/auth/logout">
+				<a href="/auth/logout" id="logout">
 					<i class="fa fa-sign-out fa-fw"></i>
 					Logout
 				</a>

@@ -13,6 +13,7 @@ use Issue\Domain;
 
 class NewsDynamicDomainTest extends TestCase
 {
+	use WithoutMiddleware;
 	public $faker;
 
 	public function setUp()

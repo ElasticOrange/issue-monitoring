@@ -13,6 +13,7 @@ use Issue\Domain;
 
 class IssuesDynamicDomainTest extends TestCase
 {
+	use WithoutMiddleware;
 	/**
 	 * A basic test example.
 	 *

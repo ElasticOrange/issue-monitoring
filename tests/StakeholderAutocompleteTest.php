@@ -10,6 +10,7 @@ use Config;
 
 class StakeholderAutocompleteTest extends TestCase
 {
+	use WithoutMiddleware;
 
 
 	/**

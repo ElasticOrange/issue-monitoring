@@ -13,6 +13,7 @@ use Issue\News;
 
 class IssuesDynamicStakeholderTest extends TestCase
 {
+	use WithoutMiddleware;
 	public $faker;
 
 	public function setUp()

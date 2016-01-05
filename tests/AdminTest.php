@@ -5,6 +5,7 @@ use TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Auth;
 
 use Issue\Document;
 use Issue\User;
@@ -46,12 +47,5 @@ class AdminTest extends TestCase
 		$this->assertEquals(200, $response->status());
 	}
 
-	/** @test */
-	public function create_a_new_admin_and_check_if_it_was_created()
-	{
-		$user = factory(User::class, 1)->create();
-		$userCreated = User::find($user->id);
 
-		$this->assertEquals($user->id, $userCreated->id);
-	}
 }

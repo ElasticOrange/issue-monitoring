@@ -34,7 +34,6 @@
                 @include('errors._errors')
                 <form class="form form-horizontal" action="/auth/login" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-                    <input type="hidden" name="password"/>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">E-mail</label>
                         <div class="col-sm-8">
@@ -51,14 +50,6 @@
                                       name="password"
                                       class="form-control"
                                     />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox col-sm-8 col-sm-offset-4">
-                            <label>
-                                <input type="checkbox" name="remember"/>
-                                Remember me
-                            </label>
                         </div>
                     </div>
                     <div class="form-group">
