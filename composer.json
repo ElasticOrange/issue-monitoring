@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "dimsav/laravel-translatable": "^5.1",
         "fzaninotto/faker": "^1.5",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "guzzlehttp/guzzle": "~4.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

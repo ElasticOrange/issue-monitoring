@@ -116,17 +116,4 @@ class AuthTest extends TestCase
         $this->visit('/users')->seePageIs('/auth/login');
     }
 
-    /** @test */
-    public function reset_password_and_login_with_new_password()
-    {
-
-        $params = [
-            '_token' => csrf_token(),
-            'email' => 'xwave21@gmail.com',
-        ];
-
-        $response = $this->call('POST', action('Auth\PasswordController@postEmail'), $params);
-
-        $this->assertEquals(302, $response->status());
-    }
 }
