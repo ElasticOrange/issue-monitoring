@@ -33,7 +33,6 @@
                 @include('errors._errors')
                 <form class="form form-horizontal" action="/password/email" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-                    <input type="hidden" name="password"/>
                     <div class="form-group">
                         <label class="col-sm-4 control-label">E-mail</label>
                         <div class="col-sm-8">

@@ -1,6 +1,7 @@
 <?php
 namespace Tests;
 
+use Illuminate\Support\Facades\DB;
 use TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -45,7 +46,43 @@ class AuthTest extends TestCase
         $this->call('POST', action('Auth\AuthController@postLogin'), $params);
 
         $this->assertResponseStatus(302);
-        $this->assertRedirectedTo('home');
+        $this->assertRedirectedToAction('AdminDashboardController@getIndex');
+    }
+
+    /** @test */
+    public function create_a_new_admin_and_login_with_wrong_email()
+    {
+        $user = factory(User::class, 1)->create();
+
+        $params = [
+            '_token' => csrf_token(),
+            'email' => '12345'.$user->email,
+            'password' => $user->remember_token
+        ];
+
+        $this->call('POST', action('Auth\AuthController@postLogin'), $params);
+
+        $this->assertRedirectedTo('/auth/login');
+        $this->visit(action('AdminDashboardController@getIndex'))
+            ->seePageIs(action('Auth\AuthController@getLogin'));
+    }
+
+    /** @test */
+    public function create_a_new_admin_and_login_with_wrong_password()
+    {
+        $user = factory(User::class, 1)->create();
+
+        $params = [
+            '_token' => csrf_token(),
+            'email' => $user->email,
+            'password' => 'sadf'.$user->remember_token
+        ];
+
+        $this->call('POST', action('Auth\AuthController@postLogin'), $params);
+
+        $this->assertRedirectedTo('/auth/login');
+        $this->visit(action('AdminDashboardController@getIndex'))
+            ->seePageIs(action('Auth\AuthController@getLogin'));
     }
 
     /** @test */
@@ -79,4 +116,17 @@ class AuthTest extends TestCase
         $this->visit('/users')->seePageIs('/auth/login');
     }
 
+    /** @test */
+    public function reset_password_and_login_with_new_password()
+    {
+
+        $params = [
+            '_token' => csrf_token(),
+            'email' => 'xwave21@gmail.com',
+        ];
+
+        $response = $this->call('POST', action('Auth\PasswordController@postEmail'), $params);
+
+        $this->assertEquals(302, $response->status());
+    }
 }

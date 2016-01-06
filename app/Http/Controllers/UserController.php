@@ -45,14 +45,20 @@ class UserController extends Controller
         $user = new User;
         $user->fill($request->all());
 
-        if($request->input('password') === $request->input('password_confirmation')) {
-            $user->password = Hash::make($request->input('password'));
-            $user->save();
+        $this->validate(
+            $request,
+            [
+                'name' => 'string|min:3',
+                'email' => 'required|email|unique:users,email'.($user ? ','.$user->id : ''),
+                'password' => 'string|min:5',
+                'password_confirmation' => 'same:password',
+            ]
+        );
 
-            return $user;
-        }
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
 
-        return response("Password doesn't match password confirmation");
+        return $user;
     }
 
     /**
@@ -88,14 +94,20 @@ class UserController extends Controller
     {
         $user->fill($request->all());
 
-        if($request->input('password') === $request->input('password_confirmation')) {
-            $user->password = Hash::make($request->input('password'));
-            $user->save();
+        $this->validate(
+            $request,
+            [
+                'name' => 'string|min:3',
+                'email' => 'required|email|unique:users,email'.($user ? ','.$user->id : ''),
+                'password' => 'string|min:5',
+                'password_confirmation' => 'same:password',
+            ]
+        );
 
-            return $user;
-        }
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
 
-        return response("Password doesn't match password confirmation");
+        return $user;
     }
 
     /**
