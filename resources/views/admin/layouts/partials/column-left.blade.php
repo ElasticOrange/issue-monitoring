@@ -39,6 +39,9 @@
             <li>
 				<a href="{{ action('StepAutocompleteController@index') }}"><i class="fa fa-magic"></i> Stadii procedurale</a>
 			</li>
+			<li>
+				<a href="/users"><i class="fa fa-users"></i> Users</a>
+			</li>
 		</ul>
 	</div>
 </div>

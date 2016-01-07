@@ -20,7 +20,8 @@
                             <thead>
                             <tr role="row">
                                 <th class="text-center" style="width: 10%;">Id</th>
-                                <th class="text-center" style="width: 80%;">Nume</th>
+                                <th class="text-center" style="width: 35%;">Nume</th>
+                                <th class="text-center" style="width: 45%;">E-mail</th>
                                 <th class="text-center" style="width: 10%;">Actiuni</th>
                             </tr>
                             </thead>
@@ -29,6 +30,7 @@
                                 <tr class="gradeA odd" role="row">
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
                                     </td>
                                     <td class="text-center">
                                         <div class="row">

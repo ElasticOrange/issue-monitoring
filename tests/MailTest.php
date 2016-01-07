@@ -6,12 +6,14 @@ use TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Hash;
 use GuzzleHttp\Client;
 
 use Issue\User;
 
 class MailTest extends TestCase
 {
+//    use DatabaseTransactions;
 
     protected $mailcatcher;
 
@@ -52,7 +54,7 @@ class MailTest extends TestCase
         $this->call('POST', action('Auth\PasswordController@postEmail'), $params);
 
         $email = $this->getLastEmail();
-        $reset_token = DB::table('password_resets')->select('token')->where('email', '=', $params['email'])->get();
+        $reset_token = DB::table('password_resets')->select('token')->where('email', '=', $user->email)->get();
 
         $this->assertContains($reset_token[0]->token, (string) $email->getBody());
 
