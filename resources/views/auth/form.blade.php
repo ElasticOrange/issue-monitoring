@@ -24,23 +24,23 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-md-2 control-label">Password</label>
-        <div class="col-sm-8">
-            <input  type="password"
-                    name="password"
-                    class="form-control"
-                    />
-        </div>
-    </div>
+    {{--<div class="form-group">--}}
+        {{--<label class="col-md-2 control-label">Password</label>--}}
+        {{--<div class="col-sm-8">--}}
+            {{--<input  type="password"--}}
+                    {{--name="password"--}}
+                    {{--class="form-control"--}}
+                    {{--/>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
-    <div class="form-group">
-        <label class="col-md-2 control-label">Password confirmation</label>
-        <div class="col-sm-8">
-            <input  type="password"
-                    name="password_confirmation"
-                    class="form-control"
-                    />
-        </div>
-    </div>
+    {{--<div class="form-group">--}}
+        {{--<label class="col-md-2 control-label">Password confirmation</label>--}}
+        {{--<div class="col-sm-8">--}}
+            {{--<input  type="password"--}}
+                    {{--name="password_confirmation"--}}
+                    {{--class="form-control"--}}
+                    {{--/>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <br/><br/>

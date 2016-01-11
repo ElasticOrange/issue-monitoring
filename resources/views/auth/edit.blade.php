@@ -27,6 +27,17 @@
                 @include('auth.form')
 
                 <div class="form-group">
+                    <label class="col-md-2 control-label">Tip</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="type">
+                            <option value="client">client</option>
+                            <option value="editor" @if($user->type === 'editor') selected="selected" @endif>editor</option>
+                            <option value="admin" @if($user->type === 'admin') selected="selected" @endif>admin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <div class="col-sm-4" style="margin-top:25px;">
                         <button class="btn btn-primary">
                             <span class="glyphicon glyphicon-floppy-disk"></span> Salveaza schimbari

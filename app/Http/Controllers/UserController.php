@@ -92,6 +92,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
+//        dd($request->all());
         $user->fill($request->all());
 
         $this->validate(
