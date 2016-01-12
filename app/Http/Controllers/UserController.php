@@ -8,6 +8,8 @@ use Issue\Http\Controllers\Controller;
 use Issue\User;
 use Hash;
 use Issue\Http\Requests\UserRequest;
+use Gate;
+use Auth;
 
 class UserController extends Controller
 {
@@ -18,6 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('list-users')) {
+            abort(403);
+        }
+
         $users = User::all();
 
         return view('auth.list', ['users' => $users]);
@@ -30,6 +36,10 @@ class UserController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('create-users')) {
+            abort(403);
+        }
+
         $user = new User;
 
         return view('auth.create', ['user' => $user]);
@@ -43,6 +53,10 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        if (Gate::denies('store-users')) {
+            abort(403);
+        }
+
         $user = new User;
         $user->fill($request->all());
 
@@ -60,6 +74,10 @@ class UserController extends Controller
      */
     public function show($user)
     {
+        if (Gate::denies('show-users')) {
+            abort(403);
+        }
+
         return $this->edit($user);
     }
 
@@ -71,6 +89,10 @@ class UserController extends Controller
      */
     public function edit($user)
     {
+        if (Gate::denies('edit-users')) {
+            abort(403);
+        }
+
         return view('auth.edit', ['user' => $user]);
     }
 
@@ -83,6 +105,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
+        if (Gate::denies('update-users')) {
+            abort(403);
+        }
+
         $this->validate(
             $request,
             [
@@ -107,8 +133,13 @@ class UserController extends Controller
      */
     public function destroy($user)
     {
+        if (Gate::denies('delete-users')) {
+            abort(403);
+        }
+
         $user->delete();
 
         return redirect()->action('UserController@index');
     }
+
 }

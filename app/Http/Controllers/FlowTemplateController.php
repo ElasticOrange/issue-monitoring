@@ -7,6 +7,7 @@ use Issue\Http\Requests;
 use Issue\Http\Requests\FlowTemplateRequest;
 use Issue\Http\Controllers\Controller;
 use Issue\FlowTemplate;
+use Gate;
 
 class FlowTemplateController extends Controller
 {
@@ -17,6 +18,10 @@ class FlowTemplateController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('list-template')) {
+            abort(403);
+        }
+
         $flowTemplates = FlowTemplate::all();
 
         return view('admin.backend.flow-template.list', ['flowTemplates' => $flowTemplates]);
@@ -29,6 +34,10 @@ class FlowTemplateController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('create-template')) {
+            abort(403);
+        }
+
         $flowTemplate = new FlowTemplate;
 
         return view('admin.backend.flow-template.create', ['flowTemplate' => $flowTemplate]);
@@ -42,6 +51,10 @@ class FlowTemplateController extends Controller
      */
     public function store(FlowTemplateRequest $request)
     {
+        if (Gate::denies('store-template')) {
+            abort(403);
+        }
+
         $flowTemplate = new FlowTemplate;
         $flowTemplate->setAll($request);
         $flowTemplate->syncLocations($request->input('location'));
@@ -57,7 +70,10 @@ class FlowTemplateController extends Controller
      */
     public function show($flowTemplate)
     {
-        //
+        if (Gate::denies('show-template')) {
+            abort(403);
+        }
+
     }
 
     /**
@@ -68,6 +84,10 @@ class FlowTemplateController extends Controller
      */
     public function edit($flowTemplate)
     {
+        if (Gate::denies('edit-template')) {
+            abort(403);
+        }
+
         $locationSteps = $flowTemplate->locationStep()->orderBy('step_order', 'asc')->get();
 
         return view(
@@ -88,6 +108,10 @@ class FlowTemplateController extends Controller
      */
     public function update(Request $request, $flowTemplate)
     {
+        if (Gate::denies('update-template')) {
+            abort(403);
+        }
+
         $flowTemplate->setAll($request);
         $flowTemplate->syncLocations($request->input('location'));
 
@@ -102,6 +126,10 @@ class FlowTemplateController extends Controller
      */
     public function destroy($flowTemplate)
     {
+        if (Gate::denies('delete-template')) {
+            abort(403);
+        }
+
         $flowTemplate->delete();
 
         return redirect()->action('FlowTemplateController@index');

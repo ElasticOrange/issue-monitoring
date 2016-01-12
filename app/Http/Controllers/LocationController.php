@@ -8,6 +8,7 @@ use Issue\Http\Controllers\Controller;
 use Issue\Location;
 use Issue\LocationTranslation;
 use Issue\Http\Requests\LocationRequest;
+use Gate;
 
 class LocationController extends Controller
 {
@@ -18,7 +19,11 @@ class LocationController extends Controller
 	 */
 	public function index()
 	{
-		$locations = Location::all();
+        if (Gate::denies('list-location')) {
+            abort(403);
+        }
+
+        $locations = Location::all();
 
 		return view('admin.backend.location.list', ['locations' => $locations]);
 	}
@@ -48,7 +53,11 @@ class LocationController extends Controller
 	 */
 	public function create()
 	{
-		$location = new Location;
+        if (Gate::denies('create-location')) {
+            abort(403);
+        }
+
+        $location = new Location;
 
 		return view('admin.backend.location.create', ['location' => $location]);
 	}
@@ -61,7 +70,11 @@ class LocationController extends Controller
 	 */
 	public function store(LocationRequest $request)
 	{
-		$location = new Location;
+        if (Gate::denies('store-location')) {
+            abort(403);
+        }
+
+        $location = new Location;
 		$this->fillLocation($location, $request);
 		$location->save();
 
@@ -76,8 +89,11 @@ class LocationController extends Controller
 	 */
 	public function show($id)
 	{
-		//
-	}
+        if (Gate::denies('show-location')) {
+            abort(403);
+        }
+
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -87,7 +103,11 @@ class LocationController extends Controller
 	 */
 	public function edit($location)
 	{
-		return view('admin.backend.location.edit', ['location' => $location]);
+        if (Gate::denies('edit-location')) {
+            abort(403);
+        }
+
+        return view('admin.backend.location.edit', ['location' => $location]);
 	}
 
 	/**
@@ -99,7 +119,11 @@ class LocationController extends Controller
 	 */
 	public function update(Request $request, $location)
 	{
-		$this->validate($request,
+        if (Gate::denies('update-location')) {
+            abort(403);
+        }
+
+        $this->validate($request,
 			[
 				'name' => 'array',
 				'name.ro' => 'required|string|unique:location_translations,name,' . $location->id . ',location_id',
@@ -129,7 +153,11 @@ class LocationController extends Controller
 	 */
 	public function destroy($location)
 	{
-		$location->delete();
+        if (Gate::denies('delete-location')) {
+            abort(403);
+        }
+
+        $location->delete();
 
 		return $location;
 	}

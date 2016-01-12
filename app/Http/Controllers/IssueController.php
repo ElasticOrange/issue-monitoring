@@ -21,6 +21,7 @@ use Issue\DocumentTranslation;
 use Issue\LocationTranslation;
 use Issue\LocationStep;
 use Issue\FlowTemplate;
+use Gate;
 
 class IssueController extends Controller
 {
@@ -31,7 +32,11 @@ class IssueController extends Controller
 	 */
 	public function index()
 	{
-		$issues=Issue::all();
+        if (Gate::denies('list-issue')) {
+            abort(403);
+        }
+
+        $issues=Issue::all();
 
 		return view('admin.backend.issues.list', ['issues' => $issues]);
 	}
@@ -43,6 +48,10 @@ class IssueController extends Controller
 	 */
 	public function create()
 	{
+        if (Gate::denies('create-issue')) {
+            abort(403);
+        }
+
         $flowTemplates = FlowTemplate::all();
 		$issue = new Issue;
 
@@ -57,7 +66,11 @@ class IssueController extends Controller
 	 */
 	public function store(IssueRequest $request)
 	{
-		$issue = new Issue;
+        if (Gate::denies('store-issue')) {
+            abort(403);
+        }
+
+        $issue = new Issue;
 		$issue->setAll($request);
 		$issue->syncLocations($request->input('location'));
 
@@ -72,7 +85,11 @@ class IssueController extends Controller
 	 */
 	public function show($code)
 	{
-		$issue = Issue::getByPublicCode($code);
+        if (Gate::denies('show-issue')) {
+            abort(403);
+        }
+
+        $issue = Issue::getByPublicCode($code);
 
 		return $this->edit($issue);
 	}
@@ -85,6 +102,10 @@ class IssueController extends Controller
 	 */
 	public function edit($issue)
 	{
+        if (Gate::denies('edit-issue')) {
+            abort(403);
+        }
+
         $flowTemplates = FlowTemplate::all();
 		$locationSteps = $issue->locationsteps()->orderBy('step_order', 'asc')->get();
 
@@ -107,6 +128,10 @@ class IssueController extends Controller
 	 */
 	public function update(Request $request, $issue)
 	{
+        if (Gate::denies('update-issue')) {
+            abort(403);
+        }
+
         $locationsData = $request->input('location');
 		$issue->setAll($request);
 		$issue->syncLocations($locationsData);
@@ -122,7 +147,11 @@ class IssueController extends Controller
 	 */
 	public function destroy($issue)
 	{
-		$issue -> delete();
+        if (Gate::denies('delete-issue')) {
+            abort(403);
+        }
+
+        $issue -> delete();
 
 		return redirect()->action('IssueController@index');
 	}

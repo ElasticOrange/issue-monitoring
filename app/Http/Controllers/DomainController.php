@@ -7,6 +7,7 @@ use Issue\Http\Controllers\Controller;
 use Issue\Domain;
 use Issue\DomainTranslation;
 use Issue\Http\Requests\DomainRequest;
+use Gate;
 
 class DomainController extends Controller
 {
@@ -18,6 +19,10 @@ class DomainController extends Controller
 	 */
 	public function index()
 	{
+        if (Gate::denies('list-domain')) {
+            abort(403);
+        }
+
 		$domain = Domain::all();
 
 		return view('admin.backend.domains.list', ['domain' => $domain]);
@@ -25,7 +30,7 @@ class DomainController extends Controller
 
 	public function getTree()
 	{
-		$domain = Domain::all();
+        $domain = Domain::all();
 		return $domain;
 	}
 
@@ -48,7 +53,11 @@ class DomainController extends Controller
 	 */
 	public function create()
 	{
-		$domain = new Domain;
+        if (Gate::denies('create-domain')) {
+            abort(403);
+        }
+
+        $domain = new Domain;
 
 		return view('admin.backend.domains.create', ['domain' => $domain]);
 	}
@@ -61,7 +70,11 @@ class DomainController extends Controller
 	 */
 	public function store(DomainRequest $request)
 	{
-		$domain = new Domain;
+        if (Gate::denies('store-domain')) {
+            abort(403);
+        }
+
+        $domain = new Domain;
 		$this->fillDomain($domain, $request);
 		$domain->save();
 
@@ -76,8 +89,11 @@ class DomainController extends Controller
 	 */
 	public function show($id)
 	{
-		//
-	}
+        if (Gate::denies('show-domain')) {
+            abort(403);
+        }
+
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -87,7 +103,11 @@ class DomainController extends Controller
 	 */
 	public function edit($domain)
 	{
-		return view('admin.backend.domains.edit', ['domain' => $domain]);
+        if (Gate::denies('edit-domain')) {
+            abort(403);
+        }
+
+        return view('admin.backend.domains.edit', ['domain' => $domain]);
 	}
 
 	/**
@@ -99,7 +119,11 @@ class DomainController extends Controller
 	 */
 	public function update(Request $request, $domain)
 	{
-		$this->validate(
+        if (Gate::denies('update-domain')) {
+            abort(403);
+        }
+
+        $this->validate(
 			$request,
 			[
 				'name' => 'array',
@@ -131,7 +155,11 @@ class DomainController extends Controller
 	 */
 	public function destroy($domain)
 	{
-		$domain->delete();
+        if (Gate::denies('delete-domain')) {
+            abort(403);
+        }
+
+        $domain->delete();
 
 		return $domain;
 	}

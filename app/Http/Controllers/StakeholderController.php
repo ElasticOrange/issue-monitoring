@@ -11,6 +11,7 @@ use Issue\Http\Requests\StakeholderRequest;
 use Issue\Http\Controllers\Controller;
 use Issue\UploadedFile;
 use Storage;
+use Gate;
 
 class StakeholderController extends Controller
 {
@@ -21,7 +22,11 @@ class StakeholderController extends Controller
 	 */
 	public function index()
 	{
-		$stakeholders = Stakeholder::all();
+        if (Gate::denies('list-stakeholder')) {
+            abort(403);
+        }
+
+        $stakeholders = Stakeholder::all();
 
 		return view('admin.backend.stakeholders.list', ['stakeholders' => $stakeholders]);
 	}
@@ -33,7 +38,11 @@ class StakeholderController extends Controller
 	 */
 	public function create()
 	{
-		$stakeholder = new Stakeholder;
+        if (Gate::denies('create-stakeholder')) {
+            abort(403);
+        }
+
+        $stakeholder = new Stakeholder;
 
 		return view('admin.backend.stakeholders.create', ['stakeholder' => $stakeholder]);
 	}
@@ -48,7 +57,11 @@ class StakeholderController extends Controller
 	 */
 	public function store(StakeholderRequest $request)
 	{
-		$stakeholder = new Stakeholder;
+        if (Gate::denies('store-stakeholder')) {
+            abort(403);
+        }
+
+        $stakeholder = new Stakeholder;
 		$stakeholder->setAll($request);
 
 		$stakeholder->syncSections($request->input('section'));
@@ -64,7 +77,11 @@ class StakeholderController extends Controller
 	 */
 	public function show($code)
 	{
-		$stakeholder = Stakeholder::getByPublicCode($code);
+        if (Gate::denies('show-stakeholder')) {
+            abort(403);
+        }
+
+        $stakeholder = Stakeholder::getByPublicCode($code);
 
 		return $this->edit($stakeholder);
 	}
@@ -77,7 +94,11 @@ class StakeholderController extends Controller
 	 */
 	public function edit($stakeholder)
 	{
-		return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder, 'sections' => $stakeholder->sections()->get()]);
+        if (Gate::denies('edit-stakeholder')) {
+            abort(403);
+        }
+
+        return view('admin.backend.stakeholders.edit', ['stakeholder' => $stakeholder, 'sections' => $stakeholder->sections()->get()]);
 	}
 
 	/**
@@ -89,7 +110,11 @@ class StakeholderController extends Controller
 	 */
 	public function update(Request $request, $stakeholder)
 	{
-		$stakeholder->setAll($request);
+        if (Gate::denies('update-stakeholder')) {
+            abort(403);
+        }
+
+        $stakeholder->setAll($request);
 		$stakeholder->syncSections($request->input('section'));
 
 		return $stakeholder;
@@ -103,7 +128,11 @@ class StakeholderController extends Controller
 	 */
 	public function destroy($stakeholder)
 	{
-		$stakeholder -> delete();
+        if (Gate::denies('delete-stakeholder')) {
+            abort(403);
+        }
+
+        $stakeholder->delete();
 
 		return redirect()->action('StakeholderController@index');
 	}

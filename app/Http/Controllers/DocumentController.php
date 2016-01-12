@@ -9,6 +9,7 @@ use Issue\Http\Requests\DocumentRequest;
 use Issue\Http\Controllers\Controller;
 use Storage;
 use Carbon\Carbon;
+use Gate;
 
 const DOCUMENTS_LOCATION = '/documents/';
 class DocumentController extends Controller
@@ -20,7 +21,11 @@ class DocumentController extends Controller
 	 */
 	public function index()
 	{
-		$documents = Document::all();
+        if (Gate::denies('list-document')) {
+            abort(403);
+        }
+
+        $documents = Document::all();
 
 		return view('admin.backend.documents.list', ['documents' => $documents]);
 	}
@@ -32,7 +37,11 @@ class DocumentController extends Controller
 	 */
 	public function create()
 	{
-		$document = new Document(['init_at' => date('Y-m-d')]);
+        if (Gate::denies('create-document')) {
+        abort(403);
+        }
+
+        $document = new Document(['init_at' => date('Y-m-d')]);
 
 		return view('admin.backend.documents.create', ['document' => $document]);
 	}
@@ -45,7 +54,11 @@ class DocumentController extends Controller
 	 */
 	public function store(DocumentRequest $request)
 	{
-		$document = new Document;
+        if (Gate::denies('store-document')) {
+            abort(403);
+        }
+
+        $document = new Document;
 		$document->fillDocument($request);
 
 		return $document;
@@ -59,6 +72,10 @@ class DocumentController extends Controller
 	 */
 	public function show($code)
 	{
+        if (Gate::denies('show-document')) {
+            abort(403);
+        }
+
 		$document = Document::getByPublicCode($code);
 
 		return $this->edit($document);
@@ -72,6 +89,10 @@ class DocumentController extends Controller
 	 */
 	public function edit($document)
 	{
+        if (Gate::denies('edit-document')) {
+            abort(403);
+        }
+
 		return view('admin.backend.documents.edit', ['document' => $document]);
 	}
 
@@ -85,6 +106,10 @@ class DocumentController extends Controller
 	 */
 	public function update(Request $request, $document)
 	{
+        if (Gate::denies('update-document')) {
+            abort(403);
+        }
+
 		$document->fillDocument($request);
 
 		return $document;
@@ -98,6 +123,10 @@ class DocumentController extends Controller
 	 */
 	public function destroy($document)
 	{
+        if (Gate::denies('delete-document')) {
+            abort(403);
+        }
+
 		$document->delete();
 
 		return redirect()->action('DocumentController@index');

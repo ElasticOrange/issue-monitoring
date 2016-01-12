@@ -38,4 +38,19 @@ class User extends Model implements AuthenticatableContract,
 	protected $hidden = ['password', 'remember_token'];
 
     protected $guarded = ['id'];
+
+    public function isAdmin()
+    {
+        return $this->type == 'admin';
+    }
+
+    public function isEditor()
+    {
+        return $this->type == 'editor';
+    }
+
+    public function isClient()
+    {
+        return $this->type == 'client';
+    }
 }

@@ -14,6 +14,7 @@ use Issue\DomainTranslation;
 use Issue\Stakeholder;
 use Issue\Issue;
 use Issue\IssueTranslation;
+use Gate;
 
 class NewsController extends Controller
 {
@@ -24,7 +25,11 @@ class NewsController extends Controller
 	 */
 	public function index()
 	{
-		$news = News::all();
+        if (Gate::denies('list-news')) {
+            abort(403);
+        }
+
+        $news = News::all();
 
 		return view('admin.backend.news.list', ['news' => $news]);
 	}
@@ -36,7 +41,11 @@ class NewsController extends Controller
 	 */
 	public function create()
 	{
-		$news = new News;
+        if (Gate::denies('create-news')) {
+            abort(403);
+        }
+
+        $news = new News;
 
 		return view('admin.backend.news.create', ['news' => $news]);
 	}
@@ -49,7 +58,11 @@ class NewsController extends Controller
 	 */
 	public function store(NewsRequest $request)
 	{
-		$news = new News;
+        if (Gate::denies('store-news')) {
+            abort(403);
+        }
+
+        $news = new News;
 		$news->setAll($request);
 
 		return $news;
@@ -63,7 +76,11 @@ class NewsController extends Controller
 	 */
 	public function show($code)
 	{
-		$news = News::getByPublicCode($code);
+        if (Gate::denies('show-news')) {
+            abort(403);
+        }
+
+        $news = News::getByPublicCode($code);
 
 		return $this->edit($news);
 	}
@@ -76,7 +93,11 @@ class NewsController extends Controller
 	 */
 	public function edit($news)
 	{
-		return view('admin.backend.news.edit', ['news'=> $news]);
+        if (Gate::denies('edit-news')) {
+            abort(403);
+        }
+
+        return view('admin.backend.news.edit', ['news'=> $news]);
 	}
 
 	/**
@@ -88,7 +109,11 @@ class NewsController extends Controller
 	 */
 	public function update(NewsRequest $request, $news)
 	{
-		$news->setAll($request);
+        if (Gate::denies('update-news')) {
+            abort(403);
+        }
+
+        $news->setAll($request);
 
 		return $news;
 	}
@@ -101,7 +126,11 @@ class NewsController extends Controller
 	 */
 	public function destroy($news)
 	{
-		$news->delete();
+        if (Gate::denies('delete-news')) {
+            abort(403);
+        }
+
+        $news->delete();
 
 		return redirect()->action('NewsController@index');
 	}
