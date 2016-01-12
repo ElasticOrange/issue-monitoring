@@ -142,4 +142,11 @@ class UserController extends Controller
         return redirect()->action('UserController@index');
     }
 
+    public function setActive($user, Request $request)
+    {
+        $user->active = $request->input('active') == 'true';
+        $user->save();
+
+        return ['result' => true];
+    }
 }

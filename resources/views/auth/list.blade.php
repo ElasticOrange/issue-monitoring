@@ -21,7 +21,8 @@
                             <tr role="row">
                                 <th class="text-center" style="width: 10%;">Id</th>
                                 <th class="text-center" style="width: 35%;">Nume</th>
-                                <th class="text-center" style="width: 45%;">E-mail</th>
+                                <th class="text-center" style="width: 40%;">E-mail</th>
+                                <th class="text-center" style="width: 5%;">Activ</th>
                                 <th class="text-center" style="width: 10%;">Actiuni</th>
                             </tr>
                             </thead>
@@ -31,6 +32,14 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td class="text-center">
+                                        <input  type="checkbox"
+                                                name="active"
+                                                data-id="{{ $user->id }}"
+                                                data-action="active-user"
+                                                update-url="{{ action("UserController@setActive",[$user]) }}"
+                                                @if($user->active) checked="checked" @endif
+                                                />
                                     </td>
                                     <td class="text-center">
                                         <div class="row">
@@ -47,4 +56,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script type="text/javascript" src="/js/users.js"></script>
 @endsection

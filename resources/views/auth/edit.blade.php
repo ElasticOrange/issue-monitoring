@@ -57,5 +57,5 @@
 @endsection
 
 @section('js')
-    {{--<script type="text/javascript" src="/js/auth.js"></script>--}}
+    <script type="text/javascript" src="/js/users.js"></script>
 @endsection

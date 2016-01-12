@@ -53,4 +53,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->type == 'client';
     }
+
+    public function isActive()
+    {
+        return $this->active == true;
+    }
 }
