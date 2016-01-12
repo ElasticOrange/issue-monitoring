@@ -7,6 +7,7 @@ use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Issue\User;
 use Hash;
+use Issue\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -40,20 +41,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $user = new User;
         $user->fill($request->all());
-
-        $this->validate(
-            $request,
-            [
-                'name' => 'string|min:3',
-                'email' => 'required|email|unique:users,email'.($user ? ','.$user->id : ''),
-                'password' => 'string|min:5',
-                'password_confirmation' => 'same:password',
-            ]
-        );
 
         $user->password = Hash::make($request->input('password'));
         $user->save();
@@ -92,17 +83,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
-        $user->fill($request->all());
-
         $this->validate(
             $request,
             [
                 'name' => 'string|min:3',
-                'email' => 'required|email|unique:users,email'.($user ? ','.$user->id : ''),
-//                'password' => 'string|min:5',
-//                'password_confirmation' => 'same:password',
+                'email' => 'required|email|unique:users,email,'.$user->id,
+                'password' => 'string|min:5',
+                'password_confirmation' => 'same:password',
             ]
         );
+        $user->fill($request->all());
 
         $user->save();
 
