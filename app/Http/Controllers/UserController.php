@@ -92,7 +92,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
-//        dd($request->all());
         $user->fill($request->all());
 
         $this->validate(
@@ -100,12 +99,11 @@ class UserController extends Controller
             [
                 'name' => 'string|min:3',
                 'email' => 'required|email|unique:users,email'.($user ? ','.$user->id : ''),
-                'password' => 'string|min:5',
-                'password_confirmation' => 'same:password',
+//                'password' => 'string|min:5',
+//                'password_confirmation' => 'same:password',
             ]
         );
 
-        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         return $user;
