@@ -58,4 +58,30 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->active == true;
     }
+
+    public function subscription()
+    {
+        return $this->hasOne('Issue\UserSubscription');
+    }
+
+    public function syncSubscription($subscriptionData)
+    {
+        $subscription = $this->subscription;
+
+        if (!$subscription) {
+            $subscription = new UserSubscription;
+        }
+
+        if (!UserSubscription::isValidSubscriptionData($subscriptionData)) {
+            $subscription->delete();
+
+            return true;
+        }
+
+        $subscription->fill($subscriptionData);
+
+        $this->subscription()->save($subscription);
+
+        return true;
+    }
 }

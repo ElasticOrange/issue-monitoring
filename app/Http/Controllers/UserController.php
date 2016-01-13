@@ -58,10 +58,10 @@ class UserController extends Controller
         }
 
         $user = new User;
+//dd($request->all());
         $user->fill($request->all());
-
-        $user->password = Hash::make($request->input('password'));
         $user->save();
+        $user->syncSubscription($request->input('subscription'));
 
         return $user;
     }
@@ -118,9 +118,9 @@ class UserController extends Controller
                 'password_confirmation' => 'same:password',
             ]
         );
-        $user->fill($request->all());
 
-        $user->save();
+        $user->save($request->all());
+        $user->syncSubscription($request->input('subscription'));
 
         return $user;
     }
