@@ -19,9 +19,10 @@
                         <table class="table table-striped table-bordered table-hover" data-table="true">
                             <thead>
                             <tr role="row">
-                                <th class="text-center" style="width: 10%;">Id</th>
+                                <th class="text-center" style="width: 5%;">Id</th>
                                 <th class="text-center" style="width: 35%;">Nume</th>
                                 <th class="text-center" style="width: 40%;">E-mail</th>
+                                <th class="text-center" style="width: 5%;">Acces</th>
                                 <th class="text-center" style="width: 5%;">Activ</th>
                                 <th class="text-center" style="width: 10%;">Actiuni</th>
                             </tr>
@@ -32,6 +33,7 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->type }}</td>
                                     <td class="text-center">
                                         <input  type="checkbox"
                                                 name="active"
