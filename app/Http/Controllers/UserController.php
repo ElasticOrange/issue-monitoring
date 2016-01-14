@@ -58,10 +58,12 @@ class UserController extends Controller
         }
 
         $user = new User;
-//dd($request->all());
+
         $user->fill($request->all());
         $user->save();
         $user->syncSubscription($request->input('subscription'));
+
+        $this->endDateGtStartDate($request, $user->subscription);
 
         return $user;
     }
@@ -122,6 +124,8 @@ class UserController extends Controller
         $user->save($request->all());
         $user->syncSubscription($request->input('subscription'));
 
+        $this->endDateGtStartDate($request, $user->subscription);
+
         return $user;
     }
 
@@ -148,5 +152,22 @@ class UserController extends Controller
         $user->save();
 
         return ['result' => true];
+    }
+
+    /**
+     * @param $request
+     * @param $data
+     */
+    public function endDateGtStartDate($request, $data)
+    {
+        if (is_object($data)) {
+            $this->validate(
+                $request,
+                [
+                    'subscription.start_date' => 'date|after:yesterday',
+                    'subscription.end_date' => 'date|after:subscription.start_date'
+                ]
+            );
+        }
     }
 }
