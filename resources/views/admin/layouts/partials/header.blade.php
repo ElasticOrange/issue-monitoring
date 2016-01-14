@@ -6,7 +6,7 @@
 		</a>
 		<ul class="dropdown-menu dropdown-user">
 			<li>
-				<a href="#">
+				<a href="{{ action('UserController@profile') }}">
 					<i class="fa fa-user fa-fw"></i>
 					User Profile
 				</a>

@@ -11,6 +11,7 @@ use Issue\Http\Requests\UserRequest;
 use Gate;
 use Auth;
 use Mail;
+use Guard;
 
 class UserController extends Controller
 {
@@ -112,6 +113,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $user)
     {
+        $input = $request->all();
+
         if (Gate::denies('update-users')) {
             abort(403);
         }
@@ -127,6 +130,10 @@ class UserController extends Controller
         );
 
         $user->fill($request->all());
+
+        if (isset($input['password']) && $input['password']) {
+            $user->password = Hash::make($input['password']);
+        }
 
         $user->save();
 
@@ -190,5 +197,40 @@ class UserController extends Controller
                 $m->to($user->email, $user->name)->subject('Your IssueMonitoring account!');
             }
         );
+    }
+
+
+    public function profile()
+    {
+        $user = Auth::user();
+
+        return view('auth.show', ['user' => $user]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $input = $request->all();
+
+        $user = User::where('email', $input['email'])->firstOrFail();
+
+        $this->validate(
+            $request,
+            [
+                'name' => 'string|min:3',
+                'email' => 'required|email|unique:users,email,'.$user->id,
+                'password' => 'string|min:5',
+                'password_confirmation' => 'same:password',
+            ]
+        );
+
+        $user->fill($input);
+
+        if (isset($input['password']) && $input['password']) {
+            $user->password = Hash::make($input['password']);
+        }
+
+        $user->save();
+
+        return $user;
     }
 }

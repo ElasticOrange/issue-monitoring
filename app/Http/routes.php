@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/backend/flowtemplate/{flowtemplate}/delete', 'FlowTemplateController@destroy');
     Route::resource('/backend/flowtemplate', 'FlowTemplateController', ['except' => ['destroy']]);
 
+    Route::get('/users/profile', 'UserController@profile');
+    Route::post('/users/profile', 'UserController@updateProfile');
     Route::get('/users/{users}/delete', 'UserController@destroy');
     Route::resource('/users', 'UserController', ['except' => ['destroy']]);
     Route::get('/users/{users}/setPublished', 'UserController@setActive');
