@@ -66,6 +66,7 @@
     </div>
 
     <div class="tab-pane" id="tip-abonament">
+        <br/>
         <div class="form-group">
             <label class="col-md-2 control-label">Abonament</label>
             <div class="col-md-8">
@@ -75,7 +76,7 @@
                     <option value="unlimited" @if(is_object($user->subscription) && $user->subscription->type === 'unlimited') selected="selected" @endif>nelimitat</option>
                 </select>
             </div>
-        </div><br/>
+        </div><br/><br/>
 
         <div class="form-group">
             <label class="col-md-2 control-label">Valabilitate</label>
@@ -110,6 +111,43 @@
                             @endif
                     />
                     <input type="hidden" id="enddate-result" name="subscription[end_date]" />
+                </div>
+            </div>
+        </div>
+
+        <br/><hr/><br/>
+
+        <div class="form-group">
+            <div class="col-md-2 text-right">
+                <label for="domain-autocomplete" class="control-label">Domenii</label>
+            </div>
+            <div class="col-md-8">
+                <input
+                        id="domain-autocomplete"
+                        source-url="{{ action('NewsController@queryDomain') }}/?name={name}"
+                        type="text"
+                        placeholder="Nume"
+                        class="form-control"
+                        prevent-enter="true"
+                        />
+            </div>
+        </div><br/>
+
+        <div class="form-group">
+            @include('auth.connected-domain')
+            <div class="panel panel-success col-md-8 col-md-offset-2">
+                <div class="panel-heading">Domenii conectate</div>
+                <div class="list-group" id="connected-domains-container">
+                    @foreach ($user->domains as $domain_connected)
+                        <div class="list-group-item" domain-id="{{ $domain_connected->id }}">
+                            <a class="badge" connected-domain-delete="{{ $domain_connected->id }}">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
+                            </a>
+                            <h4 class="list-group-item-heading">{{ $domain_connected->name }}</h4>
+                            <p class="list-group-item-text"></p>
+                            <input type="hidden" name="subscription[domains_connected][]" value="{{ $domain_connected->id }}" />
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -64,6 +64,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne('Issue\UserSubscription');
     }
 
+    public function domains()
+    {
+        return $this->belongsToMany('Issue\Domain');
+    }
+
     public function syncSubscription($subscriptionData)
     {
         $subscription = $this->subscription;
@@ -77,6 +82,13 @@ class User extends Model implements AuthenticatableContract,
 
             return true;
         }
+
+        if (!array_key_exists('domains_connected', $subscriptionData)) {
+            $domains_connected = [];
+        } else {
+            $domains_connected = $subscriptionData['domains_connected'];
+        }
+        $this->domains()->sync($domains_connected);
 
         $subscription->fill($subscriptionData);
 
