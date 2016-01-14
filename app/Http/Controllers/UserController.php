@@ -10,6 +10,7 @@ use Hash;
 use Issue\Http\Requests\UserRequest;
 use Gate;
 use Auth;
+use Mail;
 
 class UserController extends Controller
 {
@@ -59,11 +60,15 @@ class UserController extends Controller
 
         $user = new User;
 
+        $password = str_random(10);
         $user->fill($request->all());
-        $user->save();
-        $user->syncSubscription($request->input('subscription'));
+        $user->password = Hash::make($password);
 
+        $user->save();
+
+        $user->syncSubscription($request->input('subscription'));
         $this->endDateGtStartDate($request, $user->subscription);
+        $this->sendNewUserEmail($user, $password);
 
         return $user;
     }
@@ -121,9 +126,11 @@ class UserController extends Controller
             ]
         );
 
-        $user->save($request->all());
-        $user->syncSubscription($request->input('subscription'));
+        $user->fill($request->all());
 
+        $user->save();
+
+        $user->syncSubscription($request->input('subscription'));
         $this->endDateGtStartDate($request, $user->subscription);
 
         return $user;
@@ -169,5 +176,19 @@ class UserController extends Controller
                 ]
             );
         }
+    }
+
+    private function sendNewUserEmail($user, $password)
+    {
+        Mail::send(
+            'emails.usernew',
+            [
+                'user' => $user,
+                'password' => $password
+            ],
+            function ($m) use ($user) {
+                $m->to($user->email, $user->name)->subject('Your IssueMonitoring account!');
+            }
+        );
     }
 }
