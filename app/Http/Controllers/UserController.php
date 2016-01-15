@@ -223,7 +223,12 @@ class UserController extends Controller
             ]
         );
 
-        $user->fill($input);
+        $user->fill($request->all());
+
+        $user->alert_new_issue = $request->get('alert_new_issue') == true;
+        $user->alert_issue_status = $request->get('alert_issue_status') == true;
+        $user->alert_news = $request->get('alert_news') == true;
+        $user->alert_report = $request->get('alert_report') == true;
 
         if (isset($input['password']) && $input['password']) {
             $user->password = Hash::make($input['password']);

@@ -67,6 +67,72 @@
                                 />
                     </div>
                 </div>
+
+                <br/><hr><br/>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h3>Alerte</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox col-md-8 col-md-offset-2">
+                        <label>
+                            <input  type="checkbox"
+                                    value="1"
+                                    name="alert_new_issue"
+                                    @if($user->alert_new_issue)
+                                    checked="checked"
+                                    @endif
+                                    />Alerta issue nou
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox col-md-8 col-md-offset-2">
+                        <label>
+                            <input  type="checkbox"
+                                    value="1"
+                                    name="alert_issue_status"
+                                    @if($user->alert_issue_status)
+                                    checked="checked"
+                                    @endif
+                                    />Alerta issue status
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox col-md-8 col-md-offset-2">
+                        <label>
+                            <input  type="checkbox"
+                                    value="1"
+                                    name="alert_news"
+                                    @if($user->alert_news)
+                                    checked="checked"
+                                    @endif
+                                    />Alerta news
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox col-md-8 col-md-offset-2">
+                        <label>
+                            <input  type="checkbox"
+                                    value="1"
+                                    name="alert_report"
+                                    @if($user->alert_report)
+                                    checked="checked"
+                                    @endif
+                                    />Alerta raport
+                        </label>
+                    </div>
+                </div>
                 <br/><br/>
 
                 <div class="form-group">
