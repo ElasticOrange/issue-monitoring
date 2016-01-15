@@ -30,7 +30,6 @@ class Issue extends Model
 
 	public function setAll($request)
 	{
-		$this->published = $request->get('published') == true;
 		$this->archived = $request->get('archived') == true;
 
 		if (! $this->public_code) {

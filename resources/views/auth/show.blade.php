@@ -111,6 +111,20 @@
                         <label>
                             <input  type="checkbox"
                                     value="1"
+                                    name="alert_issue_stage"
+                                    @if($user->alert_issue_stage)
+                                    checked="checked"
+                                    @endif
+                                    />Alerta issue pas
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox col-md-8 col-md-offset-2">
+                        <label>
+                            <input  type="checkbox"
+                                    value="1"
                                     name="alert_news"
                                     @if($user->alert_news)
                                     checked="checked"

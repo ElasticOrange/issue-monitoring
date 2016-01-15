@@ -2,6 +2,7 @@
 
 namespace Issue\Http\Controllers;
 
+use Issue\Alert;
 use Issue\Issue;
 use Issue\IssueTranslation;
 use Illuminate\Http\Request;
@@ -73,6 +74,10 @@ class IssueController extends Controller
         $issue = new Issue;
 		$issue->setAll($request);
 		$issue->syncLocations($request->input('location'));
+
+        if ($request->published) {
+            Alert::createIssueAlert($issue);
+        }
 
 		return $issue;
 	}
