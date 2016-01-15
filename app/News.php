@@ -35,8 +35,8 @@ class News extends Model
 	{
 		$this->date = $request->get('date');
 		$this->link = $request->get('link');
-		$this->published = $request->get('published') == true;
-		if (! $this->public_code) {
+
+        if (! $this->public_code) {
 			$this->public_code = $this->createPublicCode();
 		}
 

@@ -71,17 +71,23 @@ class LocationStep extends Model
 		}
 
 		foreach ($steps as $stepData) {
-			$newFlowStep = new FlowStep;
-			$newFlowStep->fill($stepData);
+            $newFlowStep = new FlowStep;
+            $newFlowStep->fill($stepData);
 
-			if (array_key_exists('observatii', $stepData)) {
-				foreach (\Config::get('app.all_locales') as $locale) {
-					$newFlowStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
-				}
-			}
-			$this->flowsteps()->save($newFlowStep);
 
-			if (!array_key_exists('document_id', $stepData)) {
+            if (array_key_exists('observatii', $stepData)) {
+                foreach (\Config::get('app.all_locales') as $locale) {
+                    $newFlowStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
+                }
+            }
+            $this->flowsteps()->save($newFlowStep);
+
+            if (array_key_exists('published', $stepData)) {
+                if ($stepData['published'] == true)
+                Alert::createAlert($newFlowStep, 'stage');
+            }
+
+            if (!array_key_exists('document_id', $stepData)) {
 				$stepData['document_id'] = [];
 			}
 			$newFlowStep->syncStepDocuments($stepData['document_id']);

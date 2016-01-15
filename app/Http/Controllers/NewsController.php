@@ -2,6 +2,7 @@
 
 namespace Issue\Http\Controllers;
 
+use Issue\Alert;
 use Issue\News;
 use Illuminate\Http\Request;
 use Issue\Http\Requests;
@@ -65,6 +66,10 @@ class NewsController extends Controller
         $news = new News;
 		$news->setAll($request);
 
+        if ($request->published) {
+            Alert::createAlert($news, 'news');
+        }
+
 		return $news;
 	}
 
@@ -114,6 +119,12 @@ class NewsController extends Controller
         }
 
         $news->setAll($request);
+
+        if ($request->published) {
+            Alert::updateAlert($news, 'news');
+        } else {
+            Alert::deleteUnsentAlert($news, 'news');
+        }
 
 		return $news;
 	}

@@ -12,29 +12,52 @@ class Alert extends Model
 
     protected $fillable = ['type', 'item_id', 'sent'];
 
-    public static function createIssueAlert($issue)
+
+    public static function createAlert($item, $itemType)
     {
         $alert = new Alert;
-        $alert->type = 'issue';
-        $alert->item_id = $issue->getKey();
+        $alert->type = $itemType;
+        $alert->item_id = $item->getKey();
 
         $alert->save();
 
         return $alert;
     }
 
-    public static function createStatusAlert($issueId)
+    /**
+     * @param $news
+     * @return mixed
+     */
+    public static function getUnsentAlert($item, $itemType)
     {
-        return true;
+        $currentAlertNotSent = Alert::where('item_id', $item->getKey())
+            ->where('type', $itemType)
+            ->where('sent', 0)
+            ->first();
+        return $currentAlertNotSent;
     }
 
-    public static function createFlowStepAlert($flowStepId)
+    public static function updateAlert($item, $itemType)
     {
-        return true;
+        $currentAlertNotSent = self::getUnsentAlert($item, $itemType);
+
+        if ($currentAlertNotSent) {
+            return $currentAlertNotSent;
+        }
+
+        $alert = Alert::createAlert($item, $itemType);
+
+        return $alert;
     }
 
-    public static function createNewsAlert($newsId)
+    public static function deleteUnsentAlert($item, $itemType)
     {
+        $currentAlertNotSent = self::getUnsentAlert($item, $itemType);
+
+        if ($currentAlertNotSent) {
+            $currentAlertNotSent->delete();
+        }
+
         return true;
     }
 }

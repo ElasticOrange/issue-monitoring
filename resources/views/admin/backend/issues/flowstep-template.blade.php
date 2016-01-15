@@ -136,6 +136,16 @@
 							</div>
 						</div>
 					</div><br/>
+                    <div class="form-group">
+                        <div class="checkbox col-md-8 col-md-offset-1">
+                            <label>
+                                <input  type="checkbox"
+                                        value="1"
+                                        name="location[<%= location_id%>][flow_steps][<%= id%>][published]"
+                                        />Publica
+                            </label>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
