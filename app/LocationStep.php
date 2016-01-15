@@ -49,25 +49,36 @@ class LocationStep extends Model
 			$steps[$id]['flowstep_order'] = $index;
 		}
 		foreach ($currentSteps as $currentStep) {
-			if (! array_key_exists($currentStep->id, $steps)) {
-				$currentStep->delete();
-				continue;
-			}
+            if (!array_key_exists($currentStep->id, $steps)) {
+                $currentStep->delete();
+                continue;
+            }
 
-			$currentStep->fill($steps[$currentStep->id]);
+            $currentStep->fill($steps[$currentStep->id]);
 
-			if (array_key_exists('observatii', $steps[$currentStep->id])) {
-				foreach (\Config::get('app.all_locales') as $locale) {
-					$currentStep->translateOrNew($locale)->observatii = $steps[$currentStep->id]['observatii'][$locale];
-				}
-			}
+            if (array_key_exists('observatii', $steps[$currentStep->id])) {
+                foreach (\Config::get('app.all_locales') as $locale) {
+                    $currentStep->translateOrNew($locale)->observatii = $steps[$currentStep->id]['observatii'][$locale];
+                }
+            }
 
-			$this->flowsteps()->save($currentStep);
-			if (!array_key_exists('document_id', $steps[$currentStep->id])) {
-				$steps[$currentStep->id]['document_id'] = [];
-			}
-			$currentStep->syncStepDocuments($steps[$currentStep->id]['document_id']);
-			unset($steps[$currentStep->id]);
+
+            $this->flowsteps()->save($currentStep);
+
+            if (array_key_exists('published', $steps[$currentStep->id])) {
+                if ($steps[$currentStep->id]['published'] == true) {
+                    Alert::createAlert($currentStep, 'stage');
+                }
+            } else {
+                Alert::deleteUnsentAlert($currentStep, 'stage');
+            }
+
+            if (!array_key_exists('document_id', $steps[$currentStep->id])) {
+                $steps[$currentStep->id]['document_id'] = [];
+            }
+            $currentStep->syncStepDocuments($steps[$currentStep->id]['document_id']);
+
+            unset($steps[$currentStep->id]);
 		}
 
 		foreach ($steps as $stepData) {
