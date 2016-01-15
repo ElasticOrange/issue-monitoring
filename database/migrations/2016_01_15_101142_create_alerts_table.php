@@ -15,7 +15,7 @@ class CreateAlertsTable extends Migration
         Schema::create('alerts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->enum('type', ['issue', 'status', 'stage', 'news', 'report']);
+            $table->enum('type', ['issue', 'stage', 'news', 'report']);
             $table->integer('item_id');
             $table->boolean('sent')->default(0);
 
