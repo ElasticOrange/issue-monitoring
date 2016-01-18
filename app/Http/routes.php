@@ -86,6 +86,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/{users}/delete', 'UserController@destroy');
     Route::resource('/users', 'UserController', ['except' => ['destroy']]);
     Route::get('/users/{users}/setPublished', 'UserController@setActive');
+
+    Route::get('/backend/alerte', 'AlertController@index');
+    Route::get('/backend/alerte/{id}/preview', 'AlertController@preview');
 });
 
 

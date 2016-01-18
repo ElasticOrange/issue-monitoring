@@ -42,6 +42,9 @@
 			<li>
 				<a href="/users"><i class="fa fa-users"></i> Users</a>
 			</li>
+			<li>
+				<a href="{{ action('AlertController@index') }}"><i class="fa fa-bell"></i> Alerte</a>
+			</li>
 		</ul>
 	</div>
 </div>
