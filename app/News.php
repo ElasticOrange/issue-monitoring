@@ -121,4 +121,9 @@ class News extends Model
 	{
 		return $this->belongsToMany('Issue\Tag');
 	}
+
+	public function alerts()
+	{
+		return $this->morphMany(Alert::class, 'alertable');
+	}
 }

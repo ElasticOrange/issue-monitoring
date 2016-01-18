@@ -10,14 +10,14 @@ class Alert extends Model
 
     protected $guarded = 'id';
 
-    protected $fillable = ['type', 'item_id', 'sent'];
+    protected $fillable = ['alertable_type', 'alertable_id', 'sent'];
 
 
     public static function createAlert($item, $itemType)
     {
         $alert = new Alert;
-        $alert->type = $itemType;
-        $alert->item_id = $item->getKey();
+        $alert->alertable_type = $itemType;
+        $alert->alertable_id = $item->getKey();
 
         $alert->save();
 
@@ -30,8 +30,8 @@ class Alert extends Model
      */
     public static function getUnsentAlert($item, $itemType)
     {
-        $currentAlertNotSent = Alert::where('item_id', $item->getKey())
-            ->where('type', $itemType)
+        $currentAlertNotSent = Alert::where('alertable_id', $item->getKey())
+            ->where('alertable_type', $itemType)
             ->where('sent', 0)
             ->first();
         return $currentAlertNotSent;
@@ -59,5 +59,10 @@ class Alert extends Model
         }
 
         return true;
+    }
+
+    public function alertable()
+    {
+        return $this->morphTo();
     }
 }

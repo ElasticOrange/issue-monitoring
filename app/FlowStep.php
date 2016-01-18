@@ -50,4 +50,9 @@ class FlowStep extends Model
 
 		return true;
 	}
+
+	public function alerts()
+	{
+		return $this->morphMany(Alert::class, 'alertable');
+	}
 }

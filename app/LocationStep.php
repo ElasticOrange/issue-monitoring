@@ -67,10 +67,10 @@ class LocationStep extends Model
 
             if (array_key_exists('published', $steps[$currentStep->id])) {
                 if ($steps[$currentStep->id]['published'] == true) {
-                    Alert::createAlert($currentStep, 'stage');
+                    Alert::createAlert($currentStep, 'Issue\FlowStep');
                 }
             } else {
-                Alert::deleteUnsentAlert($currentStep, 'stage');
+                Alert::deleteUnsentAlert($currentStep, 'Issue\FlowStep');
             }
 
             if (!array_key_exists('document_id', $steps[$currentStep->id])) {
@@ -95,7 +95,7 @@ class LocationStep extends Model
 
             if (array_key_exists('published', $stepData)) {
                 if ($stepData['published'] == true)
-                Alert::createAlert($newFlowStep, 'stage');
+                Alert::createAlert($newFlowStep, 'Issue\FlowStep');
             }
 
             if (!array_key_exists('document_id', $stepData)) {

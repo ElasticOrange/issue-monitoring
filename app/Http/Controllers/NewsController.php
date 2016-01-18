@@ -67,7 +67,7 @@ class NewsController extends Controller
 		$news->setAll($request);
 
         if ($request->published) {
-            Alert::createAlert($news, 'news');
+            Alert::createAlert($news, 'Issue\News');
         }
 
 		return $news;
@@ -121,9 +121,9 @@ class NewsController extends Controller
         $news->setAll($request);
 
         if ($request->published) {
-            Alert::updateAlert($news, 'news');
+            Alert::updateAlert($news, 'Issue\News');
         } else {
-            Alert::deleteUnsentAlert($news, 'news');
+            Alert::deleteUnsentAlert($news, 'Issue\News');
         }
 
 		return $news;

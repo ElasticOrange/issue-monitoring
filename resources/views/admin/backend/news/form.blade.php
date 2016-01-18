@@ -235,14 +235,13 @@
 
 <hr/>
 
-
 <div class="form-group">
 	<div class="checkbox col-md-8 col-md-offset-2">
 		<label>
 			<input  type="checkbox"
 					value="1"
 					name="published"
-					@if($news->published)
+					@if(isset($news->alerts[0]) && $news->alerts[0]->sent == 0)
 						checked="checked"
 					@endif
 			/>Publica

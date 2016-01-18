@@ -76,7 +76,7 @@ class IssueController extends Controller
 		$issue->syncLocations($request->input('location'));
 
         if ($request->published) {
-            Alert::createAlert($issue, 'issue');
+            Alert::createAlert($issue, 'Issue\Issue');
         }
 
 		return $issue;
@@ -142,9 +142,9 @@ class IssueController extends Controller
 		$issue->syncLocations($locationsData);
 
         if ($request->published) {
-            Alert::createAlert($issue, 'issue');
+            Alert::createAlert($issue, 'Issue\Issue');
         } else {
-            Alert::deleteUnsentAlert($issue, 'issue');
+            Alert::deleteUnsentAlert($issue, 'Issue\Issue');
         }
 
 		return $issue;

@@ -223,4 +223,9 @@ class Issue extends Model
 	{
 		return $this->belongsToMany('Issue\Document');
 	}
+
+	public function alerts()
+	{
+		return $this->morphMany(Alert::class, 'alertable');
+	}
 }
