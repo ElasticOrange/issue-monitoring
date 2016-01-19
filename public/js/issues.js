@@ -360,7 +360,9 @@
 
         function executeAddLocation(id, flowTemplateLocationName, flowTemplateLocationId, flowTemplateNrInregistrare) {
             var locationTemplate = _.template($('#location_template').html());
-
+            if (flowTemplateLocationName == "Locatii" || flowTemplateLocationName == "Locatii") {
+                flowTemplateLocationName = " ";
+            };
 
             var populateLocationTemplate = locationTemplate({
                 'id': id,
