@@ -65,4 +65,8 @@ class Alert extends Model
     {
         return $this->morphTo();
     }
+
+    public function news() {
+        return $this->morphTo(News::class);
+    }
 }

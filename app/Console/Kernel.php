@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
 	 */
 	protected $commands = [
 		\Issue\Console\Commands\Inspire::class,
+		Commands\SendAlerts::class,
 	];
 
 	/**
