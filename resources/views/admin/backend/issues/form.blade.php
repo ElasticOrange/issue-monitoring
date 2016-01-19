@@ -382,14 +382,25 @@
                         <div class="row">
                             <label class="control-label col-sm-2">Locatie:</label>
                             <div class="col-sm-4">
-                                <input class="form-control"
-                                       name="location[{{ $locationStep->id }}][name]"
-                                       source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
-                                       location-name="true"
-                                       value="{{ $locationStep->location->name }}"
-                                       save-id-to="location-id-location-{{ $locationStep->id }}"
-                                       prevent-enter="true"
-                                        />
+                                @if($locationStep->location_id == 1)
+                                    <input class="form-control"
+                                           name="location[{{ $locationStep->id }}][name]"
+                                           source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
+                                           location-name="true"
+                                           value=" "
+                                           save-id-to="location-id-location-{{ $locationStep->id }}"
+                                           prevent-enter="true"
+                                            />
+                                @else
+                                    <input class="form-control"
+                                           name="location[{{ $locationStep->id }}][name]"
+                                           source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
+                                           location-name="true"
+                                           value="{{ $locationStep->location->name }}"
+                                           save-id-to="location-id-location-{{ $locationStep->id }}"
+                                           prevent-enter="true"
+                                            />
+                                @endif
                                 <input type="hidden"
                                        name="location[{{ $locationStep->id }}][location_id]"
                                        value="{{ $locationStep->location_id }}"
