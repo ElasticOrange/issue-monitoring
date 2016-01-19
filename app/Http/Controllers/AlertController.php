@@ -20,6 +20,6 @@ class AlertController extends Controller
     {
         $alert = Alert::find($id);
 
-        return view('admin.backend.alerts.preview', ['alert' => $alert]);
+        return view('admin.backend.alerts.headpreview', ['alert' => $alert]);
     }
 }
