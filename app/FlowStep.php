@@ -8,6 +8,8 @@ class FlowStep extends Model
 {
 	use \Dimsav\Translatable\Translatable;
 
+	protected $with = ['flowstepsInLocation'];
+
 	protected $guarded = ['id'];
 
 	public $translatedAttributes = ['observatii'];
@@ -25,7 +27,7 @@ class FlowStep extends Model
 
 	public function flowstepsInLocation()
 	{
-		return $this->belongsTo('Issue\locationStep', 'location_step_id');
+		return $this->belongsTo('Issue\LocationStep', 'location_step_id');
 	}
 
 	public function issueStep()

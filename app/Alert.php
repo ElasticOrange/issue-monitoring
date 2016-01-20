@@ -65,4 +65,47 @@ class Alert extends Model
     {
         return $this->morphTo();
     }
+
+    public static function getUsersToSendIssueAlertTo($issueAlert, $users) {
+        $usersToSendTo = [];
+        foreach ($users as $user)
+            if (array_intersect($user->domains, $issueAlert->issue->domains)) {
+                $usersToSendTo[] = $user;
+            }
+
+        return $usersToSendTo;
+    }
+
+    public static function sendIssueAlerts()
+    {
+        $usersToSendTo = [];
+        $alertType = '';
+
+        $issueAlerts = self::whereIn('alertable_type', ['Issue\Issue', 'Issue\FlowStep'])->where('sent', 0)->with(['alertable'])->get();
+        $newIssueUsers = User::where('alert_new_issue', true)->with('domains')->get();
+        $newStatusUsers = User::where('alert_issue_status', true)->with('domains')->get();
+        $newFlowStepUsers = User::where('alert_issue_stage', true)->with('domains')->get();
+
+        foreach ($issueAlerts as $alert) {
+            if ($alert->alertable_type == 'Issue\Issue') {
+                if ($alert->alertable->hasSentAlerts) {
+                    $alertType = 'alert_issue_status';
+                    $usersToSendTo = getUsersToSendIssueAlertTo($alert, $newStatusUsers);
+                }
+                else {
+                    $alertType = 'alert_new_issue';
+                    $usersToSendTo = getUsersToSendIssueAlertTo($alert, $newIssueUsers);
+                }
+            }
+
+            if ($alert->alertable_type == 'Issue\FlowStep') {
+                $alertType = 'alert_issue_stage';
+                $usersToSendTo = getUsersToSendIssueAlertTo($alert, $newFlowStepUsers);
+            }
+        }
+        return $usersToSendTo;
+        //make email
+        //send alert to $usersToSendTo
+
+    }
 }

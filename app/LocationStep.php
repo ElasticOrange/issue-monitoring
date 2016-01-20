@@ -8,6 +8,8 @@ class LocationStep extends Model
 {
 	protected $guarded = ['id'];
 
+    protected $with = ['issue'];
+
 	protected $fillable = [
 		'location_id',
 		'issue_id',
