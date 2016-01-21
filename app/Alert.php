@@ -3,6 +3,7 @@
 namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Alert extends Model
 {
@@ -66,46 +67,49 @@ class Alert extends Model
         return $this->morphTo();
     }
 
-    public static function getUsersToSendIssueAlertTo($issueAlert, $users) {
+    public static function getUsersToSendIssueAlertTo($alert, $users) {
         $usersToSendTo = [];
-        foreach ($users as $user)
-            if (array_intersect($user->domains, $issueAlert->issue->domains)) {
+
+        foreach ($users as $user) {
+            if ($alert->alertable->flowstepsInLocation == null
+                && !$user->domains->intersect($alert->alertable->connectedDomains)->isEmpty()) {
                 $usersToSendTo[] = $user;
             }
 
-        return $usersToSendTo;
-    }
-
-    public static function sendIssueAlerts()
-    {
-        $usersToSendTo = [];
-        $alertType = '';
-
-        $issueAlerts = self::whereIn('alertable_type', ['Issue\Issue', 'Issue\FlowStep'])->where('sent', 0)->with(['alertable'])->get();
-        $newIssueUsers = User::where('alert_new_issue', true)->with('domains')->get();
-        $newStatusUsers = User::where('alert_issue_status', true)->with('domains')->get();
-        $newFlowStepUsers = User::where('alert_issue_stage', true)->with('domains')->get();
-
-        foreach ($issueAlerts as $alert) {
-            if ($alert->alertable_type == 'Issue\Issue') {
-                if ($alert->alertable->hasSentAlerts) {
-                    $alertType = 'alert_issue_status';
-                    $usersToSendTo = getUsersToSendIssueAlertTo($alert, $newStatusUsers);
-                }
-                else {
-                    $alertType = 'alert_new_issue';
-                    $usersToSendTo = getUsersToSendIssueAlertTo($alert, $newIssueUsers);
-                }
-            }
-
-            if ($alert->alertable_type == 'Issue\FlowStep') {
-                $alertType = 'alert_issue_stage';
-                $usersToSendTo = getUsersToSendIssueAlertTo($alert, $newFlowStepUsers);
+            if ($alert->alertable->flowstepsInLocation != null
+                && !$user->domains->intersect($alert->alertable->flowstepsInLocation->issue->connectedDomains)->isEmpty()) {
+                $usersToSendTo[] = $user;
             }
         }
         return $usersToSendTo;
-        //make email
-        //send alert to $usersToSendTo
+    }
 
+    public static function sendMail($user, $alert, $alertType)
+    {
+        $alert_type = '';
+
+        if ($alertType == 'alert_new_issue') {
+            $alert_type = 'initiativa noua';
+        } elseif ($alertType == 'alert_issue_status') {
+            $alert_type = 'update de status';
+        } elseif ($alertType == 'alert_issue_stage') {
+            $alert_type = 'stadiu nou';
+        }
+
+        Mail::send('emails.'.$alertType,
+            [
+                'user' => $user,
+                'alert' => $alert,
+                'alert_type' => $alert_type
+            ],
+            function ($m) use ($user) {
+                $m->to($user->email)->subject('admin issue');
+            }
+        );
+
+        $alert->sent = 1;
+        $alert->save();
+
+        return true;
     }
 }
