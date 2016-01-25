@@ -10,6 +10,8 @@ class News extends Model
 {
 	use \Dimsav\Translatable\Translatable;
 
+	protected $with = ['connectedIssues'];
+
 	protected $guarded = ['id'];
 
 	protected $fillable = [

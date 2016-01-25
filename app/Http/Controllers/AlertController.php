@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Issue\Alert;
 use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests;
+use Issue\News;
 use Issue\User;
 
 class AlertController extends Controller
@@ -33,6 +34,7 @@ class AlertController extends Controller
         $newIssueUsers = User::where('active', true)->where('alert_new_issue', true)->with('domains')->get();
         $newStatusUsers = User::where('active', true)->where('alert_issue_status', true)->with('domains')->get();
         $newFlowStepUsers = User::where('active', true)->where('alert_issue_stage', true)->with('domains')->get();
+       
         foreach ($issueAlerts as $alert) {
             if ($alert->alertable_type == 'Issue\Issue') {
                 if ($alert->alertable->hasSentAlerts() == null) {
@@ -56,5 +58,23 @@ class AlertController extends Controller
         }
 
         return $usersToSendTo;
+    }
+
+    public function stirile()
+    {
+        $alertsToSendByIssue = [];
+        $alertType = 'alert_news';
+        
+        $newsAlerts = Alert::where('alertable_type', 'Issue\News')->where('sent', 0)->with(['alertable'])->get();
+        $users = User::where('active', true)->where('alert_news', true)->with('domains')->get();
+
+        foreach ($users as $user) {
+            $alertsToSendByIssue = Alert::getNewsForUser($user, $newsAlerts);
+            foreach ($alertsToSendByIssue as $alertToSendByIssue) {
+                Alert::sendNewsMail($user, $alertToSendByIssue, $alertType);
+            }
+        }
+
+        return $alertsToSendByIssue;
     }
 }
