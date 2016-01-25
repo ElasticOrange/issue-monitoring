@@ -94,6 +94,8 @@ class Alert extends Model
             $alert_type = 'update de status';
         } elseif ($alertType == 'alert_issue_stage') {
             $alert_type = 'stadiu nou';
+        } elseif ($alertType == 'alert_news') {
+            $alert_type = 'stire noua';
         }
 
         Mail::send('emails.'.$alertType,
