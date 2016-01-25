@@ -10,6 +10,8 @@ class Issue extends Model
 
 	protected $guarded = ['id'];
 
+	protected $with = ['connectedDomains'];
+
 	protected $fillable = [
 		'name',
 		'description',
@@ -227,5 +229,10 @@ class Issue extends Model
 	public function alerts()
 	{
 		return $this->morphMany(Alert::class, 'alertable');
+	}
+
+	public function hasSentAlerts()
+	{
+		return $this->alerts()->where('sent', 1)->limit(1)->get();
 	}
 }

@@ -3,6 +3,7 @@
 namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Alert extends Model
 {
@@ -66,7 +67,49 @@ class Alert extends Model
         return $this->morphTo();
     }
 
-    public function news() {
-        return $this->morphTo(News::class);
+    public static function getUsersToSendIssueAlertTo($alert, $users) {
+        $usersToSendTo = [];
+
+        foreach ($users as $user) {
+            if ($alert->alertable->flowstepsInLocation == null
+                && !$user->domains->intersect($alert->alertable->connectedDomains)->isEmpty()) {
+                $usersToSendTo[] = $user;
+            }
+
+            if ($alert->alertable->flowstepsInLocation != null
+                && !$user->domains->intersect($alert->alertable->flowstepsInLocation->issue->connectedDomains)->isEmpty()) {
+                $usersToSendTo[] = $user;
+            }
+        }
+        return $usersToSendTo;
+    }
+
+    public static function sendMail($user, $alert, $alertType)
+    {
+        $alert_type = '';
+
+        if ($alertType == 'alert_new_issue') {
+            $alert_type = 'initiativa noua';
+        } elseif ($alertType == 'alert_issue_status') {
+            $alert_type = 'update de status';
+        } elseif ($alertType == 'alert_issue_stage') {
+            $alert_type = 'stadiu nou';
+        }
+
+        Mail::send('emails.'.$alertType,
+            [
+                'user' => $user,
+                'alert' => $alert,
+                'alert_type' => $alert_type
+            ],
+            function ($m) use ($user, $alertType) {
+                $m->to($user->email)->subject($alertType);
+            }
+        );
+
+        $alert->sent = 1;
+        $alert->save();
+
+        return true;
     }
 }
