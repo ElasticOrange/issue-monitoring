@@ -102,8 +102,8 @@ class Alert extends Model
                 'alert' => $alert,
                 'alert_type' => $alert_type
             ],
-            function ($m) use ($user) {
-                $m->to($user->email)->subject('admin issue');
+            function ($m) use ($user, $alertType) {
+                $m->to($user->email)->subject($alertType);
             }
         );
 
@@ -112,4 +112,5 @@ class Alert extends Model
 
         return true;
     }
+    
 }

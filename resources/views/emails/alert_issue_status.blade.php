@@ -7,7 +7,6 @@
 <p>Hello, @if($user->name){{ $user->name }}@else{{ $user->email }}@endif!</p>
 
 Ai o noua alerta de tip <strong>{{ $alert_type }}</strong> <br />
-{{ $alert }}
 
 </body>
 </html>
