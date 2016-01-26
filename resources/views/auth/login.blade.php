@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Issue Monitoring Admin</title>
 
     <link type="text/css" rel="stylesheet" href="{{ elixir('css/all.css') }}" media="all">
 
