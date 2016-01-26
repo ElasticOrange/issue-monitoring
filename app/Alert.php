@@ -84,10 +84,24 @@ class Alert extends Model
         return $usersToSendTo;
     }
 
+    public static function getNewsForUser($user, $newsAlerts) {
+        $issues = [];
+        foreach ($newsAlerts as $newsAlert) {
+            foreach ($newsAlert->alertable->connectedIssues as $issue) {
+                if (!$issue->connectedDomains->intersect($user->domains)->isEmpty()) {
+                    if (! array_key_exists($issue->id, $issues)) {
+                        $issues[$issue->id] = [];
+                    }
+                    $issues[$issue->id][] = $newsAlert->alertable;
+                }
+            }
+        }
+        return $issues;
+    }
+
     public static function sendMail($user, $alert, $alertType)
     {
         $alert_type = '';
-
         if ($alertType == 'alert_new_issue') {
             $alert_type = 'initiativa noua';
         } elseif ($alertType == 'alert_issue_status') {
@@ -110,6 +124,33 @@ class Alert extends Model
         $alert->sent = 1;
         $alert->save();
 
-        return true;
+        return $user;
+    }
+
+    public static function sendNewsMail($user, $alertsToSendByIssue, $alertType)
+    {
+        $alert_type = '';
+        if ($alertType == 'alert_news') {
+            $alert_type = 'stire noua';
+        }
+
+        Mail::send('emails.'.$alertType,
+            [
+                'user' => $user,
+                'alertsToSendByIssue' => $alertsToSendByIssue,
+                'alert_type' => $alert_type
+            ],
+            function ($m) use ($user, $alertType) {
+                $m->to($user->email)->subject($alertType);
+            }
+        );
+
+        for ($i = 0; $i < count($alertsToSendByIssue); $i++) { 
+            $alert = self::where('alertable_type', 'Issue\News')
+                         ->where('alertable_id', $alertsToSendByIssue[$i]->id)
+                         ->update(['sent' => 1]);
+        }
+
+        return $user;
     }
 }
