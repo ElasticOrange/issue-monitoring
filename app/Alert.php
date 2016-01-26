@@ -67,6 +67,41 @@ class Alert extends Model
         return $this->morphTo();
     }
 
+    public static function sendAllIssueAlerts()
+    {
+        $usersToSendTo = [];
+        $alertType = '';
+
+        $issueAlerts = self::whereIn('alertable_type', ['Issue\Issue', 'Issue\FlowStep'])->where('sent', 0)->with(['alertable'])->get();
+        $newIssueUsers = User::where('active', true)->where('alert_new_issue', true)->with('domains')->get();
+        $newStatusUsers = User::where('active', true)->where('alert_issue_status', true)->with('domains')->get();
+        $newFlowStepUsers = User::where('active', true)->where('alert_issue_stage', true)->with('domains')->get();
+       
+        foreach ($issueAlerts as $alert) {
+            if ($alert->alertable_type == 'Issue\Issue') {
+                if ($alert->alertable->hasSentAlerts() == null) {
+                    $alertType = 'alert_issue_status';
+                    $usersToSendTo = self::getUsersToSendIssueAlertTo($alert, $newStatusUsers);
+                }
+                else {
+                    $alertType = 'alert_new_issue';
+                    $usersToSendTo = self::getUsersToSendIssueAlertTo($alert, $newIssueUsers);
+                }
+            }
+
+            if ($alert->alertable_type == 'Issue\FlowStep') {
+                $alertType = 'alert_issue_stage';
+                $usersToSendTo = self::getUsersToSendIssueAlertTo($alert, $newFlowStepUsers);
+            }
+
+            foreach ($usersToSendTo as $mailUser) {
+                self::sendMail($mailUser, $alert, $alertType);
+            }
+        }
+
+        return $usersToSendTo;
+    }
+
     public static function getUsersToSendIssueAlertTo($alert, $users) {
         $usersToSendTo = [];
 
@@ -83,22 +118,7 @@ class Alert extends Model
         }
         return $usersToSendTo;
     }
-
-    public static function getNewsForUser($user, $newsAlerts) {
-        $issues = [];
-        foreach ($newsAlerts as $newsAlert) {
-            foreach ($newsAlert->alertable->connectedIssues as $issue) {
-                if (!$issue->connectedDomains->intersect($user->domains)->isEmpty()) {
-                    if (! array_key_exists($issue->id, $issues)) {
-                        $issues[$issue->id] = [];
-                    }
-                    $issues[$issue->id][] = $newsAlert->alertable;
-                }
-            }
-        }
-        return $issues;
-    }
-
+    
     public static function sendMail($user, $alert, $alertType)
     {
         $alert_type = '';
@@ -127,6 +147,21 @@ class Alert extends Model
         return $user;
     }
 
+    public static function getNewsForUser($user, $newsAlerts) {
+        $issues = [];
+        foreach ($newsAlerts as $newsAlert) {
+            foreach ($newsAlert->alertable->connectedIssues as $issue) {
+                if (!$issue->connectedDomains->intersect($user->domains)->isEmpty()) {
+                    if (! array_key_exists($issue->id, $issues)) {
+                        $issues[$issue->id] = [];
+                    }
+                    $issues[$issue->id][] = $newsAlert->alertable;
+                }
+            }
+        }
+        return $issues;
+    }
+
     public static function sendNewsMail($user, $alertsToSendByIssue, $alertType)
     {
         $alert_type = '';
@@ -152,5 +187,23 @@ class Alert extends Model
         }
 
         return $user;
+    }
+
+    public static function sendAllNewsAlerts()
+    {
+        $alertsToSendByIssue = [];
+        $alertType = 'alert_news';
+        
+        $newsAlerts = self::where('alertable_type', 'Issue\News')->where('sent', 0)->with(['alertable'])->get();
+        $users = User::where('active', true)->where('alert_news', true)->with('domains')->get();
+
+        foreach ($users as $user) {
+            $alertsToSendByIssue = self::getNewsForUser($user, $newsAlerts);
+            foreach ($alertsToSendByIssue as $alertToSendByIssue) {
+                self::sendNewsMail($user, $alertToSendByIssue, $alertType);
+            }
+        }
+
+        return $alertsToSendByIssue;
     }
 }

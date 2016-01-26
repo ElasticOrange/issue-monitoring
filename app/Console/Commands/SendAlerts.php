@@ -3,6 +3,7 @@
 namespace Issue\Console\Commands;
 
 use Illuminate\Console\Command;
+use Issue\Alert;
 
 class SendAlerts extends Command
 {
@@ -18,7 +19,7 @@ class SendAlerts extends Command
      *
      * @var string
      */
-    protected $description = 'Send email alert to a user';
+    protected $description = 'Sends Alerts to all subscribed users';
 
     /**
      * Create a new command instance.
@@ -37,6 +38,7 @@ class SendAlerts extends Command
      */
     public function handle()
     {
-        //
+        Alert::sendAllNewsAlerts();
+        Alert::sendAllIssueAlerts();
     }
 }
