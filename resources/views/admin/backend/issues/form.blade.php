@@ -582,14 +582,13 @@
 													</div>
 												</div>
 											</div><br/>
-
                                             <div class="form-group">
                                                 <div class="checkbox col-md-8 col-md-offset-1">
                                                     <label>
                                                         <input  type="checkbox"
                                                                 value="1"
                                                                 name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][published]"
-                                                                @if(isset($step->alerts[0]) && $step->alerts[0]->sent == 0)
+                                                                @if(! $step->alerts()->notSent()->get()->isEmpty())
                                                                     checked="checked"
                                                                 @endif
                                                                 />Publica

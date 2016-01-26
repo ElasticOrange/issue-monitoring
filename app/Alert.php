@@ -13,6 +13,15 @@ class Alert extends Model
 
     protected $fillable = ['alertable_type', 'alertable_id', 'sent'];
 
+    public function alertable()
+    {
+        return $this->morphTo();
+    }
+
+    public function scopeNotSent($query)
+    {
+        return $query->where('sent', 0);
+    }
 
     public static function createAlert($item, $itemType)
     {
@@ -60,11 +69,6 @@ class Alert extends Model
         }
 
         return true;
-    }
-
-    public function alertable()
-    {
-        return $this->morphTo();
     }
 
     public static function sendAllIssueAlerts()
