@@ -64,11 +64,11 @@ class LocationStep extends Model
                 }
             }
 
-
             $this->flowsteps()->save($currentStep);
 
             if (array_key_exists('published', $steps[$currentStep->id])) {
-                if ($steps[$currentStep->id]['published'] == true) {
+                if ($steps[$currentStep->id]['published'] == true
+                    && Alert::getUnsentAlert($currentStep, 'Issue\FlowStep') == null) {
                     Alert::createAlert($currentStep, 'Issue\FlowStep');
                 }
             } else {
@@ -96,8 +96,9 @@ class LocationStep extends Model
             $this->flowsteps()->save($newFlowStep);
 
             if (array_key_exists('published', $stepData)) {
-                if ($stepData['published'] == true)
-                Alert::createAlert($newFlowStep, 'Issue\FlowStep');
+                if ($stepData['published'] == true) {
+                    Alert::createAlert($newFlowStep, 'Issue\FlowStep');
+                }
             }
 
             if (!array_key_exists('document_id', $stepData)) {
