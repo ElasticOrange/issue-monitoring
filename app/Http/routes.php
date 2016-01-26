@@ -88,8 +88,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/{users}/setPublished', 'UserController@setActive');
 
     Route::get('/backend/alerte', 'AlertController@index');
-    Route::get('/backend/userii', 'AlertController@userii');
-    Route::get('/backend/stirile', 'AlertController@stirile');
     Route::get('/backend/alerte/{id}/preview', 'AlertController@preview');
 });
 
