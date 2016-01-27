@@ -49,4 +49,9 @@ class UploadedFile extends Model
 	{
 		return $this->hasOne('Issue\News');
 	}
+
+	public function report()
+	{
+		return $this->hasOne(Report::class);
+	}
 }
