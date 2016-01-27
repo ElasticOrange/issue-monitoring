@@ -14,7 +14,22 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamp('date');
+            $table->string('public_code');
+            $table->integer('uploaded_file_id');
             $table->timestamps();
+        });
+
+        Schema::create('report_translations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('report_id')->unsigned();
+            $table->string('locale', 3)->index();
+
+            $table->string('title', 1000);
+            $table->longText('description');
+
+            $table->unique(['report_id','locale']);
+            $table->foreign('report_id')->references('id')->on('reports')->onDelete('cascade');
         });
     }
 
@@ -25,6 +40,7 @@ class CreateReportsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('reports');
+        Schema::dropIfExists('report_translations');
+        Schema::dropIfExists('reports');
     }
 }
