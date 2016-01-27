@@ -89,6 +89,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/backend/alerte', 'AlertController@index');
     Route::get('/backend/alerte/{id}/preview', 'AlertController@preview');
+
+    Route::resource('backend/reports', 'ReportController');
 });
 
 
