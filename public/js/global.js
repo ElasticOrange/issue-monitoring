@@ -279,20 +279,6 @@ $(document).ready(function() {
 		stateSave: true
 	});
 
-	var dateWidgets = $('[date-widget=true]').datetimepicker({
-		locale: 'ro',
-		format: 'L',
-		defaultDate: moment()
-	});
-
-	$('[name=date]').val(moment().format("YYYY-MM-DD"));
-
-	dateWidgets.on('dp.change', function () {
-		var d = $(this).data("DateTimePicker").date();
-		var e = d.format("YYYY-MM-DD");
-		$('[name=date]').val(e);
-	});
-
 	$('input[type=file]')
 		.change(function() {
 			var fileName = getFileNameFromPath($(this).val());

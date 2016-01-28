@@ -13,6 +13,10 @@ class AlertController extends Controller
 {
     public function index()
     {
+        if (Gate::denies('list-alerts')) {
+            abort(403);
+        }
+
         $alerts = Alert::all();
 
         return view('admin.backend.alerts.list', ['alerts' => $alerts]);
@@ -20,6 +24,10 @@ class AlertController extends Controller
 
     public function preview($id)
     {
+        if (Gate::denies('preview-alerts')) {
+            abort(403);
+        }
+
         $alert = Alert::find($id);
 
         return view('admin.backend.alerts.headpreview', ['alert' => $alert]);

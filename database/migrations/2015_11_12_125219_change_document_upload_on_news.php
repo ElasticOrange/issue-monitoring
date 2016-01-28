@@ -13,7 +13,7 @@ class ChangeDocumentUploadOnNews extends Migration
 	public function up()
 	{
 		Schema::table('news', function ($table) {
-			$table->integer('uploaded_document_id')->nullable;
+			$table->integer('uploaded_document_id')->nullable();
 		});
 	}
 
