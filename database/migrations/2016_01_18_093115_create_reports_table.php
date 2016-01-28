@@ -16,7 +16,7 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->timestamp('date');
             $table->string('public_code');
-            $table->integer('uploaded_file_id');
+            $table->integer('uploaded_file_id')->nullable();
             $table->timestamps();
         });
 

@@ -90,7 +90,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/backend/alerte', 'AlertController@index');
     Route::get('/backend/alerte/{id}/preview', 'AlertController@preview');
 
-    Route::resource('backend/reports', 'ReportController');
+    Route::get('backend/report/{report}/delete', 'ReportController@destroy');
+    Route::get('backend/report/{public_code}/show', 'ReportController@show');
+    Route::get('backend/report/{report}/deleteFile', 'ReportController@deleteFile');
+    Route::resource('backend/report', 'ReportController', ['except' => ['show', 'destroy']]);
 });
 
 

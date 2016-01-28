@@ -2,9 +2,12 @@
 
 namespace Issue\Http\Controllers;
 
+use Gate;
 use Illuminate\Http\Request;
+use Issue\Alert;
 use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests;
+use Issue\Http\Requests\ReportRequest;
 use Issue\Report;
 
 class ReportController extends Controller
@@ -36,7 +39,9 @@ class ReportController extends Controller
             abort(403);
         }
 
+        $report = new Report;
 
+        return view('admin.backend.reports.create', ['report' => $report]);
     }
 
     /**
@@ -45,13 +50,20 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReportRequest $request)
     {
         if (Gate::denies('store-reports')) {
             abort(403);
         }
 
+        $report = new Report;
+        $report->setAll($request);
 
+        if ($request->published) {
+            Alert::createAlert($report, 'Issue\Report');
+        }
+
+        return $report;
     }
 
     /**
@@ -60,13 +72,15 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($code)
     {
         if (Gate::denies('show-reports')) {
             abort(403);
         }
 
+        $report = Report::getByPublicCode($code);
 
+        return $this->edit($report);
     }
 
     /**
@@ -75,13 +89,13 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($report)
     {
         if (Gate::denies('edit-reports')) {
             abort(403);
         }
 
-
+        return view('admin.backend.reports.edit', ['report'=> $report]);
     }
 
     /**
@@ -91,13 +105,21 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReportRequest $request, $report)
     {
         if (Gate::denies('update-reports')) {
             abort(403);
         }
 
+        $report->setAll($request);
 
+        if ($request->published) {
+            Alert::updateAlert($report, 'Issue\Report');
+        } else {
+            Alert::deleteUnsentAlert($report, 'Issue\Report');
+        }
+
+        return $report;
     }
 
     /**
@@ -106,12 +128,23 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($report)
     {
         if (Gate::denies('delete-reports')) {
             abort(403);
         }
 
+        $report->delete();
 
+        return redirect()->action('ReportController@index');
+    }
+
+    public function deleteFile($report)
+    {
+        if ($report->file) {
+            $report->file->delete();
+        }
+
+        return $report;
     }
 }
