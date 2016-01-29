@@ -119,6 +119,21 @@
 <hr/>
 
 <div class="form-group">
+    <label class="col-md-2 control-label">Tipul raportului</label>
+    <div class="col-md-8">
+        <select class="form-control" name="report_type">
+            <option value=""></option>
+            <option value="1" @if($report->report_type === '1') selected="selected" @endif>Saptamanal</option>
+            <option value="2" @if($report->report_type === '2') selected="selected" @endif>Lunar</option>
+            <option value="3" @if($report->report_type === '3') selected="selected" @endif>Progres</option>
+            <option value="4" @if($report->report_type === '4') selected="selected" @endif>Minuta</option>
+        </select>
+    </div>
+</div><br/><br/>
+
+<hr>
+
+<div class="form-group">
     <div class="checkbox col-md-8 col-md-offset-2">
         <label>
             <input  type="checkbox"

@@ -23,6 +23,11 @@ class Alert extends Model
         return $query->where('sent', 0);
     }
 
+    public function scopeReportType($query)
+    {
+        return $query->where('report_type', '1');
+    }
+
     public static function createAlert($item, $itemType)
     {
         $alert = new Alert;
@@ -122,6 +127,26 @@ class Alert extends Model
         }
         return $usersToSendTo;
     }
+
+    public static function getUsersToSendReportAlertTo($alert, $users)
+    {
+        $usersToSendTo = [];
+
+        foreach ($users as $user) {
+            if ($alert->alertable->report_type == 1 ||
+                $alert->alertable->report_type == 2) {
+                $usersToSendTo[] = $user;
+            } elseif (!$user->domains->intersect($alert->alertable->domains)->isEmpty()) {
+                $usersToSendTo[] = $user;
+            }
+        }
+
+        foreach ($usersToSendTo as $mailUser) {
+            self::sendReportMail($mailUser, $alert);
+        }
+
+        return $usersToSendTo;
+    }
     
     public static function sendMail($user, $alert, $alertType)
     {
@@ -209,5 +234,41 @@ class Alert extends Model
         }
 
         return $alertsToSendByIssue;
+    }
+
+    public static function sendReportMail($user, $alert)
+    {
+        $alert_template = 'report_alert';
+        $alert_type = 'Rapoarte recent adaugate';
+
+        Mail::send('emails.'.$alert_template,
+            [
+                'user' => $user,
+                'alert' => $alert,
+                'alert_type' => $alert_type
+            ],
+            function ($m) use ($user, $alert_type) {
+                $m->to($user->email)->subject($alert_type);
+            }
+        );
+
+        $alert->sent = 1;
+        $alert->save();
+
+        return $alert;
+    }
+    
+    public static function sendReportAlerts()
+    {
+        $alertType = 'report_alert';
+
+        $reportAlerts = self::where('alertable_type', 'Issue\Report')->where('sent', 0)->with(['alertable'])->get();
+        $usersToSendReportsTo = User::where('active', true)->where('alert_report', true)->with('domains')->get();
+
+        foreach ($reportAlerts as $alert) {
+            self::getUsersToSendReportAlertTo($alert, $usersToSendReportsTo);
+        }
+
+        return $alert;
     }
 }
