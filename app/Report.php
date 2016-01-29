@@ -11,9 +11,12 @@ class Report extends Model
     use \Dimsav\Translatable\Translatable;
 
     protected $guarded = ['id'];
+    
+    protected $with = ['domains'];
 
     protected $fillable = [
         'date',
+        'report_type'
     ];
 
     public $dates = ['date'];
@@ -32,6 +35,11 @@ class Report extends Model
     public function alerts()
     {
         return $this->morphMany(Alert::class, 'alertable');
+    }
+
+    public function scopeReportTypeGeneral($query)
+    {
+        return $query->where('report_type', 1);
     }
 
     public function file()
@@ -54,6 +62,12 @@ class Report extends Model
     public function setAll($request)
     {
         $this->date = $request->get('date');
+        
+        if ($request->get('report_type') === "") {
+            $this->report_type = 0;
+        }
+        
+        $this->report_type = $request->get('report_type');
 
         if (! $this->public_code) {
             $this->public_code = $this->createPublicCode();
