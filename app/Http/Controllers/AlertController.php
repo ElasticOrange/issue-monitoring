@@ -2,6 +2,7 @@
 
 namespace Issue\Http\Controllers;
 
+use Gate;
 use Illuminate\Http\Request;
 use Issue\Alert;
 use Issue\Http\Controllers\Controller;

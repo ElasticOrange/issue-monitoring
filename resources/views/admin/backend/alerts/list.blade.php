@@ -44,19 +44,23 @@
                                         <td>{{ $alert->alertable->name }}</td>
                                     @elseif($alert->alertable_type == 'Issue\FlowStep')
                                         <td>{{ $alert->alertable->flow_name }}</td>
+                                    @elseif($alert->alertable_type == 'Issue\Report')
+                                        <td>{{ $alert->alertable->title }}</td>
                                     @endif
                                     <td>{{ $alert->created_at }}</td>
                                     <td class="text-center">
                                         <div class="row">
                                         @if($alert->alertable_type == 'Issue\News')
-                                            <a href="{{ action('NewsController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="{{ action('NewsController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @elseif($alert->alertable_type == 'Issue\Issue')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        @elseif($alert->alertable_type == 'Issue\Report')
+                                            <a href="{{ action('ReportController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @endif
 
-                                        <a href="{{ action('AlertController@preview', [$alert->id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                        <a href="{{ action('AlertController@preview', [$alert->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -101,6 +105,8 @@
                                         <td>{{ $alert->alertable->name }}</td>
                                     @elseif($alert->alertable_type == 'Issue\FlowStep')
                                         <td>{{ $alert->alertable->flow_name }}</td>
+                                    @elseif($alert->alertable_type == 'Issue\Report')
+                                        <td>{{ $alert->alertable->title }}</td>
                                     @endif
                                     <td>{{ $alert->created_at }}</td>
                                     <td class="text-center">
@@ -111,6 +117,8 @@
                                             <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @elseif($alert->alertable_type == 'Issue\FlowStep')
                                             <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        @elseif($alert->alertable_type == 'Issue\Report')
+                                            <a href="{{ action('ReportController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @endif
                                         </div>
 
