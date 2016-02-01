@@ -108,7 +108,7 @@ class Alert extends Model
             }
         }
 
-        return $usersToSendTo;
+        return true;
     }
 
     public static function getUsersToSendIssueAlertTo($alert, $users) {
@@ -173,7 +173,7 @@ class Alert extends Model
         $alert->sent = 1;
         $alert->save();
 
-        return $user;
+        return true;
     }
 
     public static function getNewsForUser($user, $newsAlerts) {
@@ -233,7 +233,7 @@ class Alert extends Model
             }
         }
 
-        return $alertsToSendByIssue;
+        return true;
     }
 
     public static function sendReportMail($user, $alert)
