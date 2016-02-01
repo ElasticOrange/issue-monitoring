@@ -39,10 +39,6 @@ class Alert extends Model
         return $alert;
     }
 
-    /**
-     * @param $news
-     * @return mixed
-     */
     public static function getUnsentAlert($item, $itemType)
     {
         $currentAlertNotSent = Alert::where('alertable_id', $item->getKey())
@@ -205,7 +201,7 @@ class Alert extends Model
                 'alert_type' => $alert_type
             ],
             function ($m) use ($user, $alertType) {
-                $m->to($user->email)->subject($alertType);
+                $m->to($user->email)->subject('Alerta stiri noi');
             }
         );
 
@@ -215,7 +211,7 @@ class Alert extends Model
                          ->update(['sent' => 1]);
         }
 
-        return true;
+        return $alert;
     }
 
     public static function sendAllNewsAlerts()
