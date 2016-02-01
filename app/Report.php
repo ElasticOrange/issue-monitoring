@@ -4,7 +4,7 @@ namespace Issue;
 
 use Illuminate\Database\Eloquent\Model;
 
-const DOCUMENT_LOCATION = '/reports/';
+const REPORT_LOCATION = '/reports/';
 
 class Report extends Model
 {
@@ -44,7 +44,7 @@ class Report extends Model
 
     public function file()
     {
-        return $this->belongsTo('Issue\UploadedFile', 'uploaded_file_id');
+        return $this->belongsTo(UploadedFile::class, 'uploaded_file_id');
     }
 
     public function domains()
@@ -79,7 +79,7 @@ class Report extends Model
             }
 
             $DocumentFile = new UploadedFile;
-            $DocumentFile->storeFile(DOCUMENT_LOCATION, $request->file('document_file'));
+            $DocumentFile->storeFile(REPORT_LOCATION, $request->file('document_file'));
             $this->file()->associate($DocumentFile);
         }
 

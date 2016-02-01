@@ -241,7 +241,7 @@
 			<input  type="checkbox"
 					value="1"
 					name="published"
-					@if(isset($news->alerts[0]) && $news->alerts[0]->sent == 0)
+					@if(! $news->alerts()->notSent()->get()->isEmpty())
 						checked="checked"
 					@endif
 			/>Publica

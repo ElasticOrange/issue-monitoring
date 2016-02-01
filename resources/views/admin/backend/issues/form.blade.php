@@ -117,7 +117,21 @@
 					</div>
 				</div>
 
-			</div>
+			</div><br/>
+
+            <div class="form-group">
+                <div class="checkbox col-md-10 col-md-offset-2">
+                    <label>
+                        <input  type="checkbox"
+                                value="1"
+                                name="published"
+                                @if(! $issue->alerts()->notSent()->get()->isEmpty())
+                                    checked="checked"
+                                @endif
+                        />Publica
+                    </label>
+                </div>
+            </div>
 
 			<hr/>
 
@@ -331,22 +345,6 @@
 								checked="checked"
 							@endif
 					/>Arhivat
-				</label>
-			</div>
-		</div>
-
-		<hr/>
-
-		<div class="form-group">
-			<div class="checkbox col-md-10 col-md-offset-2">
-				<label>
-					<input  type="checkbox"
-							value="1"
-							name="published"
-                            @if(isset($issue->alerts[0]) && $issue->alerts[0]->sent == 0)
-                                checked="checked"
-                            @endif
-					/>Publica
 				</label>
 			</div>
 		</div>
