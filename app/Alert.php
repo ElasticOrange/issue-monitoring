@@ -215,7 +215,7 @@ class Alert extends Model
                          ->update(['sent' => 1]);
         }
 
-        return $user;
+        return true;
     }
 
     public static function sendAllNewsAlerts()
@@ -255,7 +255,7 @@ class Alert extends Model
         $alert->sent = 1;
         $alert->save();
 
-        return $alert;
+        return true;
     }
     
     public static function sendReportAlerts()
@@ -269,6 +269,6 @@ class Alert extends Model
             self::getUsersToSendReportAlertTo($alert, $usersToSendReportsTo);
         }
 
-        return $alert;
+        return true;
     }
 }
