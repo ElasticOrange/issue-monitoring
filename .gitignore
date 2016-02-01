@@ -10,6 +10,8 @@ Envoy.blade.php
 /public/build
 /public/js/all.js
 /public/js/all.js.map
+/public/js/main.js
+/public/js/main.js.map
 /public/css
 /resources/assets/bower
 

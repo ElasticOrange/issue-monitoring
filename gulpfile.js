@@ -27,6 +27,12 @@ elixir(function(mix) {
 		, 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
 		, 'jquery-ui/themes/smoothness/jquery-ui.css'
 		] , 'public/css/style.css', bowerDir)
+	.styles([
+		  'bootstrap/dist/css/bootstrap.min.css'
+		, 'font-awesome/css/font-awesome.min.css'
+		, 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css'
+		, 'jquery-ui/themes/smoothness/jquery-ui.css'
+		] , 'public/css/front-style.css', bowerDir)
 	.scripts([
 		  'jquery/dist/jquery.min.js'
 		, 'lodash/lodash.min.js'
@@ -49,6 +55,15 @@ elixir(function(mix) {
 		, 'ckeditor/ckeditor.js'
 		, 'jquery-ui/jquery-ui.js'
 		], 'public/js/all.js', bowerDir)
+	.scripts([
+		  'jquery/dist/jquery.min.js'
+		, 'lodash/lodash.min.js'
+		, 'bootstrap/dist/js/bootstrap.min.js'
+		, 'moment/min/moment.min.js'
+		, 'moment/locale/ro.js'
+		, 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+		, 'jquery-ui/jquery-ui.js'
+		], 'public/js/main.js', bowerDir)
 /*    .scripts([
 			  '../customJs/deleteDocument.js'
 			, '../customJs/ajaxForms.js'
@@ -64,6 +79,14 @@ elixir(function(mix) {
 				, 'app.css'
 			]
 			, 'public/css/all.css'
+			, 'public/css/'
+		)
+	.styles(
+			[
+				  'front-style.css'
+				, 'app.css'
+			]
+			, 'public/css/main.css'
 			, 'public/css/'
 		)
 	.copy(
@@ -89,6 +112,8 @@ elixir(function(mix) {
 	.version([
 			  'css/all.css'
 			, 'js/all.js'
+			, 'css/main.css'
+			, 'js/main.js'
 //            , 'js/custom.js'
 		]);
 });
