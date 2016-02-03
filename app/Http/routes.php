@@ -12,7 +12,7 @@
 */
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', 'DocumentController@index');
+    Route::get('/', 'HomeController@index');
 
     Route::controller('/admin', 'AdminDashboardController');
 

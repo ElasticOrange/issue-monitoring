@@ -25,13 +25,13 @@
 <body>
 
     <div id="wrapper">
-        @include('frontend.layouts.partials.header')
+        @include('frontend.layout.partials.header')
 
         <div id="page-wrapper">
             @yield('content')
         </div>
 
-        @include('frontend.layouts.partials.footer')        
+        @include('frontend.layout.partials.footer')        
     </div>
 
     <!-- Bootstrap Core CSS -->
