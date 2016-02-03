@@ -2,7 +2,7 @@
 /vendor
 /node_modules
 .env
-getbranches.sh
+*.swp
 
 Envoy.blade.php
 
