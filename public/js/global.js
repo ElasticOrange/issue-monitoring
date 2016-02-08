@@ -249,6 +249,7 @@ function getFileNameFromPath(filePath) {
 
 // Set message boxes
 $(document).ready(function() {
+
 	$successBox = $('.message-box.success');
 	$errorBox = $('.message-box.error');
 	$warningBox = $('.message-box.warning');
@@ -311,3 +312,12 @@ $(document).ready(function() {
 
     preventEnterToSubmit('[prevent-enter=true]');
 });
+
+$( document ).ajaxStart(function() {
+    $('#ajaxModal').modal('show');
+});
+
+$( document ).ajaxStop(function() {
+    $('#ajaxModal').modal('hide');
+});
+

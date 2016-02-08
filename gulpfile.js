@@ -102,6 +102,10 @@ elixir(function(mix) {
 			'public/build/css/images/'
 		)
 	.copy(
+			'resources/assets/images/',
+			'public/build/css/images/'
+		)
+	.copy(
 			'resources/assets/bower/datatables/media/images/',
 			'public/build/images/'
 		)

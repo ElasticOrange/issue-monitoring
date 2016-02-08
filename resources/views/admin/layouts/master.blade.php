@@ -38,5 +38,6 @@
     <script src="{{ elixir('js/all.js') }}"></script>
     <script type="text/javascript" src="/js/global.js"></script>
     @yield('js')
+    @include('admin.layouts.partials.ajaxloader')
 </body>
 </html>
