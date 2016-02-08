@@ -17,6 +17,17 @@
 			</div>
 		</div>
 
+        <div class="form-group">
+            <label class="col-md-2 control-label">Faza</label>
+            <div class="col-md-8">
+                <select class="form-control" name="phase">
+                    <option value="viitor">viitor</option>
+                    <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>curent</option>
+                    <option value="arhivat" @if($issue->phase === 'arhivat') selected="selected" @endif>arhivat</option>
+                </select>
+            </div>
+        </div>
+
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#ro" data-toggle="tab">RO</a></li>
 			<li><a href="#en" data-toggle="tab">EN</a></li>

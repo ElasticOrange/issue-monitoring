@@ -24,7 +24,7 @@
 									<th class="text-center" style="width: 10%;">Categorie</th>
 									<th class="text-center" style="width: 10%;">Tip</th>
 									<th class="text-center" style="width: 50%;">Nume</th>
-									<th class="text-center" style="width: 5%;">Status</th>
+									<th class="text-center" style="width: 5%;">Faza</th>
 									<th class="text-center" style="width: 5%;">Publicat</th>
 									<th class="text-center" style="width: 5%;">Actiuni</th>
 								</tr>
@@ -41,7 +41,7 @@
 										<td></td>
 										<td></td>
 										<td>{{ $issue->name }}</td>
-										<td>{!! $issue->status !!}</td>
+										<td>{{ $issue->phase }}</td>
 										<td class="text-center">
 											<input  type="checkbox"
 													name="published"
