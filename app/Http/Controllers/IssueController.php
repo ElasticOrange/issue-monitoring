@@ -142,7 +142,7 @@ class IssueController extends Controller
 		$issue->syncLocations($locationsData);
 
         if ($request->published) {
-            Alert::createAlert($issue, 'Issue\Issue');
+            Alert::updateAlert($issue, 'Issue\Issue');
         } else {
             Alert::deleteUnsentAlert($issue, 'Issue\Issue');
         }

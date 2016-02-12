@@ -84,7 +84,7 @@ class Alert extends Model
        
         foreach ($issueAlerts as $alert) {
             if ($alert->alertable_type == 'Issue\Issue') {
-                if ($alert->alertable->hasSentAlerts() == null) {
+                if (! $alert->alertable->hasSentAlerts()->isEmpty()) {
                     $alertType = 'alert_issue_status';
                     $usersToSendTo = self::getUsersToSendIssueAlertTo($alert, $newStatusUsers);
                 }
@@ -123,36 +123,16 @@ class Alert extends Model
         }
         return $usersToSendTo;
     }
-
-    public static function getUsersToSendReportAlertTo($alert, $users)
-    {
-        $usersToSendTo = [];
-
-        foreach ($users as $user) {
-            if ($alert->alertable->report_type == 1 ||
-                $alert->alertable->report_type == 2) {
-                $usersToSendTo[] = $user;
-            } elseif (!$user->domains->intersect($alert->alertable->domains)->isEmpty()) {
-                $usersToSendTo[] = $user;
-            }
-        }
-
-        foreach ($usersToSendTo as $mailUser) {
-            self::sendReportMail($mailUser, $alert);
-        }
-
-        return $usersToSendTo;
-    }
     
     public static function sendMail($user, $alert, $alertType)
     {
         $alert_type = '';
         if ($alertType == 'alert_new_issue') {
-            $alert_type = 'initiativa noua';
+            $alert_type = 'Initiativa recent adaugata';
         } elseif ($alertType == 'alert_issue_status') {
-            $alert_type = 'update de status';
+            $alert_type = 'Modificare initiativa '.$alert->alertable->name;
         } elseif ($alertType == 'alert_issue_stage') {
-            $alert_type = 'stadiu nou';
+            $alert_type = 'Modificare initiativa '.$alert->alertable->flowstepsInLocation->issue->name;
         }
 
         Mail::send('emails.'.$alertType,
@@ -161,8 +141,8 @@ class Alert extends Model
                 'alert' => $alert,
                 'alert_type' => $alert_type
             ],
-            function ($m) use ($user, $alertType) {
-                $m->to($user->email)->subject($alertType);
+            function ($m) use ($user, $alert_type) {
+                $m->to($user->email)->subject($alert_type);
             }
         );
 
@@ -201,7 +181,7 @@ class Alert extends Model
                 'alert_type' => $alert_type
             ],
             function ($m) use ($user, $alertType) {
-                $m->to($user->email)->subject('Alerta stiri noi');
+                $m->to($user->email)->subject('Stiri recent adaugate');
             }
         );
 
@@ -252,6 +232,26 @@ class Alert extends Model
         $alert->save();
 
         return true;
+    }
+
+    public static function getUsersToSendReportAlertTo($alert, $users)
+    {
+        $usersToSendTo = [];
+
+        foreach ($users as $user) {
+            if ($alert->alertable->report_type == 1 ||
+                $alert->alertable->report_type == 2) {
+                $usersToSendTo[] = $user;
+            } elseif (!$user->domains->intersect($alert->alertable->domains)->isEmpty()) {
+                $usersToSendTo[] = $user;
+            }
+        }
+
+        foreach ($usersToSendTo as $mailUser) {
+            self::sendReportMail($mailUser, $alert);
+        }
+
+        return $usersToSendTo;
     }
     
     public static function sendReportAlerts()
