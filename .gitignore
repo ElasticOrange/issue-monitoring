@@ -3,6 +3,7 @@
 /node_modules
 .env
 *.swp
+*.sql
 
 Envoy.blade.php
 

@@ -64,6 +64,18 @@ return [
             'strict'    => false,
         ],
 
+        'oldissue' => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'oldissue',
+            'username'  => 'oldissue',
+            'password'  => 'oldissue',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'pgsql' => [
             'driver'   => 'pgsql',
             'host'     => env('DB_HOST', 'localhost'),
