@@ -7,6 +7,7 @@ use DB;
 use App;
 use Issue\User;
 use Issue\StepAutocomplete;
+use Issue\Stakeholder;
 
 class ImportOldDb extends Command
 {
@@ -63,7 +64,7 @@ class ImportOldDb extends Command
         $users = DB::connection('oldissue')->select('select * from users');
         foreach ($users as $user) {
 
-            $newUser = new User();
+            $newUser = new User;
             $newUser->id = $user->id;
             $newUser->name = $user->name;
             $newUser->email = $user->email;
@@ -95,7 +96,7 @@ class ImportOldDb extends Command
         $stepAutocompletes = DB::connection('oldissue')->select('select * from syslexsteps');
         foreach ($stepAutocompletes as $step) {
 
-            $newStepAutocomplete = new StepAutocomplete();
+            $newStepAutocomplete = new StepAutocomplete;
             $newStepAutocomplete->id = $step->lexstepID;
             $newStepAutocomplete->name = $step->description;
 
@@ -105,6 +106,44 @@ class ImportOldDb extends Command
         return print_r('Au fost importati: '.StepAutocomplete::count().' stepAutocomplete.'."\n");
     }
 
+    protected function importStakeholders()
+    {
+        $stakeholders = DB::connection('oldissue')->select('select * from stackeholders');
+        foreach ($stakeholders as $stakeholder) {
+
+            $newStakeholder = new Stakeholder;
+
+            $newStakeholder->id = $stakeholder->stackeholderID;
+            $newStakeholder->name = $stakeholder->first_name.' '.$stakeholder->last_name;
+
+            if ($stakeholder->isauth === '0') {
+                $newStakeholder->type = 'persoana';
+            } else {
+                $newStakeholder->type = 'organizatie';
+            }
+
+            $newStakeholder->site = $stakeholder->blog;
+            $newStakeholder->email = $stakeholder->email;
+            $newStakeholder->telephone = $stakeholder->phone;
+            $newStakeholder->public_code = str_random(40);
+
+            $newStakeholder->save();
+
+            $newStakeholder->translations()->create([
+                'ro.profile' => $stakeholder->profile ? $stakeholder->profile : '',
+                'en.profile' => $stakeholder->enprofile ? $stakeholder->enprofile : '',
+                'ro.position' => $stakeholder->posAndApart ? $stakeholder->posAndApart : '',
+                'en.position' => $stakeholder->enposAndApart ? $stakeholder->enposAndApart : '',
+                'ro.address' => $stakeholder->contact ? $stakeholder->contact : '',
+                'en.address' => $stakeholder->encontact ? $stakeholder->encontact : '',
+                ]);
+
+            $newStakeholder->save();
+        }
+
+        return print_r('Au fost importati: '.Stakeholder::count().' stakeholders.'."\n");
+    }
+
     /**
      * Execute the console command.
      *
@@ -112,7 +151,6 @@ class ImportOldDb extends Command
      */
     public function handle()
     {
-
         $this->createDb($this->argument('db_name'));
         $this->createUserWithPrivileges($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'));
         $this->importOldDb($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'), $this->argument('sql_file'));
@@ -124,6 +162,7 @@ class ImportOldDb extends Command
 
             $this->importUsers();
             $this->importStepAutocompletes();
+            $this->importStakeholders();
 
             DB::commit();
         } catch (\Exception $e) {
