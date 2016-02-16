@@ -5,6 +5,7 @@ namespace Issue\Console\Commands;
 use Illuminate\Console\Command;
 use DB;
 use App;
+use Issue\User;
 
 class ImportOldDb extends Command
 {
@@ -53,7 +54,39 @@ class ImportOldDb extends Command
             echo exec('mysql -u '.$db_user.' -p'.$db_password.' '.$db_name.' < '.base_path().'/'.$sql_file);
         }
 
-        return print_r('Database succesfully imported');
+        return print_r('Database succesfully imported'."\n");
+    }
+
+    protected function importUsers()
+    {
+        $users = DB::connection('oldissue')->select('select * from users');
+        foreach ($users as $user) {
+
+            $newUser = new User();
+            $newUser->id = $user->id;
+            $newUser->name = $user->name;
+            $newUser->email = $user->email;
+            $newUser->password = $user->password;
+            
+            if ($user->banned === 'N' && $user->active === 'Y') {
+                $newUser->active = true;
+            } else {
+                $newUser->active = false;
+            }
+
+            if ($user->profilesId === '1') {
+                $newUser->type = 'admin';
+            } elseif ($user->profilesId === '2') {
+                $newUser->type = 'editor';
+            } elseif ($user->profilesId === '4') {
+                $newUser->type = 'client';
+            }
+
+
+            $newUser->save();
+        }
+
+        return print_r('Au fost importati: '.User::count().' useri.'."\n");
     }
 
     /**
@@ -71,8 +104,14 @@ class ImportOldDb extends Command
 
         DB::beginTransaction();
 
-        // DB::connection('oldissue')->select('select * from alerts'); 
+        try {
+            
+            $this->importUsers();
 
-        DB::rollback();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            print_r('Shiit! Rollback happened.');
+        }
     }
 }
