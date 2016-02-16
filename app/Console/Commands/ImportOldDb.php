@@ -32,6 +32,30 @@ class ImportOldDb extends Command
         parent::__construct();
     }
 
+    protected function createDb($db_name)
+    {
+        DB::statement('CREATE DATABASE IF NOT EXISTS '.$db_name);
+
+        return print_r('Created database '.$db_name."\n");
+    }
+
+    protected function createUserWithPrivileges($db_name, $db_user, $db_password)
+    {
+        DB::statement('GRANT ALL PRIVILEGES ON *.* TO '."'".$db_user."'@"."'localhost' IDENTIFIED BY "."'".$db_password."';");
+
+        return print_r('Created user '.$db_user.' with password '.$db_password.' and granted all privileges to '.$db_name."\n");
+    }
+
+    protected function importOldDb($db_name, $db_user, $db_password, $sql_file)
+    {
+        if (App::runningInConsole())
+        {
+            echo exec('mysql -u '.$db_user.' -p'.$db_password.' '.$db_name.' < '.base_path().'/'.$sql_file);
+        }
+
+        return print_r('Database succesfully imported');
+    }
+
     /**
      * Execute the console command.
      *
@@ -40,23 +64,15 @@ class ImportOldDb extends Command
     public function handle()
     {
 
-        DB::statement('CREATE DATABASE IF NOT EXISTS '.$this->argument('db_name'));
-        print_r('Created database '.$this->argument('db_name')."\n");
-        DB::statement('GRANT ALL PRIVILEGES ON *.* TO '."'".$this->argument('db_user')."'@"."'localhost' IDENTIFIED BY "."'".$this->argument('db_password')."';");
-        print_r('Created user '.$this->argument('db_user').' with password '.$this->argument('db_password').' and granted all privileges to '.$this->argument('db_name')."\n");
-        DB::statement('FLUSH PRIVILEGES;');
+        $this->createDb($this->argument('db_name'));
+        $this->createUserWithPrivileges($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'));
+        $this->importOldDb($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'), $this->argument('sql_file'));
 
-        if (App::runningInConsole())
-        {
-            echo exec('mysql -u '.$this->argument('db_user').' -p'.$this->argument('db_password').' '.$this->argument('db_name').' < '.base_path().'/'.$this->argument('sql_file'));
-        }
 
         DB::beginTransaction();
 
-        DB::connection('oldissue')->select('select * from alerts'); 
+        // DB::connection('oldissue')->select('select * from alerts'); 
 
         DB::rollback();
-
-
     }
 }
