@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use DB;
 use App;
 use Issue\User;
+use Issue\StepAutocomplete;
 
 class ImportOldDb extends Command
 {
@@ -89,6 +90,21 @@ class ImportOldDb extends Command
         return print_r('Au fost importati: '.User::count().' useri.'."\n");
     }
 
+    protected function importStepAutocompletes()
+    {
+        $stepAutocompletes = DB::connection('oldissue')->select('select * from syslexsteps');
+        foreach ($stepAutocompletes as $step) {
+
+            $newStepAutocomplete = new StepAutocomplete();
+            $newStepAutocomplete->id = $step->lexstepID;
+            $newStepAutocomplete->name = $step->description;
+
+            $newStepAutocomplete->save();
+        }
+
+        return print_r('Au fost importati: '.StepAutocomplete::count().' stepAutocomplete.'."\n");
+    }
+
     /**
      * Execute the console command.
      *
@@ -105,8 +121,9 @@ class ImportOldDb extends Command
         DB::beginTransaction();
 
         try {
-            
+
             $this->importUsers();
+            $this->importStepAutocompletes();
 
             DB::commit();
         } catch (\Exception $e) {
