@@ -318,6 +318,93 @@ class ImportOldDb extends Command
         return print_r('Au fost importate: '.Issue::count().' initiative.'."\n");
     }
 
+    protected function importInitiatorIssue()
+    {
+        $initiatorIssues = DB::connection('oldissue')->select('select propid,author from initlaws');
+
+        foreach ($initiatorIssues as $initiatorIssue) {
+            $issueConnected = Issue::find($initiatorIssue->propid);
+            $connectedInitiators = explode(',', $initiatorIssue->author);
+
+            try {
+                $issueConnected->connectedInitiatorsStakeholders()->sync($connectedInitiators);
+            } catch (\Exception $e) {
+                print_r("Shiit! Un stakeholder nu mai exista.\n");
+            }
+
+        }
+
+        print_r("Relatiile Initiator - Issue au fost adaugate cu succes.\n");
+        return true;
+    }
+
+    protected function importIssueStakeholder()
+    {
+        $issueStakeholders = DB::connection('oldissue')->select('select propid,stackhlist from initlaws');
+
+        foreach ($issueStakeholders as $issueStakeholder) {
+            $issueConnected = Issue::find($issueStakeholder->propid);
+            $connectedStakeholders = explode(',', $issueStakeholder->stackhlist);
+
+            try {
+
+                $issueConnected->connectedStakeholders()->sync($connectedStakeholders);
+            } catch (\Exception $e) {
+                print_r("Shiit! Un stakeholder nu mai exista.\n");
+            }
+
+        }
+
+        print_r("Relatiile Issue - Stakeholder au fost adaugate cu succes.\n");
+        return true;
+    }
+
+    protected function importIssueNews()
+    {
+        $issueNews = DB::connection('oldissue')->select('select propid,newslist from initlaws');
+
+        foreach ($issueNews as $issuen) {
+            $issueConnected = Issue::find($issuen->propid);
+            $connectedNews = explode(',', $issuen->newslist);
+
+            try {
+
+                $issueConnected->connectedNews()->sync($connectedNews);
+            } catch (\Exception $e) {
+                print_r("Shiit! O stire nu mai exista.\n");
+            }
+
+        }
+
+        print_r("Relatiile Issue - News au fost adaugate cu succes.\n");
+        return true;
+    }
+
+    protected function importIssuesConnectedWithIssues()
+    {
+        $issueIssues = DB::connection('oldissue')->select('select propid,impacttorelatedissue from initlaws');
+
+        foreach ($issueIssues as $issues) {
+            if (($issues->impacttorelatedissue !== NULL)
+                && ($issues->impacttorelatedissue !== "Array")) {
+
+                $issueConnected = Issue::find($issues->propid);
+                $connectedIssues = explode(',', $issues->impacttorelatedissue);
+
+                try {
+
+                    $issueConnected->issuesConnectedOfMine()->sync($connectedIssues);
+                    $issueConnected->issuesConnectedOfThem()->sync($connectedIssues);
+                } catch (\Exception $e) {
+                    print_r("Shiit! O stire nu mai exista.\n");
+                }
+            }
+        }
+
+        print_r("Relatiile Issue - Issue au fost adaugate cu succes.\n");
+        return true;
+    }
+
     /**
      * Execute the console command.
      *
@@ -341,6 +428,10 @@ class ImportOldDb extends Command
             $this->importNews();
             $this->importLocations();
             $this->importIssues();
+            $this->importInitiatorIssue();
+            $this->importIssueStakeholder();
+            $this->importIssueNews();
+            $this->importIssuesConnectedWithIssues();
 
 
             DB::commit();
