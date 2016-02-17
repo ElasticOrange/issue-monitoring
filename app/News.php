@@ -18,6 +18,8 @@ class News extends Model
 		'date',
 		'link',
 		'published',
+		'title',
+		'description'
 	];
 
 	public $dates = ['date','init_at'];

@@ -9,6 +9,9 @@ use Issue\User;
 use Issue\StepAutocomplete;
 use Issue\Stakeholder;
 use Issue\Domain;
+use Issue\News;
+use Issue\Location;
+use Issue\Issue;
 
 class ImportOldDb extends Command
 {
@@ -124,8 +127,8 @@ class ImportOldDb extends Command
             }
 
             $newStakeholder->site = $stakeholder->blog;
-            $newStakeholder->email = $stakeholder->email;
-            $newStakeholder->telephone = $stakeholder->phone;
+            $newStakeholder->email = $stakeholder->email ? $stakeholder->email : '';
+            $newStakeholder->telephone = $stakeholder->phone ?$stakeholder->phone : '';
             $newStakeholder->public_code = str_random(40);
 
             $translatableData = [
@@ -207,6 +210,114 @@ class ImportOldDb extends Command
         return print_r('Au fost importate: '.Domain::count().' domenii.'."\n");
     }
 
+    protected function importNews()
+    {
+        $news = DB::connection('oldissue')->select('select * from relatednewsandstatments');
+
+        foreach ($news as $n) {
+            $newNews = new News;
+            $newNews->id = $n->id;
+            $newNews->date = $n->initat;
+            $newNews->link = $n->link ? $n->link : '';
+            $newNews->public_code = str_random(40);
+
+            $translatableData = [
+                'ro' =>[
+                    'title' => $n->title ? $n->title : '',
+                    'description' => $n->content ? $n->content : '',
+                ],
+                'en' => [
+                    'title' => $n->entitle ? $n->entitle : '',
+                    'description' => $n->encontent ? $n->encontent : '',
+                ]
+            ];
+
+            $newNews->fill($translatableData);
+
+            $newNews->save();
+        }
+
+        return print_r('Au fost importate: '.News::count().' stiri.'."\n");
+    }
+
+    protected function importLocations()
+    {
+        $location = Location::create([
+            'parent_id' => 0,
+        ]);
+
+        $locationNames = [ 'ro' => 'Locatii', 'en' => 'Locations'];
+        foreach (['ro', 'en'] as $locale) {
+            $location->translateOrNew($locale)->name = $locationNames[$locale];
+        }
+
+        $location->save();
+
+        $locations = DB::connection('oldissue')->select('select * from lexlocation');
+
+        foreach ($locations as $location) {
+            $newLocation = new Location;
+            $newLocation->id = $location->id+1;
+            $newLocation->parent_id = $location->parentid+1;
+
+            $translatableData = [
+                'ro' =>[
+                    'name' => $location->name ? $location->name : '',
+                ],
+                'en' => [
+                    'name' => $location->enname ? $location->enname : '',
+                ]
+            ];
+
+            $newLocation->fill($translatableData);
+
+            $newLocation->save();
+        }
+
+        return print_r('Au fost importate: '.Location::count().' locatii procedurale.'."\n");
+    }
+
+    protected function importIssues()
+    {
+        $issues = DB::connection('oldissue')->select('select * from initlaws');
+
+        foreach ($issues as $issue) {
+            $newIssue = new Issue;
+            $newIssue->id = $issue->propid;
+            $newIssue->public_code = str_random(40);
+            $newIssue->archived = false;
+
+// de modificat cand primesc raspuns de la alexandra
+            if ($issue->issuestatus === 'ARCHIVED' || $issue->issuestatus === 'ENDSTAGE'
+                || $issue->issuestatus === 'COMPLETE' || $issue->issuestatus === 'REFERRED_BACK') {
+                $newIssue->phase = 'arhivat';
+            } elseif ($issue->issuestatus === 'INPROGRESS') {
+                $newIssue->phase = 'curent';
+            }
+
+            $translatableData = [
+                'ro' =>[
+                    'name' => $issue->name ? $issue->name : '',
+                    'description' => $issue->description ? $issue->description : '',
+                    'impact' => $issue->impact ? $issue->impact : '',
+                    'status' => $issue->observatii ? $issue->observatii : '',
+                ],
+                'en' => [
+                    'name' => $issue->enname ? $issue->enname : '',
+                    'description' => $issue->endescription ? $issue->endescription : '',
+                    'impact' => $issue->enimpact ? $issue->enimpact : '',
+                    'status' => $issue->enobservatii ? $issue->enobservatii : '',
+                ]
+            ];
+
+            $newIssue->fill($translatableData);
+
+            $newIssue->save();
+        }
+
+        return print_r('Au fost importate: '.Issue::count().' initiative.'."\n");
+    }
+
     /**
      * Execute the console command.
      *
@@ -227,6 +338,9 @@ class ImportOldDb extends Command
             $this->importStepAutocompletes();
             $this->importStakeholders();
             $this->importDomains();
+            $this->importNews();
+            $this->importLocations();
+            $this->importIssues();
 
 
             DB::commit();
