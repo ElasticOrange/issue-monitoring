@@ -127,17 +127,20 @@ class ImportOldDb extends Command
             $newStakeholder->telephone = $stakeholder->phone;
             $newStakeholder->public_code = str_random(40);
 
-            $newStakeholder->save();
+            $translatableData = [
+                'ro' =>[
+                    'profile' => $stakeholder->profile ? $stakeholder->profile : '',
+                    'position' => $stakeholder->posAndApart ? $stakeholder->posAndApart : '',
+                    'address' => $stakeholder->contact ? $stakeholder->contact : '',
+                ],
+                'en' => [
+                    'profile' => $stakeholder->enprofile ? $stakeholder->enprofile : '',
+                    'position' => $stakeholder->enposAndApart ? $stakeholder->enposAndApart : '',
+                    'address' => $stakeholder->encontact ? $stakeholder->encontact : '',
+                ]
+            ];
 
-            $newStakeholder->translations()->create([
-                'ro.profile' => $stakeholder->profile ? $stakeholder->profile : '',
-                'en.profile' => $stakeholder->enprofile ? $stakeholder->enprofile : '',
-                'ro.position' => $stakeholder->posAndApart ? $stakeholder->posAndApart : '',
-                'en.position' => $stakeholder->enposAndApart ? $stakeholder->enposAndApart : '',
-                'ro.address' => $stakeholder->contact ? $stakeholder->contact : '',
-                'en.address' => $stakeholder->encontact ? $stakeholder->encontact : '',
-                ]);
-
+            $newStakeholder->fill($translatableData);
             $newStakeholder->save();
         }
 

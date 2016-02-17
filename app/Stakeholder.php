@@ -15,7 +15,10 @@ class Stakeholder extends Model
 	protected $fillable = [
 		'name',
 		'type',
-		'site'
+		'site',
+		'profile',
+		'position',
+		'address'
 	];
 
 	public $translatedAttributes = ['contact','profile','position'];
