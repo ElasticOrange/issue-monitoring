@@ -8,6 +8,7 @@ use App;
 use Issue\User;
 use Issue\StepAutocomplete;
 use Issue\Stakeholder;
+use Issue\Domain;
 
 class ImportOldDb extends Command
 {
@@ -147,6 +148,65 @@ class ImportOldDb extends Command
         return print_r('Au fost importati: '.Stakeholder::count().' stakeholders.'."\n");
     }
 
+    protected function importDomains()
+    {
+        $domain = Domain::create([
+            'parent_id' => 0,
+        ]);
+
+        $domainNames = [ 'ro' => 'Domenii', 'en' => 'Domains'];
+        foreach (['ro', 'en'] as $locale) {
+            $domain->translateOrNew($locale)->name = $domainNames[$locale];
+        }
+
+        $domain->save();
+
+        $lvl1domains = DB::connection('oldissue')->select('select * from syslexdomain');
+        $lvl2domains = DB::connection('oldissue')->select('select * from syslexarea');
+
+        foreach ($lvl1domains as $domain) {
+
+            $newDomain = new Domain;
+            $newDomain->id = $domain->lexdomainID;
+            $newDomain->parent_id = 1;
+
+            $translatableData = [
+                'ro' =>[
+                    'name' => $domain->name ? $domain->name : '',
+                ],
+                'en' => [
+                    'name' => $domain->enname ? $domain->enname : '',
+                ]
+            ];
+
+            $newDomain->fill($translatableData);
+
+            $newDomain->save();
+        }
+
+        foreach ($lvl2domains as $domain) {
+
+            $newDomain = new Domain;
+            $newDomain->id = $domain->lexareaID;
+            $newDomain->parent_id = $domain->domainID;
+
+            $translatableData = [
+                'ro' =>[
+                    'name' => $domain->name ? $domain->name : '',
+                ],
+                'en' => [
+                    'name' => $domain->enname ? $domain->enname : '',
+                ]
+            ];
+
+            $newDomain->fill($translatableData);
+
+            $newDomain->save();
+        }
+
+        return print_r('Au fost importate: '.Domain::count().' domenii.'."\n");
+    }
+
     /**
      * Execute the console command.
      *
@@ -166,6 +226,8 @@ class ImportOldDb extends Command
             $this->importUsers();
             $this->importStepAutocompletes();
             $this->importStakeholders();
+            $this->importDomains();
+
 
             DB::commit();
         } catch (\Exception $e) {
