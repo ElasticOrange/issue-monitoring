@@ -415,11 +415,35 @@ class ImportOldDb extends Command
             try {
                 $issueConnected->connectedDomains()->attach($issue->areaid);
             } catch (\Exception $e){
-                print_r("Shit! O relatie nu s-a putut reface.\n");
+                print_r("Shit! O relatie nu s-a putut importa.\n");
             }
         }
 
         print_r("Relatiile Domains - Issue au fost adaugate cu succes.\n");
+        return true;
+    }
+
+    protected function importNewsStakeholder()
+    {
+        $newsStakeholders = DB::connection('oldissue')->select('select id,author from relatednewsandstatments');
+
+        foreach ($newsStakeholders as $newsStakeholder) {
+            if (($newsStakeholder->author !== NULL)
+                && ($newsStakeholder->author !== "Array")) {
+
+                $stakeholderConnected = News::find($newsStakeholder->id);
+                $connectedNews = explode(',', $newsStakeholder->author);
+
+                try {
+
+                    $stakeholderConnected->connectedStakeholders()->sync($connectedNews);
+                } catch (\Exception $e) {
+                    print_r("Shiit! O relatie nu s-a putut importa.\n");
+                }
+            }
+        }
+
+        print_r("Relatiile News - Stakeholder au fost adaugate cu succes.\n");
         return true;
     }
 
@@ -451,6 +475,7 @@ class ImportOldDb extends Command
             $this->importIssueNews();
             $this->importIssuesConnectedWithIssues();
             $this->importDomainIssues();
+            $this->importNewsStakeholder();
 
 
             DB::commit();
