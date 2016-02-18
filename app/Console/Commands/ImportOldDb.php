@@ -405,6 +405,24 @@ class ImportOldDb extends Command
         return true;
     }
 
+    protected function importDomainIssues()
+    {
+        $domainIssues = DB::connection('oldissue')->select('select propid,areaid from initlaws');
+
+        foreach ($domainIssues as $issue) {
+            $issueConnected = Issue::find($issue->propid);
+
+            try {
+                $issueConnected->connectedDomains()->attach($issue->areaid);
+            } catch (\Exception $e){
+                print_r("Shit! O relatie nu s-a putut reface.\n");
+            }
+        }
+
+        print_r("Relatiile Domains - Issue au fost adaugate cu succes.\n");
+        return true;
+    }
+
     /**
      * Execute the console command.
      *
@@ -432,6 +450,7 @@ class ImportOldDb extends Command
             $this->importIssueStakeholder();
             $this->importIssueNews();
             $this->importIssuesConnectedWithIssues();
+            $this->importDomainIssues();
 
 
             DB::commit();
