@@ -279,7 +279,7 @@ class ImportOldDb extends Command
 
     protected function importIssues()
     {
-        $issues = DB::connection('oldissue')->select('select * from initlaws');
+        $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase=1');
 
         foreach ($issues as $issue) {
             $newIssue = new Issue;
@@ -318,9 +318,37 @@ class ImportOldDb extends Command
         return print_r('Au fost importate: '.Issue::count().' initiative.'."\n");
     }
 
+    protected function completeMultistageIssues()
+    {
+        $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
+
+        foreach ($issues as $issue) {
+            if (! ($issue->impacttorelatedissue === "Array") && ! ($issue->impacttorelatedissue === NULL)) {
+
+                $originalIssue = Issue::find($issue->originpropid);
+                if (! $originalIssue) {
+                    continue;
+                }
+
+                $toMergeimportIssuesConnectedWithIssues = explode(',', $issue->impacttorelatedissue);
+                foreach ($toMergeimportIssuesConnectedWithIssues as $key => $existentIssue) {
+                        try {
+                            $originalIssue->issuesConnectedOfThem()->attach($existentIssue);
+                            $originalIssue->issuesConnectedOfMine()->attach($existentIssue);
+                        } catch (\Exception $e) {
+                            print_r("Shiit! O relatie nu s-a putut importa.\n");
+                        }
+                }
+            }
+        }
+
+        print_r("Merge-ul de relatii pentru initiative a fost incheiat cu succes.\n");
+        return true;
+    }
+
     protected function importInitiatorIssue()
     {
-        $initiatorIssues = DB::connection('oldissue')->select('select propid,author from initlaws');
+        $initiatorIssues = DB::connection('oldissue')->select('select propid,author from initlaws where currentphase = 1');
 
         foreach ($initiatorIssues as $initiatorIssue) {
             $issueConnected = Issue::find($initiatorIssue->propid);
@@ -340,7 +368,7 @@ class ImportOldDb extends Command
 
     protected function importIssueStakeholder()
     {
-        $issueStakeholders = DB::connection('oldissue')->select('select propid,stackhlist from initlaws');
+        $issueStakeholders = DB::connection('oldissue')->select('select propid,stackhlist from initlaws where currentphase = 1');
 
         foreach ($issueStakeholders as $issueStakeholder) {
             $issueConnected = Issue::find($issueStakeholder->propid);
@@ -361,7 +389,7 @@ class ImportOldDb extends Command
 
     protected function importIssueNews()
     {
-        $issueNews = DB::connection('oldissue')->select('select propid,newslist from initlaws');
+        $issueNews = DB::connection('oldissue')->select('select propid,newslist from initlaws where currentphase = 1');
 
         foreach ($issueNews as $issuen) {
             $issueConnected = Issue::find($issuen->propid);
@@ -382,7 +410,7 @@ class ImportOldDb extends Command
 
     protected function importIssuesConnectedWithIssues()
     {
-        $issueIssues = DB::connection('oldissue')->select('select propid,impacttorelatedissue from initlaws');
+        $issueIssues = DB::connection('oldissue')->select('select propid,impacttorelatedissue from initlaws where currentphase = 1');
 
         foreach ($issueIssues as $issues) {
             if (($issues->impacttorelatedissue !== NULL)
@@ -407,7 +435,7 @@ class ImportOldDb extends Command
 
     protected function importDomainIssues()
     {
-        $domainIssues = DB::connection('oldissue')->select('select propid,areaid from initlaws');
+        $domainIssues = DB::connection('oldissue')->select('select propid,areaid from initlaws where currentphase = 1');
 
         foreach ($domainIssues as $issue) {
             $issueConnected = Issue::find($issue->propid);
@@ -470,6 +498,7 @@ class ImportOldDb extends Command
             $this->importNews();
             $this->importLocations();
             $this->importIssues();
+            $this->completeMultistageIssues();
             $this->importInitiatorIssue();
             $this->importIssueStakeholder();
             $this->importIssueNews();
