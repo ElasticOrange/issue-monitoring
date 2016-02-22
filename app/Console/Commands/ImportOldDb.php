@@ -318,7 +318,32 @@ class ImportOldDb extends Command
         return print_r('Au fost importate: '.Issue::count().' initiative.'."\n");
     }
 
-    protected function completeMultistageIssues()
+    protected function importIssuesConnectedWithIssues()
+    {
+        $issueIssues = DB::connection('oldissue')->select('select propid,impacttorelatedissue from initlaws where currentphase = 1');
+
+        foreach ($issueIssues as $issues) {
+            if (($issues->impacttorelatedissue !== NULL)
+                && ($issues->impacttorelatedissue !== "Array")) {
+
+                $issueConnected = Issue::find($issues->propid);
+                $connectedIssues = explode(',', $issues->impacttorelatedissue);
+
+                try {
+
+                    $issueConnected->issuesConnectedOfMine()->sync($connectedIssues);
+                    $issueConnected->issuesConnectedOfThem()->sync($connectedIssues);
+                } catch (\Exception $e) {
+                    print_r("Shiit! O stire nu mai exista.\n");
+                }
+            }
+        }
+
+        print_r("Relatiile Issue - Issue au fost adaugate cu succes.\n");
+        return true;
+    }
+
+    protected function completeMultistageIssuesConnected()
     {
         $allIssues = DB::connection('oldissue')->select('select * from initlaws');
         $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
@@ -379,6 +404,19 @@ class ImportOldDb extends Command
         return true;
     }
 
+    private function initiatorIssue($initiatorIssue, $issueConnected)
+    {
+        $connectedInitiators = explode(',', $initiatorIssue->author);
+
+        try {
+            $issueConnected->connectedInitiatorsStakeholders()->attach($connectedInitiators);
+        } catch (\Exception $e) {
+            print_r("Shiit! Un stakeholder nu mai exista.\n");
+        }
+
+        return true;
+    }
+
     protected function importInitiatorIssue()
     {
         $initiatorIssues = DB::connection('oldissue')->select('select propid,author from initlaws where currentphase = 1');
@@ -392,10 +430,115 @@ class ImportOldDb extends Command
             } catch (\Exception $e) {
                 print_r("Shiit! Un stakeholder nu mai exista.\n");
             }
-
         }
 
         print_r("Relatiile Initiator - Issue au fost adaugate cu succes.\n");
+        return true;
+    }
+
+    protected function completeMultistageInitiatorIssues()
+    {
+        $allIssues = DB::connection('oldissue')->select('select * from initlaws');
+        $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
+
+        foreach ($issues as $issue) {
+            if (($issue->author === "Array")
+                && ($issue->author === NULL)) {
+                    continue;
+            }
+
+
+            if ($issue->currentphase == 2) {
+                $originalIssue = Issue::find($issue->originpropid);
+                if (! $originalIssue) {
+                    continue;
+                }
+                $this->initiatorIssue($issue, $originalIssue);
+            }
+
+            if ($issue->currentphase == 3) {
+                $intermediateIssue = $issue->originpropid;
+
+                foreach ($allIssues as $allIssue) {
+                    if ($allIssue->propid == $intermediateIssue
+                        && $allIssue->originpropid > 0) {
+                        $getOriginalIssue = $allIssue->originpropid;
+
+                        foreach ($allIssues as $origIssue) {
+                            if ($origIssue->propid == $getOriginalIssue) {
+                                $first = Issue::find($origIssue->propid);
+                                if (! $first) {
+                                    continue;
+                                }
+                                $this->initiatorIssue($issue, $first);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        print_r("Completarea de relatii pentru InitiatorIssue a fost incheiat cu succes.\n");
+        return true;
+    }
+
+    private function explodeIssueStakeholder($issueStakeholder, $issueConnected)
+    {
+        $connectedStakeholders = explode(',', $issueStakeholder->stackhlist);
+
+        try {
+
+            $issueConnected->connectedStakeholders()->attach($connectedStakeholders);
+        } catch (\Exception $e) {
+            print_r("Shiit! Un stakeholder nu mai exista.\n");
+        }
+
+        return true;
+    }
+
+    protected function completeMultistageIssueStakeholder()
+    {
+        $allIssues = DB::connection('oldissue')->select('select * from initlaws');
+        $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
+
+        foreach ($issues as $issue) {
+            if (($issue->stackhlist === "Array")
+                && ($issue->stackhlist === NULL)) {
+                    continue;
+            }
+
+
+            if ($issue->currentphase == 2) {
+                $originalIssue = Issue::find($issue->originpropid);
+                if (! $originalIssue) {
+                    continue;
+                }
+                $this->explodeIssueStakeholder($issue, $originalIssue);
+            }
+
+            if ($issue->currentphase == 3) {
+                $intermediateIssue = $issue->originpropid;
+
+                foreach ($allIssues as $allIssue) {
+                    if ($allIssue->propid == $intermediateIssue
+                        && $allIssue->originpropid > 0) {
+                        $getOriginalIssue = $allIssue->originpropid;
+
+                        foreach ($allIssues as $origIssue) {
+                            if ($origIssue->propid == $getOriginalIssue) {
+                                $first = Issue::find($origIssue->propid);
+                                if (! $first) {
+                                    continue;
+                                }
+                                $this->explodeIssueStakeholder($issue, $first);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        print_r("Completarea de relatii pentru IssueStakeholder a fost incheiat cu succes.\n");
         return true;
     }
 
@@ -420,6 +563,66 @@ class ImportOldDb extends Command
         return true;
     }
 
+    private function explodeIssueNews($issuen, $issueConnected)
+    {
+        $connectedNews = explode(',', $issuen->newslist);
+
+        try {
+
+            $issueConnected->connectedNews()->attach($connectedNews);
+        } catch (\Exception $e) {
+            print_r("Shiit! O stire nu mai exista.\n");
+        }
+
+        return true;
+    }
+
+    protected function completeMultistageIssueNews()
+    {
+        $allIssues = DB::connection('oldissue')->select('select * from initlaws');
+        $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
+
+        foreach ($issues as $issue) {
+            if (($issue->newslist === "Array")
+                && ($issue->newslist === NULL)) {
+                    continue;
+            }
+
+
+            if ($issue->currentphase == 2) {
+                $originalIssue = Issue::find($issue->originpropid);
+                if (! $originalIssue) {
+                    continue;
+                }
+                $this->explodeIssueNews($issue, $originalIssue);
+            }
+
+            if ($issue->currentphase == 3) {
+                $intermediateIssue = $issue->originpropid;
+
+                foreach ($allIssues as $allIssue) {
+                    if ($allIssue->propid == $intermediateIssue
+                        && $allIssue->originpropid > 0) {
+                        $getOriginalIssue = $allIssue->originpropid;
+
+                        foreach ($allIssues as $origIssue) {
+                            if ($origIssue->propid == $getOriginalIssue) {
+                                $first = Issue::find($origIssue->propid);
+                                if (! $first) {
+                                    continue;
+                                }
+                                $this->explodeIssueNews($issue, $first);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        print_r("Completarea de relatii pentru IssueNews a fost incheiat cu succes.\n");
+        return true;
+    }
+
     protected function importIssueNews()
     {
         $issueNews = DB::connection('oldissue')->select('select propid,newslist from initlaws where currentphase = 1');
@@ -438,31 +641,6 @@ class ImportOldDb extends Command
         }
 
         print_r("Relatiile Issue - News au fost adaugate cu succes.\n");
-        return true;
-    }
-
-    protected function importIssuesConnectedWithIssues()
-    {
-        $issueIssues = DB::connection('oldissue')->select('select propid,impacttorelatedissue from initlaws where currentphase = 1');
-
-        foreach ($issueIssues as $issues) {
-            if (($issues->impacttorelatedissue !== NULL)
-                && ($issues->impacttorelatedissue !== "Array")) {
-
-                $issueConnected = Issue::find($issues->propid);
-                $connectedIssues = explode(',', $issues->impacttorelatedissue);
-
-                try {
-
-                    $issueConnected->issuesConnectedOfMine()->sync($connectedIssues);
-                    $issueConnected->issuesConnectedOfThem()->sync($connectedIssues);
-                } catch (\Exception $e) {
-                    print_r("Shiit! O stire nu mai exista.\n");
-                }
-            }
-        }
-
-        print_r("Relatiile Issue - Issue au fost adaugate cu succes.\n");
         return true;
     }
 
@@ -531,12 +709,15 @@ class ImportOldDb extends Command
             $this->importNews();
             $this->importLocations();
             $this->importIssues();
+            $this->importIssuesConnectedWithIssues();
             $this->importInitiatorIssue();
             $this->importIssueStakeholder();
             $this->importIssueNews();
-            $this->importIssuesConnectedWithIssues();
             $this->importDomainIssues();
-            $this->completeMultistageIssues();
+            $this->completeMultistageIssuesConnected();
+            $this->completeMultistageInitiatorIssues();
+            $this->completeMultistageIssueStakeholder();
+            $this->completeMultistageIssueNews();
             $this->importNewsStakeholder();
 
 
