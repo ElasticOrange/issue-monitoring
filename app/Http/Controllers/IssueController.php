@@ -2,27 +2,27 @@
 
 namespace Issue\Http\Controllers;
 
-use Issue\Alert;
-use Issue\Issue;
-use Issue\IssueTranslation;
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Controllers\Controller;
-use Issue\Http\Requests\IssueRequest;
-use Issue\StepAutocomplete;
+use Gate;
 use Storage;
 use Issue\News;
-use Issue\NewsTranslation;
+use Issue\Alert;
+use Issue\Issue;
 use Issue\Domain;
-use Issue\DomainTranslation;
-use Issue\Stakeholder;
 use Issue\Location;
 use Issue\Document;
-use Issue\DocumentTranslation;
-use Issue\LocationTranslation;
+use Issue\Stakeholder;
 use Issue\LocationStep;
 use Issue\FlowTemplate;
-use Gate;
+use Issue\Http\Requests;
+use Issue\NewsTranslation;
+use Issue\IssueTranslation;
+use Issue\StepAutocomplete;
+use Illuminate\Http\Request;
+use Issue\DomainTranslation;
+use Issue\DocumentTranslation;
+use Issue\LocationTranslation;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\IssueRequest;
 
 class IssueController extends Controller
 {

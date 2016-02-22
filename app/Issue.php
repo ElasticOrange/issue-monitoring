@@ -17,7 +17,8 @@ class Issue extends Model
 		'description',
 		'impact',
 		'status',
-		'phase'
+		'phase',
+		'type'
 	];
 
 	public $translatedAttributes = ['name', 'description', 'impact', 'status'];
@@ -35,6 +36,7 @@ class Issue extends Model
 	{
 		$this->archived = $request->get('archived') == true;
 		$this->phase = $request->phase;
+		$this->type = $request->type;
 
 		if (! $this->public_code) {
 			$this->public_code = $this->createPublicCode();

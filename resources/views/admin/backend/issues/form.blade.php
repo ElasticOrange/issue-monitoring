@@ -13,6 +13,13 @@
 			<label class="col-md-2 control-label">Tip</label>
 			<div class="col-md-8">
 				<select class="form-control" name="type">
+				@foreach(\Config::get('issueTypes') as $type => $locale)
+					<option value="{{ $type }}"
+						@if(isset($issue->type) && $issue->type == $type)
+							selected="selected"
+						@endif
+					>{{ $type }}</option>
+				@endforeach
 				</select>
 			</div>
 		</div>
@@ -21,9 +28,10 @@
             <label class="col-md-2 control-label">Faza</label>
             <div class="col-md-8">
                 <select class="form-control" name="phase">
-                    <option value="viitor">viitor</option>
-                    <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>curent</option>
-                    <option value="arhivat" @if($issue->phase === 'arhivat') selected="selected" @endif>arhivat</option>
+                    <option value="viitor">Inițiativă viitoare</option>
+                    <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>Inițiativă curentă</option>
+                    <option value="arhivatPublicat" @if($issue->phase === 'arhivatPublicat') selected="selected" @endif>Arhivată – Publicată în Monitorul Oficial</option>
+                    <option value="arhivatRespins" @if($issue->phase === 'arhivatRespins') selected="selected" @endif>Arhivată – Respinsă definitiv</option>
                 </select>
             </div>
         </div>
