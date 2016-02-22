@@ -320,29 +320,62 @@ class ImportOldDb extends Command
 
     protected function completeMultistageIssues()
     {
+        $allIssues = DB::connection('oldissue')->select('select * from initlaws');
         $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
 
         foreach ($issues as $issue) {
-            if (! ($issue->impacttorelatedissue === "Array") && ! ($issue->impacttorelatedissue === NULL)) {
+            if (($issue->impacttorelatedissue === "Array")
+                && ($issue->impacttorelatedissue === NULL)) {
+                    continue;
+            }
 
+
+            if ($issue->currentphase == 2) {
                 $originalIssue = Issue::find($issue->originpropid);
                 if (! $originalIssue) {
                     continue;
                 }
+                $this->explodeImpactToRelatedIssue($issue, $originalIssue);
+            }
 
-                $toMergeimportIssuesConnectedWithIssues = explode(',', $issue->impacttorelatedissue);
-                foreach ($toMergeimportIssuesConnectedWithIssues as $key => $existentIssue) {
-                        try {
-                            $originalIssue->issuesConnectedOfThem()->attach($existentIssue);
-                            $originalIssue->issuesConnectedOfMine()->attach($existentIssue);
-                        } catch (\Exception $e) {
-                            print_r("Shiit! O relatie nu s-a putut importa.\n");
+            if ($issue->currentphase == 3) {
+                $intermediateIssue = $issue->originpropid;
+
+                foreach ($allIssues as $allIssue) {
+                    if ($allIssue->propid == $intermediateIssue
+                        && $allIssue->originpropid > 0) {
+                        $getOriginalIssue = $allIssue->originpropid;
+
+                        foreach ($allIssues as $origIssue) {
+                            if ($origIssue->propid == $getOriginalIssue) {
+                                $first = Issue::find($origIssue->propid);
+                                if (! $first) {
+                                    continue;
+                                }
+                                $this->explodeImpactToRelatedIssue($issue, $first);
+                            }
                         }
+                    }
                 }
             }
         }
 
         print_r("Merge-ul de relatii pentru initiative a fost incheiat cu succes.\n");
+        return true;
+    }
+
+    private function explodeImpactToRelatedIssue($issue, $originalIssue)
+    {
+        $toMergeimportIssuesConnectedWithIssues = explode(',', $issue->impacttorelatedissue);
+        foreach ($toMergeimportIssuesConnectedWithIssues as $key => $existentIssue) {
+                try {
+                    $originalIssue->issuesConnectedOfThem()->attach($existentIssue);
+                    $originalIssue->issuesConnectedOfMine()->attach($existentIssue);
+                } catch (\Exception $e) {
+                    print_r("Shiit! O relatie nu s-a putut importa.\n");
+                }
+        }
+
         return true;
     }
 
@@ -498,12 +531,12 @@ class ImportOldDb extends Command
             $this->importNews();
             $this->importLocations();
             $this->importIssues();
-            $this->completeMultistageIssues();
             $this->importInitiatorIssue();
             $this->importIssueStakeholder();
             $this->importIssueNews();
             $this->importIssuesConnectedWithIssues();
             $this->importDomainIssues();
+            $this->completeMultistageIssues();
             $this->importNewsStakeholder();
 
 
