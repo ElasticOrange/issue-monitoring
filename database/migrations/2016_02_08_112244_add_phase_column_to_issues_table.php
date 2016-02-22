@@ -13,7 +13,7 @@ class AddPhaseColumnToIssuesTable extends Migration
     public function up()
     {
         Schema::table('issues', function (Blueprint $table) {
-            $table->enum('phase', ['viitor', 'curent', 'arhivat'])->default('viitor');
+            $table->enum('phase', ['viitor', 'curent', 'arhivatPublicat', 'arhivatRespins'])->default('viitor');
         });
     }
 
