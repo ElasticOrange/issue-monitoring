@@ -1,5 +1,6 @@
 var $successBox, $errorBox, $warningBox, successBoxTimeout, errorBoxTimeout;
 var LOADER_DELAY = 200;
+var showTheLoader;
 
 function typeaheadAutocomplete(selector) {
     selector.bind('typeahead:render', function() {
@@ -313,11 +314,14 @@ $(document).ready(function() {
     preventEnterToSubmit('[prevent-enter=true]');
 });
 
-$( document ).ajaxStart(function() {
-    $('#ajaxModal').modal('show');
+$(document).ajaxStart(function() {
+    showTheLoader = setTimeout(function () {
+		$('.modal').fadeIn();
+	}, LOADER_DELAY);
 });
 
-$( document ).ajaxStop(function() {
-    $('#ajaxModal').modal('hide');
+$(document).ajaxStop(function() {
+    clearTimeout(showTheLoader);
+    $('#ajaxModal').fadeOut();
 });
 
