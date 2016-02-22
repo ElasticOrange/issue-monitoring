@@ -11,7 +11,7 @@ class Domain extends Model
 	public $translatedAttributes = ['name'];
 
 	protected $guarded = ['id'];
-	protected $fillable = ['parent_id'];
+	protected $fillable = ['parent_id', 'name'];
 
 	public function connectedNews()
 	{
