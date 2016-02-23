@@ -2,16 +2,18 @@
 
 namespace Issue\Console\Commands;
 
-use Illuminate\Console\Command;
 use DB;
 use App;
-use Issue\User;
-use Issue\StepAutocomplete;
-use Issue\Stakeholder;
-use Issue\Domain;
 use Issue\News;
-use Issue\Location;
+use Issue\User;
 use Issue\Issue;
+use Issue\Domain;
+use Issue\FlowStep;
+use Issue\Location;
+use Issue\Stakeholder;
+use Issue\LocationStep;
+use Issue\StepAutocomplete;
+use Illuminate\Console\Command;
 
 class ImportOldDb extends Command
 {
@@ -686,6 +688,66 @@ class ImportOldDb extends Command
         return true;
     }
 
+    protected function importLocationSteps()
+    {
+        $issues = Issue::all();
+
+        foreach ($issues as $issue) {
+            $count = 0;
+            $importSteps = DB::connection('oldissue')->select("select * from customsteps where marckfordelete = 0 and propid = {$issue->id} order by id asc");
+
+            if (empty($importSteps)) {
+                continue;
+            }
+
+            $newLocationStep = new LocationStep;
+
+            if (isset($importSteps[0]->optionlocation) &&
+                $importSteps[0]->optionlocation == 1) {
+                    $newLocationStep->location_id = 3;
+            } elseif (isset($importSteps[0]->optionlocation) &&
+                $importSteps[0]->optionlocation == 2) {
+                    $newLocationStep->location_id = 4;
+            } elseif ($importSteps[0]->lextypeid == 3 ||
+                $importSteps[0]->lextypeid == 4 ||
+                $importSteps[0]->lextypeid == 5) {
+                    $newLocationStep->location_id = 5;
+            } else {
+                $newLocationStep->location_id = 2;
+            }
+
+            $newLocationStep->issue_id = $issue->id;
+            $newLocationStep->step_order = 1;
+
+            $newLocationStep->save();
+
+            foreach ($importSteps as $importStep) {
+                $newFlowStep = new FlowStep;
+                $newFlowStep->flow_name = StepAutocomplete::find($importStep->basestepid)->name;
+                $newFlowStep->estimated_duration = $importStep->durata ? $importStep->durata : '';
+                $newFlowStep->location_step_id = $newLocationStep->id;
+                $newFlowStep->flowstep_order = $count++;
+                $newFlowStep->start_date = $importStep->dataStart;
+                $newFlowStep->end_date = $importStep->dataEnd;
+
+                $translatableData = [
+                    'ro' =>[
+                        'observatii' => $importStep->obsv ? $importStep->obsv : '',
+                    ],
+                    'en' => [
+                        'observatii' => $importStep->enobsv ? $importStep->enobsv : '',
+                    ]
+                ];
+
+                $newFlowStep->fill($translatableData);
+                $newFlowStep->save();
+            }
+        }
+
+        print_r("Au fost importati: ".LocationStep::count()." locationSteps \n cu ".FlowStep::count()." flowSteps.");
+        return true;
+    }
+
     /**
      * Execute the console command.
      *
@@ -719,6 +781,7 @@ class ImportOldDb extends Command
             $this->completeMultistageIssueStakeholder();
             $this->completeMultistageIssueNews();
             $this->importNewsStakeholder();
+            $this->importLocationSteps();
 
 
             DB::commit();

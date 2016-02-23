@@ -16,7 +16,31 @@ $factory->define(Issue\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'password' =>bcrypt($pass),
+        'password' => bcrypt($pass),
         'remember_token' => $pass,
+        'active' => true,
+        'type' => 'client',
+    ];
+});
+
+$factory->define(Issue\FlowStep::class, function (Faker\Generator $faker) {
+    return [
+		'flow_name' => $faker->name,
+		'estimated_duration' => $faker->randomNumber,
+		'location_step_id' => $faker->randomNumber,
+		'flowstep_order' => $faker->randomNumber,
+		'start_date' => $faker->date,
+		'end_date' => $faker->date,
+		'ro.observatii' => "ro".$faker->name,
+		'en.observatii' => "en".$faker->name,
+    ];
+});
+
+$factory->define(Issue\LocationStep::class, function (Faker\Generator $faker) {
+    return [
+		'location_id' => $faker->randomDigit,
+		'issue_id' 	  => $faker->randomNumber,
+		'step_order'  => $faker->randomNumber,
+		'flowsteps'   => factory(Issue\FlowStep::class, 3)->create(),
     ];
 });
