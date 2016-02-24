@@ -44,3 +44,22 @@ $factory->define(Issue\LocationStep::class, function (Faker\Generator $faker) {
 		'flowsteps'   => factory(Issue\FlowStep::class, 3)->create(),
     ];
 });
+
+$factory->define(Issue\UploadedFile::class, function (Faker\Generator $faker) {
+    return [
+        'file_name' => $faker->name,
+        'folder' => '/documents/',
+        'original_file_name' => $faker->sentence,
+    ];
+});
+
+$factory->define(Issue\Document::class, function (Faker\Generator $faker) {
+    return [
+        'public' => 1,
+        'uploaded_file_id' => $faker->randomDigit,
+        'public_code' => str_random(40),
+        'init_at' => $faker->date,
+        'ro.title' => $faker->sentence,
+		'en.title' => $faker->sentence,
+    ];
+});

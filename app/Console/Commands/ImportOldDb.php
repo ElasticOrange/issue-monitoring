@@ -4,14 +4,17 @@ namespace Issue\Console\Commands;
 
 use DB;
 use App;
+use File;
 use Issue\News;
 use Issue\User;
 use Issue\Issue;
 use Issue\Domain;
+use Issue\Document;
 use Issue\FlowStep;
 use Issue\Location;
 use Issue\Stakeholder;
 use Issue\LocationStep;
+use Issue\UploadedFile;
 use Issue\StepAutocomplete;
 use Illuminate\Console\Command;
 
@@ -723,6 +726,7 @@ class ImportOldDb extends Command
 
             foreach ($importSteps as $importStep) {
                 $newFlowStep = new FlowStep;
+                $newFlowStep->id = $importStep->id;
                 $newFlowStep->flow_name = StepAutocomplete::find($importStep->basestepid)->name;
                 $newFlowStep->estimated_duration = $importStep->durata ? $importStep->durata : '';
                 $newFlowStep->location_step_id = $newLocationStep->id;
@@ -748,6 +752,87 @@ class ImportOldDb extends Command
         return true;
     }
 
+    private function moveFile($location, $newName)
+    {
+        return File::copy($location, storage_path().'/documents/'.$newName);
+    }
+
+    protected function importDocuments()
+    {
+        $pathToFiles = sprintf('%s/var/www/andr_v2/uploads/reldocs', storage_path());
+
+        $oldDocuments = DB::connection('oldissue')->select('select * from relateddoc 
+            where propid <> 0 and stepid <> 0
+            and id>310
+        ');
+
+        foreach ($oldDocuments as $document) {
+            $documentPath = sprintf('%s/propid_%s/stepid_%s/',
+                                $pathToFiles,
+                                $document->propid,
+                                $document->stepid
+                            );
+
+            try {
+                $getFileNamesFromFolder = array_diff(scandir($documentPath), ['.', '..']);
+
+                foreach ($getFileNamesFromFolder as $file) {
+                    $fullPathToFile = sprintf('%s%s', $documentPath, $file);
+
+                    do {
+                        $randomName = str_random(40);
+                    } while (UploadedFile::where('file_name', $randomName)->count() > 0);
+
+                    do {
+                        $codPublic = str_random(40);
+                    } while (Document::where('public_code', $codPublic)->count() > 0);
+
+                    $uploadedFileData = [
+                        'file_name' => $randomName,
+                        'folder' => '/documents/',
+                        'original_file_name' => $file,
+                    ];
+
+                    $this->moveFile($fullPathToFile, $uploadedFileData['file_name']);
+
+                    $doc = factory(Document::class)->create([
+                        'public' => 1,
+                        'uploaded_file_id' => factory(UploadedFile::class)
+                            ->create(
+                                    $uploadedFileData
+                                )->id,
+                        'public_code' => $codPublic,
+                        'init_at' => $document->initat,
+                    ]);
+
+                    $translatableData = [
+                        'ro' =>[
+                            'title' => $document->content ? $document->content : '',
+                        ],
+                        'en' => [
+                            'title' => $document->encontent ? $document->encontent : '',
+                        ]
+                    ];
+                    $doc->fill($translatableData);
+                    $doc->save();
+
+                    try {
+                        $doc->steps()->attach($document->stepid);
+                    } catch (\Exception $e) {
+                        print_r("Shiit! O relatie Document - FlowStep nu s-a putut importa.\n");
+                    }
+
+                }
+            } catch (\Exception $e) {
+                print_r("Shiit! Un folder nu exista.\n");
+            }
+        }
+
+        echo sprintf("Au fost importate %s documente.\n", Document::count());
+        return true;
+    }
+
+
     /**
      * Execute the console command.
      *
@@ -755,39 +840,39 @@ class ImportOldDb extends Command
      */
     public function handle()
     {
-        $this->createDb($this->argument('db_name'));
-        $this->createUserWithPrivileges($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'));
-        $this->importOldDb($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'), $this->argument('sql_file'));
+        // $this->createDb($this->argument('db_name'));
+        // $this->createUserWithPrivileges($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'));
+        // $this->importOldDb($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'), $this->argument('sql_file'));
 
 
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        try {
+        // try {
 
-            $this->importUsers();
-            $this->importStepAutocompletes();
-            $this->importStakeholders();
-            $this->importDomains();
-            $this->importNews();
-            $this->importLocations();
-            $this->importIssues();
-            $this->importIssuesConnectedWithIssues();
-            $this->importInitiatorIssue();
-            $this->importIssueStakeholder();
-            $this->importIssueNews();
-            $this->importDomainIssues();
-            $this->completeMultistageIssuesConnected();
-            $this->completeMultistageInitiatorIssues();
-            $this->completeMultistageIssueStakeholder();
-            $this->completeMultistageIssueNews();
-            $this->importNewsStakeholder();
-            $this->importLocationSteps();
+        //     $this->importUsers();
+        //     $this->importStepAutocompletes();
+        //     $this->importStakeholders();
+        //     $this->importDomains();
+        //     $this->importNews();
+        //     $this->importLocations();
+        //     $this->importIssues();
+        //     $this->importIssuesConnectedWithIssues();
+        //     $this->importInitiatorIssue();
+        //     $this->importIssueStakeholder();
+        //     $this->importIssueNews();
+        //     $this->importDomainIssues();
+        //     $this->completeMultistageIssuesConnected();
+        //     $this->completeMultistageInitiatorIssues();
+        //     $this->completeMultistageIssueStakeholder();
+        //     $this->completeMultistageIssueNews();
+        //     $this->importNewsStakeholder();
+            // $this->importLocationSteps();
+            $this->importDocuments();
 
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            print_r('Shiit! Rollback happened.');
-        }
+        //     DB::commit();
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     print_r('Shiit! Rollback happened.');
+        // }
     }
 }

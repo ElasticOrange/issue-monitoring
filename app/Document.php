@@ -71,8 +71,8 @@ class Document extends Model
 		return $this->belongsToMany('Issue\Issue');
 	}
 
-	public function connectedDocumentsFlowStep()
+	public function steps()
 	{
-		return $this->hasMany('Issue\FlowStep');
+		return $this->belongsToMany('Issue\FlowStep');
 	}
 }
