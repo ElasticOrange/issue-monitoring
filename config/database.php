@@ -64,12 +64,12 @@ return [
             'strict'    => false,
         ],
 
-        'oldissue' => [
+        env('OLD_DB_CONNECTION', 'oldissue') => [
             'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'oldissue',
-            'username'  => 'oldissue',
-            'password'  => 'oldissue',
+            'host'      => env('OLD_DB_HOST', 'localhost'),
+            'database'  => env('OLD_DB_DATABASE', 'oldissue'),
+            'username'  => env('OLD_DB_USERNAME', 'oldissue'),
+            'password'  => env('OLD_DB_PASSWORD', 'oldissue'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

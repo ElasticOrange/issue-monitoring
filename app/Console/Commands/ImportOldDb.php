@@ -25,14 +25,14 @@ class ImportOldDb extends Command
      *
      * @var string
      */
-    protected $signature = 'import:olddb {sql_file} {db_user} {db_name} {db_password}';
+    protected $signature = 'import:database';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Imports old database';
+    protected $description = 'Imports old database set in \Config\database.php';
 
     /**
      * Create a new command instance.
@@ -42,30 +42,6 @@ class ImportOldDb extends Command
     public function __construct()
     {
         parent::__construct();
-    }
-
-    protected function createDb($db_name)
-    {
-        DB::statement('CREATE DATABASE IF NOT EXISTS '.$db_name);
-
-        return print_r('Created database '.$db_name."\n");
-    }
-
-    protected function createUserWithPrivileges($db_name, $db_user, $db_password)
-    {
-        DB::statement('GRANT ALL PRIVILEGES ON *.* TO '."'".$db_user."'@"."'localhost' IDENTIFIED BY "."'".$db_password."';");
-
-        return print_r('Created user '.$db_user.' with password '.$db_password.' and granted all privileges to '.$db_name."\n");
-    }
-
-    protected function importOldDb($db_name, $db_user, $db_password, $sql_file)
-    {
-        if (App::runningInConsole())
-        {
-            echo exec('mysql -u '.$db_user.' -p'.$db_password.' '.$db_name.' < '.base_path().'/'.$sql_file);
-        }
-
-        return print_r('Database succesfully imported'."\n");
     }
 
     protected function importUsers()
@@ -348,6 +324,21 @@ class ImportOldDb extends Command
         return true;
     }
 
+    private function explodeImpactToRelatedIssue($issue, $originalIssue)
+    {
+        $toMergeimportIssuesConnectedWithIssues = explode(',', $issue->impacttorelatedissue);
+        foreach ($toMergeimportIssuesConnectedWithIssues as $key => $existentIssue) {
+                try {
+                    $originalIssue->issuesConnectedOfThem()->attach($existentIssue);
+                    $originalIssue->issuesConnectedOfMine()->attach($existentIssue);
+                } catch (\Exception $e) {
+                    print_r("Shiit! O relatie nu s-a putut importa.\n");
+                }
+        }
+
+        return true;
+    }
+
     protected function completeMultistageIssuesConnected()
     {
         $allIssues = DB::connection('oldissue')->select('select * from initlaws');
@@ -391,21 +382,6 @@ class ImportOldDb extends Command
         }
 
         print_r("Merge-ul de relatii pentru initiative a fost incheiat cu succes.\n");
-        return true;
-    }
-
-    private function explodeImpactToRelatedIssue($issue, $originalIssue)
-    {
-        $toMergeimportIssuesConnectedWithIssues = explode(',', $issue->impacttorelatedissue);
-        foreach ($toMergeimportIssuesConnectedWithIssues as $key => $existentIssue) {
-                try {
-                    $originalIssue->issuesConnectedOfThem()->attach($existentIssue);
-                    $originalIssue->issuesConnectedOfMine()->attach($existentIssue);
-                } catch (\Exception $e) {
-                    print_r("Shiit! O relatie nu s-a putut importa.\n");
-                }
-        }
-
         return true;
     }
 
@@ -762,11 +738,18 @@ class ImportOldDb extends Command
         $pathToFiles = sprintf('%s/var/www/andr_v2/uploads/reldocs', storage_path());
 
         $oldDocuments = DB::connection('oldissue')->select('select * from relateddoc 
-            where propid <> 0 and stepid <> 0
-            and id>310
+            where propid > 120 and stepid <> 0
         ');
 
         foreach ($oldDocuments as $document) {
+            if (! $document->filepaths) {
+                continue;
+            }
+
+            if (! Issue::find($document->propid)) {
+                continue;
+            }
+
             $documentPath = sprintf('%s/propid_%s/stepid_%s/',
                                 $pathToFiles,
                                 $document->propid,
@@ -832,6 +815,89 @@ class ImportOldDb extends Command
         return true;
     }
 
+    protected function importRemainingDocuments()
+    {
+        $initDocuments = Document::count();
+        $lostDocuments = [];
+        $documentsForExtendedIssues = [];
+        $pathToFiles = sprintf('%s/var/www/andr_v2/uploads/reldocs/propid_/stepid_', storage_path());
+
+        $dbPathToFile = '/var/www/andr_v2/uploads/reldocs/propid_/stepid_/';
+
+        $oldDocuments = DB::connection('oldissue')->select('select * from relateddoc
+            where propid > 120 and stepid <> 0
+        ');
+
+        $getFileNamesFromFolder = array_diff(scandir($pathToFiles), ['.', '..']);
+
+
+        foreach ($oldDocuments as $document) {
+            if (! $document->filepaths) {
+                continue;
+            }
+
+            if (strpos($document->filepaths, $dbPathToFile) === 0) {
+              $lostDocuments[] = $document;
+            }
+        }
+
+        foreach ($lostDocuments as $document) {
+            $fullPathToFile = $document->filepaths;
+            $file = str_replace($dbPathToFile, '', $fullPathToFile);
+
+            if (! in_array($file, $getFileNamesFromFolder)) {
+                continue;
+            }
+
+            do {
+                $randomName = str_random(40);
+            } while (UploadedFile::where('file_name', $randomName)->count() > 0);
+
+            do {
+                $codPublic = str_random(40);
+            } while (Document::where('public_code', $codPublic)->count() > 0);
+
+            $uploadedFileData = [
+                        'file_name' => $randomName,
+                        'folder' => '/documents/',
+                        'original_file_name' => $file,
+                    ];
+
+            $this->moveFile(storage_path().$fullPathToFile, $uploadedFileData['file_name']);
+
+            $doc = factory(Document::class)->create([
+                'public' => 1,
+                'uploaded_file_id' => factory(UploadedFile::class)
+                    ->create(
+                            $uploadedFileData
+                        )->id,
+                'public_code' => $codPublic,
+                'init_at' => $document->initat,
+            ]);
+
+            $translatableData = [
+                'ro' =>[
+                    'title' => $document->content ? $document->content : '',
+                ],
+                'en' => [
+                    'title' => $document->encontent ? $document->encontent : '',
+                ]
+            ];
+            $doc->fill($translatableData);
+            $doc->save();
+
+            try {
+                $doc->steps()->attach($document->stepid);
+            } catch (\Exception $e) {
+                print_r("Shiit! O relatie Document - FlowStep nu s-a putut importa.\n");
+            }
+        }
+
+        echo sprintf("Au fost recuperate %s documente salvate la comun intr-un folder.\n",
+            $count = Document::count() - $initDocuments);
+        return true;
+    }
+
 
     /**
      * Execute the console command.
@@ -840,39 +906,36 @@ class ImportOldDb extends Command
      */
     public function handle()
     {
-        // $this->createDb($this->argument('db_name'));
-        // $this->createUserWithPrivileges($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'));
-        // $this->importOldDb($this->argument('db_name'), $this->argument('db_user'), $this->argument('db_password'), $this->argument('sql_file'));
 
+        DB::beginTransaction();
 
-        // DB::beginTransaction();
+        try {
 
-        // try {
-
-        //     $this->importUsers();
-        //     $this->importStepAutocompletes();
-        //     $this->importStakeholders();
-        //     $this->importDomains();
-        //     $this->importNews();
-        //     $this->importLocations();
-        //     $this->importIssues();
-        //     $this->importIssuesConnectedWithIssues();
-        //     $this->importInitiatorIssue();
-        //     $this->importIssueStakeholder();
-        //     $this->importIssueNews();
-        //     $this->importDomainIssues();
-        //     $this->completeMultistageIssuesConnected();
-        //     $this->completeMultistageInitiatorIssues();
-        //     $this->completeMultistageIssueStakeholder();
-        //     $this->completeMultistageIssueNews();
-        //     $this->importNewsStakeholder();
-            // $this->importLocationSteps();
+            $this->importUsers();
+            $this->importStepAutocompletes();
+            $this->importStakeholders();
+            $this->importDomains();
+            $this->importNews();
+            $this->importLocations();
+            $this->importIssues();
+            $this->importIssuesConnectedWithIssues();
+            $this->importInitiatorIssue();
+            $this->importIssueStakeholder();
+            $this->importIssueNews();
+            $this->importDomainIssues();
+            $this->completeMultistageIssuesConnected();
+            $this->completeMultistageInitiatorIssues();
+            $this->completeMultistageIssueStakeholder();
+            $this->completeMultistageIssueNews();
+            $this->importNewsStakeholder();
+            $this->importLocationSteps();
             $this->importDocuments();
+            $this->importRemainingDocuments();
 
-        //     DB::commit();
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     print_r('Shiit! Rollback happened.');
-        // }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            print_r('Shiit! Rollback happened.');
+        }
     }
 }
