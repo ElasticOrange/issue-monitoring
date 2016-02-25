@@ -59,7 +59,5 @@ $factory->define(Issue\Document::class, function (Faker\Generator $faker) {
         'uploaded_file_id' => $faker->randomDigit,
         'public_code' => str_random(40),
         'init_at' => $faker->date,
-        'ro.title' => $faker->sentence,
-		'en.title' => $faker->sentence,
     ];
 });

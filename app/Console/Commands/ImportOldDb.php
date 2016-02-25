@@ -735,6 +735,7 @@ class ImportOldDb extends Command
 
     protected function importDocuments()
     {
+        $allFiles = [];
         $pathToFiles = sprintf('%s/var/www/andr_v2/uploads/reldocs', storage_path());
 
         $oldDocuments = DB::connection('oldissue')->select('select * from relateddoc 
@@ -759,7 +760,22 @@ class ImportOldDb extends Command
             try {
                 $getFileNamesFromFolder = array_diff(scandir($documentPath), ['.', '..']);
 
+                if (! $getFileNamesFromFolder) {
+                    continue;
+                }
+
                 foreach ($getFileNamesFromFolder as $file) {
+
+                    if (! $file) {
+                        continue;
+                    }
+
+                    if (in_array($file, $allFiles)) {
+                        continue;
+                    }
+
+                    $allFiles[] = $file;
+
                     $fullPathToFile = sprintf('%s%s', $documentPath, $file);
 
                     do {
@@ -810,6 +826,7 @@ class ImportOldDb extends Command
                 print_r("Shiit! Un folder nu exista.\n");
             }
         }
+
 
         echo sprintf("Au fost importate %s documente.\n", Document::count());
         return true;
