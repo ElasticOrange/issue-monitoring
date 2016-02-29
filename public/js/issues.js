@@ -1,6 +1,71 @@
 (function(){
 	$(document).ready(function() {
 
+        var actionButtonsTemplate = _.template($("#action_buttons").html(), 
+            {
+                interpolate: /__([\s\S]+?)__/g
+            }
+        );
+        $('#issues-table').DataTable({
+            "language":{
+                "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
+                "sInfoEmpty": "Arata de la 0 la 0 din 0 intrari",
+                "sLengthMenu": "Arata _MENU_ intrari",
+                "sSearch": "Cauta",
+                "paginate":{
+                    "next": "Inainte",
+                    "previous": "Inapoi",
+                    "first": "Primul",
+                    "last": "Ultimul"
+                },
+                "sEmptyTable": "Nu exista nicio inregistrare"
+            },
+            "columns": [
+                {
+                    data: "id",
+                    title: "id",
+                    orderable: false
+                },
+                {
+                    data: "type",
+                    title: "Tip",
+                    orderable: false
+                },
+                {
+                    data: "connected_domains",
+                    title: "Domenii",
+                    orderable: false,
+                    render: function (data, type, rowData, meta) {
+                        var domains = _.pluck(data, "name");
+                        return domains.join();
+                    }
+                },
+                {
+                    data: "name",
+                    title: "Nume",
+                    orderable: false
+                },
+                {
+                    data: "phase",
+                    title: "Faza",
+                    orderable: false
+                },
+                {
+                    data: "id",
+                    title: "Actiuni",
+                    render: function (data, type, rowData, meta) {
+                        return actionButtonsTemplate({id: data});
+                    }
+                }
+            ],
+            responsive: true,
+            stateSave: true,
+            serverSide: true,
+            ajax: {
+            "url": window.location.href + '/query',
+            }
+        });
+
         $("input[data-action=publish-issue]").click(function () {
             var request = $.ajax({
                 url: $(this).attr('update-url'),

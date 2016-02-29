@@ -21,11 +21,16 @@ use Illuminate\Http\Request;
 use Issue\DomainTranslation;
 use Issue\DocumentTranslation;
 use Issue\LocationTranslation;
-use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests\IssueRequest;
+use Issue\Http\Controllers\Controller;
 
 class IssueController extends Controller
 {
+	use CanReturnDataForDataTables;
+
+	private $defaultModel = 'Issue\Issue';
+	private $searchTable = 'issues_search';
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -37,9 +42,7 @@ class IssueController extends Controller
             abort(403);
         }
 
-        $issues=Issue::all();
-
-		return view('admin.backend.issues.list', ['issues' => $issues]);
+		return view('admin.backend.issues.list');
 	}
 
 	/**
@@ -319,5 +322,4 @@ class IssueController extends Controller
 
         return $step;
     }
-
 }

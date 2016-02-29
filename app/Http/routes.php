@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/backend/issue/{issue}/delete', 'IssueController@destroy');
     Route::get('/backend/issue/{public_code}/show', 'IssueController@show');
+    Route::get('/backend/issue/query', 'IssueController@query');
     Route::get('/backend/issue/query-domain', 'IssueController@queryDomain');
     Route::get('/backend/issue/query-stakeholder', 'IssueController@queryStakeholder');
     Route::get('/backend/issue/query-news', 'IssueController@queryNews');
