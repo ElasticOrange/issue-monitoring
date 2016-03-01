@@ -1,6 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
+	@include('admin.backend.issues.action_buttons', ['controller' => 'StakeholderController'])
 	<div class="row">
 		<div class="col-lg-12 text-left">
 			<h1 class="page-header">Stakeholderi</h1>
@@ -16,48 +17,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered table-hover" data-table="true">
-							<thead>
-								<tr role="row">
-									<th class="text-center" style="width: 20px;">Id</th>
-									<th class="text-center" style="width: 480px;">Nume</th>
-									<th class="text-center" style="width: 180x;">Pozitie si apartenenta</th>
-									<th class="text-center" style="width: 180x;">Tip</th>
-									<th class="text-center" style="width: 110px;">Foto</th>
-									<th class="text-center" style="width: 20px;">Publicat</th>
-									<th class="text-center" style="width: 80px;">Actiuni</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach ($stakeholders as $stakeholder)
-									<tr class="gradeA odd" role="row">
-										<td>{{ $stakeholder->id }}</td>
-										<td>{{ $stakeholder->name }}</td>
-										<td>{!! $stakeholder->position !!}</td>
-										<td>{{ $stakeholder->type }}</td>
-										<td  class="text-center">
-											@if($stakeholder->filePoza)
-												<img src="{{ action('UploadedFileController@downloadFile', [$stakeholder->filePoza->file_name]) }}" width="100px" height="100px" alt="">
-											@endif
-										</td>
-										<td class="text-center">
-											<input  type="checkbox"
-													name="published"
-													data-id="{{ $stakeholder->id }}"
-													data-action="publish-stakeholder"
-													update-url="{{ action("StakeholderController@setPublished",[$stakeholder]) }}"
-													@if($stakeholder->published) checked="checked" @endif
-											/>
-										</td>
-										<td class="text-center">
-										<div class="row">
-											<a href="{{ action('StakeholderController@edit', [$stakeholder])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-											<a href=" {{ action('StakeholderController@destroy', [$stakeholder]) }}" class="btn btn-danger delete-button"><span class="glyphicon glyphicon-trash"></span></a>
-										</div>
-										</td>
-									</tr>
-								@endforeach
-							</tbody>
+						<table class="table table-striped table-bordered table-hover" data-table="true" id="stakeholders-table">
 						</table>
 					</div>
 				</div>

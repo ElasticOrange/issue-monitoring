@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
     Route::get('/backend/stakeholder/{stakeholder}/delete', 'StakeholderController@destroy');
+    Route::get('/backend/stakeholder/query', 'StakeholderController@query');
     Route::get('/backend/stakeholder/{public_code}/show', 'StakeholderController@show');
     Route::get('/backend/stakeholder/query-list', 'StakeholderController@queryList');
     Route::get('/backend/stakeholder/{stakeholder}/deleteFileCv', 'StakeholderController@deleteFileCv');
