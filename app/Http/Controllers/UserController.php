@@ -15,6 +15,11 @@ use Guard;
 
 class UserController extends Controller
 {
+    use CanReturnDataForDataTables;
+
+    private $defaultModel = 'Issue\User';
+    private $searchTable = 'users_search';
+
     /**
      * Display a listing of the resource.
      *

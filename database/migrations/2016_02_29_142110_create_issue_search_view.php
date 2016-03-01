@@ -13,6 +13,8 @@ class CreateIssueSearchView extends Migration
     public function up()
     {
         DB::statement( "CREATE VIEW issues_search AS SELECT issues.id,concat(`phase`, `type`, `name`, `description`, `status`, `impact`) as content FROM issues join issue_translations ON issues.id=issue_translations.issue_id" );
+
+        DB::statement( "CREATE VIEW users_search AS SELECT users.id,concat(`name`, `email`, `company`, `observations`) as content FROM users" );
     }
 
     /**
@@ -23,5 +25,6 @@ class CreateIssueSearchView extends Migration
     public function down()
     {
         DB::statement( 'DROP VIEW issues_search' );    
+        DB::statement( 'DROP VIEW users_search' );    
     }
 }

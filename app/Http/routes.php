@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::resource('/backend/flowtemplate', 'FlowTemplateController', ['except' => ['destroy']]);
 
     Route::get('/users/profile', 'UserController@profile');
+    Route::get('/users/query', 'UserController@query');
     Route::post('/users/profile', 'UserController@updateProfile');
     Route::get('/users/{users}/delete', 'UserController@destroy');
     Route::resource('/users', 'UserController', ['except' => ['destroy']]);
