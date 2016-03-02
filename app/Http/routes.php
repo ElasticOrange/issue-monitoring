@@ -48,6 +48,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/backend/location/query-location', 'LocationController@queryLocation');
     Route::resource('/backend/location', 'LocationController', ['except' => ['edit', 'destroy']]);
 
+    Route::get('/backend/news/query', 'NewsController@query');
     Route::get('/backend/news/{news}/delete', 'NewsController@destroy');
     Route::get('/backend/news/{public_code}/show', 'NewsController@show');
     Route::get('/backend/news/query-stakeholder', 'NewsController@queryStakeholder');

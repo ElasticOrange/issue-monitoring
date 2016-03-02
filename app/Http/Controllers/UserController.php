@@ -31,9 +31,7 @@ class UserController extends Controller
             abort(403);
         }
 
-        $users = User::all();
-
-        return view('auth.list', ['users' => $users]);
+        return view('auth.list');
     }
 
     /**
