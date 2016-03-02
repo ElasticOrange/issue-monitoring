@@ -12,6 +12,11 @@ use Issue\Report;
 
 class ReportController extends Controller
 {
+    use CanReturnDataForDataTables;
+
+    private $defaultModel = 'Issue\Report';
+    private $searchTable = 'reports_search';
+
     /**
      * Display a listing of the resource.
      *
@@ -23,9 +28,7 @@ class ReportController extends Controller
             abort(403);
         }
 
-        $reports = Report::all();
-
-        return view('admin.backend.reports.list', ['reports' => $reports]);
+        return view('admin.backend.reports.list');
     }
 
     /**
