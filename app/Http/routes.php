@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::post('/backend/tag', 'TagController@store');
 
+    Route::get('/backend/stepautocomplete/query', 'StepAutocompleteController@query');
     Route::get('/backend/stepautocomplete/{stepautocomplete}/delete', 'StepAutocompleteController@destroy');
     Route::resource(
         '/backend/stepautocomplete',

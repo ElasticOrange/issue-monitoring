@@ -11,15 +11,18 @@ use Gate;
 
 class StepAutocompleteController extends Controller
 {
+    use CanReturnDataForDataTables;
+
+    private $defaultModel = 'Issue\StepAutocomplete';
+    private $searchTable = 'stepsautocomplete_search';
+
     public function index()
     {
         if (Gate::denies('list-step-autocomplete')) {
             abort(403);
         }
 
-        $steps = StepAutocomplete::all();
-
-        return view('admin.backend.step-autocomplete.list', ['steps' => $steps]);
+        return view('admin.backend.step-autocomplete.list');
     }
 
     public function store(StepAutocompleteRequest $request)
