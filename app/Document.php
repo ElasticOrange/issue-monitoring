@@ -11,6 +11,8 @@ class Document extends Model
 {
 	use \Dimsav\Translatable\Translatable;
 
+	protected $with = ['file'];
+
 	public $translatedAttributes = ['title'];
 
 	public $dates = ['init_at'];

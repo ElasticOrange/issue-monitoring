@@ -17,6 +17,8 @@ class CreateIssueSearchView extends Migration
         DB::statement( "CREATE VIEW users_search AS SELECT users.id,concat(`name`, `email`, `company`, `observations`) as content FROM users" );
 
         DB::statement( "CREATE VIEW stakeholders_search AS SELECT stakeholders.id,concat(`name`, `type`, `site`, `link`, `email`, `telephone`, `position`, `address`, `other_details`) as content FROM stakeholders join stakeholder_translations ON stakeholders.id=stakeholder_translations.stakeholder_id" );
+
+        DB::statement( "CREATE VIEW documents_search AS SELECT documents.id,concat(`title`) as content FROM documents join document_translations ON documents.id=document_translations.document_id" );
     }
 
     /**
@@ -29,5 +31,6 @@ class CreateIssueSearchView extends Migration
         DB::statement( 'DROP VIEW issues_search' );    
         DB::statement( 'DROP VIEW users_search' );    
         DB::statement( 'DROP VIEW stakeholders_search' );
+        DB::statement( 'DROP VIEW documents_search' );
     }
 }

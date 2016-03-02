@@ -14,121 +14,125 @@ use Gate;
 const DOCUMENTS_LOCATION = '/documents/';
 class DocumentController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index()
-	{
+
+    use CanReturnDataForDataTables;
+
+    private $defaultModel = 'Issue\Document';
+    private $searchTable = 'documents_search';
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         if (Gate::denies('list-document')) {
             abort(403);
         }
 
-        $documents = Document::all();
+        return view('admin.backend.documents.list');
+    }
 
-		return view('admin.backend.documents.list', ['documents' => $documents]);
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         if (Gate::denies('create-document')) {
         abort(403);
         }
 
         $document = new Document(['init_at' => date('Y-m-d')]);
 
-		return view('admin.backend.documents.create', ['document' => $document]);
-	}
+        return view('admin.backend.documents.create', ['document' => $document]);
+    }
 
-	/**
-	 * Store a newly created resource in `.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(DocumentRequest $request)
-	{
+    /**
+     * Store a newly created resource in `.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(DocumentRequest $request)
+    {
         if (Gate::denies('store-document')) {
             abort(403);
         }
 
         $document = new Document;
-		$document->fillDocument($request);
+        $document->fillDocument($request);
 
-		return $document;
-	}
+        return $document;
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($code)
-	{
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($code)
+    {
         if (Gate::denies('show-document')) {
             abort(403);
         }
 
-		$document = Document::getByPublicCode($code);
+        $document = Document::getByPublicCode($code);
 
-		return $this->edit($document);
-	}
+        return $this->edit($document);
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($document)
-	{
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($document)
+    {
         if (Gate::denies('edit-document')) {
             abort(403);
         }
 
-		return view('admin.backend.documents.edit', ['document' => $document]);
-	}
+        return view('admin.backend.documents.edit', ['document' => $document]);
+    }
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $document)
-	{
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $document)
+    {
         if (Gate::denies('update-document')) {
             abort(403);
         }
 
-		$document->fillDocument($request);
+        $document->fillDocument($request);
 
-		return $document;
-	}
+        return $document;
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($document)
-	{
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($document)
+    {
         if (Gate::denies('delete-document')) {
             abort(403);
         }
 
-		$document->delete();
+        $document->delete();
 
-		return redirect()->action('DocumentController@index');
-	}
+        return redirect()->action('DocumentController@index');
+    }
 }

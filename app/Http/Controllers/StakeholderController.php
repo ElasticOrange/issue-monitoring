@@ -31,9 +31,7 @@ class StakeholderController extends Controller
             abort(403);
         }
 
-        $stakeholders = Stakeholder::all();
-
-		return view('admin.backend.stakeholders.list', ['stakeholders' => $stakeholders]);
+		return view('admin.backend.stakeholders.list');
 	}
 
 	/**
