@@ -8,10 +8,10 @@
 				<label>Stadiu procedural</label>
 			</div>
 			<div class="col-sm-1">
-				<label>Durata</label>
+				<label>Inceput la</label>
 			</div>
 			<div class="col-sm-1">
-				<label>Inceput la</label>
+				<label>Durata</label>
 			</div>
 			<div class="col-sm-1">
 				<label>Estimat finalizat</label>
@@ -42,20 +42,28 @@
                 />
 			</div>
 			<div class="col-sm-1">
+				<input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" data-groupid="<%= id%>" data-type="startdate"/>
+				<input type="hidden" id="startdate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][start_date]" />
+			</div>
+			<div class="col-sm-1">
 				<input class="form-control"
 				    type="number"
 				    placeholder="Durata"
 				    name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"
 				    value="<%= estimated_duration%>"
 				    min="0"
+					data-groupid="<%= id%>"
+					data-type="duration"
 				    />
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" />
-				<input type="hidden" id="startdate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][start_date]" />
-			</div>
-			<div class="col-sm-1">
-				<input class="form-control" type="text" id="enddate-widget-<%= id%>" placeholder="Estimat finalizat" />
+				<input class="form-control"
+					   type="text"
+					   id="enddate-widget-<%= id%>"
+					   placeholder="Estimat finalizat" 
+					   data-groupid="<%= id%>"
+					   data-type="enddate"
+				/>
 				<input type="hidden" id="enddate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][end_date]" />
 			</div>
 			<div class="checkbox col-sm-1">

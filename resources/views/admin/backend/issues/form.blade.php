@@ -458,10 +458,10 @@
 										<label>Stadiu procedural</label>
 									</div>
 									<div class="col-sm-1">
-										<label>Durata</label>
+										<label>Inceput la</label>
 									</div>
 									<div class="col-sm-1">
-										<label>Inceput la</label>
+										<label>Durata</label>
 									</div>
 									<div class="col-sm-1">
 										<label>Estimat finalizat</label>
@@ -490,17 +490,31 @@
                                         />
 									</div>
 									<div class="col-sm-1">
-										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}" min="0" />
-									</div>
-									<div class="col-sm-1">
-										<input type="text" class="form-control" prevent-enter="true" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>
+										<input type="text"
+											   class="form-control"
+											   prevent-enter="true"
+											   id="startdate-widget-{{ $step->id }}"
+											   value="{{ $step->start_date->format('d-m-Y') }}"
+											   data-groupid="{{ $step->id }}"
+											   data-type="startdate"
+										/>
 										<input type="hidden"
 											id="startdate-result-{{ $step->id }}"
 											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]"
 										/>
 									</div>
 									<div class="col-sm-1">
-										<input type="text" class="form-control" prevent-enter="true" id="enddate-widget-{{ $step->id }}" value="{{ $step->end_date->format('d-m-Y') }}"/>
+										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}" min="0" data-duration="true" data-groupid="{{ $step->id }}" data-type="duration"/>
+									</div>
+									<div class="col-sm-1">
+										<input type="text"
+											   class="form-control"
+											   prevent-enter="true"
+											   id="enddate-widget-{{ $step->id }}"
+											   value="{{ $step->end_date->format('d-m-Y') }}"
+											   data-groupid="{{ $step->id }}"
+											   data-type="enddate"
+									    />
 										<input type="hidden"
 											id="enddate-result-{{ $step->id }}"
 											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]"

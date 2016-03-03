@@ -78,6 +78,70 @@
             });
         });
 
+        function updateEndDate(groupId) {
+            var startDatePicker = $('[data-type=startdate][data-groupid=' + groupId + ']');
+
+            if (! startDatePicker.data('DateTimePicker')) {
+                return;
+            }
+
+            var startDate = startDatePicker.data('DateTimePicker').date();
+
+            var daysDuration = $('[data-type=duration][data-groupid=' + groupId + ']').val();
+
+            if (! (daysDuration >= 0)) {
+                return;
+            }
+
+            var endDate = startDate;
+
+            endDate.add(daysDuration, 'days');
+
+            var endDatePicker = $('[data-type=enddate][data-groupid=' + groupId + ']');
+            if (! endDatePicker.data('DateTimePicker')) {
+                return;
+            }
+
+            endDatePicker.data('DateTimePicker').date(endDate);
+        }
+
+        function updateDuration(groupId) {
+            var startDatePicker = $('[data-type=startdate][data-groupid=' + groupId + ']');
+            if (! startDatePicker.data('DateTimePicker')) {
+                return;
+            }
+            var startDate = startDatePicker.data('DateTimePicker').date();
+
+            var endDatePicker = $('[data-type=enddate][data-groupid=' + groupId + ']');
+            if (! endDatePicker.data('DateTimePicker')) {
+                return;
+            }
+            var endDate = endDatePicker.data('DateTimePicker').date();
+            var daysDuration = $('[data-type=duration][data-groupid=' + groupId + ']');
+            var d = moment.duration(endDate - startDate);
+            var days = Math.floor(d.asDays());
+
+            if (! (days >= 0)) {
+                return;
+            }
+            daysDuration.val(days);
+        }
+
+        $(document).on('dp.change', '[data-type=startdate]',function() {
+            var groupId = $(this).attr('data-groupid');
+            updateEndDate(groupId);
+        });
+
+        $(document).on('dp.change', '[data-type=enddate]',function() {
+            var groupId = $(this).attr('data-groupid');
+            updateDuration(groupId);
+        });
+
+        $(document).on('change', '[data-groupid]',function() {
+           var groupId = $(this).attr('data-groupid');
+            updateEndDate(groupId);
+        });
+
         CKEDITOR.replace('editor1', {
             toolbar: [
                 {name: 'basicstyles', items: ['Bold', 'Italic']},
