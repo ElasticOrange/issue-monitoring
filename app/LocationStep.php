@@ -46,14 +46,20 @@ class LocationStep extends Model
 		}
 
 		$index = 0;
+
 		foreach ($steps as $id => $step) {
 			$index++;
 			$steps[$id]['flowstep_order'] = $index;
 		}
+
 		foreach ($currentSteps as $currentStep) {
             if (!array_key_exists($currentStep->id, $steps)) {
                 $currentStep->delete();
                 continue;
+            }
+
+            if (! array_key_exists('finalizat', $steps[$currentStep->id])) {
+                $steps[$currentStep->id]['finalizat'] = 0;
             }
 
             $currentStep->fill($steps[$currentStep->id]);
@@ -93,6 +99,11 @@ class LocationStep extends Model
                     $newFlowStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
                 }
             }
+
+            if (! array_key_exists('finalizat', $stepData)) {
+                $stepData['finalizat'] = 0;
+            }
+
             $this->flowsteps()->save($newFlowStep);
 
             if (array_key_exists('published', $stepData)) {

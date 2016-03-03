@@ -1,4 +1,4 @@
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
+ <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
 <div class="form-group">
@@ -82,7 +82,7 @@
                                 <label>Inceput la</label>
                             </div>
                             <div class="col-sm-2">
-                                <label>Finalizat la</label>
+                                <label>Estimat finalizat</label>
                             </div>
                             <div class="col-sm-1">
                                 <label>Actiuni</label>
@@ -106,7 +106,7 @@
                                 />
                             </div>
                             <div class="col-sm-1">
-                                <input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
+                                <input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}" min="0"/>
                             </div>
                             <div class="col-sm-2">
                                 <input type="text" class="form-control" prevent-enter="true" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>

@@ -23,7 +23,8 @@ class FlowStep extends Model
 		'flowstep_order',
 		'start_date',
 		'end_date',
-		'observatii'
+		'observatii',
+		'finalizat'
 	];
 
 	public function flowstepsInLocation()

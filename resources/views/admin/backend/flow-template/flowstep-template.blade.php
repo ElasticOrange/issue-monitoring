@@ -14,7 +14,7 @@
 				<label>Inceput la</label>
 			</div>
 			<div class="col-sm-2">
-				<label>Finalizat la</label>
+				<label>Estimat finalizat</label>
 			</div>
 			<div class="col-sm-1">
 				<label>Actiuni</label>
@@ -38,7 +38,8 @@
                 />
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control" type="number" placeholder="Durata" name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"/>
+				<input class="form-control" type="number" placeholder="Durata" name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"
+				min="0"/>
 			</div>
 			<div class="col-sm-2">
 				<input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" />

@@ -10,11 +10,14 @@
 			<div class="col-sm-1">
 				<label>Durata</label>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-1">
 				<label>Inceput la</label>
 			</div>
-			<div class="col-sm-2">
-				<label>Finalizat la</label>
+			<div class="col-sm-1">
+				<label>Estimat finalizat</label>
+			</div>
+			<div class="col-sm-1">
+				<label>Finalizat</label>
 			</div>
 			<div class="col-sm-1">
 				<label>Actiuni</label>
@@ -44,16 +47,25 @@
 				    placeholder="Durata"
 				    name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"
 				    value="<%= estimated_duration%>"
+				    min="0"
 				    />
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-1">
 				<input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" />
 				<input type="hidden" id="startdate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][start_date]" />
 			</div>
-			<div class="col-sm-2">
-				<input class="form-control" type="text" id="enddate-widget-<%= id%>" placeholder="Finalizat la" />
+			<div class="col-sm-1">
+				<input class="form-control" type="text" id="enddate-widget-<%= id%>" placeholder="Estimat finalizat" />
 				<input type="hidden" id="enddate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][end_date]" />
 			</div>
+			<div class="checkbox col-sm-1">
+                <label>
+                    <input  type="checkbox"
+                            value="1"
+                            name="location[<%= location_id%>][flow_steps][<%= id%>][finalizat]"
+                            />Finalizat
+                </label>
+            </div>
 			<div class="col-sm-1">
 				<input type="hidden" id="step-id-step-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][location_step_id]"/>
 				<button type="button" class="btn btn-danger delete_step" delete-id="location-<%= location_id%>-flow_steps-<%= id%>">

@@ -460,11 +460,13 @@
 									<div class="col-sm-1">
 										<label>Durata</label>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-1">
 										<label>Inceput la</label>
 									</div>
-									<div class="col-sm-2">
-										<label>Finalizat la</label>
+									<div class="col-sm-1">
+										<label>Estimat finalizat</label>
+									</div>
+									<div class="col-sm-1">
 									</div>
 									<div class="col-sm-1">
 										<label>Actiuni</label>
@@ -488,22 +490,33 @@
                                         />
 									</div>
 									<div class="col-sm-1">
-										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}"/>
+										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}" min="0" />
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-1">
 										<input type="text" class="form-control" prevent-enter="true" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>
 										<input type="hidden"
 											id="startdate-result-{{ $step->id }}"
 											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]"
 										/>
 									</div>
-									<div class="col-sm-2">
+									<div class="col-sm-1">
 										<input type="text" class="form-control" prevent-enter="true" id="enddate-widget-{{ $step->id }}" value="{{ $step->end_date->format('d-m-Y') }}"/>
 										<input type="hidden"
 											id="enddate-result-{{ $step->id }}"
 											name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]"
 										/>
 									</div>
+                                    <div class="checkbox col-sm-1">
+                                        <label>
+                                            <input  type="checkbox"
+                                                    value="1"
+                                                    name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][finalizat]"
+                                                    @if($step->finalizat == true)
+                                                        checked="checked"
+                                                    @endif
+                                                    />Finalizat
+                                        </label>
+                                    </div>
 									<div class="col-sm-1">
 										<button type="button" class="btn btn-danger delete_step" delete-id="location-{{ $locationStep->id }}flow_steps{{ $step->id }}"><span class="glyphicon glyphicon-trash"></span></button>
 									</div>
