@@ -80,19 +80,15 @@
 
         function updateEndDate(groupId) {
             var startDatePicker = $('[data-type=startdate][data-groupid=' + groupId + ']');
-
             if (! startDatePicker.data('DateTimePicker')) {
                 return;
             }
-
             var startDate = startDatePicker.data('DateTimePicker').date();
 
             var daysDuration = $('[data-type=duration][data-groupid=' + groupId + ']').val();
-
             if (! (daysDuration >= 0)) {
                 return;
             }
-
             var endDate = startDate;
 
             endDate.add(daysDuration, 'days');
@@ -117,6 +113,14 @@
                 return;
             }
             var endDate = endDatePicker.data('DateTimePicker').date();
+
+            if (endDatePicker.data('DateTimePicker').date() < 
+                startDatePicker.data('DateTimePicker').date()) {
+                
+                endDatePicker.data('DateTimePicker').date(startDate);
+                return;
+            }
+
             var daysDuration = $('[data-type=duration][data-groupid=' + groupId + ']');
             var d = moment.duration(endDate - startDate);
             var days = Math.floor(d.asDays());

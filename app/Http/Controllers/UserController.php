@@ -117,7 +117,6 @@ class UserController extends Controller
     public function update(Request $request, $user)
     {
         $input = $request->all();
-
         if (Gate::denies('update-users')) {
             abort(403);
         }
@@ -137,6 +136,12 @@ class UserController extends Controller
         if (isset($input['password']) && $input['password']) {
             $user->password = Hash::make($input['password']);
         }
+
+        $user->admin_alert_new_issue = $request->admin_alert_new_issue == true;
+        $user->admin_alert_issue_status = $request->admin_alert_issue_status == true;
+        $user->admin_alert_news = $request->admin_alert_news == true;
+        $user->admin_alert_report = $request->admin_alert_report == true;
+        $user->admin_alert_issue_stage = $request->admin_alert_issue_stage == true;
 
         $user->save();
 
