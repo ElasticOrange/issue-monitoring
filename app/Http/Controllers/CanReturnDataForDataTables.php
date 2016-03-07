@@ -3,7 +3,6 @@
 namespace Issue\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Issue\Issue;
 
 trait CanReturnDataForDataTables {
 
@@ -50,7 +49,7 @@ trait CanReturnDataForDataTables {
 
 	private function generateSearchQueryPart($string)
 	{
-		$words = explode(',', $string);
+		$words = explode(' ', $string);
 
 		foreach ($words as $key => $word) {
 			$words[$key] = 'content LIKE "%'.trim($word).'%"';
