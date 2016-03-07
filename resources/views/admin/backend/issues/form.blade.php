@@ -24,18 +24,6 @@
 			</div>
 		</div>
 
-        <div class="form-group">
-            <label class="col-md-2 control-label">Faza</label>
-            <div class="col-md-8">
-                <select class="form-control" name="phase">
-                    <option value="viitor">Inițiativă viitoare</option>
-                    <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>Inițiativă curentă</option>
-                    <option value="arhivatPublicat" @if($issue->phase === 'arhivatPublicat') selected="selected" @endif>Arhivată – Publicată în Monitorul Oficial</option>
-                    <option value="arhivatRespins" @if($issue->phase === 'arhivatRespins') selected="selected" @endif>Arhivată – Respinsă definitiv</option>
-                </select>
-            </div>
-        </div>
-
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#ro" data-toggle="tab">RO</a></li>
 			<li><a href="#en" data-toggle="tab">EN</a></li>
@@ -656,6 +644,20 @@
 			@include('admin.backend.issues.flowstep-template')
 			@include('admin.backend.issues.connected-documents')
 		</div>
+        <br/><br/>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Faza</label>
+            <div class="col-md-8">
+                <select class="form-control" name="phase">
+                    <option value="viitor">Inițiativă viitoare</option>
+                    <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>Inițiativă curentă</option>
+                    <option value="arhivatPublicat" @if($issue->phase === 'arhivatPublicat') selected="selected" @endif>Arhivată – Publicată în Monitorul Oficial</option>
+                    <option value="arhivatRespins" @if($issue->phase === 'arhivatRespins') selected="selected" @endif>Arhivată – Respinsă definitiv</option>
+                </select>
+            </div>
+        </div>
+
 		<button type="button"
                 class="btn btn-primary add_location"
                 style="margin-top: 40px;"
