@@ -72,17 +72,8 @@
                             <div class="col-sm-1">
                                 <label></label>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-8">
                                 <label>Stadiu procedural</label>
-                            </div>
-                            <div class="col-sm-1">
-                                <label>Durata</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>Inceput la</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <label>Estimat finalizat</label>
                             </div>
                             <div class="col-sm-1">
                                 <label>Actiuni</label>
@@ -97,29 +88,12 @@
                                     <span class="glyphicon glyphicon-menu-down"></span>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-8">
                                 <input class="form-control"
                                        id="autocomplete-{{ $step->id }}"
                                        name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][flow_name]"
                                        value="{{ $step->flow_name }}"
                                        source-url="{{ action('IssueController@queryStepAutocomplete') }}/?name={name}"
-                                />
-                            </div>
-                            <div class="col-sm-1">
-                                <input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}" min="0"/>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" prevent-enter="true" id="startdate-widget-{{ $step->id }}" value="{{ $step->start_date->format('d-m-Y') }}"/>
-                                <input type="hidden"
-                                    id="startdate-result-{{ $step->id }}"
-                                    name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]"
-                                />
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" class="form-control" prevent-enter="true" id="enddate-widget-{{ $step->id }}" value="{{ $step->end_date->format('d-m-Y') }}"/>
-                                <input type="hidden"
-                                    id="enddate-result-{{ $step->id }}"
-                                    name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]"
                                 />
                             </div>
                             <div class="col-sm-1">

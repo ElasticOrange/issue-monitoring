@@ -4,17 +4,8 @@
 			<div class="col-sm-1">
 				<label></label>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-8">
 				<label>Stadiu procedural</label>
-			</div>
-			<div class="col-sm-1">
-				<label>Durata</label>
-			</div>
-			<div class="col-sm-2">
-				<label>Inceput la</label>
-			</div>
-			<div class="col-sm-2">
-				<label>Estimat finalizat</label>
 			</div>
 			<div class="col-sm-1">
 				<label>Actiuni</label>
@@ -29,25 +20,13 @@
 					<span class="glyphicon glyphicon-menu-down"></span>
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-8">
 				<input class="form-control"
                        id="autocomplete-<%= id%>"
                        placeholder="Stadiu procedural"
                        name="location[<%= location_id%>][flow_steps][<%= id%>][flow_name]"
                        source-url="{{ action('IssueController@queryStepAutocomplete') }}/?name={name}"
                 />
-			</div>
-			<div class="col-sm-1">
-				<input class="form-control" type="number" placeholder="Durata" name="location[<%= location_id%>][flow_steps][<%= id%>][estimated_duration]"
-				min="0"/>
-			</div>
-			<div class="col-sm-2">
-				<input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" />
-				<input type="hidden" id="startdate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][start_date]" />
-			</div>
-			<div class="col-sm-2">
-				<input class="form-control" type="text" id="enddate-widget-<%= id%>" placeholder="Finalizat la" />
-				<input type="hidden" id="enddate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][end_date]" />
 			</div>
 			<div class="col-sm-1">
 				<input type="hidden" id="step-id-step-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][location_step_id]"/>

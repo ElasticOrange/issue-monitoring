@@ -8,9 +8,7 @@ class FlowTemplate extends Model
 {
     protected $guarded = ['id'];
 
-    protected $fillable = [
-        'name'
-    ];
+    protected $fillable = ['name'];
 
     public function locationStep()
     {
@@ -45,6 +43,7 @@ class FlowTemplate extends Model
             }
 
             $currentLocation->fill($locations[$currentLocation->id]);
+            
             $this->locationStep()->save($currentLocation);
             if (! array_key_exists('flow_steps', $locations[$currentLocation->id])) {
                 $locations[$currentLocation->id]['flow_steps'] = [];
