@@ -652,8 +652,9 @@
                 <select class="form-control" name="phase">
                     <option value="viitor">Inițiativă viitoare</option>
                     <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>Inițiativă curentă</option>
-                    <option value="arhivatPublicat" @if($issue->phase === 'arhivatPublicat') selected="selected" @endif>Arhivată – Publicată în Monitorul Oficial</option>
-                    <option value="arhivatRespins" @if($issue->phase === 'arhivatRespins') selected="selected" @endif>Arhivată – Respinsă definitiv</option>
+                    <option value="arhivatRespinsSauAbrogat" @if($issue->phase === 'arhivatRespinsSauAbrogat') selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
+                    <option value="arhivatInactiv" @if($issue->phase === 'arhivatInactiv') selected="selected" @endif>Arhivată – Inactivă</option>
+                    <option value="publicatMO" @if($issue->phase === 'publicatMO') selected="selected" @endif>Publicat in Monitorul Oficial</option>
                 </select>
             </div>
         </div>
