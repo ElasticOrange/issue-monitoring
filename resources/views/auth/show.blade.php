@@ -73,6 +73,26 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-sm-6">
+                            <h3>Language</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Language</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="language">
+                            <option value="ro">Romana</option>
+                            <option value="en" @if($user->language == 'en') selected="selected" @endif>English</option>
+                        </select>
+                    </div>
+                </div>
+
+                <br/><hr><br/>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <h3>Alerte</h3>
                         </div>
                     </div>
