@@ -550,8 +550,7 @@
 
             var endDateWidgets = $('#enddate-widget-' + flowStepId).datetimepicker({
                 locale: 'ro',
-                format: 'L',
-                defaultDate: moment()
+                format: 'L'
             });
 
             if (edit == 0) {

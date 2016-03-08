@@ -492,7 +492,7 @@
 										/>
 									</div>
 									<div class="col-sm-1">
-										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" value="{{ $step->estimated_duration }}" min="0" data-duration="true" data-groupid="{{ $step->id }}" data-type="duration"/>
+										<input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" @if($step->estimated_duration == '0' || $step->estimated_duration == '') value="" @else value="{{ $step->estimated_duration }}" @endif min="0" data-duration="true" data-groupid="{{ $step->id }}" data-type="duration"/>
 									</div>
 									<div class="col-sm-1">
 										<input type="text"
@@ -501,6 +501,8 @@
 											   id="enddate-widget-{{ $step->id }}"
                                                @if (isset($step->end_date))
                                                value="{{ $step->end_date->format('d-m-Y') }}"
+                                               @else
+                                               value=""
                                                @endif
 											   data-groupid="{{ $step->id }}"
 											   data-type="enddate"
