@@ -499,7 +499,9 @@
 											   class="form-control"
 											   prevent-enter="true"
 											   id="enddate-widget-{{ $step->id }}"
-											   value="{{ $step->end_date->format('d-m-Y') }}"
+                                               @if (isset($step->end_date))
+                                               value="{{ $step->end_date->format('d-m-Y') }}"
+                                               @endif
 											   data-groupid="{{ $step->id }}"
 											   data-type="enddate"
 									    />

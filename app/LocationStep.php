@@ -70,6 +70,11 @@ class LocationStep extends Model
                 }
             }
 
+            if ($steps[$currentStep->id]['estimated_duration'] == '0' || $steps[$currentStep->id]['estimated_duration'] == '') {
+                $currentStep->end_date = NULL;
+                $currentStep->estimated_duration = 0;
+            }
+
             $this->flowsteps()->save($currentStep);
 
             if (array_key_exists('published', $steps[$currentStep->id])) {
@@ -93,7 +98,6 @@ class LocationStep extends Model
             $newFlowStep = new FlowStep;
             $newFlowStep->fill($stepData);
 
-
             if (array_key_exists('observatii', $stepData)) {
                 foreach (\Config::get('app.all_locales') as $locale) {
                     $newFlowStep->translateOrNew($locale)->observatii = $stepData['observatii'][$locale];
@@ -102,6 +106,11 @@ class LocationStep extends Model
 
             if (! array_key_exists('finalizat', $stepData)) {
                 $stepData['finalizat'] = 0;
+            }
+
+            if ($stepData['estimated_duration'] == '0' || $stepData['estimated_duration'] == '') {
+                $newFlowStep->end_date = NULL;
+                $newFlowStep->estimated_duration = 0;
             }
 
             $this->flowsteps()->save($newFlowStep);
