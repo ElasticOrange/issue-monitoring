@@ -16,7 +16,8 @@ class Report extends Model
 
     protected $fillable = [
         'date',
-        'report_type'
+        'report_type',
+        'public'
     ];
 
     public $dates = ['date'];
@@ -87,6 +88,8 @@ class Report extends Model
             $this->translateOrNew($locale)->title = $request->get('title')[$locale];
             $this->translateOrNew($locale)->description = $request->get('description')[$locale];
         }
+
+        $this->public = $request->public == true;
 
         $this->save();
 

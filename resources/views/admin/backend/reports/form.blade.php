@@ -130,6 +130,21 @@
         </select>
     </div>
 </div><br/><br/>
+<hr>
+
+<div class="form-group">
+    <div class="checkbox col-md-8 col-md-offset-2">
+        <label>
+            <input  type="checkbox"
+                    value="1"
+                    name="public"
+                    @if($report->public)
+                        checked="checked"
+                    @endif
+            />Arata pe prima pagina
+        </label>
+    </div>
+</div>
 
 <hr>
 
