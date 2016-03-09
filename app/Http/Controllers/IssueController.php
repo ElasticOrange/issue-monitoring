@@ -8,11 +8,12 @@ use Issue\News;
 use Issue\Alert;
 use Issue\Issue;
 use Issue\Domain;
-use Issue\Location;
 use Issue\Document;
+use Issue\Location;
+use Issue\LegalNews;
 use Issue\Stakeholder;
-use Issue\LocationStep;
 use Issue\FlowTemplate;
+use Issue\LocationStep;
 use Issue\Http\Requests;
 use Issue\NewsTranslation;
 use Issue\IssueTranslation;
@@ -82,6 +83,10 @@ class IssueController extends Controller
             Alert::createAlert($issue, 'Issue\Issue');
         }
 
+        if ($request->addToLegalNews) {
+            $this->addToLegalNews($issue);
+        }
+
 		return $issue;
 	}
 
@@ -148,6 +153,10 @@ class IssueController extends Controller
             Alert::updateAlert($issue, 'Issue\Issue');
         } else {
             Alert::deleteUnsentAlert($issue, 'Issue\Issue');
+        }
+
+        if ($request->addToLegalNews) {
+            $this->addToLegalNews($issue);
         }
 
 		return $issue;
@@ -321,5 +330,20 @@ class IssueController extends Controller
         $step = StepAutocomplete::where('name', 'like', '%'. $queryStepAutocompleteName .'%')->get();
 
         return $step;
+    }
+
+    protected function addToLegalNews($issue)
+    {
+        $legalNews = new LegalNews;
+
+        foreach (\Config::get('app.all_locales') as $locale) {
+            $legalNews->translateOrNew($locale)->title = $issue->getAttribute('name:'.$locale);
+            $legalNews->translateOrNew($locale)->content = $issue->getAttribute('status:'.$locale);
+        }
+
+        $legalNews->issue_id = $issue->id;
+        $legalNews->save();
+
+        return $legalNews;
     }
 }

@@ -77,6 +77,20 @@ class LocationStep extends Model
 
             $this->flowsteps()->save($currentStep);
 
+            if (array_key_exists('addToLegalNews', $steps[$currentStep->id])) {
+                if ($steps[$currentStep->id]['addToLegalNews'] == true) {
+                    $legalNews = new LegalNews;
+
+                    foreach (\Config::get('app.all_locales') as $locale) {
+                        $legalNews->translateOrNew($locale)->title = $currentStep->flowstepsInLocation->issue->getAttribute('name:'.$locale);
+                        $legalNews->translateOrNew($locale)->content = $currentStep->getAttribute('observatii:'.$locale);
+                    }
+
+                    $legalNews->issue_id = $currentStep->flowstepsInLocation->issue_id;
+                    $legalNews->save();
+                }
+            }
+
             if (array_key_exists('published', $steps[$currentStep->id])) {
                 if ($steps[$currentStep->id]['published'] == true
                     && Alert::getUnsentAlert($currentStep, 'Issue\FlowStep') == null) {
@@ -113,7 +127,23 @@ class LocationStep extends Model
                 $newFlowStep->estimated_duration = 0;
             }
 
+
+
             $this->flowsteps()->save($newFlowStep);
+
+            if (array_key_exists('addToLegalNews', $stepData)) {
+                if ($stepData['addToLegalNews'] == true) {
+                    $legalNews = new LegalNews;
+
+                    foreach (\Config::get('app.all_locales') as $locale) {
+                        $legalNews->translateOrNew($locale)->title = $newFlowStep->flowstepsInLocation->issue->getAttribute('name:'.$locale);
+                        $legalNews->translateOrNew($locale)->content = $newFlowStep->getAttribute('observatii:'.$locale);
+                    }
+
+                    $legalNews->issue_id = $newFlowStep->flowstepsInLocation->issue_id;
+                    $legalNews->save();
+                }
+            }
 
             if (array_key_exists('published', $stepData)) {
                 if ($stepData['published'] == true) {

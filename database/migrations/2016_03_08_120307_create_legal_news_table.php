@@ -14,12 +14,22 @@ class CreateLegalNewsTable extends Migration
     {
         Schema::create('legal_news', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('content');
             $table->boolean('published');
             $table->integer('issue_id');
             $table->timestamps();
         });
+
+		Schema::create('legal_news_translations', function (Blueprint $table) {
+			$table->increments('id');
+			$table->integer('legal_news_id')->unsigned();
+			$table->string('locale', 2)->index();
+
+			$table->string('title', 1000);
+			$table->string('content', 1000);
+
+			$table->unique(['legal_news_id','locale']);
+			$table->foreign('legal_news_id')->references('id')->on('legal_news')->onDelete('cascade');
+		});
     }
 
     /**
@@ -29,6 +39,7 @@ class CreateLegalNewsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('legal_news');
+        Schema::dropIfExists('legal_news_translations');
+        Schema::dropIfExists('legal_news');
     }
 }

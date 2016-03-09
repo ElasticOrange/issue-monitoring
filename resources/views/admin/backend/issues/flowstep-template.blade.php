@@ -157,12 +157,20 @@
 						</div>
 					</div><br/>
                     <div class="form-group">
-                        <div class="checkbox col-md-8 col-md-offset-1">
+                        <div class="checkbox col-md-3 col-md-offset-1">
                             <label>
                                 <input  type="checkbox"
                                         value="1"
                                         name="location[<%= location_id%>][flow_steps][<%= id%>][published]"
                                         />Publica
+                            </label>
+                        </div>
+                        <div class="checkbox col-md-3 col-md-offset-2">
+                            <label>
+                                <input  type="checkbox"
+                                        value="1"
+                                        name="location[<%= location_id%>][flow_steps][<%= id%>][addToLegalNews]"
+                                />Adauga la noutati legislative
                             </label>
                         </div>
                     </div>

@@ -144,9 +144,6 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="addToLegalNews"
-                                    @if(! $issue->alerts()->notSent()->get()->isEmpty())
-                                        checked="checked"
-                                    @endif
                             />Adauga la noutati legislative
                         </label>
                     </div>
@@ -616,7 +613,7 @@
                                                 </div>
                                             </div><br/>
                                             <div class="form-group">
-                                                <div class="checkbox col-md-8 col-md-offset-1">
+                                                <div class="checkbox col-md-3 col-md-offset-1">
                                                     <label>
                                                         <input  type="checkbox"
                                                                 value="1"
@@ -625,6 +622,15 @@
                                                                     checked="checked"
                                                                 @endif
                                                                 />Publica
+                                                    </label>
+                                                </div>
+                                                 
+                                                <div class="checkbox col-md-3 col-md-offset-2">
+                                                    <label>
+                                                        <input  type="checkbox"
+                                                                value="1"
+                                                                name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][addToLegalNews]"
+                                                        />Adauga la noutati legislative
                                                     </label>
                                                 </div>
                                             </div>

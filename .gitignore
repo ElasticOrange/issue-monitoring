@@ -4,6 +4,7 @@
 .env
 *.swp
 *.sql
+tags
 
 Envoy.blade.php
 
