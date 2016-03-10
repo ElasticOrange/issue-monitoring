@@ -95,6 +95,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users/query', 'UserController@query');
     Route::post('/users/profile', 'UserController@updateProfile');
     Route::get('/users/{users}/delete', 'UserController@destroy');
+    Route::get('users/query-domain', 'UserController@queryDomain');
     Route::resource('/users', 'UserController', ['except' => ['destroy']]);
     Route::get('/users/{users}/setPublished', 'UserController@setActive');
 

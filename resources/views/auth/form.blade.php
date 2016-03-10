@@ -121,7 +121,7 @@
             <div class="col-md-8">
                 <input
                         id="domain-autocomplete"
-                        source-url="{{ action('NewsController@queryDomain') }}/?name={name}"
+                        source-url="{{ action('UserController@queryDomain') }}/?name={name}"
                         type="text"
                         placeholder="Nume"
                         class="form-control"
@@ -130,25 +130,99 @@
             </div>
         </div><br/>
 
-        <div class="form-group">
-            @include('auth.connected-domain')
-            <div class="panel panel-success col-md-8 col-md-offset-2">
-                <div class="panel-heading">Domenii conectate</div>
-                <div class="list-group" id="connected-domains-container">
-                    @foreach ($user->domains as $domain_connected)
-                        <div class="list-group-item" domain-id="{{ $domain_connected->id }}">
-                            <a class="badge" connected-domain-delete="{{ $domain_connected->id }}">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
-                            </a>
-                            <h4 class="list-group-item-heading">{{ $domain_connected->name }}</h4>
-                            <p class="list-group-item-text"></p>
-                            <input type="hidden" name="subscription[domains_connected][]" value="{{ $domain_connected->id }}" />
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
         <br/><hr/><br/>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Domeniu</th>
+                        <th>Initiative</th>
+                        <th>Rapoarte</th>
+                        <th>Stiri</th>
+                        <th>Stakeholderi</th>
+                        <th>Actiuni</th>
+                    </tr>
+                </thead>
+                <tbody id="connected-domains-container">
+                @foreach ($user->domains as $domain_connected)
+                    <tr domain-id="{{ $domain_connected->id }}">
+                        <th scope="row">
+                            {{ $domain_connected->name }}
+                        </th>
+                        <td>
+                            <label>
+                                <input name="can_see_issues"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->can_see_issues == true)
+                                            checked="checked"
+                                        @endif
+                                />Acces
+                            </label>
+                            <label style="margin-left: 20px;">
+                                <input name="alert_for_issues"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->alert_for_issues == true)
+                                            checked="checked"
+                                        @endif
+                                />Alerte
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input name="can_see_reports"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->can_see_reports == true)
+                                            checked="checked"
+                                        @endif
+                                />Acces
+                            </label>
+                            <label style="margin-left: 20px;">
+                                <input name="alert_for_reports"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->alert_for_reports == true)
+                                            checked="checked"
+                                        @endif
+                                />Alerte
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input name="can_see_news"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->can_see_news == true)
+                                            checked="checked"
+                                        @endif
+                                />Acces
+                            </label>
+                            <label style="margin-left: 20px;">
+                                <input name="alert_for_news"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->alert_for_news == true)
+                                            checked="checked"
+                                        @endif
+                                />Alerte
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input name="can_see_stakeholders"
+                                        type="checkbox"
+                                        @if($domain_connected->pivot->can_see_stakeholders == true)
+                                            checked="checked"
+                                        @endif
+                                />Acces
+                            </label>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger delete-button" connected-domain-delete="{{ $domain_connected->id }}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                        <input type="hidden" name="subscription[domains_connected][]" value="{{ $domain_connected->id }}" />
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

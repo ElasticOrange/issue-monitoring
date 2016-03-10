@@ -66,7 +66,15 @@ class User extends Model implements AuthenticatableContract,
 
     public function domains()
     {
-        return $this->belongsToMany('Issue\Domain');
+        return $this->belongsToMany('Issue\Domain')->withPivot(
+            'can_see_issues',
+            'can_see_news',
+            'can_see_reports',
+            'alert_for_issues',
+            'alert_for_news',
+            'alert_for_reports',
+            'can_see_stakeholders'
+        );
     }
 
     public function syncSubscription($subscriptionData)

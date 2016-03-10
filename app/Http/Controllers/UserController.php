@@ -12,6 +12,8 @@ use Gate;
 use Auth;
 use Mail;
 use Guard;
+use Issue\Domain;
+use Issue\DomainTranslation;
 
 class UserController extends Controller
 {
@@ -137,12 +139,6 @@ class UserController extends Controller
             $user->password = Hash::make($input['password']);
         }
 
-        $user->admin_alert_new_issue = $request->admin_alert_new_issue == true;
-        $user->admin_alert_issue_status = $request->admin_alert_issue_status == true;
-        $user->admin_alert_news = $request->admin_alert_news == true;
-        $user->admin_alert_report = $request->admin_alert_report == true;
-        $user->admin_alert_issue_stage = $request->admin_alert_issue_stage == true;
-
         $user->save();
 
         $user->syncSubscription($request->input('subscription'));
@@ -246,5 +242,35 @@ class UserController extends Controller
         $user->save();
 
         return $user;
+    }
+
+    public function queryDomain(Request $request)
+    {
+        $queryDomainName = $request->input('name');
+
+        $domainIds = DomainTranslation::where('name', 'like', '%'.$queryDomainName.'%')
+                                        ->where('locale', \App::getLocale())
+                                        ->lists('domain_id');
+        $domains = Domain::whereIn('id', $domainIds)
+                            ->where('parent_id', '>', 0)
+                            ->with(['translations', 'parent'])
+                            ->get();
+
+        $result = [];
+
+        foreach ($domains as $domain) {
+            $result[] = [
+                'id' => $domain->id,
+                // 'can_see_issues' => $domain->can_see_issues,
+                // 'can_see_news' => $domain->can_see_news,
+                // 'can_see_reports' => $domain->can_see_reports,
+                // 'alert_for_issues' => $domain->alert_for_issues,
+                // 'alert_for_news' => $domain->alert_for_news,
+                // 'alert_for_reports' => $domain->alert_for_reports,
+                'name' => (($domain->parent->id > 1) ? $domain->parent->name." - " : "").$domain->name,
+            ];
+        }
+
+        return $result;
     }
 }

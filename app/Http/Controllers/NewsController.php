@@ -174,6 +174,12 @@ class NewsController extends Controller
         foreach ($domains as $domain) {
             $result[] = [
                 'id' => $domain->id,
+                'can_see_issues' => $domain->can_see_issues,
+                'can_see_news' => $domain->can_see_news,
+                'can_see_reports' => $domain->can_see_reports,
+                'alert_for_issues' => $domain->alert_for_issues,
+                'alert_for_news' => $domain->alert_for_news,
+                'alert_for_reports' => $domain->alert_for_reports,
                 'name' => (($domain->parent->id > 1) ? $domain->parent->name." - " : "").$domain->name,
             ];
         }
