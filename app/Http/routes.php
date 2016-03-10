@@ -16,6 +16,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::controller('/admin', 'AdminDashboardController');
 
+    Route::get('/backend/legalnews/query', 'LegalNewsController@query');
+    Route::get('/backend/legalnews/{legalnews}/delete', 'LegalNewsController@destroy');
+    Route::resource('/backend/legalnews', 'LegalNewsController', ['except' => ['show', 'destroy']]);
+    
+
     Route::get('/backend/document/{public_code}/show', 'DocumentController@show');
     Route::get('/backend/document/query', 'DocumentController@query');
     Route::get('/backend/document/{document}/delete', 'DocumentController@destroy');

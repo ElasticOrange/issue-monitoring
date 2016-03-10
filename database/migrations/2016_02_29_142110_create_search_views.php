@@ -34,8 +34,8 @@ class CreateSearchViews extends Migration
      */
     public function down()
     {
-        DB::statement("DROP VIEW issues_search");    
-        DB::statement("DROP VIEW users_search");    
+        DB::statement("DROP VIEW issues_search");
+        DB::statement("DROP VIEW users_search");
         DB::statement("DROP VIEW stakeholders_search");
         DB::statement("DROP VIEW documents_search");
         DB::statement("DROP VIEW news_search");

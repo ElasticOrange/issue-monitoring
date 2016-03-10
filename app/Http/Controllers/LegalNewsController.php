@@ -4,11 +4,18 @@ namespace Issue\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Gate;
+use Issue\LegalNews;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 
 class LegalNewsController extends Controller
 {
+    use CanReturnDataForDataTables;
+
+    private $defaultModel = 'Issue\LegalNews';
+    private $searchTable = 'legal_news_search';
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,11 @@ class LegalNewsController extends Controller
      */
     public function index()
     {
-        //
+        if (Gate::denies('list-legal-news')) {
+            abort(403);
+        }
+
+        return view('admin.backend.legal-news.list');
     }
 
     /**
@@ -57,9 +68,13 @@ class LegalNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($legalnews)
     {
-        //
+        if (Gate::denies('edit-legal-news')) {
+            abort(403);
+        }
+
+        return view('admin.backend.legal-news.edit', ['legalNews'=> $legalnews]);
     }
 
     /**
@@ -69,9 +84,20 @@ class LegalNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $legalnews)
     {
-        //
+        if (Gate::denies('update-legal-news')) {
+            abort(403);
+        }
+
+        foreach (\Config::get('app.all_locales') as $locale) {
+            $legalnews->translateOrNew($locale)->title = $request->title[$locale];
+            $legalnews->translateOrNew($locale)->content = $request->content[$locale];
+        }
+
+        $legalnews->save();
+
+        return $legalnews;
     }
 
     /**
@@ -80,8 +106,14 @@ class LegalNewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($legalnews)
     {
-        //
+        if (Gate::denies('delete-legal-news')) {
+            abort(403);
+        }
+
+        $legalnews->delete();
+
+        return redirect()->action('LegalNewsController@index');
     }
 }

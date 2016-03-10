@@ -48,6 +48,9 @@
 			<li>
 				<a href="{{ action('ReportController@index') }}"><i class="fa fa-flag"></i> Rapoarte</a>
 			</li>
+			<li>
+				<a href="{{ action('LegalNewsController@index') }}"><i class="fa fa-external-link-square"></i> Noutati legislative</a>
+			</li>
 		</ul>
 	</div>
 </div>
