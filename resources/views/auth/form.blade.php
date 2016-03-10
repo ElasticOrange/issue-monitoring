@@ -3,7 +3,7 @@
 <ul class="nav nav-tabs">
     <li class="active"><a href="#informatii-generale" data-toggle="tab"><strong>Informatii generale</strong></a></li>
     <li><a href="#tip-abonament" data-toggle="tab"><strong>Tip abonament</strong></a></li>
-    <li><a href="#access-alerts" data-toggle="tab"><strong>Restrictioneaza alerte</strong></a></li>
+    <li><a href="#access-alerts" data-toggle="tab"><strong>Acces si alerte</strong></a></li>
 </ul>
 
 <div class="tab-content">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <br/><br/>
+        <br/><hr/><br/>
     </div>
 
     <div class="tab-pane" id="tip-abonament">
@@ -109,6 +109,10 @@
         </div>
 
         <br/><hr/><br/>
+    </div>
+
+    <div class="tab-pane" id="access-alerts">
+        <br/>
 
         <div class="form-group">
             <div class="col-md-2 text-right">
@@ -144,80 +148,7 @@
                 </div>
             </div>
         </div>
+
+        <br/><hr/><br/>
     </div>
-
-    <div class="tab-pane" id="access-alerts">
-        <br/>
-
-        <div class="form-group">
-            <div class="checkbox col-md-8 col-md-offset-2">
-                <label>
-                    <input  type="checkbox"
-                            value="1"
-                            name="admin_alert_new_issue"
-                            @if($user->admin_alert_new_issue)
-                            checked="checked"
-                            @endif
-                            />Alerta issue nou
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="checkbox col-md-8 col-md-offset-2">
-                <label>
-                    <input  type="checkbox"
-                            value="1"
-                            name="admin_alert_issue_status"
-                            @if($user->admin_alert_issue_status)
-                            checked="checked"
-                            @endif
-                            />Alerta issue status
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="checkbox col-md-8 col-md-offset-2">
-                <label>
-                    <input  type="checkbox"
-                            value="1"
-                            name="admin_alert_issue_stage"
-                            @if($user->admin_alert_issue_stage)
-                            checked="checked"
-                            @endif
-                            />Alerta issue pas
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="checkbox col-md-8 col-md-offset-2">
-                <label>
-                    <input  type="checkbox"
-                            value="1"
-                            name="admin_alert_news"
-                            @if($user->admin_alert_news)
-                            checked="checked"
-                            @endif
-                            />Alerta news
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="checkbox col-md-8 col-md-offset-2">
-                <label>
-                    <input  type="checkbox"
-                            value="1"
-                            name="admin_alert_report"
-                            @if($user->admin_alert_report)
-                            checked="checked"
-                            @endif
-                            />Alerta raport
-                </label>
-            </div>
-        </div>
-    </div>
-
 </div>
