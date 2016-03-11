@@ -144,6 +144,7 @@
                     </tr>
                 </thead>
                 <tbody id="connected-domains-container">
+                @include('auth.connected-domain')
                 @foreach ($user->domains as $domain_connected)
                     <tr domain-id="{{ $domain_connected->id }}">
                         <th scope="row">
@@ -151,16 +152,26 @@
                         </th>
                         <td>
                             <label>
-                                <input name="can_see_issues"
+                                <input name="rights[{{ $domain_connected->id }}][can_see_issues]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][can_see_issues]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->can_see_issues == true)
                                             checked="checked"
                                         @endif
                                 />Acces
                             </label>
                             <label style="margin-left: 20px;">
-                                <input name="alert_for_issues"
+                                <input name="rights[{{ $domain_connected->id }}][alert_for_issues]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][alert_for_issues]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->alert_for_issues == true)
                                             checked="checked"
                                         @endif
@@ -169,16 +180,26 @@
                         </td>
                         <td>
                             <label>
-                                <input name="can_see_reports"
+                                <input name="rights[{{ $domain_connected->id }}][can_see_reports]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][can_see_reports]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->can_see_reports == true)
                                             checked="checked"
                                         @endif
                                 />Acces
                             </label>
                             <label style="margin-left: 20px;">
-                                <input name="alert_for_reports"
+                                <input name="rights[{{ $domain_connected->id }}][alert_for_reports]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][alert_for_reports]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->alert_for_reports == true)
                                             checked="checked"
                                         @endif
@@ -187,16 +208,26 @@
                         </td>
                         <td>
                             <label>
-                                <input name="can_see_news"
+                                <input name="rights[{{ $domain_connected->id }}][can_see_news]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][can_see_news]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->can_see_news == true)
                                             checked="checked"
                                         @endif
                                 />Acces
                             </label>
                             <label style="margin-left: 20px;">
-                                <input name="alert_for_news"
+                                <input name="rights[{{ $domain_connected->id }}][alert_for_news]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][alert_for_news]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->alert_for_news == true)
                                             checked="checked"
                                         @endif
@@ -205,8 +236,13 @@
                         </td>
                         <td>
                             <label>
-                                <input name="can_see_stakeholders"
+                                <input name="rights[{{ $domain_connected->id }}][can_see_stakeholders]"
+                                        type="hidden"
+                                        value="0"
+                                />
+                                <input name="rights[{{ $domain_connected->id }}][can_see_stakeholders]"
                                         type="checkbox"
+                                        value="1"
                                         @if($domain_connected->pivot->can_see_stakeholders == true)
                                             checked="checked"
                                         @endif
@@ -218,7 +254,7 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>
-                        <input type="hidden" name="subscription[domains_connected][]" value="{{ $domain_connected->id }}" />
+                        <input type="hidden" name="domains_connected[]" value="{{ $domain_connected->id }}" />
                     </tr>
                 @endforeach
                 </tbody>

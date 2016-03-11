@@ -91,17 +91,21 @@ class User extends Model implements AuthenticatableContract,
             return true;
         }
 
-        if (!array_key_exists('domains_connected', $subscriptionData)) {
-            $domains_connected = [];
-        } else {
-            $domains_connected = $subscriptionData['domains_connected'];
-        }
-        $this->domains()->sync($domains_connected);
-
         $subscription->fill($subscriptionData);
 
         $this->subscription()->save($subscription);
 
         return true;
+    }
+
+    public function setDomains($request)
+    {
+        if (!$request->rights) {
+            $rights = [];
+        } else {
+            $rights = $request->rights;
+        }
+
+        $this->domains()->sync($rights);
     }
 }

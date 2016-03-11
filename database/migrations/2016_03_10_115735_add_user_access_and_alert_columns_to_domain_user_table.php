@@ -13,13 +13,13 @@ class AddUserAccessAndAlertColumnsToDomainUserTable extends Migration
     public function up()
     {
         Schema::table('domain_user', function (Blueprint $table) {
-            $table->boolean('can_see_issues')->default(1);
-            $table->boolean('can_see_news')->default(1);
-            $table->boolean('can_see_reports')->default(1);
-            $table->boolean('alert_for_issues')->default(1);
-            $table->boolean('alert_for_news')->default(1);
-            $table->boolean('alert_for_reports')->default(1);
-            $table->boolean('can_see_stakeholders')->default(1);
+            $table->boolean('can_see_issues')->default(0);
+            $table->boolean('can_see_news')->default(0);
+            $table->boolean('can_see_reports')->default(0);
+            $table->boolean('alert_for_issues')->default(0);
+            $table->boolean('alert_for_news')->default(0);
+            $table->boolean('alert_for_reports')->default(0);
+            $table->boolean('can_see_stakeholders')->default(0);
         });
     }
 

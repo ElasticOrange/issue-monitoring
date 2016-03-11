@@ -114,7 +114,6 @@ $(document).ready(function(){
             wildcard: '{name}',
             transform: function (response) {
                 return _.filter(response, function(item){
-                    console.log(item);
                     return $('[domain-id=' + item.id + ']').length === 0;
                 });
             }
