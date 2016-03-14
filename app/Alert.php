@@ -78,20 +78,26 @@ class Alert extends Model
         $alertType = '';
 
         $issueAlerts = self::whereIn('alertable_type', ['Issue\Issue', 'Issue\FlowStep'])->where('sent', 0)->with(['alertable'])->get();
+
         $newIssueUsers = User::where('active', true)
-                            ->where('admin_alert_new_issue', true)
                             ->where('alert_new_issue', true)
-                            ->with('domains')
+                            ->with(['domains' => function($query) {
+                                $query->where('alert_for_issues', true);
+                            }])
                             ->get();
+
         $newStatusUsers = User::where('active', true)
-                            ->where('admin_alert_issue_status', true)
                             ->where('alert_issue_status', true)
-                            ->with('domains')
+                            ->with(['domains' => function($query) {
+                                $query->where('alert_for_issues', true);
+                            }])
                             ->get();
+
         $newFlowStepUsers = User::where('active', true)
-                            ->where('admin_alert_issue_stage', true)
                             ->where('alert_issue_stage', true)
-                            ->with('domains')
+                            ->with(['domains' => function($query) {
+                                $query->where('alert_for_issues', true);
+                            }])
                             ->get();
        
         foreach ($issueAlerts as $alert) {
@@ -213,9 +219,10 @@ class Alert extends Model
         
         $newsAlerts = self::where('alertable_type', 'Issue\News')->where('sent', 0)->with(['alertable'])->get();
         $users = User::where('active', true)
-                    ->where('admin_alert_news', true)
                     ->where('alert_news', true)
-                    ->with('domains')
+                    ->with(['domains' => function($query) {
+                                $query->where('alert_for_news', true);
+                            }])
                     ->get();
 
         foreach ($users as $user) {
@@ -276,9 +283,10 @@ class Alert extends Model
 
         $reportAlerts = self::where('alertable_type', 'Issue\Report')->where('sent', 0)->with(['alertable'])->get();
         $usersToSendReportsTo = User::where('active', true)
-                                    ->where('admin_alert_report', true)
                                     ->where('alert_report', true)
-                                    ->with('domains')
+                                    ->with(['domains' => function($query) {
+                                        $query->where('alert_for_reports', true);
+                                    }])
                                     ->get();
 
         foreach ($reportAlerts as $alert) {
