@@ -14,7 +14,7 @@ var elixir = require('laravel-elixir');
 var bowerDir = './resources/assets/bower/';
 
 elixir(function(mix) {
-	mix.sass('app.scss')
+	mix.sass(['app.scss', 'customFront.scss'])
 	.styles([
 		  'bootstrap/dist/css/bootstrap.min.css'
 		, 'metisMenu/dist/metisMenu.min.css'
@@ -64,6 +64,11 @@ elixir(function(mix) {
 		, 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
 		, 'jquery-ui/jquery-ui.js'
 		], 'public/js/main.js', bowerDir)
+	.scripts([
+			  '../customCss/customFront.css'
+			]
+			, 'public/css/customFront.css'
+			, bowerDir)
 /*    .scripts([
 			  '../customJs/deleteDocument.js'
 			, '../customJs/ajaxForms.js'
@@ -73,21 +78,19 @@ elixir(function(mix) {
 			]
 			, 'public/js/custom.js'
 			, bowerDir)*/
-	.styles(
-			[
-				  'style.css'
-				, 'app.css'
-			]
-			, 'public/css/all.css'
-			, 'public/css/'
+	.styles([
+			  'style.css'
+			, 'app.css'
+		]
+		, 'public/css/all.css'
+		, 'public/css/'
 		)
-	.styles(
-			[
-				  'front-style.css'
-				, 'app.css'
-			]
-			, 'public/css/main.css'
-			, 'public/css/'
+	.styles([
+			  'front-style.css'
+			, 'app.css'
+		]
+		, 'public/css/main.css'
+		, 'public/css/'
 		)
 	.copy(
 		   'resources/assets/bower/font-awesome/fonts/',

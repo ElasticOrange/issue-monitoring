@@ -12,6 +12,7 @@
     <title>IssueMonitoring</title>
 
     <link type="text/css" rel="stylesheet" href="{{ elixir('css/main.css') }}" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/customFront.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,9 +26,8 @@
 <body>
 
     <div id="wrapper">
-        @include('frontend.layout.partials.header')
 
-        <div id="page-wrapper">
+        <div id="container">
             @yield('content')
         </div>
 
@@ -35,7 +35,6 @@
     </div>
 
     <!-- Bootstrap Core CSS -->
-    <script> var CKEDITOR_BASEPATH = '/build/js/ckeditor/'</script>
     <script src="{{ elixir('js/main.js') }}"></script>
     @yield('js')
 </body>
