@@ -33,26 +33,37 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#">Acasa</a>
+                        <a href="#acasa">Acasa</a>
                     </li>
                     <li>
-                        <a href="#">Initiative</a>
+                        <a href="#initiative">Initiative</a>
                     </li>
                     <li>
-                        <a href="#">Rapoarte</a>
+                        <a href="#rapoarte">Rapoarte</a>
                     </li>
                     <li>
-                        <a href="#">Despre noi</a>
+                        <a href="#contact">Contact</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Despre noi<strong class="caret"></strong>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#despre-noi">Despre noi</a>
+                            </li>
+                            <li>
+                                <a href="#servicii">Servicii</a>
+                            </li>
+                            <li>
+                                <a href="#echipa">Echipa</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <a href="#">Autentificare</a>
+                        <a href="#autentificare">Autentificare</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                            <!-- <span>CAUTA</span> -->
                         <div class="searching-input">
                             <input type="text" placeholder="CAUTA" />
                         </div>

@@ -1,4 +1,6 @@
 var elixir = require('laravel-elixir');
+var watch = require('gulp-watch');
+var gulp = require('gulp');
 
 /*
  |--------------------------------------------------------------------------
@@ -69,15 +71,17 @@ elixir(function(mix) {
 			]
 			, 'public/css/customFront.css'
 			, bowerDir)
-/*    .scripts([
-			  '../customJs/deleteDocument.js'
-			, '../customJs/ajaxForms.js'
-			, '../customJs/jqxtreeActivation.js'
-			, '../customJs/datatableTranslated.js'
-			, '../customJs/SetPublishedAjax.js'
-			]
-			, 'public/js/custom.js'
-			, bowerDir)*/
+/*
+	.scripts([
+		  '../customJs/deleteDocument.js'
+		, '../customJs/ajaxForms.js'
+		, '../customJs/jqxtreeActivation.js'
+		, '../customJs/datatableTranslated.js'
+		, '../customJs/SetPublishedAjax.js'
+		]
+		, 'public/js/custom.js'
+		, bowerDir)
+*/
 	.styles([
 			  'style.css'
 			, 'app.css'
@@ -117,10 +121,12 @@ elixir(function(mix) {
 		   'public/build/js/ckeditor'
 	   )
 	.version([
-			  'css/all.css'
-			, 'js/all.js'
-			, 'css/main.css'
-			, 'js/main.js'
-//            , 'js/custom.js'
+		  'css/all.css'
+		, 'js/all.js'
+		, 'css/main.css'
+		, 'js/main.js'
+/*
+	            , 'js/custom.js'
+*/
 		]);
 });

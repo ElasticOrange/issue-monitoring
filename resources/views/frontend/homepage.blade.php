@@ -64,6 +64,69 @@
     <br />
     <br />
 
+    <div class="row news-title">
+        <div class="col-md-8 title-news">
+            <h3 class="text-left">Noutati legislative</h3>
+
+            <br /><br />
+
+            <dl class="news-group">
+                <dt class="news-date-text">16 martie 2016</dt>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <img src="/img/news_stripe.png" class="news-stripe">
+            </dl>
+
+            <!-- Foreach news -->
+            <dl class="news-group">
+                <dt class="news-date-text">16 martie 2016</dt>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <img src="/img/news_stripe.png" class="news-stripe">
+            </dl>
+
+            <dl class="news-group">
+                <dt class="news-date-text">16 martie 2016</dt>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <img src="/img/news_stripe.png" class="news-stripe">
+            </dl>
+
+            <dl class="news-group">
+                <dt class="news-date-text">16 martie 2016</dt>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <img src="/img/news_stripe.png" class="news-stripe">
+            </dl>
+
+            <dl class="news-group">
+                <dt class="news-date-text">16 martie 2016</dt>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <!-- <img src="/img/news_stripe.png" class="news-stripe"> -->
+            </dl>
+            <!-- /Foreach news -->
+        </div>
+        <div class="col-md-4 subscribe-now">
+            <h3 class="text-left">Aboneaza-te</h3>
+
+            <br />
+
+            <img src="/img/subscribe_img.png" class="subscribe_img">
+            <dl>
+                <dt class="subscribe-text">Bucură-te de avantaje! <br /> Vei primi notificări privind evoluția inițiativelor legislative din domeniul selectat direct prin e-mail.</dt>
+            </dl>
+            <button class="subscribe-btn"><span class="subscribe-btn-text">Abonează-te acum</span></button>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-md-12 reports-title">
+            <h3 class="report-news">Rapoarte</h3>
+        </div>
+    </div>
+
+    <br />
+
+
+
     <div class="row">
         <div class="col-md-12">
              
