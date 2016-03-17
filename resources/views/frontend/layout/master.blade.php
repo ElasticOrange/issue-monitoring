@@ -31,7 +31,6 @@
             @yield('content')
         </div>
 
-        @include('frontend.layout.partials.footer')        
     </div>
 
     <!-- Bootstrap Core CSS -->

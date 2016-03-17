@@ -1,4 +1,5 @@
 body {
+    font-family: Circle Fina, Arial;
     background: #13a8ac url(/img/cloud_bg.png) no-repeat center center;
 }
 
@@ -164,8 +165,6 @@ dl.news-group {
 .reports-title {
     background-color: #aa7093;
     height: 50px;
-    width: 97%;
-    margin-left: 15px;
 }
 
 .report-news {
@@ -174,6 +173,25 @@ dl.news-group {
     font-size: 31px;
     font-weight: 700;
     text-align: left;
+    padding: 8px 40px;
+    margin: 0px;
+}
+
+dd a {
+    font-family: Gotham;
+    color: #1aaeb2;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.reports-dt-title {
+    margin-bottom: 5px;
+}
+
+.reports-img {
     padding-left: 40px;
-    margin-top: 8px;
+}
+
+.reports-stripe {
+    margin-top: -20px;
 }
