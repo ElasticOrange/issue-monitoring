@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
+use Issue\Domain;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -14,74 +16,60 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIndex()
     {
-        return view('frontend.homepage');
+
+        return view('frontend.pages.homepage');
     }
 
-    /**
-     * Show the form for creating a new resource.
+   /**
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getIssues()
     {
-        //
+        $user = Auth::user();
+        $publicDomainsTree = $this->getPublicDomainsTree($user);
+
+        return view('frontend.pages.issues', ['publicDomainsTree' => $publicDomainsTree]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    private function getPublicDomainsTree($user = null) {
+        $tree = [];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if ($user) {
+            $domains = $user->domains()->orderBy('parent_id')->get();
+        }
+        else {
+            $domains = Domain::isPublic()->orderBy('parent_id')->get();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        foreach($domains as $domain) {
+            if (! array_key_exists($domain->id, $tree)) {
+                $tree[$domain->id] = [
+                    'domain' => null,
+                    'subdomains' => [],
+                    'hasParent' => false
+                    ];
+                }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            if (! array_key_exists($domain->parent_id, $tree)) {
+                $tree[$domain->parent_id] = [
+                    'domain' => null,
+                    'subdomains' => [],
+                    'hasParent' => false
+                ];
+            }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $tree[$domain->id]['domain'] = $domain;
+            $tree[$domain->parent_id]['subdomains'][] = $domain;
+
+            if ($domain->parent_id) {
+                $tree[$domain->id]['hasParent'] = true;
+            }
+        }
+
+        return $tree;
     }
 }

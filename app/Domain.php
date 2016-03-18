@@ -27,4 +27,9 @@ class Domain extends Model
 	{
 		return $this->belongsToMany('Issue\Issue');
 	}
+
+	public function isPublic($query)
+	{
+		return $query->where('public', 1);
+	}
 }

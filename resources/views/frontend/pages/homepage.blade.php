@@ -1,10 +1,10 @@
 @extends('frontend.layout.master')
-<!-- @include('frontend.layout.partials.user') -->
+<!-- @include('frontend.layout.user') -->
 
 @section('content')
 
 <div class="container white">
-    @include('frontend.layout.partials.header')
+    @include('frontend.layout.header')
     <div class="row">
         <div class="col-md-12">
             <div class="carousel slide" id="carousel-122866">
@@ -147,7 +147,7 @@
         </div>
     </div>
     
-    @include('frontend.layout.partials.footer')
+    @include('frontend.layout.footer')
 </div>
 
 @endsection
