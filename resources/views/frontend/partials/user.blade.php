@@ -1,1 +1,3 @@
-{{ $user->name }}
+<span>
+    Hei, {{ $user->name }}!
+</span>
