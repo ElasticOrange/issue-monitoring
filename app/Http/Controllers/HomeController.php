@@ -7,6 +7,7 @@ use Issue\Domain;
 use Issue\Http\Requests;
 use Issue\Http\Controllers\Controller;
 use Illuminate\Http\Illuminate\Http\Request;
+use Issue\Issue;
 
 class HomeController extends Controller
 {
@@ -36,7 +37,10 @@ class HomeController extends Controller
         $domainsForTree = $this->getDomainsForTree($publicDomains);
 
         $tree = $this->getPublicDomainsTree($domainsForTree);
-        return view('frontend.pages.issues', ['publicDomainsTree' => $tree]);
+
+        $issues = Issue::limit(10)->get();
+
+        return view('frontend.pages.issues', ['publicDomainsTree' => $tree, 'issues' => $issues]);
     }
 
     private function getDomainsForTree($domains) {
@@ -100,5 +104,10 @@ class HomeController extends Controller
             }
         }
         return $tree;
+    }
+
+    public function getContact()
+    {
+        
     }
 }

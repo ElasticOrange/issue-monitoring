@@ -1,4 +1,4 @@
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="domains" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         @foreach($domains as $domain)
             @if (empty($publicDomainsTree[$domain->id]['subdomains'])) 
@@ -12,7 +12,8 @@
             @else
                 <div class="panel-heading" role="tab" id="domain-heading-{{ $domain->id }}">
                     <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-domain-{{ $domain->id }}" aria-expanded="false" aria-controls="collapse-domain-{{ $domain->id }}">
+                        <a role="button" data-toggle="collapse" data-parent="#domains" href="#collapse-domain-{{ $domain->id }}" aria-expanded="false" aria-controls="collapse-domain-{{ $domain->id }}">
+                            <i class="indicator glyphicon glyphicon-triangle-right"></i>
                             {{ $domain->name }}
                         </a>
                     </h4>
@@ -25,7 +26,6 @@
             @endif
 
         @endforeach
-
     </div>
 </div>
 
