@@ -39,7 +39,7 @@
                        @if ($domain->public)
                            checked="checked"
                        @endif
-                />Domeniu vizibil in demo</label>
+                /><span> </span>Domeniu vizibil in demo</label>
             </div>
         </div>
 		<br /><br />
