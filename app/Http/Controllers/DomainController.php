@@ -38,6 +38,7 @@ class DomainController extends Controller
 	{
 		$input = $request->all();
 		$domain->parent_id = $input['parent_id'];
+		$domain->public = $request->public == true;
 
 		foreach (['ro', 'en'] as $locale) {
 			$domain->translateOrNew($locale)->name = $input['name'][$locale];

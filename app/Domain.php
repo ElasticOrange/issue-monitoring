@@ -11,7 +11,7 @@ class Domain extends Model
 	public $translatedAttributes = ['name'];
 
 	protected $guarded = ['id'];
-	protected $fillable = ['parent_id', 'name'];
+	protected $fillable = ['parent_id', 'name', 'public'];
 
 	public function connectedNews()
 	{
@@ -28,7 +28,7 @@ class Domain extends Model
 		return $this->belongsToMany('Issue\Issue');
 	}
 
-	public function isPublic($query)
+	public function scopeIsPublic($query)
 	{
 		return $query->where('public', 1);
 	}

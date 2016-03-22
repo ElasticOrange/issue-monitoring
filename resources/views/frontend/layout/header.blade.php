@@ -33,10 +33,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#acasa">Acasa</a>
+                        <a href="{{ action('HomeController@getIndex') }}">Acasa</a>
                     </li>
                     <li>
-                        <a href="#initiative">Initiative</a>
+                        <a href="{{ action('HomeController@getIssues') }}">Initiative</a>
                     </li>
                     <li>
                         <a href="#rapoarte">Rapoarte</a>

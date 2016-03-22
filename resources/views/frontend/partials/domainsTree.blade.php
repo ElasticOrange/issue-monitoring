@@ -13,7 +13,7 @@
                 <div class="panel-heading" role="tab" id="domain-heading-{{ $domain->id }}">
                     <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-domain-{{ $domain->id }}" aria-expanded="false" aria-controls="collapse-domain-{{ $domain->id }}">
-                            <span class="glyphicon glyphicon-triangle-right"></span> {{ $domain->name }}
+                            {{ $domain->name }}
                         </a>
                     </h4>
                 </div>

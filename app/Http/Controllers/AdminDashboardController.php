@@ -26,5 +26,4 @@ class AdminDashboardController extends Controller
 
         return view('admin.backend.login');
 	}
-
 }

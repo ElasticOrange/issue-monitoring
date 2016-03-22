@@ -28,6 +28,20 @@
 				<input type="text" id="encontent" name="name[en]" nume-en="true" class="form-control" value="{{ $domain->translateOrNew('en')->name }}" />
 			</div>
 		</div>
+        <br />
+        <br />
+        <br />
+        <div class="form-group">
+            <label class="col-md-7 col-md-offset-3">
+                <input type="checkbox"
+                       value="1"
+                       name="public"
+                       @if ($domain->public)
+                           checked="checked"
+                       @endif
+                />Domeniu vizibil in demo</label>
+            </div>
+        </div>
 		<br /><br />
 	</div>
 	<div class="modal-footer">

@@ -1,5 +1,5 @@
 @extends('frontend.layout.master')
-<!-- @include('frontend.layout.user') -->
+<!-- @include('frontend.partials.user') -->
 
 @section('content')
 

@@ -195,3 +195,7 @@ dd a {
 .reports-stripe {
     margin-top: -20px;
 }
+
+.list-group-item {
+    border: none;
+}

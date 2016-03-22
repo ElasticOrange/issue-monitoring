@@ -19,10 +19,8 @@
     <script>
         (function(){
             $(document).ready(function() {
-                $('.collapse').on('shown.bs.collapse', function(){
-                    $(this).parent().find(".glyphicon-triangle-right").removeClass("glyphicon-triangle-right").addClass("glyphicon-triangle-bottom");
-                }).on('hidden.bs.collapse', function(){
-                    $(this).parent().find(".glyphicon-triangle-bottom").removeClass("glyphicon-triangle-bottom").addClass("glyphicon-triangle-right");
+                $('div.panel-heading h4.panel-title a[data-toggle=collapse]').on('click', function(event) {
+                      $(this).find('span.glyphicon').toggleClass("glyphicon-triangle-right glyphicon-triangle-bottom");
                 });
             });
         })();
