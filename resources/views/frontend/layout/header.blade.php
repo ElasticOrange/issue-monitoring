@@ -39,23 +39,23 @@
                         <a href="{{ action('HomeController@getIssues') }}">Initiative</a>
                     </li>
                     <li>
-                        <a href="#rapoarte">Rapoarte</a>
+                        <a href="{{ action('HomeController@getReports') }}">Rapoarte</a>
                     </li>
                     <li>
-                        <a href="#contact">Contact</a>
+                        <a href="{{ action('HomeController@getContact') }}">Contact</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Despre noi<strong class="caret"></strong>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#despre-noi">Despre noi</a>
+                                <a href="{{ action('HomeController@getAboutUs') }}">Despre noi</a>
                             </li>
                             <li>
-                                <a href="#servicii">Servicii</a>
+                                <a href="{{ action('HomeController@getServices') }}">Servicii</a>
                             </li>
                             <li>
-                                <a href="#echipa">Echipa</a>
+                                <a href="{{ action('HomeController@getTeam') }}">Echipa</a>
                             </li>
                         </ul>
                     </li>

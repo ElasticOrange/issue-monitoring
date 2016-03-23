@@ -110,4 +110,24 @@ class HomeController extends Controller
     {
         
     }
+
+    public function getReports()
+    {
+        
+    }
+
+    public function getAboutUs()
+    {
+        
+    }
+
+    public function getServices()
+    {
+        
+    }
+
+    public function getTeam()
+    {
+        
+    }
 }
