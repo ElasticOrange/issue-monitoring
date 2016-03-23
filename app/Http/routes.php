@@ -119,4 +119,10 @@ Route::post('/password/email', 'Auth\PasswordController@postEmail');
 Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('/password/reset', 'Auth\PasswordController@postReset');
 
-Route::controller('/', 'HomeController');
+Route::get('issues', 'HomeController@getIssues');
+Route::get('reports', 'HomeController@getReports');
+Route::get('contact', 'HomeController@getContact');
+Route::get('about-us', 'HomeController@getAboutUs');
+Route::get('services', 'HomeController@getServices');
+Route::get('team', 'HomeController@getTeam');
+Route::get('/', 'HomeController@getIndex');

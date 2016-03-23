@@ -1,3 +1,7 @@
 <span>
-    Hei, {{ $user->name }}!
+@if($user)
+    Hei,  {{ $user->name }}!
+@else
+    Salut!
+@endif 
 </span>

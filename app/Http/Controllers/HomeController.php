@@ -3,11 +3,11 @@
 namespace Issue\Http\Controllers;
 
 use Auth;
+use Issue\Issue;
 use Issue\Domain;
 use Issue\Http\Requests;
+use Illuminate\Http\Request;
 use Issue\Http\Controllers\Controller;
-use Illuminate\Http\Illuminate\Http\Request;
-use Issue\Issue;
 
 class HomeController extends Controller
 {
@@ -22,14 +22,32 @@ class HomeController extends Controller
         return view('frontend.pages.homepage');
     }
 
+    private function getIssuesFromDomainIds(array $domainIds)
+    {
+        $issueIds = \DB::table('domain_issue')->whereIn('domain_id', $domainIds)->get(['issue_id']);
+        $issues = Issue::whereIn('id', collect($issueIds)->lists('issue_id'))->orderBy('id', 'desc')->limit(10)->get();
+
+        return $issues;
+    }
+
+
+    private function getIssuesFromDomainId($domainId)
+    {
+        $issueIds = \DB::table('domain_issue')->where('domain_id', $domainId)->get(['issue_id']);
+        $issues = Issue::whereIn('id', collect($issueIds)->lists('issue_id'))->orderBy('id', 'desc')->limit(10)->get();
+
+        return $issues;
+    }
+
     /**
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response
     */
-    public function getIssues()
+    public function getIssues(Request $request)
     {
         $user = Auth::user();
+
         $publicDomains = $this->getVisibleDomains($user);
         if(!$publicDomains or  $publicDomains->isEmpty()) {
             $publicDomains = $this->getVisibleDomains();
@@ -38,7 +56,32 @@ class HomeController extends Controller
 
         $tree = $this->getPublicDomainsTree($domainsForTree);
 
-        $issues = Issue::limit(10)->get();
+        if(! $user) {
+            $pubDomains = $this->getVisibleDomains();
+            if(! $request->domain) {
+                $issues = $this->getIssuesFromDomainIds($pubDomains->lists('id')->toArray());
+            } else {
+                if(array_key_exists($request->domain, array_flip($pubDomains->lists('id')->toArray()))) {
+                    $issues = $this->getIssuesFromDomainId((int)$request->domain);
+                } else {
+                    $issues = $this->getIssuesFromDomainIds($pubDomains->lists('id')->toArray());
+                }
+            }
+        } else {
+            $pubDomains = $this->getVisibleDomains($user);
+            if(!$pubDomains or  $pubDomains->isEmpty()) {
+                $pubDomains = $this->getVisibleDomains();
+            }
+            if(! $request->domain) {
+                $issues = $this->getIssuesFromDomainIds($pubDomains->lists('id')->toArray());
+            } else {
+                if(array_key_exists($request->domain, array_flip($pubDomains->lists('id')->toArray()))) {
+                    $issues = $this->getIssuesFromDomainId((int)$request->domain);
+                } else {
+                    $issues = $this->getIssuesFromDomainIds($pubDomains->lists('id')->toArray());
+                }
+            }
+        }
 
         return view('frontend.pages.issues', ['publicDomainsTree' => $tree, 'issues' => $issues]);
     }
