@@ -22,7 +22,6 @@ class NewsController extends Controller
     use CanReturnDataForDataTables;
 
     private $defaultModel = 'Issue\News';
-    private $searchTable = 'news_search';
 
     /**
      * Display a listing of the resource.

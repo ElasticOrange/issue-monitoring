@@ -18,7 +18,6 @@ class StakeholderController extends Controller
     use CanReturnDataForDataTables;
 
     private $defaultModel = 'Issue\Stakeholder';
-    private $searchTable = 'stakeholders_search';
 
 	/**
 	 * Display a listing of the resource.

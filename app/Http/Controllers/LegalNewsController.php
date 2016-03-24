@@ -14,7 +14,6 @@ class LegalNewsController extends Controller
     use CanReturnDataForDataTables;
 
     private $defaultModel = 'Issue\LegalNews';
-    private $searchTable = 'legal_news_search';
 
     /**
      * Display a listing of the resource.

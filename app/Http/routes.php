@@ -120,6 +120,7 @@ Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('/password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('issues', 'HomeController@getIssues');
+Route::post('issues', 'HomeController@getIssues');
 Route::get('reports', 'HomeController@getReports');
 Route::get('contact', 'HomeController@getContact');
 Route::get('about-us', 'HomeController@getAboutUs');

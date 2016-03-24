@@ -11,6 +11,9 @@ const POZA_LOCATION = '/poza/';
 class Stakeholder extends Model
 {
 	use \Dimsav\Translatable\Translatable;
+	use HasSearchTable;
+
+    private $searchTable = 'stakeholders_search';
 
 	protected $fillable = [
 		'name',

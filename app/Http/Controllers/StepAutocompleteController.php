@@ -14,7 +14,6 @@ class StepAutocompleteController extends Controller
     use CanReturnDataForDataTables;
 
     private $defaultModel = 'Issue\StepAutocomplete';
-    private $searchTable = 'stepsautocomplete_search';
 
     public function index()
     {

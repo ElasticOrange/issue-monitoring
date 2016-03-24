@@ -15,7 +15,6 @@ class ReportController extends Controller
     use CanReturnDataForDataTables;
 
     private $defaultModel = 'Issue\Report';
-    private $searchTable = 'reports_search';
 
     /**
      * Display a listing of the resource.

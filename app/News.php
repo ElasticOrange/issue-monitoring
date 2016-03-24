@@ -9,6 +9,9 @@ const DOCUMENT_LOCATION = '/news/';
 class News extends Model
 {
 	use \Dimsav\Translatable\Translatable;
+	use HasSearchTable;
+
+    private $searchTable = 'news_search';
 
 	protected $with = ['connectedIssues'];
 

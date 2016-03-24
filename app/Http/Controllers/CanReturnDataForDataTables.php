@@ -10,30 +10,17 @@ trait CanReturnDataForDataTables {
 	{
 		$searched = false;
 		$modelInstance = new $this->defaultModel;
-		if ( $request->search['value']) {
 
-			$itemIds = \DB::select('
-					SELECT distinct id 
-					FROM `'.$this->searchTable.'` 
-					WHERE '.$this->generateSearchQueryPart($request->search['value'])
-				);
-			$itemIds = collect($itemIds)->lists('id');
-			$itemsCount = count($itemIds);
-			$searched = true;
-		}
+		$queryBuilder = $modelInstance->bySearchTerm($request->search['value']);
 
+		$itemsCount = $modelInstance->searchTermItemsCount();
 		if (empty($itemsCount)) {
 			$itemsCount = $modelInstance->count();
 		}
 
-		$items = $modelInstance->take($request->input('length'))
-					   ->skip($request->input('start'));
-
-		if ($searched) {
-			$items->whereIn('id', $itemIds);
-		}
-
-		$items = $items->get();
+		$items = $queryBuilder->take($request->input('length'))
+					   ->skip($request->input('start'))
+					   ->get();
 
 		$tableData = [];
 		$index = $request->input('start');
@@ -45,16 +32,5 @@ trait CanReturnDataForDataTables {
 			'data' => $items->toArray()
 		];
 		return $result;
-	}
-
-	private function generateSearchQueryPart($string)
-	{
-		$words = explode(' ', $string);
-
-		foreach ($words as $key => $word) {
-			$words[$key] = 'content LIKE "%'.trim($word).'%"';
-		}
-		
-		return implode(' AND ', $words);
 	}
 }

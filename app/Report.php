@@ -9,6 +9,9 @@ const REPORT_LOCATION = '/reports/';
 class Report extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use HasSearchTable;
+
+    private $searchTable = 'reports_search';
 
     protected $guarded = ['id'];
     

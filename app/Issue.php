@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Issue extends Model
 {
 	use \Dimsav\Translatable\Translatable;
+	use \Issue\HasSearchTable;
 
+	protected $searchTable = 'issues_search';
+	
 	protected $guarded = ['id'];
 
 	protected $with = ['connectedDomains'];
@@ -22,7 +25,7 @@ class Issue extends Model
 	];
 
 	public $translatedAttributes = ['name', 'description', 'impact', 'status'];
-
+	
 	public function createPublicCode()
 	{
 		do {

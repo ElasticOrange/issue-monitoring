@@ -30,7 +30,6 @@ class IssueController extends Controller
 	use CanReturnDataForDataTables;
 
 	private $defaultModel = 'Issue\Issue';
-	private $searchTable = 'issues_search';
 
 	/**
 	 * Display a listing of the resource.

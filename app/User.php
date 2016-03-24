@@ -15,6 +15,9 @@ class User extends Model implements AuthenticatableContract,
 									CanResetPasswordContract
 {
 	use Authenticatable, Authorizable, CanResetPassword;
+    use HasSearchTable;
+
+    private $searchTable = 'users_search';
 
 	/**
 	 * The database table used by the model.
