@@ -14,16 +14,9 @@
     </div>
     <div id="issues_{{ $issue->id }}" class="panel-collapse collapse" aria-expanded="false">
         <div class="panel-body">
-            <span><b>Nr. înreg. Parlament:</b> Pl-x 242/2015</span>
-            <br>
-            <span><b>Data start:</b> 2014-06-23</span>
-            <br>
-                              Propunerea legislativă are
-            ca obiect reglementarea metodelor de extracție a hidrocarburilor
-            neconvenționale pe teritoriul României, urmărindu-se instituirea unui
-            mecanism legislativ și instituțional care să permită exploatarea acestor resurse
-            pe baza unor tehnologii mai eficiente și lipsite de riscuri pentru mediu,
-            economie și comunitățile locale.                            
+            <span><b>Data start:</b> {{ $issue->created_at->format('d-m-Y') }}</span>
+            <br/><br/>
+                {!! strip_tags($issue->description) !!}
             <p>
                 <br>
                 <b><a href="{{ action('HomeController@getContact') }}" rel="nofollow">Pentru a accesa mai multe informații, vă rugăm să ne contactați !</a></b>
