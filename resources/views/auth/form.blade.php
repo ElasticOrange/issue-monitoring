@@ -250,7 +250,7 @@
                             </label>
                         </td>
                         <td>
-                            <a class="btn btn-danger delete-button" connected-domain-delete="{{ $domain_connected->id }}">
+                            <a class="btn btn-danger" connected-domain-delete="{{ $domain_connected->id }}">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>

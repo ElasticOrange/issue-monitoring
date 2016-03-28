@@ -89,7 +89,7 @@
             </label>
         </td>
         <td>
-            <a class="btn btn-danger delete-button" connected-domain-delete="<%= id %>">
+            <a class="btn btn-danger" connected-domain-delete="<%= id %>">
                 <span class="glyphicon glyphicon-trash"></span>
             </a>
         </td>

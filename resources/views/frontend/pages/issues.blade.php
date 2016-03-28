@@ -6,10 +6,10 @@
 <div class="container white">
     @include('frontend.layout.header')
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             @include('frontend.partials.domainsTree')
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <form method="POST">
                 {!! csrf_field() !!}
                 <div class="row">

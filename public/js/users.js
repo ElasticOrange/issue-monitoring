@@ -143,6 +143,9 @@ $(document).ready(function(){
 
     $('#connected-domains-container').on('click', '[connected-domain-delete]', function() {
         var connected_domain_id = $(this).attr('connected-domain-delete');
-        $('[domain-id=' + connected_domain_id + ']').remove();
+        if(confirm('Vrei sa stergi acest domeniu ?'))
+        {
+            $('[domain-id=' + connected_domain_id + ']').remove();
+        }
     });
 });
