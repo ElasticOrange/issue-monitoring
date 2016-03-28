@@ -65,7 +65,17 @@ class HomeController extends Controller
         $tree = $this->getPublicDomainsTree($domainsForTree);
         $issues = $this->getIssuesFromDomainIds($domainsForIssues->lists('id')->toArray(), $request->issue_search);
 
-        return view('frontend.pages.issues', ['publicDomainsTree' => $tree, 'issues' => $issues]);
+        $domainIdToHighlight = 0;
+        
+        if($request->domain) {
+            $domainIdToHighlight = $request->domain;
+        }
+
+        return view('frontend.pages.issues', [
+                'publicDomainsTree' => $tree,
+                'issues' => $issues,
+                'domainIdToHighlight' => $domainIdToHighlight
+            ]);
     }
 
     private function getDomainsForTree($domains) {

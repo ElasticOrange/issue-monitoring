@@ -30,6 +30,7 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="viitor"
+                                    checked="checked" 
                                     />viitor
                         </label>
                     </div>
@@ -38,6 +39,7 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="curent"
+                                    checked="checked" 
                                     />curent
                         </label>
                     </div>
@@ -46,6 +48,7 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="arhivat"
+                                    checked="checked" 
                                     />arhivat
                         </label>
                     </div>
@@ -72,6 +75,8 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            var domainIdToHighlight = {{ $domainIdToHighlight }}
+
             function toggleSign(e) {
                 $(e.target)
                     .prev('.panel-heading')
@@ -89,6 +94,27 @@
             }
             $('#domains').on('hidden.bs.collapse', toggleTriangle);
             $('#domains').on('shown.bs.collapse', toggleTriangle);
+
+            function selectDomainWhenFilterIssue() {
+                var element = $('#domains').find('a[id-domain=' + domainIdToHighlight + ']');
+                var iconSelector = element
+                    .parent()
+                    .parent()
+                    .parent()
+                    .attr('id');
+
+                element.parent().parent().parent()
+                    .attr('aria-expanded', 'true')
+                    .addClass('in');
+
+                element.css('font-weight', 'bold');
+
+                $('#domains').find('a[href="#' + iconSelector + '"] i.indicator')
+                    .removeClass('glyphicon-triangle-right')
+                    .addClass('glyphicon-triangle-bottom');
+            }
+
+            selectDomainWhenFilterIssue();
         });
     </script>
 @endsection

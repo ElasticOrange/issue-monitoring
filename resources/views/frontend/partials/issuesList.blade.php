@@ -7,6 +7,7 @@
                   href="#issues_{{ $issue->id }}"
                   aria-expanded="false"
             >
+
                 <i class="indicator glyphicon glyphicon-plus"></i>
                 {{ $issue->name}}
             </a>
@@ -24,3 +25,4 @@
         </div>
     </div>
 </div>
+<br />
