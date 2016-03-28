@@ -5,6 +5,7 @@ namespace Issue\Providers;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Issue\Document;
+use Issue\Domain;
 use Issue\UploadedFile;
 use Auth;
 
@@ -19,7 +20,18 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('frontend.partials.user', function($view)
         {
-            $view->with('user', Auth::user()); 
+            $view->with('user', Auth::user());
+        });
+
+        view()->composer('frontend.partials.domainsTree', function($view)
+        {
+            $publicDomains = Domain::getPublicDomains();
+            $tree = Domain::getTree(Domain::getDomainsForTree($publicDomains));
+
+            $view->with([
+                  'tree' => $tree,
+                  'domains' => $tree[1]['subdomains']
+              ]);
         });
 
         Document::deleted(function($document)

@@ -1,7 +1,7 @@
 <div class="panel-group" id="domains" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         @foreach($domains as $domain)
-            @if (empty($publicDomainsTree[$domain->id]['subdomains'])) 
+            @if (empty($tree[$domain->id]['subdomains']))
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a href="#{{ $domain->name }}">
@@ -20,7 +20,7 @@
                 </div>
                 <div id="collapse-domain-{{ $domain->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="domain-heading-{{ $domain->id }}">
                     <div class="panel-body">
-                        @include('frontend.partials.domainsTreeItems', ['domains' => $publicDomainsTree[$domain->id]['subdomains']])
+                        @include('frontend.partials.domainsTreeItems', ['domains' => $tree[$domain->id]['subdomains']])
                     </div>
                 </div>
             @endif
@@ -28,4 +28,3 @@
         @endforeach
     </div>
 </div>
-

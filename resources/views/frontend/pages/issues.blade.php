@@ -7,7 +7,7 @@
     @include('frontend.layout.header')
     <div class="row">
         <div class="col-md-4">
-            @include('frontend.partials.domainsTree', ['domains' => $publicDomainsTree[1]['subdomains']])
+            @include('frontend.partials.domainsTree')
         </div>
         <div class="col-md-8">
             <form method="POST">
@@ -30,7 +30,7 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="viitor"
-                                    checked="checked" 
+                                    checked="checked"
                                     />viitor
                         </label>
                     </div>
@@ -39,7 +39,7 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="curent"
-                                    checked="checked" 
+                                    checked="checked"
                                     />curent
                         </label>
                     </div>
@@ -48,7 +48,7 @@
                             <input  type="checkbox"
                                     value="1"
                                     name="arhivat"
-                                    checked="checked" 
+                                    checked="checked"
                                     />arhivat
                         </label>
                     </div>

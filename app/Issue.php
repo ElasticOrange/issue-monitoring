@@ -10,7 +10,7 @@ class Issue extends Model
 	use \Issue\HasSearchTable;
 
 	protected $searchTable = 'issues_search';
-	
+
 	protected $guarded = ['id'];
 
 	protected $with = ['connectedDomains'];
@@ -25,7 +25,16 @@ class Issue extends Model
 	];
 
 	public $translatedAttributes = ['name', 'description', 'impact', 'status'];
-	
+
+	public function scopeByDomainIds($query, $domainIds)
+	{
+		$issueIds = \DB::table('domain_issue')
+		->whereIn('domain_id', $domainIds)
+		->get(['issue_id']);
+
+		return $query->whereIn('id', collect($issueIds)->lists('issue_id'));
+	}
+
 	public function createPublicCode()
 	{
 		do {
