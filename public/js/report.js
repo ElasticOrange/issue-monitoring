@@ -131,11 +131,10 @@
             var connected_stakeholder_id = $(this).attr('connected-domain-delete');
             $('[domain-id=' + connected_stakeholder_id + ']').remove();
         });
-        
+
         var dateWidget = $('#date-init').datetimepicker({
             locale: 'ro',
-            format: 'L',
-            defaultDate: moment()
+            format: 'L'
         });
 
         $('#date-result').val(($('#date-init').val()).split(".").reverse().join("-"));

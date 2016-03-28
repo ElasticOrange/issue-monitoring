@@ -82,7 +82,7 @@
 			]
 		});
 
-        var stakeholderAutocomplete = $('#stakeholder-autocomplete');
+    var stakeholderAutocomplete = $('#stakeholder-autocomplete');
 		var stakeholdersList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -125,7 +125,7 @@
 			$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 		});
 
-        var domainAutocomplete = $('#domain-autocomplete');
+    var domainAutocomplete = $('#domain-autocomplete');
 		var domainList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -168,7 +168,7 @@
 			$('[domain-id=' + connected_stakeholder_id + ']').remove();
 		});
 
-        var tagAutocomplete = $('#tag-autocomplete');
+    var tagAutocomplete = $('#tag-autocomplete');
 		var tagsList = new Bloodhound({
 			queryTokenizer: Bloodhound.tokenizers.whitespace,
 			datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -292,8 +292,7 @@
 
         var dateWidgets = $('[date-widget=true]').datetimepicker({
             locale: 'ro',
-            format: 'L',
-            defaultDate: moment()
+            format: 'L'
         });
 
         $('[name=date]').val(($('[date-widget=true]').val()).split(".").reverse().join("-"));

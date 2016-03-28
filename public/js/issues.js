@@ -1,7 +1,7 @@
 (function(){
 	$(document).ready(function() {
 
-        var actionButtonsTemplate = _.template($("#action_buttons").html(), 
+        var actionButtonsTemplate = _.template($("#action_buttons").html(),
             {
                 interpolate: /__([\s\S]+?)__/g
             }
@@ -114,9 +114,9 @@
             }
             var endDate = endDatePicker.data('DateTimePicker').date();
 
-            if (endDatePicker.data('DateTimePicker').date() < 
+            if (endDatePicker.data('DateTimePicker').date() <
                 startDatePicker.data('DateTimePicker').date()) {
-                
+
                 endDatePicker.data('DateTimePicker').date(startDate);
                 return;
             }

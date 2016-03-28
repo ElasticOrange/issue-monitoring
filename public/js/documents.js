@@ -90,8 +90,7 @@
 
 		var dateWidgets = $('[date-widget=true]').datetimepicker({
 			locale: 'ro',
-			format: 'L',
-			defaultDate: moment()
+			format: 'L'
 		});
 
 		$('[name=date]').val(($('[date-widget=true]').val()).split(".").reverse().join("-"));

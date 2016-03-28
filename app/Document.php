@@ -10,6 +10,9 @@ const DOCUMENTS_LOCATION = '/documents/';
 class Document extends Model
 {
 	use \Dimsav\Translatable\Translatable;
+	use \Issue\HasSearchTable;
+
+	protected $searchTable = 'documents_search';
 
 	protected $with = ['file'];
 

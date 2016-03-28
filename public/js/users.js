@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var actionButtonsTemplate = _.template($("#action_buttons").html(), 
+    var actionButtonsTemplate = _.template($("#action_buttons").html(),
             {
                 interpolate: /__([\s\S]+?)__/g
             }
@@ -76,8 +76,7 @@ $(document).ready(function(){
     function initDate() {
         var startDateWidgets = $('#startdate-subscription').datetimepicker({
             locale: 'ro',
-            format: 'L',
-            defaultDate: moment()
+            format: 'L'
         });
 
         $('#startdate-result').val(($('#startdate-subscription').val()).split(".").reverse().join("-"));
@@ -90,8 +89,7 @@ $(document).ready(function(){
 
         var endDateWidgets = $('#enddate-subscription').datetimepicker({
             locale: 'ro',
-            format: 'L',
-            defaultDate: moment()
+            format: 'L'
         });
 
         $('#enddate-result').val(($('#enddate-subscription').val()).split(".").reverse().join("-"));
