@@ -12,6 +12,7 @@ class Domain extends Model
 
 	protected $guarded = ['id'];
 	protected $fillable = ['parent_id', 'name', 'public'];
+	protected $with = 'translations';
 
 	public function connectedNews()
 	{
@@ -38,12 +39,16 @@ class Domain extends Model
 		$publicDomains = null;
 		$user = \Auth::user();
 		if($user) {
-			$publicDomains = $user->domains()->orderBy('parent_id')->with('translations')->get();
+			$publicDomains = $user->domains()->orderBy('parent_id')->get();
 		}
 
 		if(!$publicDomains or  $publicDomains->isEmpty()) {
-			$publicDomains = self::isPublic()->orderBy('parent_id')->with('translations')->get();
+			$publicDomains = self::isPublic()->orderBy('parent_id')->get();
 		}
+
+		$subdomains = self::whereIn('parent_id', $publicDomains->lists('id'))->get();
+
+		$publicDomains = $publicDomains->merge($subdomains);
 
 		return $publicDomains;
 	}
