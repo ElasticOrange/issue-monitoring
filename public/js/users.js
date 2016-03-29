@@ -5,61 +5,64 @@ $(document).ready(function(){
                 interpolate: /__([\s\S]+?)__/g
             }
         );
-        $('#users-table').DataTable({
-            "language":{
-                "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
-                "sInfoEmpty": "Arata de la 0 la 0 din 0 intrari",
-                "sLengthMenu": "Arata _MENU_ intrari",
-                "sSearch": "Cauta",
-                "paginate":{
-                    "next": "Inainte",
-                    "previous": "Inapoi",
-                    "first": "Primul",
-                    "last": "Ultimul"
-                },
-                "sEmptyTable": "Nu exista nicio inregistrare"
+
+    $('#users-table').DataTable({
+        "language":{
+            "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
+            "sInfoEmpty": "Arata de la 0 la 0 din 0 intrari",
+            "sLengthMenu": "Arata _MENU_ intrari",
+            "sSearch": "Cauta",
+            "paginate":{
+                "next": "Inainte",
+                "previous": "Inapoi",
+                "first": "Primul",
+                "last": "Ultimul"
             },
-            "columns": [
-                {
-                    data: "id",
-                    title: "id",
-                    orderable: true
-                },
-                {
-                    data: "name",
-                    title: "Nume",
-                    orderable: true
-                },
-                {
-                    data: "email",
-                    title: "E-mail",
-                    orderable: true
-                },
-                {
-                    data: "type",
-                    title: "Acces",
-                    orderable: true
-                },
-                {
-                    data: "active",
-                    title: "Activ",
-                    orderable: false
-                },
-                {
-                    data: "id",
-                    title: "Actiuni",
-                    render: function (data, type, rowData, meta) {
-                        return actionButtonsTemplate({id: data});
-                    }
+            "sEmptyTable": "Nu exista nicio inregistrare"
+        },
+        "columns": [
+            {
+                data: "id",
+                title: "id",
+                orderable: true
+            },
+            {
+                data: "name",
+                title: "Nume",
+                orderable: true
+            },
+            {
+                data: "email",
+                title: "E-mail",
+                orderable: true
+            },
+            {
+                data: "type",
+                title: "Acces",
+                orderable: true
+            },
+            {
+                data: "active",
+                title: "Activ",
+                render: function (data, type, rowData, meta) {
+                    return (data != 0 ? '<span class="glyphicon glyphicon-ok"></span>' : '');
                 }
-            ],
-            responsive: true,
-            stateSave: true,
-            serverSide: true,
-            ajax: {
-            "url": window.location.href + '/query',
+            },
+            {
+                data: "id",
+                title: "Actiuni",
+                render: function (data, type, rowData, meta) {
+                    return actionButtonsTemplate({id: data});
+                }
             }
-        });
+        ],
+        responsive: true,
+        stateSave: true,
+        serverSide: true,
+        ajax: {
+        "url": window.location.href + '/query'
+        }
+    });
 
     $("input[data-action=active-user]").click(function(){
         var request = $.ajax({
