@@ -43,8 +43,7 @@ class HomeController extends Controller
         $issues = Issue::bySearchTerm($request->issue_search)
                          ->byDomainIds($domainsForIssues->lists('id')->toArray())
                         ->orderBy('id', 'desc')
-                        ->limit(10)
-                        ->get();
+                        ->paginate(8);
 
         return view('frontend.pages.issues', [
                 'issues' => $issues,

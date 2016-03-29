@@ -65,6 +65,11 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {!! $issues->appends(['domain' => $domainIdToHighlight])->render() !!}
+                </div>
+            </div>
         </div>
     </div>
     @include('frontend.layout.footer')
@@ -74,47 +79,60 @@
 
 @section('js')
     <script>
-        $(document).ready(function() {
-            var domainIdToHighlight = {{ $domainIdToHighlight }}
+        (function() {
+            $(document).ready(function() {
+                $('#issues').on('hidden.bs.collapse', function toggleSign(e) {
+                    $(e.target)
+                            .prev('.panel-heading')
+                            .find('i.indicator')
+                            .toggleClass('glyphicon-plus glyphicon-minus');
+                });
+                $('#issues').on('shown.bs.collapse', function toggleSign(e) {
+                    $(e.target)
+                            .prev('.panel-heading')
+                            .find('i.indicator')
+                            .toggleClass('glyphicon-plus glyphicon-minus');
+                });
 
-            function toggleSign(e) {
-                $(e.target)
-                    .prev('.panel-heading')
-                    .find('i.indicator')
-                    .toggleClass('glyphicon-plus glyphicon-minus');
-            }
-            $('#issues').on('hidden.bs.collapse', toggleSign);
-            $('#issues').on('shown.bs.collapse', toggleSign);
+                $('#domains').on('hidden.bs.collapse', function toggleTriangle(e) {
+                    $(e.target)
+                            .prev('.panel-heading')
+                            .find('i.indicator')
+                            .toggleClass('glyphicon-triangle-right glyphicon-triangle-bottom');
+                });
+                $('#domains').on('shown.bs.collapse', function toggleTriangle(e) {
+                    $(e.target)
+                            .prev('.panel-heading')
+                            .find('i.indicator')
+                            .toggleClass('glyphicon-triangle-right glyphicon-triangle-bottom');
+                });
 
-            function toggleTriangle(e) {
-                $(e.target)
-                    .prev('.panel-heading')
-                    .find('i.indicator')
-                    .toggleClass('glyphicon-triangle-right glyphicon-triangle-bottom');
-            }
-            $('#domains').on('hidden.bs.collapse', toggleTriangle);
-            $('#domains').on('shown.bs.collapse', toggleTriangle);
+                function selectDomainWhenFilterIssue(domainIdToHighlight) {
+                    var element = $('#domains').find('a[id-domain=' + domainIdToHighlight + ']');
+                    var iconSelector = element
+                        .parent()
+                        .parent()
+                        .parent()
+                        .attr('id');
 
-            function selectDomainWhenFilterIssue() {
-                var element = $('#domains').find('a[id-domain=' + domainIdToHighlight + ']');
-                var iconSelector = element
-                    .parent()
-                    .parent()
-                    .parent()
-                    .attr('id');
+                    element.parent().parent().parent()
+                        .attr('aria-expanded', 'true')
+                        .addClass('in');
 
-                element.parent().parent().parent()
-                    .attr('aria-expanded', 'true')
-                    .addClass('in');
+                    element.css('font-weight', 'bold');
 
-                element.css('font-weight', 'bold');
+                    $('#domains').find('a[href="#' + iconSelector + '"] i.indicator')
+                        .removeClass('glyphicon-triangle-right')
+                        .addClass('glyphicon-triangle-bottom');
+                }
 
-                $('#domains').find('a[href="#' + iconSelector + '"] i.indicator')
-                    .removeClass('glyphicon-triangle-right')
-                    .addClass('glyphicon-triangle-bottom');
-            }
+                var domainIdToHighlight = {{ $domainIdToHighlight }}
+                console.log(domainIdToHighlight);
 
-            selectDomainWhenFilterIssue();
-        });
+                if(domainIdToHighlight) {
+                    selectDomainWhenFilterIssue(domainIdToHighlight);
+                }
+            });
+        }());
     </script>
 @endsection
