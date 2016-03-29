@@ -55,6 +55,16 @@
             </div>
         </div>
 
+        <br/><hr/>
+        <div class="checkbox col-md-8 col-md-offset-2">
+            <label>
+                <input type="hidden" value="0" name="active">
+                <input type="checkbox"
+                       value="1"
+                       name="active"
+                       @if($user->active)checked="checked" @endif>Activ
+            </label>
+        </div>
         <br/><hr/><br/>
     </div>
 

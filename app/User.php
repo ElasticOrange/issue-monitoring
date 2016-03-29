@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract,
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'type', 'language'];
+	protected $fillable = ['name', 'email', 'type', 'language', 'active'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -103,12 +103,10 @@ class User extends Model implements AuthenticatableContract,
 
     public function setDomains($request)
     {
-        if (!$request->rights) {
-            $rights = [];
-        } else {
+        $rights = [];
+        if ($request->rights) {
             $rights = $request->rights;
         }
-
         $this->domains()->sync($rights);
     }
 }
