@@ -16,7 +16,7 @@
 </div>
 
 <br />
-    
+
 <div class="row">
     <div class="col-md-2 text-center">
         <img alt="logo Issue Monitoring" src="/img/logo_im.png" />
@@ -60,7 +60,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#autentificare">Autentificare</a>
+                        <a href="{{ action('Auth\AuthController@getLogin') }}">Autentificare</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

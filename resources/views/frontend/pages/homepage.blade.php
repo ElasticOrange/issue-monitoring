@@ -1,5 +1,5 @@
 @extends('frontend.layout.master')
-<!-- @include('frontend.partials.user') -->
+@include('frontend.partials.user')
 
 @section('content')
 
@@ -131,7 +131,7 @@
             <h3>Cele mai recente rapoarte</h3>
             <dl>
                 <dt class="reports-dt-title">Weekly Policy and Political Report, January 25-29, 2016</dt>
-                <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment): 
+                <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment):
                         EP and Council Scrutiny Period to End on 28 December
                         <a href="#descarca-raport">Descarca</a>
                 </dd>
@@ -139,14 +139,14 @@
             <img src="/img/reports_stripe.png" class="reports-stripe">
             <dl>
                 <dt class="reports-dt-title">Weekly Policy and Political Report, January 25-29, 2016</dt>
-                <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment): 
+                <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment):
                         EP and Council Scrutiny Period to End on 28 December
                         <a href="#descarca-raport">Descarca</a>
                 </dd>
             </dl>
         </div>
     </div>
-    
+
     @include('frontend.layout.footer')
 </div>
 
