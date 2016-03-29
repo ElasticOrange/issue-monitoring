@@ -8,7 +8,9 @@
                   aria-expanded="false"
             >
 
-                <i class="indicator glyphicon glyphicon-plus"></i>
+                <div class="glyph-background col-xs-1">
+                    <i class="indicator glyphicon glyphicon-plus"></i>
+                </div>
                 {{ $issue->name}}
             </a>
         </h5>

@@ -86,12 +86,22 @@
                             .prev('.panel-heading')
                             .find('i.indicator')
                             .toggleClass('glyphicon-plus glyphicon-minus');
+
+                    $(e.target)
+                            .prev('.panel-heading')
+                            .find('div.glyph-background')
+                            .css({'background-color': 'lightgrey'});
                 });
                 $('#issues').on('shown.bs.collapse', function toggleSign(e) {
                     $(e.target)
                             .prev('.panel-heading')
                             .find('i.indicator')
                             .toggleClass('glyphicon-plus glyphicon-minus');
+
+                    $(e.target)
+                            .prev('.panel-heading')
+                            .find('div.glyph-background')
+                            .css({'background-color': '#E02222', 'padding-left': '5px'});
                 });
 
                 $('#domains').on('hidden.bs.collapse', function toggleTriangle(e) {
