@@ -18,7 +18,6 @@ class HomeController extends Controller
      */
     public function getIndex()
     {
-
         return view('frontend.pages.homepage');
     }
 
@@ -44,6 +43,20 @@ class HomeController extends Controller
                          ->byDomainIds($domainsForIssues->lists('id')->toArray())
                         ->orderBy('id', 'desc')
                         ->paginate(8);
+
+        if ($request->viitor) {
+            $issues = $issues->where('phase', 'viitor');
+        }
+
+        if ($request->curent) {
+            $issues = $issues->where('phase', 'curent');
+        }
+
+        if ($request->arhivat) {
+            $arhivatRespins = $issues->where('phase', 'arhivatRespinsSauAbrogat');
+            $arhivatInactiv = $issues->where('phase', 'arhivatInactiv');
+            $issues = $arhivatInactiv->merge($arhivatRespins);
+        }
 
         return view('frontend.pages.issues', [
                 'issues' => $issues,
