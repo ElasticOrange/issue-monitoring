@@ -23,13 +23,11 @@
             "columns": [
                 {
                     data: "id",
-                    title: "id",
-                    orderable: false
+                    title: "id"
                 },
                 {
                     data: "type",
-                    title: "Tip",
-                    orderable: false
+                    title: "Tip"
                 },
                 {
                     data: "connected_domains",
@@ -47,15 +45,15 @@
                 },
                 {
                     data: "phase",
-                    title: "Faza",
-                    orderable: false
+                    title: "Faza"
                 },
                 {
                     data: "id",
                     title: "Actiuni",
                     render: function (data, type, rowData, meta) {
                         return actionButtonsTemplate({id: data});
-                    }
+                    },
+                    orderable: false
                 }
             ],
             responsive: true,

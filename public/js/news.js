@@ -24,30 +24,28 @@
             "columns": [
                 {
                     data: "id",
-                    title: "id",
-                    orderable: true
+                    title: "id"
                 },
                 {
                     data: "title",
                     title: "Titlu",
-                    orderable: true
+                    orderable: false
                 },
                 {
                     data: "date",
-                    title: "Data",
-                    orderable: true
+                    title: "Data"
                 },
                 {
                     data: "link",
-                    title: "Sursa",
-                    orderable: true
+                    title: "Sursa"
                 },
                 {
                     data: "id",
                     title: "Actiuni",
                     render: function(data, type, rowData, meta) {
                         return actionButtonsTemplate({id: data});
-                    }
+                    },
+					orderable: false
                 }
             ],
             responsive: true,

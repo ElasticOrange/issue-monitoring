@@ -34,17 +34,17 @@
             "columns": [
                 {
                     data: "id",
-                    title: "id",
-                    orderable: true
+                    title: "id"
                 },
                 {
                     data: "title",
                     title: "Titlu",
-                    orderable: true
+                    orderable: false
                 },
                 {
                     data: "file",
                     title: "Document",
+                    orderable: false,
                     render: function(data, type, rowData, meta) {
                         return downloadUploadedFile({fileName: data.file_name, originalFileName: data.original_file_name});
                     }
@@ -54,19 +54,20 @@
                     title: "Link",
                     render: function(data, type, rowData, meta) {
                         return externalLink({publicCode: data});
-                    }
+                    },
+                    orderable: false
                 },
                 {
                     data: "init_at",
-                    title: "Data",
-                    orderable: true
+                    title: "Data"
                 },
                 {
                     data: "id",
                     title: "Actiuni",
                     render: function(data, type, rowData, meta) {
                         return actionButtonsTemplate({id: data});
-                    }
+                    },
+                    orderable:false
                 }
             ],
             responsive: true,

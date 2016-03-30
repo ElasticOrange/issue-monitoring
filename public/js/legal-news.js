@@ -24,25 +24,25 @@
             "columns": [
                 {
                     data: "id",
-                    title: "id",
-                    orderable: true
+                    title: "id"
                 },
                 {
                     data: "title",
                     title: "Titlu",
-                    orderable: true
+                    orderable: false
                 },
                 {
                     data: "content",
                     title: "Continut",
-                    orderable: true
+                    orderable: false
                 },
                 {
                     data: "id",
                     title: "Actiuni",
                     render: function(data, type, rowData, meta) {
                         return deleteButtonTemplate({id: data});
-                    }
+                    },
+                    orderable: false
                 }
             ],
             responsive: true,

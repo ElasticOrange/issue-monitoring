@@ -23,23 +23,19 @@ $(document).ready(function(){
         "columns": [
             {
                 data: "id",
-                title: "id",
-                orderable: true
+                title: "id"
             },
             {
                 data: "name",
-                title: "Nume",
-                orderable: true
+                title: "Nume"
             },
             {
                 data: "email",
-                title: "E-mail",
-                orderable: true
+                title: "E-mail"
             },
             {
                 data: "type",
-                title: "Acces",
-                orderable: true
+                title: "Acces"
             },
             {
                 data: "active",
@@ -53,7 +49,8 @@ $(document).ready(function(){
                 title: "Actiuni",
                 render: function (data, type, rowData, meta) {
                     return actionButtonsTemplate({id: data});
-                }
+                },
+                orderable: false
             }
         ],
         responsive: true,

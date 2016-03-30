@@ -23,30 +23,28 @@ $(document).ready(function(){
         "columns": [
             {
                 data: "id",
-                title: "id",
-                orderable: true
+                title: "id"
             },
             {
                 data: "name",
-                title: "Nume",
-                orderable: true
+                title: "Nume"
             },
             {
                 data: "position",
                 title: "Pozitie si apartenenta",
-                orderable: true
+                orderable: false
             },
             {
                 data: "type",
-                title: "Tip",
-                orderable: true
+                title: "Tip"
             },
             {
                 data: "id",
                 title: "Actiuni",
                 render: function (data, type, rowData, meta) {
                     return actionButtonsTemplate({id: data});
-                }
+                },
+				orderable: false
             }
         ],
         responsive: true,
@@ -63,7 +61,7 @@ $(document).ready(function(){
 		var template_populated= compiled({ 'sectionid': _.random(100000, 1000000),
 											'id': _.uniqueId('new-')});
 		$('.sections').append(template_populated);
-        
+
         preventEnterToSubmit('[prevent-enter=true]');
 	});
 

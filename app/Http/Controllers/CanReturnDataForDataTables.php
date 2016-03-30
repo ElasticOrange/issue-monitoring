@@ -17,10 +17,29 @@ trait CanReturnDataForDataTables {
 			$itemsCount = $modelInstance->count();
 		}
 
-		$items = $queryBuilder->take($request->input('length'))
-					   ->skip($request->input('start'))
-					   ->orderBy('id', 'desc')
-					   ->get();
+		$orders = [[
+			'column' => $modelInstance->getKeyName(),
+			'order' => 'desc'
+		]];
+
+		if ($request->order) {
+			$orders = [];
+			foreach($request->order as $columnOrder) {
+				$orders[] = [
+					'column' => $request->columns[$columnOrder['column']]['data'],
+					'order' => $columnOrder['dir']
+				];
+			}
+		}
+
+		$queryBuilder = $queryBuilder->take($request->input('length'))
+					   ->skip($request->input('start'));
+
+		foreach ($orders as $order) {
+			$queryBuilder = $queryBuilder->orderBy($order['column'], $order['order']);
+		}
+
+		$items = $queryBuilder->get();
 
 		$result = [
 			'draw' => 0 + $request->input('draw'),
