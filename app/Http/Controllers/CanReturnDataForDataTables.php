@@ -8,7 +8,6 @@ trait CanReturnDataForDataTables {
 
 	public function query(Request $request)
 	{
-		$searched = false;
 		$modelInstance = new $this->defaultModel;
 
 		$queryBuilder = $modelInstance->bySearchTerm($request->search['value']);
@@ -20,10 +19,8 @@ trait CanReturnDataForDataTables {
 
 		$items = $queryBuilder->take($request->input('length'))
 					   ->skip($request->input('start'))
+					   ->orderBy('id', 'desc')
 					   ->get();
-
-		$tableData = [];
-		$index = $request->input('start');
 
 		$result = [
 			'draw' => 0 + $request->input('draw'),
