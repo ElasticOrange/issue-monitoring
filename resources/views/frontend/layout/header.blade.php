@@ -2,16 +2,44 @@
     <div class="col-md-8">
         <img alt="stripe header" src="/img/stripe_header.png" />
     </div>
-    <div class="col-md-2">
-        <br />
-        <a href="#en">
-            <img alt="english flag" src="/img/flag_en.png" />
-        </a>
-        <a href="#ro">
-            <img alt="romanian flag" src="/img/flag_ro.png" />
-        </a>
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#en">
+                    <img alt="english flag" src="/img/flag_en.png" />
+                </a>
+            </li>
+            <li>
+                <a href="#ro">
+                    <img alt="romanian flag" src="/img/flag_ro.png" />
+                </a>
+            </li>
+        @if($user)
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">{{ $user->name }}<strong class="caret"></strong>
+                </a>
+                <ul class="dropdown-menu">
+                    @if($user->isAdmin() or $user->isEditor())
+                        <li>
+                            <a href="{{ action('AdminDashboardController@getIndex') }}">Admin</a>
+                        </li>
+                    @endif
+                    <li>
+                    <a href="#">Profil</a>
+                        </li>
+                    <li>
+                    <a href="{{ action('Auth\AuthController@getLogout') }}">Logout</a>
+                        </li>
+                </ul>
+            </li>
+        @else
+            <li>
+                <a href="{{ action('Auth\AuthController@getLogin') }}">
+                        Autentificare
+                </a>
+            </li>
+        @endif
+        </ul>
     </div>
 </div>
 
@@ -30,7 +58,7 @@
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" style="margin-left: 40px;" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="{{ action('HomeController@getIndex') }}">Acasa</a>
@@ -58,9 +86,6 @@
                                 <a href="{{ action('HomeController@getTeam') }}">Echipa</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="{{ action('Auth\AuthController@getLogin') }}">Autentificare</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

@@ -1,5 +1,4 @@
 @extends('frontend.layout.master')
-@include('frontend.partials.user')
 
 @section('content')
 
