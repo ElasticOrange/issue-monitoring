@@ -87,7 +87,7 @@ ul.nav.nav-tabs.sticky-domains a:hover{
 }
 
 .news-title {
-    background: url(/img/news_title_blue.png) no-repeat; 
+    background: url(/img/news_title_blue.png) no-repeat;
     width: 100%;
     margin-left: 15px;
 }
@@ -111,7 +111,6 @@ ul.nav.nav-tabs.sticky-domains a:hover{
 
 .subscribe_img {
     width: 100%;
-    height: 100%;
 }
 
 dt.subscribe-text {
@@ -127,7 +126,6 @@ dt.subscribe-text {
     margin-top: 15px;
     background: #8ed7d9 url(/img/subscribe_btn.png) no-repeat;
     width: 100%;
-    height: 100%;
     padding: 0;
     border: 0;
 }
@@ -146,9 +144,9 @@ dt.subscribe-text {
 
 dl dd.news-text-desc {
         font-family: Gotham;
-         color: #000; 
-         font-size: 14px; 
-         font-weight: 400; 
+         color: #000;
+         font-size: 14px;
+         font-weight: 400;
         text-align: left;
 }
 
