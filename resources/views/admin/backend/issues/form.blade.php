@@ -446,7 +446,7 @@
                                         <label>Durata</label>
                                     </div>
                                     <div class="col-sm-1">
-                                        <label>Estimat finalizat</label>
+                                        <label>Termen</label>
                                     </div>
                                     <div class="col-sm-1">
                                     </div>
@@ -624,7 +624,7 @@
                                                                 />Publica
                                                     </label>
                                                 </div>
-                                                 
+
                                                 <div class="checkbox col-md-3 col-md-offset-2">
                                                     <label>
                                                         <input  type="checkbox"
