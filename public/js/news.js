@@ -7,6 +7,11 @@
                 }
             );
 
+		var link = _.template($("#external_link").html(),
+			{
+				interpolate: /__([\s\S]+?)__/g
+			});
+
         $('#news-table').DataTable({
             "language":{
                 "sInfo": "Arata de la _START_ la _END_ din _TOTAL_ intrari",
@@ -47,14 +52,17 @@
                         if(mm < 10) {
                             mm = '0' + mm;
                         }
-                        
+
                         date = dd + '-' + mm + '-' + yyyy;
                         return date;
                     }
                 },
                 {
                     data: "link",
-                    title: "Sursa"
+                    title: "Sursa",
+					render: function(data, type, rowData, meta) {
+						return link({link: data});
+					}
                 },
                 {
                     data: "id",

@@ -2,6 +2,7 @@
 
 @section('content')
 	@include('admin.backend.issues.action_buttons', ['controller' => 'NewsController'])
+	@include('admin.backend.news.external_link')
 
 	<div class="row">
 		<div class="col-lg-12 text-left">
