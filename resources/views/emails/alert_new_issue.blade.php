@@ -89,6 +89,10 @@
         td[class="section-padding-bottom-image"]{
           padding: 50px 15px 0 15px !important;
         }
+
+        a:link{
+          color: darkcyan !important;
+        }
     }
 </style>
 </head>
