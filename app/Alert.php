@@ -186,6 +186,10 @@ class Alert extends Model
     public static function getNewsForUser($user, $newsAlerts) {
         $issues = [];
         foreach ($newsAlerts as $newsAlert) {
+            if ($newsAlert->alertable == null) {
+                continue;
+            }
+
             foreach ($newsAlert->alertable->connectedIssues as $issue) {
                 if (!$issue->connectedDomains->intersect($user->domains)->isEmpty()) {
                     if (! array_key_exists($issue->id, $issues)) {
