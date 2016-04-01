@@ -31,10 +31,11 @@ class Alert extends Model
     public static function deleteUnsentAlertsWithoutDestination()
     {
         $date = new \DateTime;
-        $date->modify('+1 hour');
+        $date = $date->modify('-1 hour');
+        $date = $date->format('Y-m-d H:i:s');
 
         self::where('sent', 0)
-            ->where($date, '>=', 'created_at')
+            ->where('created_at', '<=', $date)
             ->delete();
 
         return true;
