@@ -28,6 +28,18 @@ class Alert extends Model
         return $query->where('report_type', '1');
     }
 
+    public static function deleteUnsentAlertsWithoutDestination()
+    {
+        $date = new \DateTime;
+        $date->modify('+1 hour');
+
+        self::where('sent', 0)
+            ->where($date, '>=', 'created_at')
+            ->delete();
+
+        return true;
+    }
+
     public static function createAlert($item, $itemType)
     {
         $alert = new Alert;

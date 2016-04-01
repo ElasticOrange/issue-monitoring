@@ -41,5 +41,6 @@ class SendAlerts extends Command
         Alert::sendAllNewsAlerts();
         Alert::sendAllIssueAlerts();
         Alert::sendReportAlerts();
+        Alert::deleteUnsentAlertsWithoutDestination();
     }
 }
