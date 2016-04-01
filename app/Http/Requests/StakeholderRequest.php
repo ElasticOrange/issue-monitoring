@@ -24,7 +24,7 @@ class StakeholderRequest extends Request
 	public function rules()
 	{
 		return [
-			'name' => 'required|string',
+			'name' => 'string',
 			'type' => 'in:persoana,organizatie',
 			'contact.ro' => 'string',
 			'contact.en' => 'string',
@@ -32,6 +32,8 @@ class StakeholderRequest extends Request
 			'profile.en' => 'string',
 			'position.ro' => 'string',
 			'position.en' => 'string',
+			'org_name.ro' => 'string',
+			'org_name.en' => 'string',
 			'site' => 'url',
 			'published' => 'boolean',
 			'poza_file' => 'image'

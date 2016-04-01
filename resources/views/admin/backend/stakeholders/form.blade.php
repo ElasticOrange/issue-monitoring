@@ -1,20 +1,63 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 <div class="form-group">
+    <label class="col-md-2 control-label">Tip</label>
+    <div class="col-md-8">
+        <select class="form-control" name="type" stakeholder-type="true">
+            <option value="persoana">persoana</option>
+            <option value="organizatie" @if($stakeholder->type === 'organizatie') selected="selected" @endif>organizatie</option>
+        </select>
+    </div>
+</div>
+
+<br>
+
+<div class="form-group" person-name="true">
 	<label class="col-md-2 control-label">Nume complet</label>
 	<div class="col-md-8">
 		<input type="text" prevent-enter="true" name="name" class="form-control" value="{{ $stakeholder->name }}"/>
 	</div>
 </div>
 
-<div class="form-group">
-	<label class="col-md-2 control-label">Tip</label>
-	<div class="col-md-8">
-		<select class="form-control" name="type" stakeholder-type="true">
-			<option value="persoana">persoana</option>
-			<option value="organizatie" @if($stakeholder->type === 'organizatie') selected="selected" @endif>organizatie</option>
-		</select>
-	</div>
+<ul class="nav nav-tabs" organization-name="true">
+    <li class="active"><a href="#ro-org" data-toggle="tab">RO</a></li>
+    <li><a href="#en-org" data-toggle="tab">EN</a></li>
+</ul>
+
+<div class="tab-content" organization-name="true">
+    <br/>
+    <div class="tab-pane active" id="ro-org">
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Nume Organizatie</label>
+            <div class="col-md-8">
+                <input type="text"
+                       prevent-enter="true"
+                       name="org_name[ro]"
+                       class="form-control"
+                       value="{{ $stakeholder->translateOrNew('ro')->org_name }}"
+                >
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane" id="en-org">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Organization Name</label>
+            <div class="col-md-8">
+                <input type="text"
+                       prevent-enter="true"
+                       name="org_name[en]"
+                       class="form-control"
+                       value="{{ $stakeholder->translateOrNew('en')->org_name }}"
+                       organization-name="true"
+                >
+            </div>
+        </div>
+    </div>
 </div>
+<br>
+<br>
 
 <div class="form-group">
 	<label class="col-md-2 control-label">Email</label>
@@ -37,7 +80,7 @@
 	</div>
 </div>
 
-<div class="form-group">
+<div class="form-group" stakeholder-cv="true">
 	<label class="col-md-2 control-label">CV</label>
 	<div class="col-md-8">
 		<label>

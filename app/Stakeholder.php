@@ -21,7 +21,8 @@ class Stakeholder extends Model
 		'site',
 		'profile',
 		'position',
-		'address'
+		'address',
+		'org_name'
 	];
 
 	public $translatedAttributes = ['contact','profile','position'];
@@ -75,6 +76,7 @@ class Stakeholder extends Model
 			$this->translateOrNew($locale)->other_details = $request->get('other_details')[$locale];
 			$this->translateOrNew($locale)->profile = $request->get('profile')[$locale];
 			$this->translateOrNew($locale)->position = $request->get('position')[$locale];
+			$this->translateOrNew($locale)->org_name = $request->get('org_name')[$locale];
 		}
 		$this->save();
 

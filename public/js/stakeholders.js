@@ -57,8 +57,8 @@ $(document).ready(function(){
 
 	var compiled = _.template($('#section_template').html());
 
-	$('.add_section').on('click', function(){
-		var template_populated= compiled({ 'sectionid': _.random(100000, 1000000),
+	$('.add_section').on('click', function() {
+		var template_populated = compiled({ 'sectionid': _.random(100000, 1000000),
 											'id': _.uniqueId('new-')});
 		$('.sections').append(template_populated);
 
@@ -69,7 +69,7 @@ $(document).ready(function(){
 		var selected_id = $(this).attr("id");
 		var result = confirm("Sigur doriti sa stergeti sectiunea?");
 		if (result) {
-			$('#section'+selected_id).remove();
+			$('#section' + selected_id).remove();
 		}
 	});
 
@@ -77,7 +77,7 @@ $(document).ready(function(){
 		var request = $.ajax({
 			url: $(this).attr('update-url'),
 			data: {
-				published:$(this).prop('checked'),
+				published:$(this).prop('checked')
 			},
 			method:'get'
 		});
@@ -178,20 +178,27 @@ $(document).ready(function(){
 		$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
 	});
 
-	$('[stakeholder-type=true]').change(function(){
+	$('[stakeholder-type=true]').change(function() {
 		if($(this).val() == 'organizatie'){
 			$('[stakeholder-cv=true]').hide();
 			$('[stakeholder-position=true]').hide();
+			$('[person-name=true]').hide();
+			$('[organization-name=true]').show();
 		}
 		else{
+			$('[organization-name=true]').hide();
 			$('[stakeholder-cv=true]').show();
 			$('[stakeholder-position=true]').show();
+			$('[person-name=true]').show();
 		}
 	});
 
 	if($('[stakeholder-type=true]').val() == 'organizatie'){
 		$('[stakeholder-cv=true]').hide();
 		$('[stakeholder-position=true]').hide();
+		$('[person-name=true]').hide();
+	} else if($('[stakeholder-type=true]').val() == 'persoana'){
+		$('[organization-name=true]').hide();
 	}
 
 	$(document).on('click', '[delete-cv=true]', function(ev) {
