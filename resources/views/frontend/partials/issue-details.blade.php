@@ -32,7 +32,7 @@
                 Descriere scurta:
             </b>
         </p>
-            {{ $issue->description }}
+            {!! strip_tags($issue->description) !!}
     </div>
 
     <div class="tab-pane" id="flux">
@@ -48,10 +48,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    @foreach ($issue->locationsteps as $locationStep)
-                        @foreach ($locationStep->flowsteps as $step)
-                            @foreach ($step->documents as $document)
+                @foreach ($issue->locationsteps as $locationStep)
+                    @foreach ($locationStep->flowsteps as $step)
+                        @foreach ($step->documents as $document)
+                            <tr>
                                 <td>
                                     {{ $document->title }}
                                 </td>
@@ -65,10 +65,10 @@
                                 <td>
                                     {{ $document->init_at->format('d-m-Y') }}
                                 </td>
-                            @endforeach
+                            </tr>
                         @endforeach
                     @endforeach
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
