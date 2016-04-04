@@ -107,9 +107,47 @@
     </div>
 
     <div class="tab-pane" id="stakeholders">
+        <p>
+            <b>Organizatii</b>
+        </p>
+        @foreach ($issue->connectedStakeholders as $stakeholder)
+            @if($stakeholder->type == 'organizatie')
+            <ul>
+                <li>
+                    <a href="#" target="_blank">
+                        {{ $stakeholder->name }}
+                    </a>
+                </li>
+            </ul>
+            @endif
+        @endforeach
+        <p>
+            <b>Persoane</b>
+        </p>
+        @foreach ($issue->connectedStakeholders as $stakeholder)
+            @if($stakeholder->type == 'persoana')
+            <ul>
+                <li>
+                    <a href="#" target="_blank">
+                        {{ $stakeholder->name }}
+                    </a>
+                </li>
+            </ul>
+            @endif
+        @endforeach
     </div>
 
     <div class="tab-pane" id="notifications">
+        <div class="tab-pane fade active in" id="tab-notificari">
+            <form action="" method="POST">
+                <label>Vreau să-mi transmiteți notificări pentru aceasta inițiativă</label>
+                <select name="notify" id="notify">
+                    <option value="N" selected="">NU</option>
+                    <option value="Z">ZILNIC</option>
+                    <option value="S">SĂPTĂMÂNAL</option>
+                </select>
+                <input type="submit" value="Salvează">
+            </form>
+        </div>
     </div>
-
 </div>
