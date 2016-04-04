@@ -64,6 +64,13 @@ class HomeController extends Controller
             ]);
     }
 
+    public function getIssueInfo($id)
+    {
+        $issue = Issue::findOrFail($id);
+
+        return view('frontend.pages.info-issue', ['issue' => $issue]);
+    }
+
     public function getContact()
     {
 

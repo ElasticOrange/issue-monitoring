@@ -22,7 +22,11 @@
                 {!! strip_tags($issue->description) !!}
             <p>
                 <br>
-                <b><a href="{{ action('HomeController@getContact') }}" rel="nofollow">Pentru a accesa mai multe informații, vă rugăm să ne contactați !</a></b>
+                @if(\Auth::user())
+                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $issue->id]) }}" rel="nofollow">Mai multe detalii</a>
+                @else
+                    <a href="{{ action('HomeController@getContact') }}" rel="nofollow">Pentru a accesa mai multe informații, vă rugăm să ne contactați !</a>
+                @endif
             </p>
         </div>
     </div>
