@@ -36,6 +36,71 @@
     </div>
 
     <div class="tab-pane" id="flux">
+        <div class="tab-pane row fade active in" id="tab-flux">
+            <div id="legenda" class="pull-right">
+                <span class="s-f"><g></g> Stadiu finalizat</span>
+                <span class="s-i"><g></g> Stadiu în curs</span>
+                <span class="s-n"><g></g> Stadiu neînceput</span>
+                <span class="s-e" style="margin-right: 25px;"><g></g> Termen depășit</span>
+            </div>
+        </div>
+        <div class="col-md-12 issues-list panel-group" id="steps-list" style="text-align:center">
+            <div class="clearfix steps-header">
+                <div class="col-md-4 col-xs-4 step" style="text-align:left">Stadiu procedural</div>
+                <div class="col-md-2 col-xs-2 step">Status</div>
+                <div class="col-md-2 col-xs-2 step">Data de început</div>
+                <div class="col-md-2 col-xs-2 step">Data de sfârșit<sup>1</sup></div>
+                <div class="col-md-2 col-xs-2 step">Mai mult...</div>
+            </div>
+            <div>
+            @if($issue->locationsteps)
+                @foreach($issue->locationsteps as $locationStep)
+                    @if($locationStep->flowsteps)
+                        @foreach($locationStep->flowsteps as $step)
+                            @if($step->finalizat == 1)
+                                <div class="clearfix individual-step finalizat">
+                            @elseif($step->start_date && $step->finalizat == 0)
+                                <div class="clearfix individual-step in-curs">
+                            @elseif(! $step->start_date)
+                                <div class="clearfix individual-step">
+                            @endif
+                                <div class="col-md-4 col-xs-4 step" style="text-align:left">
+                                    {{ $step->flow_name }}
+                                </div>
+                                <div class="col-md-2 col-xs-2 step">
+                                @if($step->finalizat == 0)
+                                    <i class="fa fa-square-o"></i>
+                                @else
+                                    <i class="fa fa-check-square-o"></i>
+                                @endif
+                                </div>
+                                <div class="col-md-2 col-xs-2 step">
+                                @if($step->start_date)
+                                    {{ $step->start_date->format('d-m-Y') }}
+                                @else - @endif
+                                </div>
+                                <div class="col-md-2 col-xs-2 step">
+                                @if($step->end_date)
+                                    {{ $step->end_date->format('d-m-Y') }}
+                                @else - @endif
+                                </div>
+                                @if($step->observatii)
+                                    <div class="col-md-2 col-xs-2 step">
+                                        <i class="fa fa-plus accordion-toggle collapsed" data-toggle="collapse" data-parent="#steps-list" href="#step_{{ $step->id }}" aria-expanded="false"></i>
+                                    </div>
+                                    <div id="step_{{ $step->id }}" class="col-md-12 col-xs-12 panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                        <div class="panel-body">
+                                            {!! strip_tags($step->observatii) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+            @endif
+            </div>
+        </div>
     </div>
 
     <div class="tab-pane" id="documents">

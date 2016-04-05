@@ -206,3 +206,62 @@ dd a {
     padding: 4px 0 0 6px;
     margin-right: 15px;
 }
+
+#legenda span g {
+    width: 9px;
+    height: 9px;
+    border: 1px solid #000;
+    background: #fff;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#legenda span.s-f g {
+    background: #c9e7ce;
+}
+
+#legenda span.s-i g {
+    background: #fee6bf;
+}
+
+#legenda span.s-e g {
+    background: #e02222;
+}
+
+.steps-header {
+    border: 1px solid #000;
+}
+
+.individual-step.in-curs {
+    background: #fee6bf;
+}
+
+.individual-step {
+    border-bottom: 1px solid #000;
+    line-height: 22px;
+}
+
+.individual-step.finalizat {
+    background: #c9e7ce;
+    color: #3e4d5c;
+}
+
+#steps-list .step {
+    padding: 5px;
+    min-height: 35px;
+}
+
+.clerfix:before {
+    display: table;
+    content: " ";
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+}
