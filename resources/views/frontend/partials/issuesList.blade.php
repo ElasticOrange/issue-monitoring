@@ -23,7 +23,7 @@
             <p>
                 <br>
                 @if(\Auth::user())
-                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $issue->id]) }}" rel="nofollow">Mai multe detalii</a>
+                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $issue->id, 'name' => Illuminate\Support\Str::slug($issue->name)]) }}" rel="nofollow">Mai multe detalii</a>
                 @else
                     <a href="{{ action('HomeController@getContact') }}" rel="nofollow">Pentru a accesa mai multe informații, vă rugăm să ne contactați !</a>
                 @endif

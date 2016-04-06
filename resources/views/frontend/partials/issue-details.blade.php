@@ -139,36 +139,19 @@
     </div>
 
     <div class="tab-pane" id="news">
+        @if($issue->connectedNews)
         @foreach ($issue->connectedNews as $n)
-            <p>
-                <b>{{ $n->title }}</b>
-            </p>
-            <br>
-            <p>
-                <b>Data: </b>{{ $n->date->format('d-m-Y') }}
-            </p>
-            <p>
-                <b>Extras :</b> {!! strip_tags($n->description) !!}
-            </p>
-            <p>
-                <b>Stakeholderi: </b>
-                @foreach ($n->connectedStakeholders as $stakeholder)
-                <ul>
-                    <li>
-                        <a href="#" target="_blank">
-                            {{ $stakeholder->name }}
+            <ul>
+                <li>
+                    <p>
+                        <a href="{{ action('HomeController@getIssueNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)]) }}">
+                            <b>{{ $n->title }}</b>
                         </a>
-                    </li>
-                </ul>
-                @endforeach
-            </p>
-            <br>
-
-            <a href="{{ $n->link }}" target="_blank">
-                Stire completa
-            </a>
-            <br><hr>
-        @endforeach 
+                    </p>
+                </li>
+            </ul>
+        @endforeach
+        @endif
     </div>
 
     <div class="tab-pane" id="stakeholders">
@@ -213,6 +196,9 @@
                 </select>
                 <input type="submit" value="Salvează">
             </form>
+            <p>
+                Este in lucru.
+            </p>
         </div>
     </div>
 </div>

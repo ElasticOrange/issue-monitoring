@@ -18,7 +18,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/backend/legalnews/query', 'LegalNewsController@query');
     Route::get('/backend/legalnews/{legalnews}/delete', 'LegalNewsController@destroy');
     Route::resource('/backend/legalnews', 'LegalNewsController', ['except' => ['show', 'destroy']]);
-    
+
 
     Route::get('/backend/document/{public_code}/show', 'DocumentController@show');
     Route::get('/backend/document/query', 'DocumentController@query');
@@ -121,7 +121,8 @@ Route::post('/password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('issues', 'HomeController@getIssues');
 Route::post('issues', 'HomeController@getIssues');
-Route::get('issues/info/{id}', 'HomeController@getIssueInfo');
+Route::get('issues/{id}-{name}', 'HomeController@getIssueInfo');
+Route::get('issues/news/{id}-{name}', 'HomeController@getIssueNewsInfo');
 Route::get('reports', 'HomeController@getReports');
 Route::get('contact', 'HomeController@getContact');
 Route::get('about-us', 'HomeController@getAboutUs');

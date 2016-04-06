@@ -8,6 +8,7 @@ use Issue\Domain;
 use Issue\Http\Requests;
 use Illuminate\Http\Request;
 use Issue\Http\Controllers\Controller;
+use Issue\News;
 
 class HomeController extends Controller
 {
@@ -69,6 +70,13 @@ class HomeController extends Controller
         $issue = Issue::findOrFail($id);
 
         return view('frontend.pages.info-issue', ['issue' => $issue]);
+    }
+
+    public function getIssueNewsInfo($id)
+    {
+        $news = News::with('translations')->findOrFail($id);
+
+        return view('frontend.pages.info-news', ['news' => $news]);
     }
 
     public function getContact()
