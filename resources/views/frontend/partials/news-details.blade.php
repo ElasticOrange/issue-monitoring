@@ -25,4 +25,4 @@
 <a href="{{ $news->link }}" target="_blank">
     Stire completa
 </a>
-<br><hr>
+<br>

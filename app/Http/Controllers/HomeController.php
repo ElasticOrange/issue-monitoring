@@ -9,6 +9,7 @@ use Issue\Http\Requests;
 use Illuminate\Http\Request;
 use Issue\Http\Controllers\Controller;
 use Issue\News;
+use Issue\Stakeholder;
 
 class HomeController extends Controller
 {
@@ -72,11 +73,18 @@ class HomeController extends Controller
         return view('frontend.pages.info-issue', ['issue' => $issue]);
     }
 
-    public function getIssueNewsInfo($id)
+    public function getNewsInfo($id)
     {
         $news = News::with('translations')->findOrFail($id);
 
         return view('frontend.pages.info-news', ['news' => $news]);
+    }
+
+    public function getStakeholderInfo($id)
+    {
+        $stakeholder = Stakeholder::with('translations')->findOrFail($id);
+
+        return view('frontend.pages.info-stakeholder', compact('stakeholder'));
     }
 
     public function getContact()

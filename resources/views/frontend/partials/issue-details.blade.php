@@ -21,7 +21,7 @@
             @foreach ($issue->connectedInitiatorsStakeholders as $initiator)
                 <ul>
                     <li>
-                        <a href="#" target="_blank">
+                        <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
                         {{ $initiator->name }}
                         </a>
                     </li>
@@ -144,7 +144,9 @@
             <ul>
                 <li>
                     <p>
-                        <a href="{{ action('HomeController@getIssueNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)]) }}">
+                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)]) }}"
+                            target="_blank"
+                        >
                             <b>{{ $n->title }}</b>
                         </a>
                     </p>
@@ -162,7 +164,7 @@
             @if($stakeholder->type == 'organizatie')
             <ul>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
                         {{ $stakeholder->name }}
                     </a>
                 </li>
@@ -176,7 +178,7 @@
             @if($stakeholder->type == 'persoana')
             <ul>
                 <li>
-                    <a href="#" target="_blank">
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
                         {{ $stakeholder->name }}
                     </a>
                 </li>

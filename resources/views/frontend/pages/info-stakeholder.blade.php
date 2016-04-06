@@ -6,7 +6,7 @@
         @include('frontend.layout.header')
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                @include('frontend.partials.news-details')
+                @include('frontend.partials.stakeholder-details')
             </div>
 
         </div>
