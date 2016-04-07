@@ -22,10 +22,11 @@ class Stakeholder extends Model
 		'profile',
 		'position',
 		'address',
+		'other_details',
 		'org_name'
 	];
 
-	public $translatedAttributes = ['contact','profile','position'];
+	public $translatedAttributes = ['profile','position', 'address', 'other_details', 'org_name'];
 
 	protected $guarded = ['id'];
 

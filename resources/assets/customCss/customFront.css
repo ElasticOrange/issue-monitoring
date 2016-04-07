@@ -265,3 +265,36 @@ dd a {
     font-size: 0;
     line-height: 0;
 }
+
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 7px;
+}
+
+.profile-userbuttons {
+    padding-bottom: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.green-haze.btn {
+    color: #FFFFFF;
+    background-color: #44b6ae;
+    border-radius: 25px;
+    font-size: 14px;
+}
+
+.green-haze:hover, .green-haze:focus, .green-haze:active, .green-haze.active {
+    color: #FFFFFF;
+    background-color: #3a9c95;
+}

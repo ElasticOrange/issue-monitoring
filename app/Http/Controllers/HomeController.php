@@ -82,9 +82,17 @@ class HomeController extends Controller
 
     public function getStakeholderInfo($id)
     {
-        $stakeholder = Stakeholder::with('translations')->findOrFail($id);
+        $stakeholder = Stakeholder::findOrFail($id);
 
         return view('frontend.pages.info-stakeholder', compact('stakeholder'));
+    }
+
+    public function getAllStakeholderNews($stakeholderId)
+    {
+        $stakeholder = Stakeholder::findOrFail($stakeholderId);
+        $news = $stakeholder->connectedNews()->orderBy('id', 'desc')->paginate(10);
+
+        return view('frontend.pages.news-list', compact('news'));
     }
 
     public function getContact()
