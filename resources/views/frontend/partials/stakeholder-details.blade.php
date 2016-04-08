@@ -66,8 +66,12 @@
                 <h3>Inițiative pentru care este relevant</h3>
             </div>
             <hr>
-            @foreach($stakeholder->connectedIssues()->get() as $stakeholderIssue)
-                <a href="#">{{ $stakeholderIssue->name }}</a>
+            @foreach($stakeholder->connectedIssues()->limit(5)->get() as $stakeholderIssue)
+                    <ul>
+                        <li>
+                            <a href="#">{{ $stakeholderIssue->name }}</a>
+                        </li>
+                </ul>
             @endforeach
             <hr>
             <br><br>
@@ -78,13 +82,14 @@
                 <h3>Știri / declarații în care este menționat</h3>
             </div>
             <hr>
-            @foreach($stakeholder->connectedNews()->orderBy('id', 'desc')->get() as $stakeholderNews)
+            @foreach($stakeholder->connectedNews()->orderBy('id', 'desc')->limit(5)->get() as $stakeholderNews)
                 <ul>
                     <li>
                         <a href="#">{{ $stakeholderNews->title }}</a>
                     </li>
                 </ul>
             @endforeach
+            <br>
             <a href="{{ action('HomeController@getAllStakeholderNews', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">Vezi toate</a>
             <hr>
             <br><br>
