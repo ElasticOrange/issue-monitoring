@@ -10,9 +10,11 @@
 <div class="tab-content">
     <br/>
     <div class="tab-pane active" id="summary">
-        <p>
-            <b>Tip:</b> {{ $issue->type }}
-        </p>
+        @if($issue->type)
+            <p>
+                <b>Tip:</b> {{ $issue->type }}
+            </p>
+        @endif
         <p>
             <b>
                 Initiatori:
@@ -170,7 +172,7 @@
     </div>
 
     <div class="tab-pane" id="news">
-        @if($issue->connectedNews)
+        @if(! $issue->connectedNews->isEmpty())
         @foreach ($issue->connectedNews as $n)
             <ul>
                 <li>

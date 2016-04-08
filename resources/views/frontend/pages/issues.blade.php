@@ -8,13 +8,20 @@
         <div class="col-md-3">
             @include('frontend.partials.domainsTree')
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" style="min-height: 690px;">
             <form method="POST">
-                {!! csrf_field() !!}
+                {{ csrf_field() }}
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                         <div class="input-group">
-                        <input type="text" name="issue_search" class="form-control" placeholder="Search" required>
+                        <input type="text"
+                               name="issue_search"
+                               class="form-control"
+                               placeholder="Search"
+                               @if($issue_search)
+                                   value="{{ $issue_search }}"
+                               @endif
+                        >
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="submit"> Search </button>
                             </span>
@@ -24,30 +31,36 @@
                 <br />
 
                 <div class="row">
-                    <div class="col-sm-3 col-sm-offset-2">
+                    <div class="col-sm-3 col-sm-offset-2 checkbox-inline">
                         <label>
                             <input  type="checkbox"
                                     value="1"
                                     name="viitor"
-                                    checked="checked"
+                                    @if($viitor)
+                                        checked="checked"
+                                    @endif
                                     />viitor
                         </label>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 checkbox-inline">
                         <label>
                             <input  type="checkbox"
                                     value="1"
                                     name="curent"
-                                    checked="checked"
+                                    @if($curent)
+                                        checked="checked"
+                                    @endif
                                     />curent
                         </label>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 checkbox-inline">
                         <label>
                             <input  type="checkbox"
                                     value="1"
                                     name="arhivat"
-                                    checked="checked"
+                                    @if($arhivat)
+                                        checked="checked"
+                                    @endif
                                     />arhivat
                         </label>
                     </div>
@@ -63,11 +76,13 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    {!! $issues->appends(['domain' => $domainIdToHighlight])->render() !!}
-                </div>
+                {!! $issues->appends([
+                    'issue_search' => $issue_search,
+                    'domain' => $domainIdToHighlight,
+                    'viitor' => $viitor,
+                    'curent' => $curent,
+                    'arhivat' => $arhivat
+                    ])->render() !!}
             </div>
         </div>
     </div>

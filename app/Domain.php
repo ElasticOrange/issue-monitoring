@@ -42,7 +42,7 @@ class Domain extends Model
 			$publicDomains = $user->domains()->orderBy('parent_id')->get();
 		}
 
-		if(!$publicDomains or  $publicDomains->isEmpty()) {
+		if(!$publicDomains or $publicDomains->isEmpty()) {
 			$publicDomains = self::isPublic()->orderBy('parent_id')->get();
 		}
 

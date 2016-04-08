@@ -64,7 +64,7 @@
                 </ul>
             @endforeach
             <br>
-            @if($stakeholder->connectedIssues()->count() > 2)
+            @if($stakeholder->connectedIssues()->count() > 5)
                 <a href="{{ action('HomeController@getAllStakeholderIssues', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
                     Vezi toate
                 </a>

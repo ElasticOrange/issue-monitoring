@@ -30,8 +30,6 @@ class HomeController extends Controller
     */
     public function getIssues(Request $request)
     {
-        $user = Auth::user();
-
         $domainsForIssues = Domain::getPublicDomains();
 
         if ($request->domain) {
@@ -42,28 +40,32 @@ class HomeController extends Controller
         }
 
         $issues = Issue::bySearchTerm($request->issue_search)
-                         ->byDomainIds($domainsForIssues->lists('id')->toArray())
-                        ->orderBy('id', 'desc')
-                        ->paginate(8);
+            ->byDomainIds($domainsForIssues->lists('id')->toArray())
+            ->orderBy('id', 'desc')
+            ->where(function($query) use ($request) {
+                if ($request->viitor) {
+                    $query = $query->orWhere('phase', 'viitor');
+                }
 
-        if ($request->viitor) {
-            $issues = $issues->where('phase', 'viitor');
-        }
+                if ($request->curent) {
+                    $query = $query->orWhere('phase', 'curent');
+                }
 
-        if ($request->curent) {
-            $issues = $issues->where('phase', 'curent');
-        }
-
-        if ($request->arhivat) {
-            $arhivatRespins = $issues->where('phase', 'arhivatRespinsSauAbrogat');
-            $arhivatInactiv = $issues->where('phase', 'arhivatInactiv');
-            $issues = $arhivatInactiv->merge($arhivatRespins);
-        }
+                if ($request->arhivat) {
+                    $query = $query->orWhere('phase', 'arhivatRespinsSauAbrogat')
+                        ->orWhere('phase', 'arhivatInactiv');
+                }
+            })
+            ->paginate(10);
 
         return view('frontend.pages.issues', [
                 'issues' => $issues,
-                'domainIdToHighlight' => $request->domain
-            ]);
+                'domainIdToHighlight' => $request->domain,
+                'arhivat' => $request->arhivat,
+                'curent' => $request->curent,
+                'viitor' => $request->viitor,
+                'issue_search' => $request->issue_search
+        ]);
     }
 
     public function getIssueInfo($id)
