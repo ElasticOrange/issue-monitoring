@@ -51,16 +51,6 @@
                 </div>
             </div><br>
         @endif
-        {{--@if()--}}
-            {{--<div>--}}
-                {{--<h3>Inițiative la care este coautor</h3>--}}
-            {{--</div>--}}
-            {{--<hr>--}}
-            {{--@foreach()--}}
-            {{--@endforeach--}}
-            {{--<hr>--}}
-            {{--<br><br>--}}
-        {{--@endif--}}
         @if(! $stakeholder->connectedIssues()->get()->isEmpty())
             <div>
                 <h3>Inițiative pentru care este relevant</h3>

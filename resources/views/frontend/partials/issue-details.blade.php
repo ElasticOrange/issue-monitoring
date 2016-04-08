@@ -84,7 +84,7 @@
                                     {{ $step->end_date->format('d-m-Y') }}
                                 @else - @endif
                                 </div>
-                                @if($step->observatii)
+                                @if($step->observatii or $step->documents)
                                     <div class="col-md-2 col-xs-2 step">
                                         <i class="fa fa-plus accordion-toggle collapsed" data-toggle="collapse" data-parent="#steps-list" href="#step_{{ $step->id }}" aria-expanded="false"></i>
                                     </div>
@@ -92,6 +92,37 @@
                                         <div class="panel-body">
                                             {!! strip_tags($step->observatii) !!}
                                         </div>
+                                        @if(! $step->documents->isEmpty())
+                                            <br>
+                                            <table class="table table-bordered table-striped" style="background-color: #fff;">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descriere scurtă</th>
+                                                    <th>Fișiere</th>
+                                                    <th>Data</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach ($step->documents as $document)
+                                                    <tr>
+                                                        <td>
+                                                            {{ $document->title }}
+                                                        </td>
+                                                        <td style="text-align: center; vertical-align: middle;">
+                                                            @if($document->file)
+                                                                <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank" title="{{ $document->file->original_file_name }}">
+                                                                    <i class="fa fa-file-pdf-o"></i>
+                                                                </a>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            {{ $document->init_at->format('d-m-Y') }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        @endif
                                     </div>
                                 @endif
                             </div>
