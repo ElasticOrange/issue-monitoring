@@ -9,12 +9,12 @@
                 @foreach($news as $n)
                     <ul>
                         <li>
-                            <a href="">{{ $n->title }}</a>
+                            <a href="{{ action('HomeController@getNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)]) }}">{{ $n->title }}</a>
                         </li>
                     </ul>
                 @endforeach
+                {!! $news->render() !!}
             </div>
-
         </div>
         @include('frontend.layout.footer')
     </div>

@@ -95,6 +95,14 @@ class HomeController extends Controller
         return view('frontend.pages.news-list', compact('news'));
     }
 
+    public function getAllStakeholderIssues($stakeholderId)
+    {
+        $stakeholder = Stakeholder::findOrFail($stakeholderId);
+        $issues = $stakeholder->connectedIssues()->orderBy('id', 'desc')->paginate(10);
+
+        return view('frontend.pages.issues-list', compact('issues'));
+    }
+
     public function getContact()
     {
 

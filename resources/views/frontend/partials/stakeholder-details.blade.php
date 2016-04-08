@@ -69,10 +69,16 @@
             @foreach($stakeholder->connectedIssues()->limit(5)->get() as $stakeholderIssue)
                     <ul>
                         <li>
-                            <a href="#">{{ $stakeholderIssue->name }}</a>
+                            <a href="{{ action('HomeController@getIssueInfo', ['id' => $stakeholderIssue->id, 'name' => Illuminate\Support\Str::slug($stakeholderIssue->name)]) }}">{{ $stakeholderIssue->name }}</a>
                         </li>
                 </ul>
             @endforeach
+            <br>
+            @if($stakeholder->connectedIssues()->count() > 2)
+                <a href="{{ action('HomeController@getAllStakeholderIssues', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                    Vezi toate
+                </a>
+            @endif
             <hr>
             <br><br>
         @endif
@@ -85,12 +91,16 @@
             @foreach($stakeholder->connectedNews()->orderBy('id', 'desc')->limit(5)->get() as $stakeholderNews)
                 <ul>
                     <li>
-                        <a href="#">{{ $stakeholderNews->title }}</a>
+                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $stakeholderNews->id, 'name' => Illuminate\Support\Str::slug($stakeholderNews->title)]) }}" target="_blank">
+                            {{ $stakeholderNews->title }}
+                        </a>
                     </li>
                 </ul>
             @endforeach
             <br>
-            <a href="{{ action('HomeController@getAllStakeholderNews', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">Vezi toate</a>
+            @if($stakeholder->connectedNews()->count() > 5)
+                <a href="{{ action('HomeController@getAllStakeholderNews', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">Vezi toate</a>
+            @endif
             <hr>
             <br><br>
         @endif
