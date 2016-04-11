@@ -60,22 +60,16 @@
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse" style="margin-left: 40px;" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse"
+                 id="bs-example-navbar-collapse-1"
+                 style="margin-left: -40px;"
+                 >
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="{{ action('HomeController@getIndex') }}">Acasa</a>
                     </li>
-                    <li>
-                        <a href="{{ action('HomeController@getIssues') }}">Initiative</a>
-                    </li>
-                    <li>
-                        <a href="{{ action('HomeController@getReports') }}">Rapoarte</a>
-                    </li>
-                    <li>
-                        <a href="{{ action('HomeController@getContact') }}">Contact</a>
-                    </li>
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Despre noi<strong class="caret"></strong>
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Issue Monitoring<strong class="caret"></strong>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
@@ -88,6 +82,18 @@
                                 <a href="{{ action('HomeController@getTeam') }}">Echipa</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="{{ action('HomeController@getIssues') }}">Initiative</a>
+                    </li>
+                    <li>
+                        <a href="{{ action('HomeController@getReports') }}">Rapoarte</a>
+                    </li>
+                    <li>
+                        <a href="{{ action('HomeController@getStakeholders') }}">Stakeholderi</a>
+                    </li>
+                    <li>
+                        <a href="{{ action('HomeController@getContact') }}">Contact</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

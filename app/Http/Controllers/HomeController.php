@@ -105,6 +105,11 @@ class HomeController extends Controller
         return view('frontend.pages.issues-list', compact('issues'));
     }
 
+    public function getStakeholders()
+    {
+        
+    }
+
     public function getContact()
     {
 
