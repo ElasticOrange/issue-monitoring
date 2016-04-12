@@ -70,6 +70,9 @@ ul.nav.nav-tabs.sticky-domains {
 
 ul.nav.nav-tabs.sticky-domains a{
     color: #fff;
+    height: 70px;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 ul.nav.nav-tabs.sticky-domains a:hover{
@@ -297,4 +300,20 @@ dd a {
 .green-haze:hover, .green-haze:focus, .green-haze:active, .green-haze.active {
     color: #FFFFFF;
     background-color: #3a9c95;
+}
+
+.home-slider {
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+        margin-right: -40px;
+        margin-top: -17px;
+    }
+
+    .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+        margin-left: -40px;
+        margin-top: -17px;
+    }
 }

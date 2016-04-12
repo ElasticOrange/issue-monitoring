@@ -6,37 +6,61 @@
     @include('frontend.layout.header')
     <div class="row">
         <div class="col-md-12">
-            <img alt="Slide IM" src="/img/slider1.png" />
+            <img alt="Slide IM" src="/img/slider1.png" class="home-slider" />
         </div>
     </div>
 
     <br />
+
+
 
     <div class="row">
         <div class="col-lg-12">
             <p class="sticky-domains">
                 Domenii monitorizate
             </p>
-            <ul class="nav nav-tabs sticky-domains">
-                <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Fiscalitate</a>
-                </li>
-                <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Legislaţia muncii</a>
-                </li>
-                <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Concurenţă</a>
-                </li>
-                <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Sănătate</a>
-                </li>
-                <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Protecţie socială</a>
-                </li>
-                <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Societate civilă</a>
-                </li>
-            </ul>
+            <div class="carousel slide" id="carousel-122866">
+                 <div class="carousel-inner">
+                     <div class="item active">
+                         <ul class="nav nav-tabs sticky-domains">
+                            <li class="col-md-2 col-md-offset-2 text-center">
+                                <a href="#">Fiscalitate</a>
+                            </li>
+                            <li class="col-md-2 text-center">
+                                <a href="#">Legislaţia muncii</a>
+                            </li>
+                            <li class="col-md-2 text-center">
+                                <a href="#">Concurenţă</a>
+                            </li>
+                            <li class="col-md-2 text-center">
+                                <a href="#">Sănătate</a>
+                            </li>
+                        </ul>
+                     </div>
+                     <div class="item">
+                         <ul class="nav nav-tabs sticky-domains">
+                            <li class="col-md-2 col-md-offset-2 text-center">
+                                <a href="#">Protecţie socială</a>
+                            </li>
+                            <li class="col-md-2 text-center">
+                                <a href="#">Societate civilă</a>
+                            </li>
+                            <li class="col-md-2 text-center">
+                                <a href="#">Energie</a>
+                            </li>
+                            <li class="col-md-2 text-center">
+                                <a href="#">Bancar</a>
+                            </li>
+                         </ul>
+                     </div>
+                 </div>
+                <a class="left carousel-control" href="#carousel-122866" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-122866" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -112,7 +136,7 @@
                 <dt class="reports-dt-title">Weekly Policy and Political Report, January 25-29, 2016</dt>
                 <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment):
                         EP and Council Scrutiny Period to End on 28 December
-                        <a href="#descarca-raport">Descarca</a>
+                        <a href="#descarca-raport">Descarcă</a>
                 </dd>
             </dl>
             <img src="/img/reports_stripe.png" class="reports-stripe">
@@ -120,7 +144,7 @@
                 <dt class="reports-dt-title">Weekly Policy and Political Report, January 25-29, 2016</dt>
                 <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment):
                         EP and Council Scrutiny Period to End on 28 December
-                        <a href="#descarca-raport">Descarca</a>
+                        <a href="#descarca-raport">Descarcă</a>
                 </dd>
             </dl>
         </div>
