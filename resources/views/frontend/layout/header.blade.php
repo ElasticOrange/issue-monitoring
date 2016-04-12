@@ -66,7 +66,7 @@
                  >
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="{{ action('HomeController@getIndex') }}">Acasa</a>
+                        <a href="{{ action('HomeController@getIndex') }}">Acasă</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Issue Monitoring<strong class="caret"></strong>
@@ -84,7 +84,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ action('HomeController@getIssues') }}">Initiative</a>
+                        <a href="{{ action('HomeController@getIssues') }}">Iniţiative</a>
                     </li>
                     <li>
                         <a href="{{ action('HomeController@getReports') }}">Rapoarte</a>

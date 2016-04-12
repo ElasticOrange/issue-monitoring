@@ -22,19 +22,19 @@
                     <a href="#">Fiscalitate</a>
                 </li>
                 <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Legislatia muncii</a>
+                    <a href="#">Legislaţia muncii</a>
                 </li>
                 <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Concurenta</a>
+                    <a href="#">Concurenţă</a>
                 </li>
                 <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Sanatate</a>
+                    <a href="#">Sănătate</a>
                 </li>
                 <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Protectie sociala</a>
+                    <a href="#">Protecţie socială</a>
                 </li>
                 <li class="col-md-2 col-xs-12 text-center">
-                    <a href="#">Societate civila</a>
+                    <a href="#">Societate civilă</a>
                 </li>
             </ul>
         </div>
@@ -45,44 +45,44 @@
 
     <div class="row news-title">
         <div class="col-md-8 title-news">
-            <h3 class="text-left">Noutati legislative</h3>
+            <h3 class="text-left">Noutăţi legislative</h3>
 
             <br /><br />
 
             <dl class="news-group">
                 <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
                 <img src="/img/news_stripe.png" class="news-stripe">
             </dl>
 
             <!-- Foreach news -->
             <dl class="news-group">
                 <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
                 <img src="/img/news_stripe.png" class="news-stripe">
             </dl>
 
             <dl class="news-group">
                 <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
                 <img src="/img/news_stripe.png" class="news-stripe">
             </dl>
 
             <dl class="news-group">
                 <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
                 <img src="/img/news_stripe.png" class="news-stripe">
             </dl>
 
             <dl class="news-group">
                 <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Afla mai multe</a></dd>
+                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
                 <!-- <img src="/img/news_stripe.png" class="news-stripe"> -->
             </dl>
             <!-- /Foreach news -->
         </div>
         <div class="col-md-4 col-sm-8 subscribe-now">
-            <h3 class="text-left">Aboneaza-te</h3>
+            <h3 class="text-left">Înregistrează-te</h3>
 
             <br />
 
