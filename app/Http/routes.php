@@ -120,7 +120,6 @@ Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('/password/reset', 'Auth\PasswordController@postReset');
 
 Route::get('issues', 'HomeController@getIssues');
-Route::post('issues', 'HomeController@getIssues');
 Route::get('issues/{id}-{name}', 'HomeController@getIssueInfo');
 Route::get('issues/news/{id}-{name}', 'HomeController@getNewsInfo');
 Route::get('stakeholders/{id}-{name}', 'HomeController@getStakeholderInfo');

@@ -55,6 +55,10 @@ class HomeController extends Controller
                     $query = $query->orWhere('phase', 'arhivatRespinsSauAbrogat')
                         ->orWhere('phase', 'arhivatInactiv');
                 }
+
+                if (empty($request->all())) {
+                    $query = $query->orWhere('phase', 'curent');
+                }
             })
             ->paginate(10);
 
@@ -64,7 +68,8 @@ class HomeController extends Controller
                 'arhivat' => $request->arhivat,
                 'curent' => $request->curent,
                 'viitor' => $request->viitor,
-                'issue_search' => $request->issue_search
+                'issue_search' => $request->issue_search,
+                'all' => $request->all()
         ]);
     }
 
@@ -72,14 +77,14 @@ class HomeController extends Controller
     {
         $issue = Issue::findOrFail($id);
 
-        return view('frontend.pages.info-issue', ['issue' => $issue]);
+        return view('frontend.pages.info-issue', compact('issue'));
     }
 
     public function getNewsInfo($id)
     {
         $news = News::with('translations')->findOrFail($id);
 
-        return view('frontend.pages.info-news', ['news' => $news]);
+        return view('frontend.pages.info-news', compact('news'));
     }
 
     public function getStakeholderInfo($id)

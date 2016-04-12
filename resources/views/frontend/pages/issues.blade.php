@@ -9,8 +9,7 @@
             @include('frontend.partials.domainsTree')
         </div>
         <div class="col-md-9" style="min-height: 690px;">
-            <form method="POST">
-                {{ csrf_field() }}
+            <form method="GET">
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                         <div class="input-group">
@@ -33,6 +32,10 @@
                 <div class="row">
                     <div class="col-sm-3 col-sm-offset-2 checkbox-inline">
                         <label>
+                            <input  type="hidden"
+                                    value="0"
+                                    name="viitor"
+                                    />
                             <input  type="checkbox"
                                     value="1"
                                     name="viitor"
@@ -44,10 +47,14 @@
                     </div>
                     <div class="col-sm-3 checkbox-inline">
                         <label>
+                            <input  type="hidden"
+                                    value="0"
+                                    name="curent"
+                                    />
                             <input  type="checkbox"
                                     value="1"
                                     name="curent"
-                                    @if($curent)
+                                    @if($curent or empty($all))
                                         checked="checked"
                                     @endif
                                     />curent
@@ -55,6 +62,10 @@
                     </div>
                     <div class="col-sm-2 checkbox-inline">
                         <label>
+                            <input  type="hidden"
+                                    value="0"
+                                    name="arhivat"
+                                    />
                             <input  type="checkbox"
                                     value="1"
                                     name="arhivat"
