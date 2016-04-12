@@ -106,15 +106,17 @@
             <!-- /Foreach news -->
         </div>
         <div class="col-md-4 col-sm-8 subscribe-now">
-            <h3 class="text-left">Înregistrează-te</h3>
+            <button class="subscribe-btn">
+                <span class="subscribe-btn-text">Înregistrează-te</span>
+            </button>
 
+            <br />
             <br />
 
             <img src="/img/subscribe_img.png" class="subscribe_img">
             <dl>
                 <dt class="subscribe-text">Bucură-te de avantaje! <br /> Vei primi notificări privind evoluția inițiativelor legislative din domeniul selectat direct prin e-mail.</dt>
             </dl>
-            <button class="subscribe-btn"><span class="subscribe-btn-text">Abonează-te acum</span></button>
         </div>
     </div>
 
