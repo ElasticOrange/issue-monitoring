@@ -20,26 +20,28 @@
                     <a href="{{ $stakeholder->site }}" target="_blank" rel="nofollow" class="btn btn-circle green-haze">Blog</a>
             </div>
         @endif
-        <hr>
-        <div>
-            <h4 class="text-center">
-                Date de contact
-            </h4><br>
-            <p>
-                @if($stakeholder->email)
-                    <b>Email:</b> {{ $stakeholder->email }}<br><br>
-                @endif
-                @if($stakeholder->telephone)
-                    <b>Telefon:</b> {{ $stakeholder->telephone }}<br><br>
-                @endif
-                @if($stakeholder->address)
-                    <b>Adresa:</b> {{ $stakeholder->address }}<br><br>
-                @endif
-                @if($stakeholder->other_details)
-                    <b>Alte detalii:</b> {{ $stakeholder->other_details }}<br>
-                @endif
-            </p>
-        </div>
+        @if ($stakeholder->email or $stakeholder->telephone or $stakeholder->address or $stakeholder->other_details)
+            <hr>
+            <div>
+                <h4 class="text-center">
+                    Date de contact
+                </h4><br>
+                <p>
+                    @if($stakeholder->email)
+                        <b>Email:</b> {{ $stakeholder->email }}<br><br>
+                    @endif
+                    @if($stakeholder->telephone)
+                        <b>Telefon:</b> {{ $stakeholder->telephone }}<br><br>
+                    @endif
+                    @if($stakeholder->address)
+                        <b>Adresa:</b> {{ $stakeholder->address }}<br><br>
+                    @endif
+                    @if($stakeholder->other_details)
+                        <b>Alte detalii:</b> {{ $stakeholder->other_details }}<br>
+                    @endif
+                </p>
+            </div>
+       @endif
     </div>
     <div class="col-md-8">
         @if($stakeholder->profile)
