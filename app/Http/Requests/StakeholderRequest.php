@@ -35,6 +35,7 @@ class StakeholderRequest extends Request
 			'org_name.ro' => 'string',
 			'org_name.en' => 'string',
 			'site' => 'url',
+			'photo_source' => 'url',
 			'published' => 'boolean',
 			'poza_file' => 'image'
 		];

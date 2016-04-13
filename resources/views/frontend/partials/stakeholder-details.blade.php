@@ -1,5 +1,12 @@
 <div class="row">
     <div class="col-md-4">
+        @if($stakeholder->photo_source)
+            <div class="text-right">
+                <small>
+                    Sursa: {{ $stakeholder->photo_source }}
+                </small>
+            </div>
+        @endif
         @if($stakeholder->name)
             <div class="profile-usertitle-name text-center">
                 {{ $stakeholder->name }}

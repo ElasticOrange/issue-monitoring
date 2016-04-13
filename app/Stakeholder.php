@@ -23,7 +23,8 @@ class Stakeholder extends Model
 		'position',
 		'address',
 		'other_details',
-		'org_name'
+        'org_name',
+        'photo_source'
 	];
 
 	public $translatedAttributes = ['profile','position', 'address', 'other_details', 'org_name'];
@@ -41,6 +42,7 @@ class Stakeholder extends Model
 
 	public function setAll($request)
 	{
+        $this->photo_source = $request->photo_source;
 		$this->name = $request->get('name');
 		$this->type = $request->get('type');
 		$this->site = $request->get('site');

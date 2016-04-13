@@ -126,6 +126,13 @@
 	</div>
 </div>
 
+<div class="form-group">
+    <label class="col-md-2 control-label">Sursa poza</label>
+    <div class="col-md-8">
+		<input type="text" prevent-enter="true" name="photo_source" class="form-control" value="{{ $stakeholder->photo_source }}"></input>
+    </div>
+</div>
+
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#ro" data-toggle="tab">RO</a></li>
 	<li><a href="#en" data-toggle="tab">EN</a></li>
