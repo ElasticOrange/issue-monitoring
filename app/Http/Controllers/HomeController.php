@@ -3,13 +3,14 @@
 namespace Issue\Http\Controllers;
 
 use Auth;
+use Issue\News;
 use Issue\Issue;
 use Issue\Domain;
+use Issue\Stakeholder;
 use Issue\Http\Requests;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Issue\Http\Controllers\Controller;
-use Issue\News;
-use Issue\Stakeholder;
 
 class HomeController extends Controller
 {
@@ -73,38 +74,60 @@ class HomeController extends Controller
         ]);
     }
 
-    public function getIssueInfo($id)
+    public function getIssueInfo($id, $name)
     {
         $issue = Issue::findOrFail($id);
+
+        if ($name != Str::slug($issue->name)) {
+            abort(403);
+        }
 
         return view('frontend.pages.info-issue', compact('issue'));
     }
 
-    public function getNewsInfo($id)
+    public function getNewsInfo($id, $name)
     {
         $news = News::with('translations')->findOrFail($id);
+
+        if ($name != Str::slug($news->title)) {
+            abort(403);
+        }
 
         return view('frontend.pages.info-news', compact('news'));
     }
 
-    public function getStakeholderInfo($id)
+    public function getStakeholderInfo($id, $name)
     {
         $stakeholder = Stakeholder::findOrFail($id);
+
+        if ($name != Str::slug($stakeholder->name)) {
+            abort(403);
+        }
 
         return view('frontend.pages.info-stakeholder', compact('stakeholder'));
     }
 
-    public function getAllStakeholderNews($stakeholderId)
+    public function getAllStakeholderNews($stakeholderId, $stakeholderName)
     {
         $stakeholder = Stakeholder::findOrFail($stakeholderId);
+
+        if ($stakeholderName != Str::slug($stakeholder->name)) {
+            abort(403);
+        }
+
         $news = $stakeholder->connectedNews()->orderBy('id', 'desc')->paginate(10);
 
         return view('frontend.pages.news-list', compact('news'));
     }
 
-    public function getAllStakeholderIssues($stakeholderId)
+    public function getAllStakeholderIssues($stakeholderId, $stakeholderName)
     {
         $stakeholder = Stakeholder::findOrFail($stakeholderId);
+
+        if ($stakeholderName != Str::slug($stakeholder->name)) {
+            abort(403);
+        }
+
         $issues = $stakeholder->connectedIssues()->orderBy('id', 'desc')->paginate(10);
 
         return view('frontend.pages.issues-list', compact('issues'));
