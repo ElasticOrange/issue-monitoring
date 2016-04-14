@@ -46,7 +46,7 @@
 <br />
 
 <div class="row">
-    <a href="http://www.issuemonitoring.ro">
+    <a href="{{ action('HomeController@getIndex') }}">
         <div class="col-md-2 text-center">
             <img alt="logo Issue Monitoring" src="/img/logo_im.png" />
         </div>
