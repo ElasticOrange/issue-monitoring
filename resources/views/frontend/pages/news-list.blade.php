@@ -6,6 +6,14 @@
         @include('frontend.layout.header')
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                <h4>
+                    Știri / declarații in care este menționat: <br><b>{{ $stakeholder->name }}</b>
+                </h4>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
                 @foreach($news as $n)
                     <ul>
                         <li>

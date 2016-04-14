@@ -117,7 +117,7 @@ class HomeController extends Controller
 
         $news = $stakeholder->connectedNews()->orderBy('id', 'desc')->paginate(10);
 
-        return view('frontend.pages.news-list', compact('news'));
+        return view('frontend.pages.news-list', compact(['news', 'stakeholder']));
     }
 
     public function getAllStakeholderIssues($stakeholderId, $stakeholderName)
