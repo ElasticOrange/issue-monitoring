@@ -168,7 +168,7 @@ class HomeController extends Controller
 
     public function getAboutUs()
     {
-
+        return view('frontend.pages.about-us');
     }
 
     public function getServices()
