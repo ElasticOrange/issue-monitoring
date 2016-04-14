@@ -173,7 +173,7 @@ class HomeController extends Controller
 
     public function getServices()
     {
-
+        return view('frontend.pages.services');
     }
 
     public function getTeam()
