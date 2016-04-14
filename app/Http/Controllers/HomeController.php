@@ -178,6 +178,6 @@ class HomeController extends Controller
 
     public function getTeam()
     {
-
+        return view('frontend.pages.team');
     }
 }
