@@ -10,6 +10,9 @@
         </div>
         <div class="col-md-9" style="min-height: 690px;">
             <form method="GET">
+                @if($domain)
+                    <input type="hidden" name="domain" value="{{ $domain }}">
+                @endif
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
                         <div class="input-group">
@@ -32,10 +35,6 @@
                 <div class="row">
                     <div class="col-sm-3 col-sm-offset-2 checkbox-inline">
                         <label>
-                            <input  type="hidden"
-                                    value="0"
-                                    name="viitor"
-                                    />
                             <input  type="checkbox"
                                     value="1"
                                     name="viitor"
@@ -47,10 +46,6 @@
                     </div>
                     <div class="col-sm-3 checkbox-inline">
                         <label>
-                            <input  type="hidden"
-                                    value="0"
-                                    name="curent"
-                                    />
                             <input  type="checkbox"
                                     value="1"
                                     name="curent"
@@ -62,10 +57,6 @@
                     </div>
                     <div class="col-sm-2 checkbox-inline">
                         <label>
-                            <input  type="hidden"
-                                    value="0"
-                                    name="arhivat"
-                                    />
                             <input  type="checkbox"
                                     value="1"
                                     name="arhivat"
@@ -88,8 +79,8 @@
                     </div>
                 </div>
                 {!! $issues->appends([
+                    'domain' => $domain,
                     'issue_search' => $issue_search,
-                    'domain' => $domainIdToHighlight,
                     'viitor' => $viitor,
                     'curent' => $curent,
                     'arhivat' => $arhivat
@@ -161,7 +152,7 @@
                         .addClass('glyphicon-triangle-bottom');
                 }
 
-                var domainIdToHighlight = {{ $domainIdToHighlight }}
+                var domainIdToHighlight = {{ $domain }}
                 console.log(domainIdToHighlight);
 
                 if(domainIdToHighlight) {

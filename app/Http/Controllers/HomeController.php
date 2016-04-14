@@ -65,7 +65,7 @@ class HomeController extends Controller
 
         return view('frontend.pages.issues', [
                 'issues' => $issues,
-                'domainIdToHighlight' => $request->domain,
+                'domain' => $request->domain,
                 'arhivat' => $request->arhivat,
                 'curent' => $request->curent,
                 'viitor' => $request->viitor,
