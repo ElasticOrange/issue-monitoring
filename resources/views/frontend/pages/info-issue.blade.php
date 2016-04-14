@@ -54,6 +54,13 @@
                         .addClass('glyphicon-triangle-bottom');
                 }
 
+                var domainIdToHighlight = {{ $domain }}
+                console.log(domainIdToHighlight);
+
+                if(domainIdToHighlight) {
+                    selectDomainWhenFilterIssue(domainIdToHighlight);
+                }
+
             });
         }());
     </script>

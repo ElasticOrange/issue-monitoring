@@ -78,11 +78,29 @@ class HomeController extends Controller
     {
         $issue = Issue::findOrFail($id);
 
+        $domain = $issue->connectedDomains;
+
+        if(! $domain[0]->id) {
+            abort(403);
+        }
+
+        $domainsForIssues = Domain::getPublicDomains();
+
+        foreach($domainsForIssues as $publicDomain) {
+            $allowedDomains[] = $publicDomain->id;
+        }
+
+        if(! in_array($domain[0]->id, $allowedDomains)) {
+            abort(403);
+        }
+
         if ($name != Str::slug($issue->name)) {
             abort(403);
         }
 
-        return view('frontend.pages.info-issue', compact('issue'));
+        return view('frontend.pages.info-issue', [
+            'issue' => $issue,
+            'domain' => $domain[0]->id]);
     }
 
     public function getNewsInfo($id, $name)
