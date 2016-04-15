@@ -155,7 +155,9 @@ class HomeController extends Controller
 
     public function getStakeholders()
     {
-        
+        $stakeholders = Stakeholder::paginate(10);
+
+        return view('frontend.pages.stakeholders', compact('stakeholders'));
     }
 
     public function getContact()
