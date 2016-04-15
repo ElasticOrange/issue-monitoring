@@ -1,5 +1,13 @@
+@font-face {
+    font-family: 'Gotham Medium';
+    src: url(/fonts/Gotham-Medium.ttf) format('truetype');
+}
+
+* {
+    font-family: 'Gotham Medium', Arial;
+}
+
 body {
-    font-family: Circle Fina, Arial;
     background: #13a8ac url(/img/cloud_bg.png) no-repeat center center;
 }
 
@@ -56,7 +64,6 @@ div.custom-search-stripe {
 }
 
 p.sticky-domains {
-    font-family: Gotham;
     color:  #984e7b;
     font-size: 39px;
     font-weight: 500;
@@ -96,7 +103,6 @@ ul.nav.nav-tabs.sticky-domains a:hover{
 }
 
 .title-news {
-    font-family: Gotham;
     color:  #fff;
     font-size: 31px;
     font-weight: 700;
@@ -105,7 +111,6 @@ ul.nav.nav-tabs.sticky-domains a:hover{
 }
 
 .subscribe-now {
-    font-family: Gotham;
     color:  #13a8ac;
     font-size: 31px;
     font-weight: 700;
@@ -117,7 +122,6 @@ ul.nav.nav-tabs.sticky-domains a:hover{
 }
 
 dt.subscribe-text {
-    font-family: Gotham;
     color:  #231f20;
     font-size: 18px;
     font-weight: 700;
@@ -134,7 +138,6 @@ dt.subscribe-text {
 }
 
 .subscribe-btn-text {
-    font-family: Gotham;
     color:  #fff;
     font-size: 26px;
     margin-top: -30px;
@@ -146,7 +149,6 @@ dt.subscribe-text {
 }
 
 dl dd.news-text-desc {
-        font-family: Gotham;
          color: #000;
          font-size: 14px;
          font-weight: 400;
@@ -169,7 +171,6 @@ dl.news-group {
 }
 
 .report-news {
-    font-family: Gotham;
     color:  #fff;
     font-size: 31px;
     font-weight: 700;
@@ -179,7 +180,6 @@ dl.news-group {
 }
 
 dd a {
-    font-family: Gotham;
     color: #1aaeb2;
     font-size: 15px;
     font-weight: 500;

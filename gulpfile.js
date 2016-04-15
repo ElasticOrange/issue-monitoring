@@ -120,6 +120,10 @@ elixir(function(mix) {
 		   'resources/assets/bower/ckeditor',
 		   'public/build/js/ckeditor'
 	   )
+	.copy(
+			'resources/assets/fonts/',
+			'public/build/fonts'
+		)
 	.version([
 		  'css/all.css'
 		, 'js/all.js'
