@@ -3,6 +3,7 @@
 namespace Issue\Http\Controllers;
 
 use Auth;
+use Mail;
 use Issue\News;
 use Issue\Issue;
 use Issue\Domain;
@@ -10,6 +11,7 @@ use Issue\Stakeholder;
 use Issue\Http\Requests;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Issue\Http\Requests\ContactFormRequest;
 use Issue\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -158,7 +160,36 @@ class HomeController extends Controller
 
     public function getContact()
     {
+        return view('frontend.pages.contact');
+    }
 
+    private function sendContactEmail($name, $email, $body)
+    {
+        Mail::send(
+            'emails.contact',
+            [
+                'name' => $name,
+                'email' => $email,
+                'body' =>$body
+            ],
+            function ($m) use ($name, $email, $body) {
+                $m->to('alexandra.preda@cmpp.ro')
+                    ->from($email)
+                    ->subject('Mesaj primit din sectiunea de Contact');
+            }
+        );
+
+        return true;
+    }
+
+    public function postContact(ContactFormRequest $request)
+    {
+        $name = $request->name;
+        $email = $request->email;
+        $body = nl2br($request->body);
+        $this->sendContactEmail($name, $email, $body);
+
+        return redirect()->back();
     }
 
     public function getReports()

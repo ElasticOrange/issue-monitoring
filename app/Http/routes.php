@@ -128,6 +128,7 @@ Route::get('stakeholders/issues/{id}-{name}', 'HomeController@getAllStakeholderI
 Route::get('stakeholders', 'HomeController@getStakeholders');
 Route::get('reports', 'HomeController@getReports');
 Route::get('contact', 'HomeController@getContact');
+Route::post('contact', 'HomeController@postContact');
 Route::get('about-us', 'HomeController@getAboutUs');
 Route::get('services', 'HomeController@getServices');
 Route::get('team', 'HomeController@getTeam');
