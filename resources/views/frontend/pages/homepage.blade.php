@@ -70,40 +70,45 @@
     <div class="row news-title">
         <div class="col-md-8 title-news">
             <h3 class="text-left">Noutăţi legislative</h3>
-
             <br /><br />
-
-            <dl class="news-group">
-                <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
-                <img src="/img/news_stripe.png" class="news-stripe">
-            </dl>
-
-            <!-- Foreach news -->
-            <dl class="news-group">
-                <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
-                <img src="/img/news_stripe.png" class="news-stripe">
-            </dl>
-
-            <dl class="news-group">
-                <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
-                <img src="/img/news_stripe.png" class="news-stripe">
-            </dl>
-
-            <dl class="news-group">
-                <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
-                <img src="/img/news_stripe.png" class="news-stripe">
-            </dl>
-
-            <dl class="news-group">
-                <dt class="news-date-text">16 martie 2016</dt>
-                <dd class="news-text-desc">Proiectul de lege Pl-x 655/2015 privind aprobarea Ordonanţei de urgenţã a Guvernului nr.27/2015 pentru completarea Ordonanţei de urgenţã a Guvernului nr.83/2014 privind salarizarea personalului plătit din fonduri publice în anul 2015 a fost adoptat la data de 24.02.2016 în plenul Camerei Deputaților, în calitate de cameră decizională. <a href="">Află mai multe</a></dd>
-                <!-- <img src="/img/news_stripe.png" class="news-stripe"> -->
-            </dl>
-            <!-- /Foreach news -->
+            <div class="carousel slide vertical" id="carousel-133466">
+                <div class="carousel-inner">
+                    @foreach ($legalNews as $legalN)
+                        <div class="item">
+                            <ul class="nav nav-tabs">
+                                @foreach ($legalN as $ln)
+                                    <li class="col-md-8">
+                                        <dl class="news-group">
+                                            <dt class="news-date-text">
+                                                {{ $ln->created_at->format('d-m-Y')}}
+                                            </dt>
+                                            <dd class="news-text-desc">
+                                                <b>
+                                                    {{ $ln->title }}
+                                                </b>
+                                                    @if($ln->content)
+                                                        : {{ strip_tags($ln->content) }}
+                                                    @endif
+                                                @if(\Auth::user())
+                                                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $ln->issue_id, 'name' => Illuminate\Support\Str::slug($ln->title)]) }}"> Află mai multe</a>
+                                                @else
+                                                    <a href="{{ action('HomeController@getContact') }}"> Află mai multe</a>
+                                                @endif
+                                            </dd>
+                                        </dl>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
+                <a class="left carousel-control" href="#carousel-133466" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-133466" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
         </div>
         <div class="col-md-4 col-sm-8 subscribe-now">
             <button class="subscribe-btn">
@@ -155,4 +160,14 @@
     @include('frontend.layout.footer')
 </div>
 
+@endsection
+
+@section('js')
+    <script>
+        (function() {
+            $(document).ready(function() {
+                $('#carousel-133466').children().find('div.item:first').addClass('active');
+            });
+        })();
+    </script>
 @endsection
