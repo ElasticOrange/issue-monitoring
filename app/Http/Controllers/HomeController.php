@@ -100,9 +100,16 @@ class HomeController extends Controller
             abort(403);
         }
 
+        $canSeeStakeholders = \DB::table('domain_user')
+                                    ->where('user_id', \Auth::user()->id)
+                                    ->where('can_see_stakeholders', 1)
+                                    ->get();
+
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
-            'domain' => $domain[0]->id]);
+            'domain' => $domain[0]->id,
+            'canSeeStakeholders' => $canSeeStakeholders
+        ]);
     }
 
     public function getNewsInfo($id, $name)
@@ -124,7 +131,12 @@ class HomeController extends Controller
             abort(403);
         }
 
-        return view('frontend.pages.info-stakeholder', compact('stakeholder'));
+        $canSeeStakeholders = \DB::table('domain_user')
+                                    ->where('user_id', \Auth::user()->id)
+                                    ->where('can_see_stakeholders', 1)
+                                    ->get();
+
+        return view('frontend.pages.info-stakeholder', compact(['stakeholder', 'canSeeStakeholders']));
     }
 
     public function getAllStakeholderNews($stakeholderId, $stakeholderName)
@@ -157,7 +169,12 @@ class HomeController extends Controller
     {
         $stakeholders = Stakeholder::paginate(10);
 
-        return view('frontend.pages.stakeholders', compact('stakeholders'));
+        $canSeeStakeholders = \DB::table('domain_user')
+                                    ->where('user_id', \Auth::user()->id)
+                                    ->where('can_see_stakeholders', 1)
+                                    ->get();
+
+        return view('frontend.pages.stakeholders', compact(['stakeholders', 'canSeeStakeholders']));
     }
 
     public function getContact()

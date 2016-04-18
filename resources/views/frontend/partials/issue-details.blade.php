@@ -61,7 +61,7 @@
                         @foreach($locationStep->flowsteps as $step)
                             @if($step->finalizat == 1)
                                 <div class="clearfix individual-step finalizat">
-                            @elseif($step->start_date && $step->finalizat == 0)
+                            @elseif($step->start_date and $step->finalizat == 0)
                                 <div class="clearfix individual-step in-curs">
                             @elseif(! $step->start_date)
                                 <div class="clearfix individual-step">
@@ -190,30 +190,46 @@
     </div>
 
     <div class="tab-pane" id="stakeholders">
-        <p>
-            <b>Organizatii</b>
-        </p>
+        @if($issue->connectedStakeholders->contains('type', 'organizatie'))
+            <p>
+                <b>Organizatii</b>
+            </p>
+        @endif
         @foreach ($issue->connectedStakeholders as $stakeholder)
             @if($stakeholder->type == 'organizatie')
             <ul>
                 <li>
-                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
-                        {{ $stakeholder->name }}
-                    </a>
+                    @if(empty($canSeeStakeholders))
+                        <a href="{{ action('HomeController@getContact') }}">
+                            {{ $stakeholder->name }}
+                        </a>
+                    @else
+                        <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                            {{ $stakeholder->name }}
+                        </a>
+                    @endif
                 </li>
             </ul>
             @endif
         @endforeach
-        <p>
-            <b>Persoane</b>
-        </p>
+        @if($issue->connectedStakeholders->contains('type', 'persoana'))
+            <p>
+                <b>Persoane</b>
+            </p>
+        @endif
         @foreach ($issue->connectedStakeholders as $stakeholder)
             @if($stakeholder->type == 'persoana')
             <ul>
                 <li>
-                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
-                        {{ $stakeholder->name }}
-                    </a>
+                    @if(empty($canSeeStakeholders))
+                        <a href="{{ action('HomeController@getContact') }}">
+                            {{ $stakeholder->name }}
+                        </a>
+                    @else
+                        <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                            {{ $stakeholder->name }}
+                        </a>
+                    @endif
                 </li>
             </ul>
             @endif

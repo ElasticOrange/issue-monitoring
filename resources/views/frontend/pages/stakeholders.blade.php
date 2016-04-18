@@ -13,8 +13,8 @@
                     <ul>
                         @foreach($stakeholders as $stakeholder)
                             <li>
-                                <a 
-                                    @if(\Auth::user() and \Auth::user()->domains[0]->pivot->can_see_stakeholders)
+                                <a
+                                    @if(\Auth::user() and ! empty($canSeeStakeholders))
                                         href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}"
                                     @else
                                         href="{{ action('HomeController@getContact') }}"
