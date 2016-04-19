@@ -22,6 +22,7 @@
     <script>
         (function() {
             $(document).ready(function() {
+                $('div.col-md-12.issues-list.panel-group.collapse:last').addClass('in');
                 $('#domains').on('hidden.bs.collapse', function toggleTriangle(e) {
                     $(e.target)
                             .prev('.panel-heading')

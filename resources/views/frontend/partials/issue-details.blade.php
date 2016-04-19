@@ -46,17 +46,24 @@
                 <span class="s-e" style="margin-right: 25px;"><g></g> Termen depășit</span>
             </div>
         </div>
-        <div class="col-md-12 issues-list panel-group" id="steps-list" style="text-align:center">
-            <div class="clearfix steps-header">
-                <div class="col-md-4 col-xs-4 step" style="text-align:left">Stadiu procedural</div>
-                <div class="col-md-2 col-xs-2 step">Status</div>
-                <div class="col-md-2 col-xs-2 step">Data de început</div>
-                <div class="col-md-2 col-xs-2 step">Data de sfârșit<sup>1</sup></div>
-                <div class="col-md-2 col-xs-2 step">Mai mult...</div>
-            </div>
-            <div>
             @if($issue->locationsteps)
                 @foreach($issue->locationsteps as $locationStep)
+                <br>
+                <br>
+                <a role="button" data-toggle="collapse" href="#collapse-{{ $locationStep->id }}" aria-expanded="false" aria-controls="collapse-{{ $locationStep->id }}">
+                    <p>
+                        {{ $locations->where('id', $locationStep->location_id)->lists('name')->toArray()[0] }}
+                    </p>
+                </a>
+                    <div class="col-md-12 collapse issues-list panel-group" id="collapse-{{ $locationStep->id }}" style="text-align:center">
+                        <div class="clearfix steps-header">
+                            <div class="col-md-4 col-xs-4 step" style="text-align:left">Stadiu procedural</div>
+                            <div class="col-md-2 col-xs-2 step">Status</div>
+                            <div class="col-md-2 col-xs-2 step">Data de început</div>
+                            <div class="col-md-2 col-xs-2 step">Data de sfârșit<sup>1</sup></div>
+                            <div class="col-md-2 col-xs-2 step">Mai mult...</div>
+                        </div>
+                        <div>
                     @if($locationStep->flowsteps)
                         @foreach($locationStep->flowsteps as $step)
                             @if($step->finalizat == 1)
@@ -86,11 +93,20 @@
                                     {{ $step->end_date->format('d-m-Y') }}
                                 @else - @endif
                                 </div>
-                                @if($step->observatii or $step->documents)
+                                @if ($step->observatii != '' or ! empty($step->documents))
                                     <div class="col-md-2 col-xs-2 step">
-                                        <i class="fa fa-plus accordion-toggle collapsed" data-toggle="collapse" data-parent="#steps-list" href="#step_{{ $step->id }}" aria-expanded="false"></i>
+                                        <i class="fa fa-plus accordion-toggle collapsed"
+                                            data-toggle="collapse"
+                                            data-parent="#collapse-{{ $locationStep->id }}"
+                                            href="#step_{{ $step->id }}"
+                                            aria-expanded="false">
+                                        </i>
                                     </div>
-                                    <div id="step_{{ $step->id }}" class="col-md-12 col-xs-12 panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                    <div id="step_{{ $step->id }}"
+                                        class="col-md-12 col-xs-12 panel-collapse collapse"
+                                        aria-expanded="false"
+                                        style="height: 0px;"
+                                    >
                                         <div class="panel-body">
                                             {!! strip_tags($step->observatii) !!}
                                         </div>
@@ -130,10 +146,10 @@
                             </div>
                         @endforeach
                     @endif
-                @endforeach
-            @endif
+                </div>
             </div>
-        </div>
+            @endforeach
+        @endif
     </div>
 
     <div class="tab-pane" id="documents">

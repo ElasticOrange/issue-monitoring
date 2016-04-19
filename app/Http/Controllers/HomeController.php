@@ -15,6 +15,7 @@ use Issue\LegalNews;
 use Issue\News;
 use Issue\Stakeholder;
 use Mail;
+use Issue\Location;
 
 class HomeController extends Controller
 {
@@ -113,7 +114,8 @@ class HomeController extends Controller
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
             'domain' => $domain[0]->id,
-            'canSeeStakeholders' => $canSeeStakeholders
+            'canSeeStakeholders' => $canSeeStakeholders,
+            'locations' => Location::all()
         ]);
     }
 
