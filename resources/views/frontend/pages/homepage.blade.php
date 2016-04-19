@@ -77,25 +77,24 @@
                         <div class="item">
                             <ul class="nav nav-tabs">
                                 @foreach ($legalN as $ln)
-                                    <li class="col-md-8">
-                                        <dl class="news-group">
-                                            <dt class="news-date-text">
-                                                {{ $ln->created_at->format('d-m-Y')}}
-                                            </dt>
-                                            <dd class="news-text-desc">
-                                                <b>
-                                                    {{ $ln->title }}
-                                                </b>
-                                                    @if($ln->content)
-                                                        : {{ strip_tags($ln->content) }}
-                                                    @endif
-                                                @if(\Auth::user())
-                                                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $ln->issue_id, 'name' => Illuminate\Support\Str::slug($ln->title)]) }}"> Află mai multe</a>
-                                                @else
-                                                    <a href="{{ action('HomeController@getContact') }}"> Află mai multe</a>
+                                    <li class="col-md-12">
+                                        <p class="news-date-text">
+                                            {{ $ln->created_at->format('d-m-Y')}}
+                                        </p>
+                                        <p class="news-text-desc">
+                                            <b>
+                                                {{ $ln->title }}
+                                            </b>
+                                                @if($ln->content)
+                                                    : {{ strip_tags($ln->content) }}
                                                 @endif
-                                            </dd>
-                                        </dl>
+                                            @if(\Auth::user())
+                                                <a href="{{ action('HomeController@getIssueInfo', ['id' => $ln->issue_id, 'name' => Illuminate\Support\Str::slug($ln->title)]) }}"> Află mai multe</a>
+                                            @else
+                                                <a href="{{ action('HomeController@getContact') }}"> Află mai multe</a>
+                                            @endif
+                                        </p>
+                                        <img src="/img/news_stripe.png" style="width: 100%;">
                                     </li>
                                 @endforeach
                             </ul>
