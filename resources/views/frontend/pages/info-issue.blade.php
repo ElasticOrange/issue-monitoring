@@ -22,7 +22,12 @@
     <script>
         (function() {
             $(document).ready(function() {
+                if(window.location.hash) {
+                    $('.nav-tabs a[href="' + window.location.hash + '"]').tab('show');
+                }
+
                 $('div.col-md-12.issues-list.panel-group.collapse:last').addClass('in');
+
                 $('#domains').on('hidden.bs.collapse', function toggleTriangle(e) {
                     $(e.target)
                             .prev('.panel-heading')

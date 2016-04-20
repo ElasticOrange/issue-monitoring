@@ -111,11 +111,14 @@ class HomeController extends Controller
                                     ->where('can_see_stakeholders', 1)
                                     ->get();
 
+        $newsList = $issue->connectedNews()->paginate(10);
+
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
             'domain' => $domain[0]->id,
             'canSeeStakeholders' => $canSeeStakeholders,
-            'locations' => Location::all()
+            'locations' => Location::all(),
+            'newsList' => $newsList
         ]);
     }
 

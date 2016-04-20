@@ -188,21 +188,22 @@
     </div>
 
     <div class="tab-pane" id="news">
-        @if(! $issue->connectedNews->isEmpty())
-        @foreach ($issue->connectedNews as $n)
+        @if(! $newsList->isEmpty())
+        @foreach ($newsList as $news)
             <ul>
                 <li>
                     <p>
-                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)]) }}"
+                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $news->id, 'name' => Illuminate\Support\Str::slug($news->title)]) }}"
                             target="_blank"
                         >
-                            <b>{{ $n->title }}</b>
+                            <b>{{ $news->title }}</b>
                         </a>
                     </p>
                 </li>
             </ul>
         @endforeach
         @endif
+        {!! $newsList->fragment('news')->render() !!}
     </div>
 
     <div class="tab-pane" id="stakeholders">
