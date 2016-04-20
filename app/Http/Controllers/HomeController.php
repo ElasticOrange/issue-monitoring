@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use Issue\Domain;
+use Issue\Report;
 use Issue\Http\Controllers\Controller;
 use Issue\Http\Requests;
 use Issue\Http\Requests\ContactFormRequest;
@@ -221,9 +222,17 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function getReports()
+    public function getReports(Request $request)
     {
+        $reports = Report::orderBy('created_at', 'desc')->paginate(10);
 
+        $report_type = false;
+        if ($request->report_type) {
+            $report_type = $request->report_type;
+            $reports = Report::orderBy('created_at', 'desc')->where('report_type', $request->report_type)->paginate(10);
+        }
+
+        return view('frontend.pages.reports', compact(['reports', 'report_type']));
     }
 
     public function getAboutUs()

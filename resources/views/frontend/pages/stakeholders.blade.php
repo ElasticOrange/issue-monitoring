@@ -6,7 +6,7 @@
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-8 col-md-offset-2">
-            <h3>Stakeholderi</h3>
+            <h2>Stakeholderi</h2>
             <br>
             <div class="row">
                 <div class="col-md-12">

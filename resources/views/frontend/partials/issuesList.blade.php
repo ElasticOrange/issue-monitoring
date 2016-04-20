@@ -8,7 +8,7 @@
                   aria-expanded="false"
             >
 
-                <div class="glyph-background col-xs-1">
+                <div class="glyph-background col-xs-1" style="margin-top: -4px;">
                     <i class="indicator glyphicon glyphicon-plus"></i>
                 </div>
                 {{ $issue->name}}
