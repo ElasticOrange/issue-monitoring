@@ -71,7 +71,7 @@
                                             </a>
                                         </p>
                                     @else
-                                        <a href="{{ action('HomeController@getContact') }}" rel="nofollow">Pentru a accesa mai multe informații, vă rugăm să ne contactați !</a>
+                                        <a href="{{ action('Auth\AuthController@getLogin') }}">Pentru a downloada rapoartul trebuie să vă autentificați</a>
                                     @endif
                                 </p>
                             </div>

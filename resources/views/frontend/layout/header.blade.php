@@ -1,7 +1,18 @@
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <img alt="stripe header" src="/img/stripe_header.png" />
     </div>
+        <div class="col-md-2" style="margin-top: 6px;">
+            <a href="https://www.facebook.com/cmpp.issuemonitoring" style="margin-left: 40px;" target="_blank">
+                <img alt="facebook" src="/img/facebook.png" width="40px" />
+            </a>
+            <a href="https://www.linkedin.com/company/issue-monitoring" target="_blank">
+                <img alt="facebook" src="/img/linkedin.png" width="40px" />
+            </a>
+            <a href="https://twitter.com/issuemonitoring" target="_blank">
+                <img alt="facebook" src="/img/twitter.png" width="40px" />
+            </a>
+        </div>
     <div class="col-md-4">
         <ul class="nav navbar-nav">
             <li>
@@ -62,7 +73,6 @@
 
             <div class="collapse navbar-collapse"
                  id="bs-example-navbar-collapse-1"
-                 style="margin-left: -40px;"
                  >
                 <ul class="nav navbar-nav">
                     <li class="active">

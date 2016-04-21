@@ -118,9 +118,19 @@
             <br />
 
             <img src="/img/subscribe_img.png" class="subscribe_img">
-            <dl>
+            <dl style="margin-top: -250px;">
                 <dt class="subscribe-text">Bucură-te de avantaje! <br /> Vei primi notificări privind evoluția inițiativelor legislative din domeniul selectat direct prin e-mail.</dt>
             </dl>
+            <br>
+            <li class="text-scope">
+                Monitorizare:<br><span class="text-scope">Monitorizare a inițiativelor legislative relevante pentru domeniul tău de interes.</span>
+            </li><br>
+            <li class="text-scope">
+                Alertă: <br><span class="text-scope">Alertă pe e-mail cu modificările de status ale inițiativelor relevante.</span>
+            </li><br>
+            <li class="text-scope">
+            Analiză: <br><span class="text-scope">Analiză săptămnală sau lunară asupra evoluției inițiativelor monitorizate.</span>
+            </li>
         </div>
     </div>
 

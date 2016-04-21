@@ -36,6 +36,7 @@
                     <div class="col-sm-3 col-sm-offset-2 checkbox-inline">
                         <label>
                             <input  type="checkbox"
+                                    class="auto-refresh"
                                     value="1"
                                     name="viitor"
                                     @if($viitor)
@@ -47,6 +48,7 @@
                     <div class="col-sm-3 checkbox-inline">
                         <label>
                             <input  type="checkbox"
+                                    class="auto-refresh"
                                     value="1"
                                     name="curent"
                                     @if($curent or empty($all))
@@ -58,6 +60,7 @@
                     <div class="col-sm-2 checkbox-inline">
                         <label>
                             <input  type="checkbox"
+                                    class="auto-refresh"
                                     value="1"
                                     name="arhivat"
                                     @if($arhivat)
@@ -97,6 +100,9 @@
     <script>
         (function() {
             $(document).ready(function() {
+                $('.auto-refresh').change(function() {
+                    $(this).parents('form').submit();
+                });
                 $('#issues').on('hidden.bs.collapse', function toggleSign(e) {
                     $(e.target)
                             .prev('.panel-heading')
