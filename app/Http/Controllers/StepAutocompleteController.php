@@ -2,12 +2,12 @@
 
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Controllers\Controller;
-use Issue\StepAutocomplete;
-use Issue\Http\Requests\StepAutocompleteRequest;
 use Gate;
+use Issue\Http\Requests;
+use Issue\StepAutocomplete;
+use Illuminate\Http\Request;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\StepAutocompleteRequest;
 
 class StepAutocompleteController extends Controller
 {

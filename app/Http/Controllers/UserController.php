@@ -2,18 +2,18 @@
 
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Controllers\Controller;
-use Issue\User;
-use Hash;
-use Issue\Http\Requests\UserRequest;
-use Gate;
 use Auth;
+use Gate;
+use Hash;
 use Mail;
 use Guard;
+use Issue\User;
 use Issue\Domain;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
 use Issue\DomainTranslation;
+use Issue\Http\Requests\UserRequest;
+use Issue\Http\Controllers\Controller;
 
 class UserController extends Controller
 {

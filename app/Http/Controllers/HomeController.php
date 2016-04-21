@@ -3,20 +3,20 @@
 namespace Issue\Http\Controllers;
 
 use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Str;
+use Mail;
+use Issue\News;
+use Issue\Issue;
 use Issue\Domain;
 use Issue\Report;
-use Issue\Http\Controllers\Controller;
-use Issue\Http\Requests;
-use Issue\Http\Requests\ContactFormRequest;
-use Issue\Issue;
-use Issue\LegalNews;
-use Issue\News;
-use Issue\Stakeholder;
-use Mail;
 use Issue\Location;
+use Issue\LegalNews;
+use Issue\Stakeholder;
+use Issue\Http\Requests;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\ContactFormRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class HomeController extends Controller
 {

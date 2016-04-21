@@ -2,16 +2,16 @@
 
 namespace Issue\Http\Controllers;
 
-use Issue\Stakeholder;
+use Gate;
+use Storage;
 use Issue\Section;
+use Issue\Stakeholder;
+use Issue\UploadedFile;
+use Issue\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Issue\Http\Requests;
-use Issue\Http\Requests\StakeholderRequest;
 use Issue\Http\Controllers\Controller;
-use Issue\UploadedFile;
-use Storage;
-use Gate;
+use Issue\Http\Requests\StakeholderRequest;
 
 class StakeholderController extends Controller
 {

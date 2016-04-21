@@ -3,12 +3,12 @@
 namespace Issue\Http\Controllers;
 
 use Gate;
-use Illuminate\Http\Request;
 use Issue\Alert;
-use Issue\Http\Controllers\Controller;
-use Issue\Http\Requests;
-use Issue\Http\Requests\ReportRequest;
 use Issue\Report;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\ReportRequest;
 
 class ReportController extends Controller
 {

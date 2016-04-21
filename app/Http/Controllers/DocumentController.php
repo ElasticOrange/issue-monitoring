@@ -1,15 +1,15 @@
 <?php
 namespace Issue\Http\Controllers;
 
-use Issue\Document;
-use Issue\UploadedFile;
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Requests\DocumentRequest;
-use Issue\Http\Controllers\Controller;
+use Gate;
 use Storage;
 use Carbon\Carbon;
-use Gate;
+use Issue\Document;
+use Issue\UploadedFile;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\DocumentRequest;
 
 const DOCUMENTS_LOCATION = '/documents/';
 class DocumentController extends Controller

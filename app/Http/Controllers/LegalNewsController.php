@@ -2,11 +2,10 @@
 
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use Gate;
 use Issue\LegalNews;
 use Issue\Http\Requests;
+use Illuminate\Http\Request;
 use Issue\Http\Controllers\Controller;
 
 class LegalNewsController extends Controller

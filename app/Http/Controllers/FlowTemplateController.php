@@ -2,12 +2,12 @@
 
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Requests\FlowTemplateRequest;
-use Issue\Http\Controllers\Controller;
-use Issue\FlowTemplate;
 use Gate;
+use Issue\FlowTemplate;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\FlowTemplateRequest;
 
 class FlowTemplateController extends Controller
 {

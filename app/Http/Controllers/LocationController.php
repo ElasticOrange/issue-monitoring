@@ -2,13 +2,13 @@
 
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Controllers\Controller;
-use Issue\Location;
-use Issue\LocationTranslation;
-use Issue\Http\Requests\LocationRequest;
 use Gate;
+use Issue\Location;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
+use Issue\LocationTranslation;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\LocationRequest;
 
 class LocationController extends Controller
 {

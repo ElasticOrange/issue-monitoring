@@ -1,13 +1,13 @@
 <?php
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Controllers\Controller;
-use Issue\Domain;
-use Issue\DomainTranslation;
-use Issue\Http\Requests\DomainRequest;
 use Gate;
+use Issue\Domain;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
+use Issue\DomainTranslation;
+use Issue\Http\Controllers\Controller;
+use Issue\Http\Requests\DomainRequest;
 
 class DomainController extends Controller
 {

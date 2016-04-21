@@ -2,10 +2,10 @@
 
 namespace Issue\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Controllers\Controller;
 use Issue\UploadedFile;
+use Issue\Http\Requests;
+use Illuminate\Http\Request;
+use Issue\Http\Controllers\Controller;
 
 class UploadedFileController extends Controller
 {

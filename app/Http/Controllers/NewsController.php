@@ -2,20 +2,20 @@
 
 namespace Issue\Http\Controllers;
 
-use Issue\Alert;
-use Issue\News;
-use Illuminate\Http\Request;
-use Issue\Http\Requests;
-use Issue\Http\Requests\NewsRequest;
-use Issue\Http\Controllers\Controller;
+use Gate;
 use Storage;
 use Issue\Tag;
-use Issue\Domain;
-use Issue\DomainTranslation;
-use Issue\Stakeholder;
+use Issue\News;
+use Issue\Alert;
 use Issue\Issue;
+use Issue\Domain;
+use Issue\Stakeholder;
+use Issue\Http\Requests;
 use Issue\IssueTranslation;
-use Gate;
+use Illuminate\Http\Request;
+use Issue\DomainTranslation;
+use Issue\Http\Requests\NewsRequest;
+use Issue\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {

@@ -353,4 +353,10 @@ p.news-text-desc a {
 
 .carousel.vertical .item {
     left: 0;
-}​
+}
+
+.panel-default>.panel-heading {
+    background-color: #F3F9F9;
+    border-color: #a8d2d6;
+
+}

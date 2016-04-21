@@ -15,14 +15,22 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="{{ action('HomeController@getReports', ['report_type' => 1]) }}">
-                                Saptamanale
-                            </a>
+                                <a href="{{ action('HomeController@getReports', ['report_type' => 1]) }}"
+                                    @if ($report_type == 1)
+                                        style="font-weight: 700;"
+                                    @endif
+                                >
+                                    Saptamanale
+                                </a>
                         </h4>
                     </div>
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a href="{{ action('HomeController@getReports', ['report_type' => 2])}}">
+                            <a href="{{ action('HomeController@getReports', ['report_type' => 2])}}"
+                                @if ($report_type == 2)
+                                    style="font-weight: 700;"
+                                @endif
+                            >
                                 Lunare
                             </a>
                         </h4>
