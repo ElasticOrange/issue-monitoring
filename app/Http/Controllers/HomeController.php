@@ -114,12 +114,15 @@ class HomeController extends Controller
 
         $newsList = $issue->connectedNews()->paginate(10);
 
+        $stakeholdersList = $issue->connectedStakeholders->chunk(10);
+
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
             'domain' => $domain[0]->id,
             'canSeeStakeholders' => $canSeeStakeholders,
             'locations' => Location::all(),
-            'newsList' => $newsList
+            'newsList' => $newsList,
+            'stakeholdersList' => $stakeholdersList
         ]);
     }
 

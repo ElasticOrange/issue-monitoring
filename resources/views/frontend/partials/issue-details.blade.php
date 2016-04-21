@@ -20,17 +20,36 @@
                 Initiatori:
             </b>
         </p>
-            @foreach ($issue->connectedInitiatorsStakeholders as $initiator)
-                <ul>
-                    <li>
-                        <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
-                        {{ $initiator->name }}
-                        </a>
-                    </li>
-                </ul>
-            @endforeach
+        @foreach ($stakeholdersList[0] as $initiator)
+            <ul>
+                <li>
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
+                    {{ $initiator->name }}
+                    </a>
+                </li>
+            </ul>
+        @endforeach
+        @if(count($stakeholdersList) > 1)
+            <a role="button" data-toggle="collapse" href="#stakeholdersList" aria-expanded="false" aria-controls="stakeholdersList">
+                Arata toti stakeholderii
+            </a>
+            <div class="collapse" id="stakeholdersList">
+                @for ($i = 1; $i < count($stakeholdersList); $i++)
+                    @foreach ($stakeholdersList[$i] as $initiator)
+                        <ul>
+                            <li>
+                                <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
+                                {{ $initiator->name }}
+                                </a>
+                            </li>
+                        </ul>
+                    @endforeach
+                @endfor
+            </div>
+        @endif
         <p>
             <b>
+                <br>
                 Descriere scurta:
             </b>
         </p>
@@ -188,18 +207,22 @@
     </div>
 
     <div class="tab-pane" id="news">
+        <br>
         @if(! $newsList->isEmpty())
         @foreach ($newsList as $news)
             <ul>
                 <li>
-                    <p>
-                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $news->id, 'name' => Illuminate\Support\Str::slug($news->title)]) }}"
-                            target="_blank"
-                        >
-                            <b>{{ $news->title }}</b>
-                        </a>
-                    </p>
-                </li>
+                    {{ $news->date->format('d-m-Y') }}
+                    <a href="{{ $news->link }}" target="_blank">
+                        <b>{{ $news->title }}</b>
+                    </a><br>
+                    <span class="news-ellipsis">
+                        {{ strip_tags($news->description) }}
+                    </span>
+                    <a href="{{ action('HomeController@getNewsInfo', ['id' => $news->id, 'name' => Illuminate\Support\Str::slug($news->title)])  }}" target="_blank">
+                        Detalii
+                    </a>
+                </li><br>
             </ul>
         @endforeach
         @endif
