@@ -34,23 +34,61 @@ class Domain extends Model
 		return $query->where('public', 1);
 	}
 
-	public static function getPublicDomains()
+	public static function getPublicDomains() 
 	{
-		$publicDomains = null;
-		$user = \Auth::user();
-		if($user) {
-			$publicDomains = $user->domains()->orderBy('parent_id')->get();
-		}
-
-		if(!$publicDomains or $publicDomains->isEmpty()) {
-			$publicDomains = self::isPublic()->orderBy('parent_id')->get();
-		}
-
-		$subdomains = self::whereIn('parent_id', $publicDomains->lists('id'))->get();
-
-		$publicDomains = $publicDomains->merge($subdomains);
+		$publicDomains = self::isPublic()->orderBy('parent_id')->get();
 
 		return $publicDomains;
+	}
+
+	public static function getUserDomains()
+	{
+		$user = \Auth::user();
+
+		if(! $user) {
+			return false;
+		}
+
+		$domains = $user->domains()->orderBy('parent_id')->get();
+
+		return $domains;
+	}
+
+	public static function getUserAndPublicDomains() {
+		$domains = self::getPublicDomains();
+
+		if (! $domains) {
+			$domains = collect([]);
+		}	
+
+		$userDomains = self::getUserDomains();
+
+		if ($userDomains) {
+			$domains = $domains->merge($userDomains);
+		}
+
+		return self::getDomainsWithSubdomains($domains);
+	}
+
+	public static function getDomainsWithSubdomains($domains) {
+		if (! $domains || $domains->isEmpty()) {
+			return $domains;
+		}
+
+		$subdomains = self::whereIn('parent_id', $domains->lists('id'))->get();
+		$domains = $domains->merge($subdomains);
+		return $domains;
+	}
+
+	public static function getCurrentDomains() 
+	{
+		$domains = self::getUserDomains();
+
+		if (! $domains || $domains->isEmpty()) {
+			$domains = self::getPublicDomains();
+		}
+
+		return self::getDomainsWithSubdomains($domains);
 	}
 
 	public static function getDomainsForTree($domains) {

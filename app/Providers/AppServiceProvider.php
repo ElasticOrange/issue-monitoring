@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('frontend.partials.domainsTree', function($view)
         {
-            $publicDomains = Domain::getPublicDomains();
-            $tree = Domain::getTree(Domain::getDomainsForTree($publicDomains));
+            $domains = Domain::getCurrentDomains();
+            $tree = Domain::getTree(Domain::getDomainsForTree($domains));
 
             $view->with([
                   'tree' => $tree,
