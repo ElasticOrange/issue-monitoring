@@ -40,7 +40,7 @@ class HomeController extends Controller
     */
     public function getIssues(Request $request)
     {
-        $domainsForIssues = Domain::getPublicDomains();
+        $domainsForIssues = Domain::getCurrentDomains();
 
         if ($request->domain) {
             $domain = $domainsForIssues->find($request->domain);
@@ -87,19 +87,14 @@ class HomeController extends Controller
     {
         $issue = Issue::findOrFail($id);
 
-        $domain = $issue->connectedDomains;
-
-        if(! $domain[0]->id) {
+        $issueDomains = $issue->connectedDomains;
+        if(! $issueDomains || $issueDomains->isEmpty()) {
             abort(403);
         }
 
-        $domainsForIssues = Domain::getPublicDomains();
-
-        foreach($domainsForIssues as $publicDomain) {
-            $allowedDomains[] = $publicDomain->id;
-        }
-
-        if(! in_array($domain[0]->id, $allowedDomains)) {
+        $allowedDomains = Domain::getUserAndPublicDomains();
+        $intersection = $allowedDomains->intersect($issueDomains);        
+        if(! $intersection || $intersection->isEmpty()) {
             abort(403);
         }
 
@@ -107,19 +102,13 @@ class HomeController extends Controller
             abort(403);
         }
 
-        $canSeeStakeholders = \DB::table('domain_user')
-                                    ->where('user_id', \Auth::user()->id)
-                                    ->where('can_see_stakeholders', 1)
-                                    ->get();
-
         $newsList = $issue->connectedNews()->paginate(10);
 
         $stakeholdersList = $issue->connectedStakeholders->chunk(10);
 
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
-            'domain' => $domain[0]->id,
-            'canSeeStakeholders' => $canSeeStakeholders,
+            'domain' => $issueDomains[0]->id,
             'locations' => Location::all(),
             'newsList' => $newsList,
             'stakeholdersList' => $stakeholdersList

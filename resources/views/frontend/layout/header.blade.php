@@ -2,7 +2,7 @@
     <div class="col-md-6">
         <img alt="stripe header" src="/img/stripe_header.png" />
     </div>
-        <div class="col-md-2" style="margin-top: 6px;">
+        <div class="col-md-2 social-links-container" style="margin-top: 6px;">
             <a href="https://www.facebook.com/cmpp.issuemonitoring" style="margin-left: 40px;" target="_blank">
                 <img alt="facebook" src="/img/facebook.png" width="40px" />
             </a>

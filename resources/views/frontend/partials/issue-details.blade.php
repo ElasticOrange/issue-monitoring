@@ -239,15 +239,9 @@
             @if($stakeholder->type == 'organizatie')
             <ul>
                 <li>
-                    @if(empty($canSeeStakeholders))
-                        <a href="{{ action('HomeController@getContact') }}">
-                            {{ $stakeholder->name }}
-                        </a>
-                    @else
-                        <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
-                            {{ $stakeholder->name }}
-                        </a>
-                    @endif
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                        {{ $stakeholder->name }}
+                    </a>
                 </li>
             </ul>
             @endif
@@ -261,15 +255,9 @@
             @if($stakeholder->type == 'persoana')
             <ul>
                 <li>
-                    @if(empty($canSeeStakeholders))
-                        <a href="{{ action('HomeController@getContact') }}">
-                            {{ $stakeholder->name }}
-                        </a>
-                    @else
-                        <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
-                            {{ $stakeholder->name }}
-                        </a>
-                    @endif
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                        {{ $stakeholder->name }}
+                    </a>
                 </li>
             </ul>
             @endif
