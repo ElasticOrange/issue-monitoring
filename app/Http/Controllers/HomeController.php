@@ -172,8 +172,14 @@ class HomeController extends Controller
     {
         $stakeholders = Stakeholder::paginate(10);
 
+        $user = \Auth::user();
+
+        if (! $user) {
+            abort(403);
+        }
+
         $canSeeStakeholders = \DB::table('domain_user')
-                                    ->where('user_id', \Auth::user()->id)
+                                    ->where('user_id', $user->id)
                                     ->where('can_see_stakeholders', 1)
                                     ->get();
 
