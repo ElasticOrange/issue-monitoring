@@ -110,9 +110,12 @@
             </div>
         </div>
         <div class="col-md-4 col-sm-8 subscribe-now">
-            <button class="subscribe-btn">
+            <a role="button"
+                class="btn subscribe-btn"
+                style="text-decoration: none;"
+                href="{{ action('Auth\AuthController@getRegister') }}">
                 <span class="subscribe-btn-text">Înregistrează-te</span>
-            </button>
+            </a>
 
             <br />
             <br />

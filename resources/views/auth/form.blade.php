@@ -75,6 +75,7 @@
             <div class="col-md-8">
                 <select class="form-control" name="subscription[type]">
                     <option value=" " > </option>
+                    <option value="trial" @if(is_object($user->subscription) && $user->subscription->type === 'trial') selected="selected" @endif>trial</option>
                     <option value="limited" @if(is_object($user->subscription) && $user->subscription->type === 'limited') selected="selected" @endif>limitat</option>
                     <option value="unlimited" @if(is_object($user->subscription) && $user->subscription->type === 'unlimited') selected="selected" @endif>nelimitat</option>
                 </select>

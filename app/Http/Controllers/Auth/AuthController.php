@@ -2,13 +2,14 @@
 
 namespace Issue\Http\Controllers\Auth;
 
-use Issue\User;
+use DB;
 use Validator;
+use Issue\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Issue\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -100,5 +101,55 @@ class AuthController extends Controller
             ->withErrors([
                 $this->loginUsername() => $this->getFailedLoginMessage(),
             ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function createTrial(array $data)
+    {
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'active' => 1,
+            'type' => 'client'
+        ]);
+
+        $end_date = $user->created_at;
+        $end_date = $end_date->modify('+14 days');
+        $end_date = $end_date->format('Y-m-d H:i:s');
+
+        DB::table('user_subscriptions')->insert([
+            'user_id'    => $user->id,
+            'type'       => 'trial',
+            'start_date' => $user->created_at,
+            'end_date'   => $end_date
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * Registers a trial user
+     *
+     * @param Request $request
+     */
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        Auth::login($this->createTrial($request->all()));
+
+        return redirect($this->redirectPath());
     }
 }

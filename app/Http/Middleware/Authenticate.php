@@ -43,9 +43,10 @@ class Authenticate
         }
 
         #logout if user not active
-        if ($this->auth->check() && $this->auth->user()->active == 0) {
+        if ($this->auth->check() and $this->auth->user()->active == 0) {
 
             $this->auth->logout();
+
             return redirect()->guest('/auth/login')->withErrors('Sorry, this user account is not active');
         }
 
