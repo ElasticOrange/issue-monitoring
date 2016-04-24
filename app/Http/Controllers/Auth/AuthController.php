@@ -114,10 +114,12 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
             'active' => 1,
             'type' => 'client'
         ]);
+
+        $user->password = bcrypt($data['password']);
+        $user->save();
 
         $end_date = $user->created_at;
         $end_date = $end_date->modify('+14 days');

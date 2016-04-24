@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract,
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'type', 'language', 'active'];
+	protected $fillable = ['name', 'email', 'type', 'language', 'active'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -108,5 +108,14 @@ class User extends Model implements AuthenticatableContract,
             $rights = $request->rights;
         }
         $this->domains()->sync($rights);
+    }
+
+    public function subscriptionExpired()
+    {
+        if ($this->subscription->end_date < (new \DateTime)->format('Y-m-d H:i:s')) {
+            return true;
+        }
+
+        return false;
     }
 }

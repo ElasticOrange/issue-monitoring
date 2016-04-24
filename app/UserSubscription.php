@@ -34,7 +34,7 @@ class UserSubscription extends Model
             return false;
         }
 
-        if (!in_array($subscriptionData['type'], ['limited', 'unlimited'])) {
+        if (!in_array($subscriptionData['type'], ['trial', 'limited', 'unlimited'])) {
             return false;
         }
 
