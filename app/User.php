@@ -112,6 +112,10 @@ class User extends Model implements AuthenticatableContract,
 
     public function subscriptionExpired()
     {
+        if (! $this->subscription) {
+            return false;
+        }
+
         if ($this->subscription->end_date < (new \DateTime)->format('Y-m-d H:i:s')) {
             return true;
         }

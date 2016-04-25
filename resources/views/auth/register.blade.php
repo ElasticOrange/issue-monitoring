@@ -28,7 +28,7 @@
     <p>&nbsp;</p>
     <div class="col-sm-6 col-sm-offset-3">
         <div class="panel panel-primary">
-            <div class="panel-heading">Sign up with your email address</div>
+            <div class="panel-heading text-center">Înregistrează-te acum și vei avea acces pe platformă timp de 14 zile la notificările și rapoartele Issue Monitoring</div>
             <div class="panel-body main-panel">
 
                 @include('errors._errors')
@@ -77,7 +77,7 @@
                             <button type="submit" class="btn btn-primary">Register</button>
                             <br>
                             <br>
-                            Already have an account? <a href="{{ action('Auth\AuthController@getLogin') }}">Log in</a>
+                            Ai deja cont? Te poți autentifica <a href="{{ action('Auth\AuthController@getLogin') }}">aici.</a>
                         </div>
                     </div>
                 </form>
