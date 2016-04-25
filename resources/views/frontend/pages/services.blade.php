@@ -5,7 +5,7 @@
 <div class="container white">
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <h2>Issue Monitoring – pachete de servicii</h2>
             <br>
             <p>Issue Monitoring este disponibil în mai multe variante de abonament, iar informaţia disponibilă poate fi personalizată în funcţie de subiectele de interes. Accesul pe platforma este securizat printr-un sistem de username şi parolă.</p>

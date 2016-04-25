@@ -5,7 +5,7 @@
 <div class="container white">
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <h2>Echipa Issue Monitoring</h2>
             <br>
             <div class="row">
