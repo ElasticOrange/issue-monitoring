@@ -76,19 +76,6 @@
             </label>
         </td>
         <td>
-            <label>
-            	<input name="rights[<%= id %>][can_see_stakeholders]"
-                        type="hidden"
-                        value="0"
-                />
-                <input name="rights[<%= id %>][can_see_stakeholders]"
-                        type="checkbox"
-                        value="1"
-                        checked="checked"
-                />Acces
-            </label>
-        </td>
-        <td>
             <a class="btn btn-danger" connected-domain-delete="<%= id %>">
                 <span class="glyphicon glyphicon-trash"></span>
             </a>

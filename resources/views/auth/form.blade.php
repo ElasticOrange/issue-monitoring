@@ -141,6 +141,19 @@
             </div>
         </div><br/>
 
+        <div class="checkbox col-md-8 col-md-offset-2">
+            <label>
+                <input type="hidden" value="0" name="can_see_stakeholders" />
+                <input type="checkbox"
+                        value="1"
+                        name="can_see_stakeholders"
+                        @if ($user->can_see_stakeholders == true)
+                            checked="checked"
+                        @endif
+                /> Access Stakeholderi
+            </label>
+        </div>
+
         <br/><hr/><br/>
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -150,7 +163,6 @@
                         <th>Initiative</th>
                         <th>Rapoarte</th>
                         <th>Stiri</th>
-                        <th>Stakeholderi</th>
                         <th>Actiuni</th>
                     </tr>
                 </thead>
@@ -243,21 +255,6 @@
                                             checked="checked"
                                         @endif
                                 />Alerte
-                            </label>
-                        </td>
-                        <td>
-                            <label>
-                                <input name="rights[{{ $domain_connected->id }}][can_see_stakeholders]"
-                                        type="hidden"
-                                        value="0"
-                                />
-                                <input name="rights[{{ $domain_connected->id }}][can_see_stakeholders]"
-                                        type="checkbox"
-                                        value="1"
-                                        @if($domain_connected->pivot->can_see_stakeholders == true)
-                                            checked="checked"
-                                        @endif
-                                />Acces
                             </label>
                         </td>
                         <td>
