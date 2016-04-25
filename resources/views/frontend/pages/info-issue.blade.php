@@ -9,6 +9,9 @@
             @include('frontend.partials.domainsTree')
         </div>
         <div class="col-md-9">
+            <h4 style="margin-top: -2px;">
+                {{ $issue->name }}
+            </h4><br>
             @include('frontend.partials.issue-details')
         </div>
 
