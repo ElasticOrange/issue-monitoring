@@ -30,9 +30,6 @@
             </ul>
         @endforeach
         @if(count($initiatorsList) > 1)
-            <a role="button" data-toggle="collapse" href="#stakeholdersList" aria-expanded="false" aria-controls="stakeholdersList">
-                Arata toti stakeholderii
-            </a>
             <div class="collapse" id="stakeholdersList">
                 @for ($i = 1; $i < count($initiatorsList); $i++)
                     @foreach ($initiatorsList[$i] as $initiator)
@@ -46,6 +43,9 @@
                     @endforeach
                 @endfor
             </div>
+            <a role="button" data-toggle="collapse" href="#stakeholdersList" aria-expanded="false" aria-controls="stakeholdersList">
+                Arata toti stakeholderii
+            </a>
         @endif
         <p>
             <b>
