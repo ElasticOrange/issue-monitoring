@@ -57,10 +57,10 @@ ul.nav.navbar-nav.navbar-right span {
 
 div.custom-search-stripe {
     background: url(/img/search_custom_stripe.png) no-repeat;
-    width: 490px;
-    height: 29px;
-    margin-left: 40px;
-    margin-top: -30px;
+    width: 720px;
+    height: 41px;
+    margin-top: -37px;
+    background-size: cover;
 }
 
 p.sticky-domains {
