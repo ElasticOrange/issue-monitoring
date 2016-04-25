@@ -20,7 +20,7 @@
                 Initiatori:
             </b>
         </p>
-        @foreach ($stakeholdersList[0] as $initiator)
+        @foreach ($initiatorsList[0] as $initiator)
             <ul>
                 <li>
                     <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
@@ -29,13 +29,13 @@
                 </li>
             </ul>
         @endforeach
-        @if(count($stakeholdersList) > 1)
+        @if(count($initiatorsList) > 1)
             <a role="button" data-toggle="collapse" href="#stakeholdersList" aria-expanded="false" aria-controls="stakeholdersList">
                 Arata toti stakeholderii
             </a>
             <div class="collapse" id="stakeholdersList">
-                @for ($i = 1; $i < count($stakeholdersList); $i++)
-                    @foreach ($stakeholdersList[$i] as $initiator)
+                @for ($i = 1; $i < count($initiatorsList); $i++)
+                    @foreach ($initiatorsList[$i] as $initiator)
                         <ul>
                             <li>
                                 <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">

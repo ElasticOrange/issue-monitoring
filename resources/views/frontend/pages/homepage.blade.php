@@ -132,7 +132,7 @@
                 Alertă: <br><span class="text-scope">Alertă pe e-mail cu modificările de status ale inițiativelor relevante.</span>
             </li><br>
             <li class="text-scope">
-            Analiză: <br><span class="text-scope">Analiză săptămnală sau lunară asupra evoluției inițiativelor monitorizate.</span>
+            Analiză: <br><span class="text-scope">Analiză săptămânale sau lunară asupra evoluției inițiativelor monitorizate.</span>
             </li>
         </div>
     </div>
