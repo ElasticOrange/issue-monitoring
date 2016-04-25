@@ -176,7 +176,7 @@ class HomeController extends Controller
 
         $user = \Auth::user();
 
-        if (! $user) {
+        if (! $user or ! $user->can_see_stakeholders) {
             abort(403);
         }
 
