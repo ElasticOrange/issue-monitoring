@@ -93,7 +93,7 @@ class HomeController extends Controller
         }
 
         $allowedDomains = Domain::getUserAndPublicDomains();
-        $intersection = $allowedDomains->intersect($issueDomains);        
+        $intersection = $allowedDomains->intersect($issueDomains);
         if(! $intersection || $intersection->isEmpty()) {
             abort(403);
         }
@@ -224,15 +224,30 @@ class HomeController extends Controller
 
     public function getReports(Request $request)
     {
-        $reports = Report::orderBy('created_at', 'desc')->paginate(10);
-
-        $report_type = false;
-        if ($request->report_type) {
-            $report_type = $request->report_type;
-            $reports = Report::orderBy('created_at', 'desc')->where('report_type', $request->report_type)->paginate(10);
+        $domainsForReports = Domain::getCurrentDomains();
+        if ($request->domain) {
+            $domain = $domainsForReports->find($request->domain);
+            if ($domain) {
+                $domainsForReports = collect([$domain]);
+            }
         }
 
-        return view('frontend.pages.reports', compact(['reports', 'report_type']));
+        $reports = Report::bySearchTerm($request->report_search)
+            ->byDomainIds($domainsForReports->lists('id')->toArray())
+            ->orderBy('id', 'desc')
+            ->where(function($query) use ($request) {
+                if ($request->report_type) {
+                    $query = $query->orWhere('report_type', $request->report_type);
+                }
+            })
+            ->paginate(1);
+
+        return view('frontend.pages.reports', [
+            'reports' => $reports,
+            'report_type' => $request->report_type,
+            'report_search' => $request->report_search,
+            'domain' => $request->domain
+        ]);
     }
 
     public function getAboutUs()

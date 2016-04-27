@@ -34,6 +34,17 @@ class AppServiceProvider extends ServiceProvider
               ]);
         });
 
+        view()->composer('frontend.partials.domainsTreeForReports', function($view)
+        {
+            $domains = Domain::getCurrentDomains();
+            $tree = Domain::getTree(Domain::getDomainsForTree($domains));
+
+            $view->with([
+                  'tree' => $tree,
+                  'domains' => $tree[1]['subdomains']
+              ]);
+        });
+
         Document::deleted(function($document)
         {
             $fileToDelete = UploadedFile::where('id', '=', $document['uploaded_file_id'])->get();

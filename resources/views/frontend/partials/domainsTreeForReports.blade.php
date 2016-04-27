@@ -11,7 +11,7 @@
             </div>
             <div id="collapse-domain-{{ $domain->id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="domain-heading-{{ $domain->id }}">
                 <div class="panel-body">
-                    @include('frontend.partials.domainsTreeItems', ['domains' => $tree[$domain->id]['subdomains']])
+                    @include('frontend.partials.domainsTreeItemsForReports', ['domains' => $tree[$domain->id]['subdomains']])
                 </div>
             </div>
         @endforeach

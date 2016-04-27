@@ -14,7 +14,7 @@ class Report extends Model
     private $searchTable = 'reports_search';
 
     protected $guarded = ['id'];
-    
+
     protected $with = ['domains'];
 
     protected $fillable = [
@@ -26,6 +26,15 @@ class Report extends Model
     public $dates = ['date'];
 
     public $translatedAttributes = ['title', 'description'];
+
+    public function scopeByDomainIds($query, $domainIds)
+    {
+        $reportIds = \DB::table('domain_report')
+                        ->whereIn('domain_id', $domainIds)
+                        ->get(['report_id']);
+
+        return $query->whereIn('id', collect($reportIds)->lists('report_id'));
+    }
 
     public function createPublicCode()
     {
@@ -66,11 +75,11 @@ class Report extends Model
     public function setAll($request)
     {
         $this->date = $request->get('date');
-        
+
         if ($request->get('report_type') === "") {
             $this->report_type = 0;
         }
-        
+
         $this->report_type = $request->get('report_type');
 
         if (! $this->public_code) {
