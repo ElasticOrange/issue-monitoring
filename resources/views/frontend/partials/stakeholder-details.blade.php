@@ -74,7 +74,7 @@
             @endforeach
             <br>
             @if($stakeholder->connectedIssues()->count() > 5)
-                <a href="{{ action('HomeController@getAllStakeholderIssues', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                <a href="{{ action('HomeController@getAllStakeholderIssues', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">
                     Vezi toate
                 </a>
             @endif
@@ -90,7 +90,7 @@
             @foreach($stakeholder->connectedNews()->orderBy('id', 'desc')->limit(5)->get() as $stakeholderNews)
                 <ul>
                     <li>
-                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $stakeholderNews->id, 'name' => Illuminate\Support\Str::slug($stakeholderNews->title)]) }}" target="_blank">
+                        <a href="{{ action('HomeController@getNewsInfo', ['id' => $stakeholderNews->id, 'name' => Illuminate\Support\Str::slug($stakeholderNews->title)]) }}">
                             {{ $stakeholderNews->title }}
                         </a>
                     </li>

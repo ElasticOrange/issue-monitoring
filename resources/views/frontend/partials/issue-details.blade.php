@@ -23,7 +23,7 @@
         @foreach ($initiatorsList[0] as $initiator)
             <ul>
                 <li>
-                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}">
                     {{ $initiator->name }}
                     </a>
                 </li>
@@ -35,7 +35,7 @@
                     @foreach ($initiatorsList[$i] as $initiator)
                         <ul>
                             <li>
-                                <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}" target="_blank">
+                                <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}">
                                 {{ $initiator->name }}
                                 </a>
                             </li>
@@ -147,7 +147,7 @@
                                                         </td>
                                                         <td style="text-align: center; vertical-align: middle;">
                                                             @if($document->file)
-                                                                <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank" title="{{ $document->file->original_file_name }}">
+                                                                <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" title="{{ $document->file->original_file_name }}">
                                                                     <i class="fa fa-file-pdf-o"></i>
                                                                 </a>
                                                             @endif
@@ -190,7 +190,7 @@
                                 </td>
                                 <td style="text-align: center; vertical-align: middle;">
                                     @if($document->file)
-                                        <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" target="_blank" title="{{ $document->file->original_file_name }}">
+                                        <a href="{{ action( "UploadedFileController@downloadFile" , [$document->file->file_name]) }}" title="{{ $document->file->original_file_name }}">
                                             <i class="fa fa-file-pdf-o"></i>
                                         </a>
                                     @endif
@@ -213,13 +213,13 @@
             <ul>
                 <li>
                     {{ $news->date->format('d-m-Y') }}
-                    <a href="{{ $news->link }}" target="_blank">
+                    <a href="{{ $news->link }}">
                         <b>{{ $news->title }}</b>
                     </a><br>
                     <span class="news-ellipsis">
                         {{ strip_tags($news->description) }}
                     </span>
-                    <a href="{{ action('HomeController@getNewsInfo', ['id' => $news->id, 'name' => Illuminate\Support\Str::slug($news->title)])  }}" target="_blank">
+                    <a href="{{ action('HomeController@getNewsInfo', ['id' => $news->id, 'name' => Illuminate\Support\Str::slug($news->title)])  }}">
                         Detalii
                     </a>
                 </li><br>
@@ -239,7 +239,7 @@
             @if($stakeholder->type == 'organizatie')
             <ul>
                 <li>
-                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">
                         {{ $stakeholder->name }}
                     </a>
                 </li>
@@ -255,7 +255,7 @@
             @if($stakeholder->type == 'persoana')
             <ul>
                 <li>
-                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}" target="_blank">
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">
                         {{ $stakeholder->name }}
                     </a>
                 </li>

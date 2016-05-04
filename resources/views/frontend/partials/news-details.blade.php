@@ -13,7 +13,7 @@
     @foreach ($news->connectedStakeholders as $stakeholder)
     <ul>
         <li>
-            <a href="#" target="_blank">
+            <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">
                 {{ $stakeholder->name }}
             </a>
         </li>

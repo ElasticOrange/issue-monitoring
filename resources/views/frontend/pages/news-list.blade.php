@@ -18,13 +18,13 @@
                     <ul>
                         <li>
                             {{ $n->date->format('d-m-Y') }}
-                            <a href="{{ $n->link }}" target="_blank">
+                            <a href="{{ $n->link }}">
                                 <b>{{ $n->title }}</b>
                             </a><br>
                             <span class="news-ellipsis">
                                 {{ strip_tags($n->description) }}
                             </span>
-                            <a href="{{ action('HomeController@getNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)])  }}" target="_blank">
+                            <a href="{{ action('HomeController@getNewsInfo', ['id' => $n->id, 'name' => Illuminate\Support\Str::slug($n->title)])  }}">
                                 Detalii
                             </a>
                         </li>
