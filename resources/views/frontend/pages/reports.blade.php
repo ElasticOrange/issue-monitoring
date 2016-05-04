@@ -54,34 +54,24 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h5 class="panel-title">
-                                <a class="accordion-toggle collapsed"
-                                      data-toggle="collapse"
-                                      data-parent="#reports-list"
-                                      href="#reports_{{ $report->id }}"
-                                      aria-expanded="false"
-                                >
-
-                                    {{ $report->title}}
-                                </a>
+                                {{ $report->title}}
                             </h5>
                         </div>
-                        <div id="reports_{{ $report->id }}" class="panel-collapse collapse" aria-expanded="false">
-                            <div class="panel-body">
-                                    {{ strip_tags($report->description) }}
-                                <p>
-                                    <br>
-                                    @if(\Auth::user() and $report->file)
-                                        <p>
-                                            Descarca raportul:
-                                            <a href="{{ action( "UploadedFileController@downloadFile" , [$report->file->file_name]) }}" target="_blank" title="{{ $report->file->original_file_name }}">
-                                                <i class="fa fa-file-pdf-o" style="font-size: 18px;"></i>
-                                            </a>
-                                        </p>
-                                    @else
-                                        <a href="{{ action('Auth\AuthController@getLogin') }}">Pentru a downloada rapoartul trebuie să vă autentificați</a>
-                                    @endif
-                                </p>
-                            </div>
+                        <div class="panel-body">
+                                {{ strip_tags($report->description) }}
+                            <p>
+                                <br>
+                                @if(\Auth::user() and $report->file)
+                                    <p>
+                                        Descarca raportul:
+                                        <a href="{{ action( "UploadedFileController@downloadFile" , [$report->file->file_name]) }}" target="_blank" title="{{ $report->file->original_file_name }}">
+                                            <i class="fa fa-file-pdf-o" style="font-size: 18px;"></i>
+                                        </a>
+                                    </p>
+                                @else
+                                    <a href="{{ action('Auth\AuthController@getLogin') }}">Pentru a downloada rapoartul trebuie să vă autentificați</a>
+                                @endif
+                            </p>
                         </div>
                     </div>
                     <br />
