@@ -264,4 +264,9 @@ class HomeController extends Controller
     {
         return view('frontend.pages.team');
     }
+
+    public function howWorks()
+    {
+        return view('frontend.pages.howWorks');
+    }
 }

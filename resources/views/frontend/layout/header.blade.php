@@ -91,6 +91,9 @@
                             <li>
                                 <a href="{{ action('HomeController@getTeam') }}">Echipa</a>
                             </li>
+                            <li>
+                                <a href="{{ action('HomeController@howWorks') }}">Cum funcţionează platforma</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

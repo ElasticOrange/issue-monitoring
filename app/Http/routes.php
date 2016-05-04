@@ -134,5 +134,6 @@ Route::get('contact', 'HomeController@getContact');
 Route::post('contact', 'HomeController@postContact');
 Route::get('about-us', 'HomeController@getAboutUs');
 Route::get('services', 'HomeController@getServices');
+Route::get('how-it-works', 'HomeController@howWorks');
 Route::get('team', 'HomeController@getTeam');
 Route::get('', 'HomeController@getIndex');
