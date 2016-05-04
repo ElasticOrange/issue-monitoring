@@ -33,13 +33,20 @@ class AuthLoginEventHandler
      * @param  $remember
      * @return void
      */
-    public function handle(User $user, $remember)
+    public function handle(User $user)
     {
         if ($user->subscriptionExpired()) {
 
             $this->auth->logout();
 
             return redirect()->guest('/auth/login')->withErrors('Ne pare rau, perioada de testare de 14 zile a expirat.');
+        }
+
+        if ($user->active == 0) {
+
+            $this->auth->logout();
+
+            return redirect()->guest('/auth/login')->withErrors('Ne pare rau, contul tau a fost dezactivat.');
         }
     }
 }
