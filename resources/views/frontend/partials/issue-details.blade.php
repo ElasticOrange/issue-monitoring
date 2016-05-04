@@ -53,7 +53,7 @@
                 Descriere scurta:
             </b>
         </p>
-            {!! strip_tags($issue->description) !!}
+            {{ strip_tags($issue->description) }}
     </div>
 
     <div class="tab-pane" id="flux">

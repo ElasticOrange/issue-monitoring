@@ -26,7 +26,7 @@
                             <li class="col-md-2 col-md-offset-2 text-center">
                                 <a href="#">Fiscalitate</a>
                             </li>
-                            <li class="col-md-2 text-center">
+                            <li class="col-md-3 text-center">
                                 <a href="#">Legislaţia muncii</a>
                             </li>
                             <li class="col-md-2 text-center">
@@ -39,10 +39,10 @@
                      </div>
                      <div class="item">
                          <ul class="nav nav-tabs sticky-domains">
-                            <li class="col-md-2 col-md-offset-2 text-center">
+                            <li class="col-md-3 col-md-offset-1 text-center">
                                 <a href="#">Protecţie socială</a>
                             </li>
-                            <li class="col-md-2 text-center">
+                            <li class="col-md-3 text-center">
                                 <a href="#">Societate civilă</a>
                             </li>
                             <li class="col-md-2 text-center">
