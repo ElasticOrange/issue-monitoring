@@ -35,7 +35,7 @@
                 <form class="form form-horizontal" action="{{ action('Auth\AuthController@postRegister') }}" method="post">
                     {!! csrf_field() !!}
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Name</label>
+                        <label class="col-sm-4 control-label">Nume</label>
                         <div class="col-sm-8">
                             <input 	type="text"
                                     value="{{ old('name')  }}"
@@ -55,7 +55,37 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Password</label>
+                        <label class="col-sm-4 control-label">Organizaţie</label>
+                        <div class="col-sm-8">
+                            <input 	type="text"
+                                      value="{{ old('organization')  }}"
+                                      name="organization"
+                                      class="form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Funcţie</label>
+                        <div class="col-sm-8">
+                            <input 	type="text"
+                                      value="{{ old('function')  }}"
+                                      name="function"
+                                      class="form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Telefon</label>
+                        <div class="col-sm-8">
+                            <input 	type="text"
+                                      value="{{ old('telephone')  }}"
+                                      name="telephone"
+                                      class="form-control"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Parola</label>
                         <div class="col-sm-8">
                             <input 	type="password"
                                     name="password"
@@ -64,7 +94,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">Confirm Password</label>
+                        <label class="col-sm-4 control-label">Confirmă Parola</label>
                         <div class="col-sm-8">
                             <input 	type="password"
                                     name="password_confirmation"
@@ -74,7 +104,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-4">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">Înregistrează-mă</button>
                             <br>
                             <br>
                             Ai deja cont? Te poți autentifica <a href="{{ action('Auth\AuthController@getLogin') }}">aici.</a>

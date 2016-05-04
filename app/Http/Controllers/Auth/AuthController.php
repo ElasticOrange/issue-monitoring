@@ -53,6 +53,18 @@ class AuthController extends Controller
         ]);
     }
 
+    protected function trialValidator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'organization' => 'required|string',
+            'function' => 'required|string',
+            'telephone' => 'string',
+            'password' => 'required|confirmed|min:6',
+        ]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -142,7 +154,7 @@ class AuthController extends Controller
      */
     public function postRegister(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $validator = $this->trialValidator($request->all());
 
         if ($validator->fails()) {
             $this->throwValidationException(
