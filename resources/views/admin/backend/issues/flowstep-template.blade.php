@@ -14,10 +14,9 @@
 				<label>Durata</label>
 			</div>
 			<div class="col-sm-1">
-				<label>Estimat finalizat</label>
+				<label>Termen</label>
 			</div>
 			<div class="col-sm-1">
-				<label>Finalizat</label>
 			</div>
 			<div class="col-sm-1">
 				<label>Actiuni</label>
