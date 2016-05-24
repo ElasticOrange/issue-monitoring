@@ -268,12 +268,12 @@ class ImportOldDb extends Command
             $newIssue->public_code = str_random(40);
             $newIssue->archived = false;
 
-// de modificat cand primesc raspuns de la alexandra
-            if ($issue->issuestatus === 'ARCHIVED' || $issue->issuestatus === 'ENDSTAGE'
-                || $issue->issuestatus === 'COMPLETE' || $issue->issuestatus === 'REFERRED_BACK') {
-                $newIssue->phase = 'arhivat';
-            } elseif ($issue->issuestatus === 'INPROGRESS') {
+            if ($issue->issuestatus === 'INPROGRESS') {
                 $newIssue->phase = 'curent';
+            } elseif ($issue->issuestatus === 'REFERRED_BACK' || $issue->issuestatus === 'ARCHIVED') {
+                $newIssue->phase = 'arhivatRespinsSauAbrogat';
+            } elseif ($issue->issuestatus === 'ENDSTAGE' || $issue->issuestatus === 'COMPLETE') {
+                $newIssue->phase = 'publicatMO';
             }
 
             $translatableData = [
@@ -705,6 +705,7 @@ class ImportOldDb extends Command
                 $newFlowStep->flowstep_order = $count++;
                 $newFlowStep->start_date = $importStep->dataStart;
                 $newFlowStep->end_date = $importStep->dataEnd;
+                $newFlowStep->finalizat = $importStep->dataEnd ? 1 : 0;
 
                 $translatableData = [
                     'ro' =>[
@@ -761,6 +762,7 @@ class ImportOldDb extends Command
                 $newFlowStep->flowstep_order = $count++;
                 $newFlowStep->start_date = $importStep->dataStart;
                 $newFlowStep->end_date = $importStep->dataEnd;
+                $newFlowStep->finalizat = $importStep->dataEnd ? 1 : 0;
 
                 $translatableData = [
                     'ro' =>[
