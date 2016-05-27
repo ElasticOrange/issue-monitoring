@@ -139,7 +139,7 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td align="left" style="padding: 20px 0 0 0; font-size: 12px; line-height: 16px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-                                    <a class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a>
+                                    <!-- <a class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a> -->
                                 </td>
                             </tr>
                         </table>
