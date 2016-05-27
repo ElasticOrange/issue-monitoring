@@ -981,23 +981,23 @@ class ImportOldDb extends Command
 
         try {
 
-            // $this->importUsers();
+            $this->importUsers();
             $this->importStepAutocompletes();
-            // $this->importStakeholders();
+            $this->importStakeholders();
             $this->importDomains();
-            // $this->importNews();
+            $this->importNews();
             $this->importLocations();
             $this->importIssues();
-            // $this->importIssuesConnectedWithIssues();
-            // $this->importInitiatorIssue();
-            // $this->importIssueStakeholder();
-            // $this->importIssueNews();
-            // $this->importDomainIssues();
-            // $this->completeMultistageIssuesConnected();
-            // $this->completeMultistageInitiatorIssues();
-            // $this->completeMultistageIssueStakeholder();
-            // $this->completeMultistageIssueNews();
-            // $this->importNewsStakeholder();
+            $this->importIssuesConnectedWithIssues();
+            $this->importInitiatorIssue();
+            $this->importIssueStakeholder();
+            $this->importIssueNews();
+            $this->importDomainIssues();
+            $this->completeMultistageIssuesConnected();
+            $this->completeMultistageInitiatorIssues();
+            $this->completeMultistageIssueStakeholder();
+            $this->completeMultistageIssueNews();
+            $this->importNewsStakeholder();
             $this->importLocationSteps();
             $this->importLocationStepsForContinuedIssues();
             $this->importDocuments();
