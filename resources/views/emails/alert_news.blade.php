@@ -118,7 +118,6 @@
                                                 <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><li><a href="{{ action('NewsController@show', [$news->public_code])}}">{{ $news->title }}</a></li></ul></td>
                                             </tr>
                                         @endforeach
-                                        <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est.</ul></td>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Cheers,<br>The IssueMonitoring Team</td>
                                         </tr>
@@ -144,7 +143,7 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td align="left" style="padding: 20px 0 0 0; font-size: 12px; line-height: 16px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-                                    <a class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a>
+                                    <!-- <a class="original-only" style="color: #666666; text-decoration: none;">Unsubscribe</a> -->
                                 </td>
                             </tr>
                         </table>
