@@ -476,7 +476,11 @@
                                                class="form-control"
                                                prevent-enter="true"
                                                id="startdate-widget-{{ $step->id }}"
-                                               value="{{ $step->start_date->format('d-m-Y') }}"
+                                               @if ($step->start_date)
+                                                   value="{{ $step->start_date->format('d-m-Y') }}"
+                                               @else
+                                                    value=""
+                                               @endif
                                                data-groupid="{{ $step->id }}"
                                                data-type="startdate"
                                         />
@@ -494,9 +498,9 @@
                                                prevent-enter="true"
                                                id="enddate-widget-{{ $step->id }}"
                                                @if (isset($step->end_date))
-                                               value="{{ $step->end_date->format('d-m-Y') }}"
+                                                    value="{{ $step->end_date->format('d-m-Y') }}"
                                                @else
-                                               value=""
+                                                    value=""
                                                @endif
                                                data-groupid="{{ $step->id }}"
                                                data-type="enddate"
@@ -574,7 +578,10 @@
                                                                     </a>
                                                                 @endif
                                                             </td>
-                                                            <td>{{ $document->init_at->format('d-m-Y') }}</td>
+                                                            <td> @if ($document->init_at)
+                                                                    {{ $document->init_at->format('d-m-Y') }}
+                                                                @endif
+                                                            </td>
                                                             <td></td>
                                                             <td>
                                                                 <a href="{{ action('DocumentController@edit', [$document]) }}" target="_blank" title="Edit">
