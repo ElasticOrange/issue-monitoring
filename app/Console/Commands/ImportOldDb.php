@@ -268,12 +268,12 @@ class ImportOldDb extends Command
             $newIssue->public_code = str_random(40);
             $newIssue->archived = false;
 
-// de modificat cand primesc raspuns de la alexandra
-            if ($issue->issuestatus === 'ARCHIVED' || $issue->issuestatus === 'ENDSTAGE'
-                || $issue->issuestatus === 'COMPLETE' || $issue->issuestatus === 'REFERRED_BACK') {
-                $newIssue->phase = 'arhivat';
-            } elseif ($issue->issuestatus === 'INPROGRESS') {
+            if ($issue->issuestatus === 'INPROGRESS') {
                 $newIssue->phase = 'curent';
+            } elseif ($issue->issuestatus === 'REFERRED_BACK' || $issue->issuestatus === 'ARCHIVED') {
+                $newIssue->phase = 'arhivatRespinsSauAbrogat';
+            } elseif ($issue->issuestatus === 'ENDSTAGE' || $issue->issuestatus === 'COMPLETE') {
+                $newIssue->phase = 'publicatMO';
             }
 
             $translatableData = [
@@ -681,15 +681,11 @@ class ImportOldDb extends Command
 
             $newLocationStep = new LocationStep;
 
-            if (isset($importSteps[0]->optionlocation) &&
-                $importSteps[0]->optionlocation == 1) {
+            if (isset($importSteps[0]->optionlocation) && $importSteps[0]->optionlocation == 1) {
                     $newLocationStep->location_id = 3;
-            } elseif (isset($importSteps[0]->optionlocation) &&
-                $importSteps[0]->optionlocation == 2) {
+            } elseif (isset($importSteps[0]->optionlocation) && $importSteps[0]->optionlocation == 2) {
                     $newLocationStep->location_id = 4;
-            } elseif ($importSteps[0]->lextypeid == 3 ||
-                $importSteps[0]->lextypeid == 4 ||
-                $importSteps[0]->lextypeid == 5) {
+            } elseif ($importSteps[0]->lextypeid == 3 || $importSteps[0]->lextypeid == 4 || $importSteps[0]->lextypeid == 5) {
                     $newLocationStep->location_id = 5;
             } else {
                 $newLocationStep->location_id = 2;
@@ -709,6 +705,7 @@ class ImportOldDb extends Command
                 $newFlowStep->flowstep_order = $count++;
                 $newFlowStep->start_date = $importStep->dataStart;
                 $newFlowStep->end_date = $importStep->dataEnd;
+                $newFlowStep->finalizat = $importStep->dataEnd ? 1 : 0;
 
                 $translatableData = [
                     'ro' =>[
@@ -728,6 +725,62 @@ class ImportOldDb extends Command
         return true;
     }
 
+    protected function importLocationStepsForContinuedIssues()
+    {
+        $issues = DB::connection('oldissue')->select('select * from initlaws where currentphase <> 1 and originpropid > 0');
+        foreach ($issues as $issue) {
+            $count = 0;
+            $importSteps = DB::connection('oldissue')->select("select * from customsteps where marckfordelete = 0 and propid = {$issue->propid} order by id asc");
+
+            if (empty($importSteps)) {
+                continue;
+            }
+
+            $newLocationStep = new LocationStep;
+
+            if (isset($importSteps[0]->optionlocation) && $importSteps[0]->optionlocation == 1) {
+                    $newLocationStep->location_id = 3;
+            } elseif (isset($importSteps[0]->optionlocation) && $importSteps[0]->optionlocation == 2) {
+                    $newLocationStep->location_id = 4;
+            } elseif ($importSteps[0]->lextypeid == 3 || $importSteps[0]->lextypeid == 4 || $importSteps[0]->lextypeid == 5) {
+                    $newLocationStep->location_id = 5;
+            } else {
+                $newLocationStep->location_id = 2;
+            }
+
+            $newLocationStep->issue_id = $issue->originpropid;
+            $newLocationStep->step_order = 1;
+
+            $newLocationStep->save();
+
+            foreach ($importSteps as $importStep) {
+                $newFlowStep = new FlowStep;
+                $newFlowStep->id = $importStep->id;
+                $newFlowStep->flow_name = StepAutocomplete::find($importStep->basestepid)->name;
+                $newFlowStep->estimated_duration = $importStep->durata ? $importStep->durata : '';
+                $newFlowStep->location_step_id = $newLocationStep->id;
+                $newFlowStep->flowstep_order = $count++;
+                $newFlowStep->start_date = $importStep->dataStart;
+                $newFlowStep->end_date = $importStep->dataEnd;
+                $newFlowStep->finalizat = $importStep->dataEnd ? 1 : 0;
+
+                $translatableData = [
+                    'ro' =>[
+                        'observatii' => $importStep->obsv ? $importStep->obsv : '',
+                    ],
+                    'en' => [
+                        'observatii' => $importStep->enobsv ? $importStep->enobsv : '',
+                    ]
+                ];
+
+                $newFlowStep->fill($translatableData);
+                $newFlowStep->save();
+            }
+        }
+        print_r("Au fost importati: ".LocationStep::count()." locationSteps \n cu ".FlowStep::count()." flowSteps.");
+        return true;
+    }
+
     private function moveFile($location, $newName)
     {
         return File::copy($location, storage_path().'/documents/'.$newName);
@@ -738,7 +791,7 @@ class ImportOldDb extends Command
         $allFiles = [];
         $pathToFiles = sprintf('%s/var/www/andr_v2/uploads/reldocs', storage_path());
 
-        $oldDocuments = DB::connection('oldissue')->select('select * from relateddoc 
+        $oldDocuments = DB::connection('oldissue')->select('select * from relateddoc
             where propid > 120 and stepid <> 0
         ');
 
@@ -928,24 +981,25 @@ class ImportOldDb extends Command
 
         try {
 
-            $this->importUsers();
+            // $this->importUsers();
             $this->importStepAutocompletes();
-            $this->importStakeholders();
+            // $this->importStakeholders();
             $this->importDomains();
-            $this->importNews();
+            // $this->importNews();
             $this->importLocations();
             $this->importIssues();
-            $this->importIssuesConnectedWithIssues();
-            $this->importInitiatorIssue();
-            $this->importIssueStakeholder();
-            $this->importIssueNews();
-            $this->importDomainIssues();
-            $this->completeMultistageIssuesConnected();
-            $this->completeMultistageInitiatorIssues();
-            $this->completeMultistageIssueStakeholder();
-            $this->completeMultistageIssueNews();
-            $this->importNewsStakeholder();
+            // $this->importIssuesConnectedWithIssues();
+            // $this->importInitiatorIssue();
+            // $this->importIssueStakeholder();
+            // $this->importIssueNews();
+            // $this->importDomainIssues();
+            // $this->completeMultistageIssuesConnected();
+            // $this->completeMultistageInitiatorIssues();
+            // $this->completeMultistageIssueStakeholder();
+            // $this->completeMultistageIssueNews();
+            // $this->importNewsStakeholder();
             $this->importLocationSteps();
+            $this->importLocationStepsForContinuedIssues();
             $this->importDocuments();
             $this->importRemainingDocuments();
 
