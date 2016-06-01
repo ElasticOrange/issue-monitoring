@@ -122,10 +122,12 @@ class LocationStep extends Model
                 $stepData['finalizat'] = 0;
             }
 
-            if ($stepData['estimated_duration'] == '0' || $stepData['estimated_duration'] == '') {
-                $newFlowStep->end_date = NULL;
-                $newFlowStep->estimated_duration = 0;
-            }
+            if (array_key_exists('estimated_duration', $stepData)) {
+							if ($stepData['estimated_duration'] == '0' || $stepData['estimated_duration'] == '' || $stepData['estimated_duration'] == null) {
+	                $newFlowStep->end_date = NULL;
+	                $newFlowStep->estimated_duration = 0;
+	            }
+						}
 
 
 
