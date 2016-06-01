@@ -6,53 +6,53 @@ use Illuminate\Database\Eloquent\Model;
 
 class LocationStep extends Model
 {
-	protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
     protected $with = ['issue'];
 
-	protected $fillable = [
-		'location_id',
-		'issue_id',
-		'step_order',
+    protected $fillable = [
+        'location_id',
+        'issue_id',
+        'step_order',
         'nr_inregistrare'
-	];
+    ];
 
-	public function issue()
-	{
-		return $this->belongsTo('Issue\Issue');
-	}
+    public function issue()
+    {
+        return $this->belongsTo('Issue\Issue');
+    }
 
-	public function location()
-	{
-		return $this->belongsTo('Issue\Location');
-	}
+    public function location()
+    {
+        return $this->belongsTo('Issue\Location');
+    }
 
-	public function flowsteps()
-	{
-		return $this->hasMany('Issue\FlowStep')->orderBy('flowstep_order', 'asc');
-	}
+    public function flowsteps()
+    {
+        return $this->hasMany('Issue\FlowStep')->orderBy('flowstep_order', 'asc');
+    }
 
     public function flowTemplate()
     {
         return $this->belongsTo('Issue\FlowTemplate', 'flow_template_id');
     }
 
-	public function syncSteps($steps)
-	{
-		$currentSteps = $this->flowsteps()->get();
+    public function syncSteps($steps)
+    {
+        $currentSteps = $this->flowsteps()->get();
 
-		if (! is_array($steps)) {
-			$steps = [];
-		}
+        if (! is_array($steps)) {
+            $steps = [];
+        }
 
-		$index = 0;
+        $index = 0;
 
-		foreach ($steps as $id => $step) {
-			$index++;
-			$steps[$id]['flowstep_order'] = $index;
-		}
+        foreach ($steps as $id => $step) {
+            $index++;
+            $steps[$id]['flowstep_order'] = $index;
+        }
 
-		foreach ($currentSteps as $currentStep) {
+        foreach ($currentSteps as $currentStep) {
             if (!array_key_exists($currentStep->id, $steps)) {
                 $currentStep->delete();
                 continue;
@@ -106,9 +106,9 @@ class LocationStep extends Model
             $currentStep->syncStepDocuments($steps[$currentStep->id]['document_id']);
 
             unset($steps[$currentStep->id]);
-		}
+        }
 
-		foreach ($steps as $stepData) {
+        foreach ($steps as $stepData) {
             $newFlowStep = new FlowStep;
             $newFlowStep->fill($stepData);
 
@@ -123,11 +123,11 @@ class LocationStep extends Model
             }
 
             if (array_key_exists('estimated_duration', $stepData)) {
-							if ($stepData['estimated_duration'] == '0' || $stepData['estimated_duration'] == '' || $stepData['estimated_duration'] == null) {
-	                $newFlowStep->end_date = NULL;
-	                $newFlowStep->estimated_duration = 0;
-	            }
-						}
+                if ($stepData['estimated_duration'] == '0' || $stepData['estimated_duration'] == '') {
+                    $newFlowStep->end_date = NULL;
+                    $newFlowStep->estimated_duration = 0;
+                }
+            }
 
 
 
@@ -154,11 +154,11 @@ class LocationStep extends Model
             }
 
             if (!array_key_exists('document_id', $stepData)) {
-				$stepData['document_id'] = [];
-			}
-			$newFlowStep->syncStepDocuments($stepData['document_id']);
-		}
+                $stepData['document_id'] = [];
+            }
+            $newFlowStep->syncStepDocuments($stepData['document_id']);
+        }
 
-		return true;
-	}
+        return true;
+    }
 }
