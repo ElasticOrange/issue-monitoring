@@ -1,5 +1,5 @@
 (function(){
-	$(document).ready(function() {
+    $(document).ready(function() {
 
         var actionButtonsTemplate = _.template($("#action_buttons").html(),
             {
@@ -530,7 +530,6 @@
             var startDateWidgets = $('#startdate-widget-' + flowStepId).datetimepicker({
                 locale: 'ro',
                 format: 'L',
-                defaultDate: moment()
             });
 
             if (edit == 0) {

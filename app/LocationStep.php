@@ -70,9 +70,15 @@ class LocationStep extends Model
                 }
             }
 
-            if ($steps[$currentStep->id]['estimated_duration'] == '0' || $steps[$currentStep->id]['estimated_duration'] == '') {
-                $currentStep->end_date = NULL;
-                $currentStep->estimated_duration = 0;
+            if (array_key_exists('estimated_duration', $steps[$currentStep->id])) {
+                if ($steps[$currentStep->id]['estimated_duration'] == '') {
+                    $currentStep->start_date = null;
+                    $currentStep->end_date = null;
+                    $currentStep->estimated_duration = null;
+                } elseif ($steps[$currentStep->id]['estimated_duration'] == '0') {
+                    $currentStep->end_date = null;
+                    $currentStep->estimated_duration = null;
+                }
             }
 
             $this->flowsteps()->save($currentStep);
@@ -123,13 +129,15 @@ class LocationStep extends Model
             }
 
             if (array_key_exists('estimated_duration', $stepData)) {
-                if ($stepData['estimated_duration'] == '0' || $stepData['estimated_duration'] == '') {
-                    $newFlowStep->end_date = NULL;
-                    $newFlowStep->estimated_duration = 0;
+                if ($stepData['estimated_duration'] == '') {
+                    $newFlowStep->start_date = null;
+                    $newFlowStep->end_date = null;
+                    $newFlowStep->estimated_duration = null;
+                } elseif ($stepData['estimated_duration'] == '0') {
+                    $newFlowStep->end_date = null;
+                    $newFlowStep->estimated_duration = null;
                 }
             }
-
-
 
             $this->flowsteps()->save($newFlowStep);
 
