@@ -15,6 +15,7 @@
                 <b>Tip:</b> {{ $issue->type }}
             </p>
         @endif
+        @if(count($initiatorsList) > 1)
         <p>
             <b>
                 Initiatori:
@@ -29,7 +30,6 @@
                 </li>
             </ul>
         @endforeach
-        @if(count($initiatorsList) > 1)
             <div class="collapse" id="stakeholdersList">
                 @for ($i = 1; $i < count($initiatorsList); $i++)
                     @foreach ($initiatorsList[$i] as $initiator)
@@ -47,6 +47,7 @@
                 Arata toti stakeholderii
             </a>
         @endif
+        @if ($issue->description)
         <p>
             <b>
                 <br>
@@ -54,6 +55,7 @@
             </b>
         </p>
             {{ strip_tags($issue->description) }}
+        @endif
     </div>
 
     <div class="tab-pane" id="flux">
@@ -85,12 +87,14 @@
                         <div>
                     @if($locationStep->flowsteps)
                         @foreach($locationStep->flowsteps as $step)
-                            @if($step->finalizat == 1)
-                                <div class="clearfix individual-step finalizat">
-                            @elseif($step->start_date and $step->finalizat == 0)
-                                <div class="clearfix individual-step in-curs">
-                            @elseif(! $step->start_date)
+                            @if(! $step->start_date and ! $step->end_date)
                                 <div class="clearfix individual-step">
+                            @elseif($step->start_date and !$step->end_date and !$step->finalizat)
+                                <div class="clearfix individual-step in-curs">
+                            @elseif($step->finalizat == 1)
+                                <div class="clearfix individual-step finalizat">
+                            @elseif($step->end_date and !$step->finalizat and $dateNow > $step->end_date)
+                                <div class="clearfix individual-step depasit">
                             @endif
                                 <div class="col-md-4 col-xs-4 step" style="text-align:left">
                                     {{ $step->flow_name }}
