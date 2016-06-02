@@ -107,13 +107,16 @@ class HomeController extends Controller
         $stakeholdersList = $issue->connectedStakeholders->chunk(10);
         $initiatorsList = $issue->connectedInitiatorsStakeholders->chunk(10);
 
+        $dateNow = (new \DateTime)->format('Y-m-d H:i:s');
+
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
             'domain' => $issueDomains[0]->id,
             'locations' => Location::all(),
             'newsList' => $newsList,
             'stakeholdersList' => $stakeholdersList,
-            'initiatorsList' => $initiatorsList
+            'initiatorsList' => $initiatorsList,
+            'dateNow' => $dateNow
         ]);
     }
 

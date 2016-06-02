@@ -490,7 +490,20 @@
                                         />
                                     </div>
                                     <div class="col-sm-1">
-                                        <input class="form-control" type="number" prevent-enter="true" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]" @if($step->estimated_duration == '0' || $step->estimated_duration == '') value="" @else value="{{ $step->estimated_duration }}" @endif min="0" data-duration="true" data-groupid="{{ $step->id }}" data-type="duration"/>
+                                        <input class="form-control"
+                                                type="number"
+                                                prevent-enter="true"
+                                                name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]"
+                                                @if($step->start_date and $step->estimated_duration == null)
+                                                    value="0"
+                                                @else
+                                                    value="{{ $step->estimated_duration }}"
+                                                @endif
+                                                min="0"
+                                                data-duration="true"
+                                                data-groupid="{{ $step->id }}"
+                                                data-type="duration"
+                                        />
                                     </div>
                                     <div class="col-sm-1">
                                         <input type="text"

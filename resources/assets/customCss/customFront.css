@@ -245,6 +245,10 @@ p.news-text-desc a {
     color: #3e4d5c;
 }
 
+.individual-step.depasit {
+    background: #e02222;
+}
+
 #steps-list .step {
     padding: 5px;
     min-height: 35px;
