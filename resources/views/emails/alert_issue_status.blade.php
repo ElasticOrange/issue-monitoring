@@ -101,6 +101,12 @@
 <!-- ONE COLUMN SECTION -->
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
+        <td align="center" style="padding: 20px 10px 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+            <img src="/img/Logo_IM.png" alt="Logo_IM" width="100" align="center" />
+            <hr>
+        </td>
+    </tr>
+    <tr>
         <td bgcolor="#ffffff" align="center" style="padding: 15px;" class="section-padding">
             <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
                 <tr>
@@ -110,17 +116,21 @@
                                 <td>
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
+                                        <!-- <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Hey @if($user->name){{ $user->name }}@else{{ $user->email }}@endif,</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ $alert->alertable->name }}</ul></td>
                                         </tr>
                                         <tr>
-                                        	<td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><a href="#">{{ $alert->alertable->name }}</a></ul></td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{!! $alert->alertable->status !!}</b></ul></td>
                                         </tr>
                                         <tr>
-                                        	<td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{!! $alert->alertable->status !!}</ul></td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                                                <ul><a href="{{ action('HomeController@getIssueInfo', ['id' => $alert->alertable->id, 'name' => Illuminate\Support\Str::slug($alert->alertable->name)]) }}">Vezi pagina initiativei pentru mai multe informatii!</a></ul></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Cheers,<br>The IssueMonitoring Team</td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>
                                         </tr>
                                     </table>
                                 </td>

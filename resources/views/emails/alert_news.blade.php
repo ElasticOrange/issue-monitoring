@@ -111,15 +111,15 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Hey @if($user->name){{ $user->name }}@else{{ $user->email }}@endif,</td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Au fost adaugate urmatoarele stiri:</td>
                                         </tr>
                                         @foreach($alertsToSendByIssue as $news)
                                             <tr>
-                                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><li><a href="{{ action('NewsController@show', [$news->public_code])}}">{{ $news->title }}</a></li></ul></td>
+                                                <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><li><a href="#">{{ $news->title }}</a></li></ul></td>
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Cheers,<br>The IssueMonitoring Team</td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -134,6 +134,12 @@
 
 <!-- FOOTER -->
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="center" style="padding: 20px 10px 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+            <img src="/img/Logo_IM.png" alt="Logo_IM" width="100" align="center" />
+            <hr>
+        </td>
+    </tr>
     <tr>
         <td bgcolor="#ffffff" align="center" style="padding: 15px;">
             <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
