@@ -81,7 +81,12 @@
                 <br>
                 <br>
                 <a role="button" data-toggle="collapse" href="#collapse-{{ $locationStep->id }}" aria-expanded="false" aria-controls="collapse-{{ $locationStep->id }}">
-                    <p>
+                    <p class="flux_closed_location">
+                        @if (! $locationStep->flowsteps->contains('finalizat', 0))
+                        <div class="glyph-background col-xs-1" style="margin-top: -4px;">
+                            <i class="indicator glyphicon glyphicon-plus"></i>
+                        </div>
+                        @endif
                         {{ $locations->where('id', $locationStep->location_id)->lists('name')->toArray()[0] }}
                     </p>
                 </a>
@@ -96,7 +101,7 @@
                         <div>
                     @if($locationStep->flowsteps)
                         @foreach($locationStep->flowsteps as $step)
-                            @if(! $step->start_date and ! $step->end_date)
+                            @if(! $step->start_date and ! $step->end_date and !$step->finalizat)
                                 <div class="clearfix individual-step">
                             @elseif($step->start_date and !$step->end_date and !$step->finalizat)
                                 <div class="clearfix individual-step in-curs">
