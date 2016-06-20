@@ -30,7 +30,10 @@ class HomeController extends Controller
         $legalNews = LegalNews::orderBy('created_at', 'desc')->limit(15)->get();
         $legalNews = $legalNews->chunk(5);
 
-        return view('frontend.pages.homepage', compact('legalNews'));
+        $reports = Report::orderBy('created_at', 'desc')->where('public', '1')->limit(6)->get();
+        $reports = $reports->chunk(2);
+
+        return view('frontend.pages.homepage', compact(['legalNews', 'reports']));
     }
 
     /**

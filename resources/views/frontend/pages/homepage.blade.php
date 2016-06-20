@@ -151,21 +151,29 @@
         </div>
         <div class="col-md-6">
             <h3>Cele mai recente rapoarte</h3>
-            <dl>
-                <dt class="reports-dt-title">Weekly Policy and Political Report, January 25-29, 2016</dt>
-                <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment):
-                        EP and Council Scrutiny Period to End on 28 December
-                        <a href="#descarca-raport">Descarcă</a>
-                </dd>
-            </dl>
-            <img src="/img/reports_stripe.png" class="reports-stripe">
-            <dl>
-                <dt class="reports-dt-title">Weekly Policy and Political Report, January 25-29, 2016</dt>
-                <dd>Maritime Safety and Prevention of Pollution from Ships (Amendment):
-                        EP and Council Scrutiny Period to End on 28 December
-                        <a href="#descarca-raport">Descarcă</a>
-                </dd>
-            </dl>
+            <div class="carousel slide vertical" id="carousel-1234">
+                <div class="carousel-inner">
+                    @foreach ($reports as $report)
+                        <div class="item">
+                            <ul class="nav nav-tabs">
+                                @foreach ($report as $rep)
+                                    <dt class="reports-dt-title">{{ $rep->title }}</dt>
+                                    <dd class="report-ellipsis">
+                                        {{ strip_tags($rep->description) }}
+                                    </dd>
+                                    <img src="/img/reports_stripe.png" class="reports-stripe">
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                </div>
+                <a class="left carousel-control" href="#carousel-1234" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-1234" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -179,6 +187,7 @@
         (function() {
             $(document).ready(function() {
                 $('#carousel-133466').children().find('div.item:first').addClass('active');
+                $('#carousel-1234').children().find('div.item:first').addClass('active');
             });
         })();
     </script>
