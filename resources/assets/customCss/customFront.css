@@ -1,10 +1,9 @@
 @font-face {
-    font-family: 'Gotham Medium';
-    src: url(/fonts/Gotham-Medium.ttf) format('truetype');
+    font-family: "Open Sans", 'Cambria', Arial, sans-serif;
 }
 
 * {
-    font-family: 'Gotham Medium', Arial;
+    font-family: "Open Sans", 'Cambria', Arial, sans-serif;
 }
 
 body {
