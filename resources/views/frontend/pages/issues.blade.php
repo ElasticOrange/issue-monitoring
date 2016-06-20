@@ -70,6 +70,24 @@
                         </label>
                     </div>
                 </div>
+                <div class="row">
+                    <br>
+                    <div class="form-group">
+                        <div class="col-md-5 col-md-offset-6">
+                            <select class="form-control" name="type">
+                                <option value="">Tipul inițiativei</option>
+                                <option value="Propunere legislativă" @if($type == "Propunere legislativă") selected="selected" @endif>Propunere legislativă</option>
+                                <option value="Proiect de lege" @if($type == "Proiect de lege") selected="selected" @endif>Proiect de lege</option>
+                                <option value="Decizie" @if($type == "Decizie") selected="selected" @endif>Decizie</option>
+                                <option value="Ordin" @if($type == "Ordin") selected="selected" @endif>Ordin</option>
+                                <option value="Hotărâre de Guvern" @if($type == "Hotărâre de Guvern") selected="selected" @endif>Hotărâre de Guvern</option>
+                                <option value="Ordonanță" @if($type == "Ordonanță") selected="selected" @endif>Ordonanță</option>
+                                <option value="Directivă europeană" @if($type == "Directivă europeană") selected="selected" @endif>Directivă europeană</option>
+                                <option value="Regulament" @if($type == "Regulament") selected="selected" @endif>Regulament</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             <br />
             </form>
 
@@ -164,6 +182,10 @@
                 if(domainIdToHighlight) {
                     selectDomainWhenFilterIssue(domainIdToHighlight);
                 }
+
+                $('select[name="type"]').on('focus', function() {
+                    $(this).find('option:first').attr('disabled', 'disabled');
+                });
             });
         }());
     </script>

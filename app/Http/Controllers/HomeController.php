@@ -66,6 +66,10 @@ class HomeController extends Controller
                         ->orWhere('phase', 'arhivatInactiv');
                 }
 
+                if ($request->type) {
+                    $query = $query->where('type', $request->type);
+                }
+
                 if (empty($request->all())) {
                     $query = $query->orWhere('phase', 'curent');
                 }
@@ -79,6 +83,7 @@ class HomeController extends Controller
                 'curent' => $request->curent,
                 'viitor' => $request->viitor,
                 'issue_search' => $request->issue_search,
+                'type' => $request->type,
                 'all' => $request->all()
         ]);
     }
