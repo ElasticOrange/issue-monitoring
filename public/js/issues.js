@@ -210,6 +210,28 @@
             ]
         });
 
+        CKEDITOR.replace('editor7', {
+            toolbar: [
+                {name: 'basicstyles', items: ['Bold', 'Italic']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                {name: 'links', items: ['Link', 'Unlink']},
+                {name: 'styles', items: ['Styles', 'Format']},
+                {name: 'document', items: ['Source']},
+                {name: 'about', items: ['About']}
+            ]
+        });
+
+        CKEDITOR.replace('editor8', {
+            toolbar: [
+                {name: 'basicstyles', items: ['Bold', 'Italic']},
+                {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                {name: 'links', items: ['Link', 'Unlink']},
+                {name: 'styles', items: ['Styles', 'Format']},
+                {name: 'document', items: ['Source']},
+                {name: 'about', items: ['About']}
+            ]
+        });
+
         var domainAutocomplete = $('#domain-autocomplete');
         var domainList = new Bloodhound({
             queryTokenizer: Bloodhound.tokenizers.whitespace,

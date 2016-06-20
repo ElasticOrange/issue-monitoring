@@ -625,10 +625,26 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-4 col-md-offset-1">
-                                                        <textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][ro]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('ro')->observatii }}</textarea>
+                                                        <textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][ro]"
+                                                                class="form-control"
+                                                                style="resize: none;"
+                                                                rows="6"
+                                                                cols="20"
+                                                                id="editor7"
+                                                        >
+                                                            {{ $step->translateOrNew('ro')->observatii }}
+                                                        </textarea>
                                                     </div>
                                                     <div class="col-md-4 col-md-offset-1">
-                                                        <textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][en]" class="form-control" style="resize: none;" rows="6" cols="20">{{ $step->translateOrNew('en')->observatii }}</textarea>
+                                                        <textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][en]"
+                                                                class="form-control"
+                                                                style="resize: none;"
+                                                                rows="6"
+                                                                cols="20"
+                                                                id="editor8"
+                                                        >
+                                                            {{ $step->translateOrNew('en')->observatii }}
+                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div><br/>

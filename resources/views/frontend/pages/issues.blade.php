@@ -74,7 +74,7 @@
                     <br>
                     <div class="form-group">
                         <div class="col-md-5 col-md-offset-1">
-                            <select class="form-control" name="type">
+                            <select class="form-control auto-refresh" name="type">
                                 <option value="">Tipul inițiativei</option>
                                 <option value="Propunere legislativă" @if($type == "Propunere legislativă") selected="selected" @endif>Propunere legislativă</option>
                                 <option value="Proiect de lege" @if($type == "Proiect de lege") selected="selected" @endif>Proiect de lege</option>
@@ -87,7 +87,7 @@
                             </select>
                         </div>
                         <div class="col-md-5">
-                            <select class="form-control" name="phase">
+                            <select class="form-control auto-refresh" name="phase">
                                 <option value="">Faza inițiativei</option>
                                 <option value="arhivatRespinsSauAbrogat" @if($phase == "arhivatRespinsSauAbrogat") selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
                                 <option value="arhivatInactiv" @if($phase == "arhivatInactiv") selected="selected" @endif>Arhivată – Inactivă</option>
