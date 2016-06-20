@@ -56,6 +56,15 @@
         </p>
             {{ strip_tags($issue->description) }}
         @endif
+        @if ($issue->status)
+        <p>
+            <b>
+                <br>
+                Status:
+            </b>
+        </p>
+            {{ strip_tags($issue->status) }}
+        @endif
     </div>
 
     <div class="tab-pane" id="flux">
