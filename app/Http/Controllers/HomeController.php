@@ -70,6 +70,10 @@ class HomeController extends Controller
                     $query = $query->where('type', $request->type);
                 }
 
+                if ($request->phase) {
+                    $query = $query->where('phase', $request->phase);
+                }
+
                 if (empty($request->all())) {
                     $query = $query->orWhere('phase', 'curent');
                 }
@@ -84,6 +88,7 @@ class HomeController extends Controller
                 'viitor' => $request->viitor,
                 'issue_search' => $request->issue_search,
                 'type' => $request->type,
+                'phase' => $request->phase,
                 'all' => $request->all()
         ]);
     }

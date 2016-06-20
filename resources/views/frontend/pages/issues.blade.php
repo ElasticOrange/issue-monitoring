@@ -73,7 +73,7 @@
                 <div class="row">
                     <br>
                     <div class="form-group">
-                        <div class="col-md-5 col-md-offset-6">
+                        <div class="col-md-5 col-md-offset-1">
                             <select class="form-control" name="type">
                                 <option value="">Tipul inițiativei</option>
                                 <option value="Propunere legislativă" @if($type == "Propunere legislativă") selected="selected" @endif>Propunere legislativă</option>
@@ -84,6 +84,14 @@
                                 <option value="Ordonanță" @if($type == "Ordonanță") selected="selected" @endif>Ordonanță</option>
                                 <option value="Directivă europeană" @if($type == "Directivă europeană") selected="selected" @endif>Directivă europeană</option>
                                 <option value="Regulament" @if($type == "Regulament") selected="selected" @endif>Regulament</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <select class="form-control" name="phase">
+                                <option value="">Faza inițiativei</option>
+                                <option value="arhivatRespinsSauAbrogat" @if($phase == "arhivatRespinsSauAbrogat") selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
+                                <option value="arhivatInactiv" @if($phase == "arhivatInactiv") selected="selected" @endif>Arhivată – Inactivă</option>
+                                <option value="publicatMO" @if($phase == "publicatMO") selected="selected" @endif>Publicat in Monitorul Oficial</option>
                             </select>
                         </div>
                     </div>
@@ -183,9 +191,6 @@
                     selectDomainWhenFilterIssue(domainIdToHighlight);
                 }
 
-                $('select[name="type"]').on('focus', function() {
-                    $(this).find('option:first').attr('disabled', 'disabled');
-                });
             });
         }());
     </script>
