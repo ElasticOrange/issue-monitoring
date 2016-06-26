@@ -117,10 +117,10 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ alert->alertable->name }}:</b></ul></td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ $alert->alertable->name }}:</b></ul></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ alert->alertable->observatii }} </ul>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ $alert->alertable->observatii }} </ul>
                                                 <ul><a href="{{ action('HomeController@getIssueInfo', ['id' => $alert->alertable->id, 'name' => Illuminate\Support\Str::slug($alert->alertable->name)]) }}">Vezi pagina initiativei pentru mai multe informatii!</a></ul></td>
                                         </tr>
                                         <tr>
