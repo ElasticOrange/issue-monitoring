@@ -210,26 +210,17 @@
             ]
         });
 
-        CKEDITOR.replace('editor7', {
-            toolbar: [
-                {name: 'basicstyles', items: ['Bold', 'Italic']},
-                {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
-                {name: 'links', items: ['Link', 'Unlink']},
-                {name: 'styles', items: ['Styles', 'Format']},
-                {name: 'document', items: ['Source']},
-                {name: 'about', items: ['About']}
-            ]
-        });
-
-        CKEDITOR.replace('editor8', {
-            toolbar: [
-                {name: 'basicstyles', items: ['Bold', 'Italic']},
-                {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
-                {name: 'links', items: ['Link', 'Unlink']},
-                {name: 'styles', items: ['Styles', 'Format']},
-                {name: 'document', items: ['Source']},
-                {name: 'about', items: ['About']}
-            ]
+        $('.activate-editor').each(function () {
+            CKEDITOR.replace(this, {
+                toolbar: [
+                    {name: 'basicstyles', items: ['Bold', 'Italic']},
+                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                    {name: 'links', items: ['Link', 'Unlink']},
+                    {name: 'styles', items: ['Styles', 'Format']},
+                    {name: 'document', items: ['Source']},
+                    {name: 'about', items: ['About']}
+                ]
+            });
         });
 
         var domainAutocomplete = $('#domain-autocomplete');
@@ -793,12 +784,25 @@
                     _.forEach(locationStep.flowsteps, function (flowStep) {
                         var stepId = _.uniqueId('new-');
 
+                        $('.activate-editor').each(function () {
+                            CKEDITOR.replace(this, {
+                                toolbar: [
+                                    {name: 'basicstyles', items: ['Bold', 'Italic']},
+                                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                                    {name: 'links', items: ['Link', 'Unlink']},
+                                    {name: 'styles', items: ['Styles', 'Format']},
+                                    {name: 'document', items: ['Source']},
+                                    {name: 'about', items: ['About']}
+                                ]
+                            });
+                        });
                         executeAddFlowStep(
                             stepId,
                             id,
                             flowStep.flow_name,
                             flowStep.estimated_duration
                         );
+
                     });
 
                 });

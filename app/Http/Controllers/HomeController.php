@@ -30,8 +30,8 @@ class HomeController extends Controller
         $legalNews = LegalNews::orderBy('created_at', 'desc')->limit(15)->get();
         $legalNews = $legalNews->chunk(5);
 
-        $reports = Report::orderBy('created_at', 'desc')->where('public', '1')->limit(6)->get();
-        $reports = $reports->chunk(2);
+        $reports = Report::orderBy('created_at', 'desc')->where('public', '1')->limit(15)->get();
+        $reports = $reports->chunk(5);
 
         return view('frontend.pages.homepage', compact(['legalNews', 'reports']));
     }
@@ -250,7 +250,7 @@ class HomeController extends Controller
 
         $reports = Report::bySearchTerm($request->report_search)
             ->byDomainIds($domainsForReports->lists('id')->toArray())
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->where(function($query) use ($request) {
                 if ($request->report_type) {
                     $query = $query->orWhere('report_type', $request->report_type);

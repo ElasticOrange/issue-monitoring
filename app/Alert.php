@@ -112,7 +112,7 @@ class Alert extends Model
                                 $query->where('alert_for_issues', true);
                             }])
                             ->get();
-       
+
         foreach ($issueAlerts as $alert) {
             if ($alert->alertable_type == 'Issue\Issue') {
                 if (! $alert->alertable->hasSentAlerts()->isEmpty()) {
@@ -154,7 +154,7 @@ class Alert extends Model
         }
         return $usersToSendTo;
     }
-    
+
     public static function sendMail($user, $alert, $alertType)
     {
         $alert_type = '';
@@ -220,7 +220,7 @@ class Alert extends Model
             }
         );
 
-        for ($i = 0; $i < count($alertsToSendByIssue); $i++) { 
+        for ($i = 0; $i < count($alertsToSendByIssue); $i++) {
             $alert = self::where('alertable_type', 'Issue\News')
                          ->where('alertable_id', $alertsToSendByIssue[$i]->id)
                          ->update(['sent' => 1]);
@@ -233,7 +233,7 @@ class Alert extends Model
     {
         $alertsToSendByIssue = [];
         $alertType = 'alert_news';
-        
+
         $newsAlerts = self::where('alertable_type', 'Issue\News')->where('sent', 0)->with(['alertable'])->get();
         $users = User::where('active', true)
                     ->where('alert_news', true)
@@ -293,7 +293,7 @@ class Alert extends Model
 
         return $usersToSendTo;
     }
-    
+
     public static function sendReportAlerts()
     {
         $alertType = 'report_alert';

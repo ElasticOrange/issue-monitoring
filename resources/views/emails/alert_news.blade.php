@@ -125,7 +125,7 @@
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><li><a href="#">Pagina initiativa</a></li></ul></td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><a href="{{ action('HomeController@getIssueInfo', ['id' => $news->connectedIssues[0]->id, 'name' => Illuminate\Support\Str::slug($news->connectedIssues[0]->name)]) }}">Pagina initiativa</a></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>
