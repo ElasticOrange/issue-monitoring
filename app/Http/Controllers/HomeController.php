@@ -250,13 +250,13 @@ class HomeController extends Controller
 
         $reports = Report::bySearchTerm($request->report_search)
             ->byDomainIds($domainsForReports->lists('id')->toArray())
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->where(function($query) use ($request) {
                 if ($request->report_type) {
                     $query = $query->orWhere('report_type', $request->report_type);
                 }
             })
-            ->paginate(1);
+            ->paginate(5);
 
         return view('frontend.pages.reports', [
             'reports' => $reports,
