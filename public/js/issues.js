@@ -210,19 +210,6 @@
             ]
         });
 
-        $('.activate-editor').each(function () {
-            CKEDITOR.replace(this, {
-                toolbar: [
-                    {name: 'basicstyles', items: ['Bold', 'Italic']},
-                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
-                    {name: 'links', items: ['Link', 'Unlink']},
-                    {name: 'styles', items: ['Styles', 'Format']},
-                    {name: 'document', items: ['Source']},
-                    {name: 'about', items: ['About']}
-                ]
-            });
-        });
-
         var domainAutocomplete = $('#domain-autocomplete');
         var domainList = new Bloodhound({
             queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -537,6 +524,18 @@
             }
         });
 
+        $('.activate-editor').each(function(e){
+            CKEDITOR.replace( this.id, {
+                toolbar: [
+                    {name: 'basicstyles', items: ['Bold', 'Italic']},
+                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                    {name: 'links', items: ['Link', 'Unlink']},
+                    {name: 'styles', items: ['Styles', 'Format']},
+                    {name: 'document', items: ['Source']},
+                    {name: 'about', items: ['About']}
+                ]
+            });
+        });
 
 //FlowSteps
         function initFlowStepDate(flowStepId, edit) {
@@ -668,6 +667,29 @@
                     }
                 }
             }).disableSelection();
+
+
+            CKEDITOR.replace(locationId + stepId + '-ro', {
+                toolbar: [
+                    {name: 'basicstyles', items: ['Bold', 'Italic']},
+                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                    {name: 'links', items: ['Link', 'Unlink']},
+                    {name: 'styles', items: ['Styles', 'Format']},
+                    {name: 'document', items: ['Source']},
+                    {name: 'about', items: ['About']}
+                ]
+            });
+            CKEDITOR.replace(locationId + stepId + '-en', {
+                toolbar: [
+                    {name: 'basicstyles', items: ['Bold', 'Italic']},
+                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
+                    {name: 'links', items: ['Link', 'Unlink']},
+                    {name: 'styles', items: ['Styles', 'Format']},
+                    {name: 'document', items: ['Source']},
+                    {name: 'about', items: ['About']}
+                ]
+            });
+
         }
 
         $(document).on('click', '.add_flowstep', function () {
@@ -784,18 +806,6 @@
                     _.forEach(locationStep.flowsteps, function (flowStep) {
                         var stepId = _.uniqueId('new-');
 
-                        $('.activate-editor').each(function () {
-                            CKEDITOR.replace(this, {
-                                toolbar: [
-                                    {name: 'basicstyles', items: ['Bold', 'Italic']},
-                                    {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent']},
-                                    {name: 'links', items: ['Link', 'Unlink']},
-                                    {name: 'styles', items: ['Styles', 'Format']},
-                                    {name: 'document', items: ['Source']},
-                                    {name: 'about', items: ['About']}
-                                ]
-                            });
-                        });
                         executeAddFlowStep(
                             stepId,
                             id,

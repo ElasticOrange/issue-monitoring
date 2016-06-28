@@ -142,6 +142,7 @@
                             <div class="col-md-4 col-md-offset-1">
                                 <textarea name="location[<%= location_id%>][flow_steps][<%= id%>][observatii][ro]"
                                     class="form-control activate-editor"
+                                    id="<%= location_id%><%= id%>-ro"
                                     style="resize: none;"
                                     rows="6"
                                     cols="20"></textarea>
@@ -149,6 +150,7 @@
                             <div class="col-md-4 col-md-offset-1">
                                 <textarea name="location[<%= location_id%>][flow_steps][<%= id%>][observatii][en]"
                                     class="form-control activate-editor"
+                                    id="<%= location_id%><%= id%>-en"
                                     style="resize: none;"
                                     rows="6"
                                     cols="20"></textarea>

@@ -627,6 +627,7 @@
                                                     <div class="col-md-4 col-md-offset-1">
                                                         <textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][ro]"
                                                                 class="form-control activate-editor"
+                                                                id="{{ $locationStep->id }}{{ $step->id }}-ro"
                                                                 style="resize: none;"
                                                                 rows="6"
                                                                 cols="20"
@@ -637,6 +638,7 @@
                                                     <div class="col-md-4 col-md-offset-1">
                                                         <textarea name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][observatii][en]"
                                                                 class="form-control activate-editor"
+                                                                id="{{ $locationStep->id }}{{ $step->id }}-en"
                                                                 style="resize: none;"
                                                                 rows="6"
                                                                 cols="20"
