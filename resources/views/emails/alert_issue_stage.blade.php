@@ -121,7 +121,7 @@
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ strip_tags($alert->alertable->observatii) }} </ul>
-                                                <ul><a href="{{ url('http://live.issuemonitoring.ro/issues/'. 'id' => $alert->alertable->id . '/' . 'name' => Illuminate\Support\Str::slug($alert->alertable->name)) }}">Vezi pagina initiativei pentru mai multe informatii!</a></ul></td>
+                                                <ul><a href="{{ url('http://live.issuemonitoring.ro/issues/' . "/" . $alert->alertable->id . '/' . Illuminate\Support\Str::slug($alert->alertable->name)) }}">Vezi pagina initiativei pentru mai multe informatii!</a></ul></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>
