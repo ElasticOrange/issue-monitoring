@@ -102,7 +102,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center" style="padding: 20px 10px 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-            <img src="http://live.issuemonitoring.ro/img/logo_im.png" alt="Logo_IM" width="100" align="center" />
+            <img src="{{ url('/img/logo_im.png') }}" alt="Logo_IM" width="100" align="center" />
             <hr>
         </td>
     </tr>
@@ -121,11 +121,19 @@
                                         </tr>
                                         @foreach($alertsToSendByIssue as $news)
                                             <tr>
-                                                <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><li><b>{{ $news->title }}</b></li></ul></td>
+                                                <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="{{ action('EmailViewController@getExternalNewsInfo', [$news->id, Illuminate\Support\Str::slug($news->title)]) }}">
+                                                                <b>{{ $news->title }}</b>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><a href="{{ action('HomeController@getIssueInfo', ['id' => $news->connectedIssues[0]->id, 'name' => Illuminate\Support\Str::slug($news->connectedIssues[0]->name)]) }}">Pagina initiativa</a></td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><a href="{{ action('EmailViewController@getExternalIssueInfo', [$news->connectedIssues[0]->id, Illuminate\Support\Str::slug($news->connectedIssues[0]->name)]) }}">Pagina initiativa</a></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>

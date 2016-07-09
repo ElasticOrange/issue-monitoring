@@ -102,7 +102,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <td align="center" style="padding: 20px 10px 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-            <img src="http://live.issuemonitoring.ro/img/logo_im.png" alt="Logo_IM" width="100" align="center" />
+            <img src="{{ url('/img/logo_im.png') }}" alt="Logo_IM" width="100" align="center" />
             <hr>
         </td>
     </tr>
@@ -126,7 +126,7 @@
                                             <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{!! $alert->alertable->description !!}</ul></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="padding: 10px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><a href="#">Acceseaza raportul</a></ul></td>
+                                            <td align="left" style="padding: 10px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><a href="{{ action('EmailViewController@getExternalReportInfo', [$alert->alertable->id, Illuminate\Support\Str::slug($alert->alertable->title)]) }}">Acceseaza raportul</a></ul></td>
                                         </tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>
                                         </tr>

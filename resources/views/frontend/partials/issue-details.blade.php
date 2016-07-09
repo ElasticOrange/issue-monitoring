@@ -288,14 +288,11 @@
                 <label>Vreau să-mi transmiteți notificări pentru aceasta inițiativă</label>
                 <select name="notify" id="notify">
                     <option value="N" selected="">NU</option>
-                    <option value="Z">ZILNIC</option>
+                    <option disabled="disabled" value="Z">ZILNIC</option>
                     <option value="S">SĂPTĂMÂNAL</option>
                 </select>
                 <input type="submit" value="Salvează">
             </form>
-            <p>
-                Este in lucru.
-            </p>
         </div>
     </div>
 </div>
