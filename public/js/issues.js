@@ -129,20 +129,20 @@
             daysDuration.val(days);
         }
 
-        $(document).on('dp.change', '[data-type=startdate]',function() {
-            var groupId = $(this).attr('data-groupid');
-            updateEndDate(groupId);
-        });
-
-        $(document).on('dp.change', '[data-type=enddate]',function() {
-            var groupId = $(this).attr('data-groupid');
-            updateDuration(groupId);
-        });
-
-        $(document).on('change', '[data-groupid]',function() {
-           var groupId = $(this).attr('data-groupid');
-            updateEndDate(groupId);
-        });
+        // $(document).on('dp.change', '[data-type=startdate]',function() {
+        //     var groupId = $(this).attr('data-groupid');
+        //     updateEndDate(groupId);
+        // });
+        //
+        // $(document).on('dp.change', '[data-type=enddate]',function() {
+        //     var groupId = $(this).attr('data-groupid');
+        //     updateDuration(groupId);
+        // });
+        //
+        // $(document).on('change', '[data-groupid]',function() {
+        //    var groupId = $(this).attr('data-groupid');
+        //     updateEndDate(groupId);
+        // });
 
         CKEDITOR.replace('editor1', {
             toolbar: [

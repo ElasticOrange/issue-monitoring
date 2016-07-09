@@ -494,11 +494,7 @@
                                                 type="number"
                                                 prevent-enter="true"
                                                 name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][estimated_duration]"
-                                                @if($step->start_date and $step->estimated_duration == null)
-                                                    value="0"
-                                                @else
-                                                    value="{{ $step->estimated_duration }}"
-                                                @endif
+                                                value="{{ $step->estimated_duration }}"
                                                 min="0"
                                                 data-duration="true"
                                                 data-groupid="{{ $step->id }}"

@@ -72,13 +72,17 @@ class LocationStep extends Model
 
             if (array_key_exists('estimated_duration', $steps[$currentStep->id])) {
                 if ($steps[$currentStep->id]['estimated_duration'] == '') {
-                    $currentStep->start_date = null;
-                    $currentStep->end_date = null;
-                    $currentStep->estimated_duration = null;
-                } elseif ($steps[$currentStep->id]['estimated_duration'] == '0') {
+//                    $currentStep->start_date = null;
                     $currentStep->end_date = null;
                     $currentStep->estimated_duration = null;
                 }
+                if ($steps[$currentStep->id]['end_date'] == '') {
+                    $currentStep->end_date = null;
+                }
+//                elseif ($steps[$currentStep->id]['estimated_duration'] == '0') {
+//                    $currentStep->end_date = null;
+//                    $currentStep->estimated_duration = null;
+//                }
             }
 
             $this->flowsteps()->save($currentStep);
