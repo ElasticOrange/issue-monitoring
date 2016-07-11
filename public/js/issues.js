@@ -544,12 +544,12 @@
                 format: 'L',
             });
 
-            if (edit == 0) {
-                $('#startdate-result-' + flowStepId).val(moment().format("YYYY-MM-DD"));
-            }
-            else {
+            // if (edit == 0) {
+            //     $('#startdate-result-' + flowStepId).val(moment().format("YYYY-MM-DD"));
+            // }
+            // else {
                 $('#startdate-result-' + flowStepId).val(($('#startdate-widget-' + flowStepId).val()).split(".").reverse().join("-"));
-            }
+            // }
 
             startDateWidgets.on('dp.change', function () {
                 var d = $(this).data("DateTimePicker").date();
@@ -562,12 +562,12 @@
                 format: 'L'
             });
 
-            if (edit == 0) {
-                $('#enddate-result-' + flowStepId).val(moment().format("YYYY-MM-DD"));
-            }
-            else {
+            // if (edit == 0) {
+            //     $('#enddate-result-' + flowStepId).val(moment().format("YYYY-MM-DD"));
+            // }
+            // else {
                 $('#enddate-result-' + flowStepId).val(($('#enddate-widget-' + flowStepId).val()).split(".").reverse().join("-"));
-            }
+            // }
             endDateWidgets.on('dp.change', function () {
                 var d = $(this).data("DateTimePicker").date();
                 var e = d.format("YYYY-MM-DD");
