@@ -70,6 +70,10 @@ class LocationStep extends Model
                 }
             }
 
+            if (! array_key_exists('start_date', $stepData)) {
+                $stepData['start_date'] = null;
+            }
+
             if (array_key_exists('estimated_duration', $steps[$currentStep->id])) {
                 if ($steps[$currentStep->id]['estimated_duration'] == '') {
 //                    $currentStep->start_date = null;
@@ -78,6 +82,9 @@ class LocationStep extends Model
                 }
                 if ($steps[$currentStep->id]['end_date'] == '') {
                     $currentStep->end_date = null;
+                }
+                if ($steps[$currentStep->id]['start_date'] == '') {
+                    $currentStep->start_date = null;
                 }
 //                elseif ($steps[$currentStep->id]['estimated_duration'] == '0') {
 //                    $currentStep->end_date = null;
@@ -132,14 +139,18 @@ class LocationStep extends Model
                 $stepData['finalizat'] = 0;
             }
 
+            if (! array_key_exists('start_date', $stepData)) {
+                $stepData['start_date'] = null;
+            }
+
             if (array_key_exists('estimated_duration', $stepData)) {
                 if ($stepData['estimated_duration'] == '') {
-                    $newFlowStep->start_date = null;
+//                    $newFlowStep->start_date = null;
                     $newFlowStep->end_date = null;
                     $newFlowStep->estimated_duration = null;
-                } elseif ($stepData['estimated_duration'] == '0') {
-                    $newFlowStep->end_date = null;
-                    $newFlowStep->estimated_duration = null;
+//                } elseif ($stepData['estimated_duration'] == '0') {
+//                    $newFlowStep->end_date = null;
+//                    $newFlowStep->estimated_duration = null;
                 }
             }
 
