@@ -488,6 +488,10 @@
                                             id="startdate-result-{{ $step->id }}"
                                             name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][start_date]"
                                         />
+                                        <label>
+                                            <input type="checkbox" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][delete_start_date]" value="1">
+                                            Sterge
+                                        </label>
                                     </div>
                                     <div class="col-sm-1">
                                         <input class="form-control"
@@ -518,6 +522,10 @@
                                             id="enddate-result-{{ $step->id }}"
                                             name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][end_date]"
                                         />
+                                        <label>
+                                            <input type="checkbox" name="location[{{ $locationStep->id }}][flow_steps][{{ $step->id }}][delete_end_date]" value="1">
+                                            Sterge
+                                        </label>
                                     </div>
                                     <div class="checkbox col-sm-1">
                                         <label>

@@ -89,6 +89,18 @@ class LocationStep extends Model
                 }
             }
 
+            if (array_key_exists('delete_end_date', $steps[$currentStep->id])) {
+                if ($steps[$currentStep->id]['delete_end_date'] == '1') {
+                    $currentStep->end_date = null;
+                }
+            }
+
+            if (array_key_exists('delete_start_date', $steps[$currentStep->id])) {
+                if ($steps[$currentStep->id]['delete_start_date'] == '1') {
+                    $currentStep->start_date = null;
+                }
+            }
+
             $this->flowsteps()->save($currentStep);
 
             if (array_key_exists('addToLegalNews', $steps[$currentStep->id])) {
@@ -152,6 +164,18 @@ class LocationStep extends Model
             if (array_key_exists('end_date', $stepData)) {
                 if ($stepData['end_date'] == '') {
                     $newFlowStep->end_date = null;
+                }
+            }
+
+            if (array_key_exists('delete_end_date', $stepData)) {
+                if ($stepData['delete_end_date'] == '1') {
+                    $newFlowStep->end_date = null;
+                }
+            }
+            
+            if (array_key_exists('delete_start_date', $stepData)) {
+                if ($stepData['delete_start_date'] == '1') {
+                    $newFlowStep->start_date = null;
                 }
             }
 

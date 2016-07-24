@@ -43,6 +43,10 @@
             <div class="col-sm-1">
                 <input class="form-control" type="text" id="startdate-widget-<%= id%>" placeholder="Inceput la" data-groupid="<%= id%>" data-type="startdate"/>
                 <input type="hidden" id="startdate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][start_date]" />
+                <label>
+                    <input type="checkbox" name="location[<%= location_id%>][flow_steps][<%= id%>][delete_start_date]" value="1">
+                    Sterge
+                </label>
             </div>
             <div class="col-sm-1">
                 <input class="form-control"
@@ -64,6 +68,10 @@
                        data-type="enddate"
                 />
                 <input type="hidden" id="enddate-result-<%= id%>" name="location[<%= location_id%>][flow_steps][<%= id%>][end_date]" />
+                <label>
+                    <input type="checkbox" name="location[<%= location_id%>][flow_steps][<%= id%>][delete_end_date]" value="1">
+                    Sterge
+                </label>
             </div>
             <div class="checkbox col-sm-1">
                 <label>
