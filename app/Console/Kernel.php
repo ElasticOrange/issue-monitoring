@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
 		\Issue\Console\Commands\Inspire::class,
 		Commands\SendAlerts::class,
 		Commands\ImportOldDb::class,
+		Commands\ImportStakeholderProfile::class,
 	];
 
 	/**
