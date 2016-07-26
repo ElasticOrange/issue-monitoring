@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'admin@issuemonitoring.ro', 'name' => null],
+    'from' => ['address' => 'noreply@issuemonitoring.ro', 'name' => 'Alerta Issue Monitoring'],
 
     /*
     |--------------------------------------------------------------------------
