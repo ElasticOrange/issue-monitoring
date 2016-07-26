@@ -53,7 +53,7 @@ class LocationStep extends Model
         }
 
         foreach ($currentSteps as $currentStep) {
-            if (!array_key_exists($currentStep->id, $steps)) {
+            if (! array_key_exists($currentStep->id, $steps)) {
                 $currentStep->delete();
                 continue;
             }
@@ -78,7 +78,6 @@ class LocationStep extends Model
 
             if (array_key_exists('estimated_duration', $steps[$currentStep->id])) {
                 if ($steps[$currentStep->id]['estimated_duration'] == '') {
-                    $currentStep->end_date = null;
                     $currentStep->estimated_duration = null;
                 }
             }
@@ -156,7 +155,6 @@ class LocationStep extends Model
 
             if (array_key_exists('estimated_duration', $stepData)) {
                 if ($stepData['estimated_duration'] == '') {
-                    $newFlowStep->end_date = null;
                     $newFlowStep->estimated_duration = null;
                 }
             }

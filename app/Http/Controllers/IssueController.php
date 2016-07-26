@@ -144,9 +144,8 @@ class IssueController extends Controller
             abort(403);
         }
 
-        $locationsData = $request->input('location');
 		$issue->setAll($request);
-		$issue->syncLocations($locationsData);
+		$issue->syncLocations($request->location);
 
         if ($request->published) {
             Alert::updateAlert($issue, 'Issue\Issue');
