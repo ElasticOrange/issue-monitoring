@@ -33,44 +33,6 @@
                 <br />
 
                 <div class="row">
-                    <div class="col-sm-3 col-sm-offset-2 checkbox-inline">
-                        <label>
-                            <input  type="checkbox"
-                                    class="auto-refresh"
-                                    value="1"
-                                    name="viitor"
-                                    @if($viitor)
-                                        checked="checked"
-                                    @endif
-                                    />viitor
-                        </label>
-                    </div>
-                    <div class="col-sm-3 checkbox-inline">
-                        <label>
-                            <input  type="checkbox"
-                                    class="auto-refresh"
-                                    value="1"
-                                    name="curent"
-                                    @if($curent or empty($all))
-                                        checked="checked"
-                                    @endif
-                                    />curent
-                        </label>
-                    </div>
-                    <div class="col-sm-2 checkbox-inline">
-                        <label>
-                            <input  type="checkbox"
-                                    class="auto-refresh"
-                                    value="1"
-                                    name="arhivat"
-                                    @if($arhivat)
-                                        checked="checked"
-                                    @endif
-                                    />arhivat
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
                     <br>
                     <div class="form-group">
                         <div class="col-md-5 col-md-offset-1">
@@ -84,11 +46,15 @@
                                 <option value="Ordonanță" @if($type == "Ordonanță") selected="selected" @endif>Ordonanță</option>
                                 <option value="Directivă europeană" @if($type == "Directivă europeană") selected="selected" @endif>Directivă europeană</option>
                                 <option value="Regulament" @if($type == "Regulament") selected="selected" @endif>Regulament</option>
+                                <option value="Plan" @if($type == "Plan") selected="selected" @endif>Plan</option>
+                                <option value="Strategie" @if($type == "Strategie") selected="selected" @endif>Strategie</option>
                             </select>
                         </div>
                         <div class="col-md-5">
                             <select class="form-control auto-refresh" name="phase">
                                 <option value="">Faza inițiativei</option>
+                                <option value="curent" @if($phase == "curent") selected="selected" @endif>Curent</option>
+                                <option value="viitor" @if($phase == "viitor") selected="selected" @endif>Viitor</option>
                                 <option value="arhivatRespinsSauAbrogat" @if($phase == "arhivatRespinsSauAbrogat") selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
                                 <option value="arhivatInactiv" @if($phase == "arhivatInactiv") selected="selected" @endif>Arhivată – Inactivă</option>
                                 <option value="publicatMO" @if($phase == "publicatMO") selected="selected" @endif>Publicat in Monitorul Oficial</option>
