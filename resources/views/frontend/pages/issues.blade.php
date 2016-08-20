@@ -48,6 +48,10 @@
                                 <option value="Regulament" @if($type == "Regulament") selected="selected" @endif>Regulament</option>
                                 <option value="Plan" @if($type == "Plan") selected="selected" @endif>Plan</option>
                                 <option value="Strategie" @if($type == "Strategie") selected="selected" @endif>Strategie</option>
+                                <option value="Memorandum" @if($type == "Memorandum") selected="selected" @endif>Memorandum</option>
+                                <option value="Program" @if($type == "Program") selected="selected" @endif>Program</option>
+                                <option value="Instructiune" @if($type == "Instructiune") selected="selected" @endif>Instructiune</option>
+                                <option value="Tip" @if($type == "Tip") selected="selected" @endif>Tip</option>
                             </select>
                         </div>
                         <div class="col-md-5">

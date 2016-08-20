@@ -40,5 +40,21 @@ return [
     'Strategie' => [
         'ro' => 'Strategie',
         'en' => 'Strategy',
+    ],
+    'Memorandum' => [
+        'ro' => 'Memorandum',
+        'en' => 'Memorandum'
+    ],
+    'Program' => [
+        'ro' => 'Program',
+        'en' => 'Program'
+    ],
+    'Instructiune' => [
+        'ro' => 'Instructiune',
+        'en' => 'Instruction'
+    ],
+    'Ghid' => [
+        'ro' => 'Ghid',
+        'en' => 'Guide'
     ]
 ];
