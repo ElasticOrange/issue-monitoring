@@ -97,6 +97,7 @@
                         </div>
                         @endif
                         {{ $locations->where('id', $locationStep->location_id)->lists('name')->toArray()[0] }}
+                        &nbsp;&nbsp;{{ $locationStep->nr_inregistrare }}
                     </p>
                 </a>
                     <div class="col-md-12 collapse issues-list panel-group" id="collapse-{{ $locationStep->id }}" style="text-align:center">
