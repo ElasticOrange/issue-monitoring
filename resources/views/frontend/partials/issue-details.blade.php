@@ -47,6 +47,15 @@
                 Arata toti stakeholderii
             </a>
         @endif
+        @if ($issue->impact)
+            <p>
+                <b>
+                    <br>
+                    Impact asupra altor legi
+                </b>
+            </p>
+                {{ strip_tags($issue->impact) }}
+        @endif
         @if ($issue->description)
         <p>
             <b>
