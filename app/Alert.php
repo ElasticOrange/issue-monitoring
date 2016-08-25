@@ -244,6 +244,11 @@ class Alert extends Model
 
         foreach ($users as $user) {
             $alertsToSendByIssue = self::getNewsForUser($user, $newsAlerts);
+            foreach (array_keys($alertsToSendByIssue) as $value) {
+                if ($user->issues()->where('issue_id', $value)->first()) {
+                    unset($alertsToSendByIssue[$value]);
+                }
+            }
             foreach ($alertsToSendByIssue as $alertToSendByIssue) {
                 self::sendNewsMail($user, $alertToSendByIssue, $alertType);
             }
