@@ -205,6 +205,30 @@ class UserController extends Controller
         );
     }
 
+    public function refuseIssueNotification(Request $request)
+    {
+        if ($request->user_id == '') {
+            return ['success' => 'fail'];
+        }
+
+        $user = User::findOrFail($request->user_id);
+
+        if ($request->notify && $request->notify === 'dont') { //daca alege nu
+            if (! $user->issues()->where('issue_id', $request->issue_id)->first()) { //nu exista issue_id in tabela
+                $user->issues()->attach($request->issue_id);
+                return ['success' => 'unsubscribed'];
+            } else {
+                return ['success' => 'doubleUnsubscribed'];
+            }
+        } else if ($request->notify && $request->notify === 'zilnic'){
+            if ($user->issues()->where('issue_id', $request->issue_id)->first()) {
+                $user->issues()->detach($request->issue_id);
+                return ['success' => 'subscribed'];
+            } else {
+                return ['success' => 'doubleSubscribed'];
+            }
+        }
+    }
 
     public function profile()
     {

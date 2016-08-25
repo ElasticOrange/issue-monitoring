@@ -25,6 +25,46 @@
     <script>
         (function() {
             $(document).ready(function() {
+
+                $('#refuse-alerts').on('submit', function (event) {
+                    event.preventDefault();
+                    var action = $('#refuse-alerts').attr('action');
+                    var method = $('#refuse-alerts').attr('method');
+                    var formData = $('#refuse-alerts').serializeArray();
+
+                    var request = $.ajax({
+                        url: action,
+                        method: method,
+                        data: formData,
+                    });
+
+                    function setAlert(type, message) {
+                        $('.unsubscribe-alert').removeClass('hidden');
+                        $('.unsubscribe-alert .alert').addClass(type);
+                        $('.unsubscribe-alert .alert .caption').text(message);
+                        setTimeout(function () {
+                            $('.unsubscribe-alert').addClass('hidden');
+                            $('.unsubscribe-alert .alert').removeClass(type);
+                            $('.unsubscribe-alert .alert .caption').text("");
+                        }, 4000);
+                    }
+
+                    request.done(function(data) {
+                        console.error(data);
+                        if (data.success == 'fail') {
+                            setAlert('alert-danger', 'Error updating!');
+                        } else if (data.success == 'unsubscribed') {
+                            setAlert('alert-warning', 'Unsubscribed succesfully!');
+                        } else if (data.success == 'doubleUnsubscribed') {
+                            setAlert('alert-info', 'Already unsubscribed from this issue.');
+                        } else if (data.success == 'subscribed') {
+                            setAlert('alert-success', 'Subscribed succesfully!');
+                        } else if (data.success == 'doubleSubscribed') {
+                            setAlert('alert-info', 'Already subscribed for this issue.');
+                        }
+                    });
+                });
+
                 if(window.location.hash) {
                     $('.nav-tabs a[href="' + window.location.hash + '"]').tab('show');
                 }

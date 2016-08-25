@@ -11,34 +11,34 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract,
-									AuthorizableContract,
-									CanResetPasswordContract
+                                    AuthorizableContract,
+                                    CanResetPasswordContract
 {
-	use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, Authorizable, CanResetPassword;
     use HasSearchTable;
 
     private $searchTable = 'users_search';
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = ['name', 'email', 'type', 'language', 'active', 'telephone', 'function', 'organization', 'can_see_stakeholders'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'email', 'type', 'language', 'active', 'telephone', 'function', 'organization', 'can_see_stakeholders'];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = ['password', 'remember_token'];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
     protected $guarded = ['id'];
 
@@ -65,6 +65,11 @@ class User extends Model implements AuthenticatableContract,
     public function subscription()
     {
         return $this->hasOne('Issue\UserSubscription');
+    }
+
+    public function issues()
+    {
+        return $this->belongsToMany('Issue\Issue');
     }
 
     public function domains()

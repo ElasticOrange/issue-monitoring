@@ -90,6 +90,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('backend/flowtemplate/{flowtemplate}/delete', 'FlowTemplateController@destroy');
     Route::resource('backend/flowtemplate', 'FlowTemplateController', ['except' => ['destroy']]);
 
+    Route::get('users/refuse-issue-alert', 'UserController@refuseIssueNotification');
     Route::get('users/profile', 'UserController@profile');
     Route::get('users/query', 'UserController@query');
     Route::post('users/profile', 'UserController@updateProfile');

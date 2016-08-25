@@ -294,12 +294,22 @@
 
     <div class="tab-pane" id="notifications">
         <div class="tab-pane fade active in" id="tab-notificari">
-            <form action="" method="POST">
+            <div class="unsubscribe-alert hidden">
+                <div class="alert">
+                    <span class="caption"></span>
+                </div>
+            </div>
+            <form action="{{ action('UserController@refuseIssueNotification') }}"
+                  id="refuse-alerts"
+                  method="GET"
+            >
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="issue_id" value="{{ $issue->id }}">
+                <input type="hidden" name="user_id" value="{{ \Auth::check() ? \Auth::user()->id : '' }}">
                 <label>Vreau să-mi transmiteți notificări pentru aceasta inițiativă</label>
                 <select name="notify" id="notify">
-                    <option value="N" selected="">NU</option>
-                    <option disabled="disabled" value="Z">ZILNIC</option>
-                    <option value="S">SĂPTĂMÂNAL</option>
+                    <option value="dont" selected="">NU</option>
+                    <option value="zilnic">ZILNIC</option>
                 </select>
                 <input type="submit" value="Salvează">
             </form>
