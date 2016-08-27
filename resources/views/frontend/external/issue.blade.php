@@ -28,6 +28,13 @@
 
                 $('div.col-md-12.issues-list.panel-group.collapse:last').addClass('in');
 
+                $('#refuse-alerts').on('submit', function (event) {
+                    event.preventDefault();
+                    var action = $('#refuse-alerts').attr('action');
+                    if (action == '') {
+                        return;
+                    }
+                });
             });
         }());
     </script>

@@ -311,7 +311,7 @@
                     <option value="dont" selected="">NU</option>
                     <option value="zilnic">ZILNIC</option>
                 </select>
-                <input type="submit" value="Salvează">
+                <input type="submit" class="btn btn-default btn-sm" value="Salvează">
             </form>
         </div>
     </div>
