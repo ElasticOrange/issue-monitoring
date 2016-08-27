@@ -80,9 +80,8 @@
                 {!! $issues->appends([
                     'domain' => $domain,
                     'issue_search' => $issue_search,
-                    'viitor' => $viitor,
-                    'curent' => $curent,
-                    'arhivat' => $arhivat
+                    'type' => $type,
+                    'phase' => $phase,
                     ])->render() !!}
             </div>
         </div>

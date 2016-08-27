@@ -56,19 +56,6 @@ class HomeController extends Controller
             ->byDomainIds($domainsForIssues->lists('id')->toArray())
             ->orderBy('id', 'desc')
             ->where(function($query) use ($request) {
-                if ($request->viitor) {
-                    $query = $query->orWhere('phase', 'viitor');
-                }
-
-                if ($request->curent) {
-                    $query = $query->orWhere('phase', 'curent');
-                }
-
-                if ($request->arhivat) {
-                    $query = $query->orWhere('phase', 'arhivatRespinsSauAbrogat')
-                        ->orWhere('phase', 'arhivatInactiv');
-                }
-
                 if ($request->type) {
                     $query = $query->where('type', $request->type);
                 }
@@ -86,9 +73,6 @@ class HomeController extends Controller
         return view('frontend.pages.issues', [
                 'issues' => $issues,
                 'domain' => $request->domain,
-                'arhivat' => $request->arhivat,
-                'curent' => $request->curent,
-                'viitor' => $request->viitor,
                 'issue_search' => $request->issue_search,
                 'type' => $request->type,
                 'phase' => $request->phase,
