@@ -1,6 +1,5 @@
 (function(){
     $(document).ready(function() {
-console.error('gigel');
         var actionButtonsTemplate = _.template($("#action_buttons").html(),
             {
                 interpolate: /__([\s\S]+?)__/g
