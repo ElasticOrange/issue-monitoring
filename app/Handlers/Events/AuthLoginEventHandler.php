@@ -39,14 +39,18 @@ class AuthLoginEventHandler
 
             $this->auth->logout();
 
-            return redirect()->guest('/auth/login')->withErrors('Ne pare rau, perioada de testare de 14 zile a expirat.');
+            if ($user->subscription->type == 'trial') {
+                return redirect()->guest('/auth/login')->withErrors('Perioada de testare de 14 zile a expirat.');
+            }
+
+            return redirect()->guest('/auth/login')->withErrors('Abonamentul tau a expirat.');
         }
 
         if ($user->active == 0) {
 
             $this->auth->logout();
 
-            return redirect()->guest('/auth/login')->withErrors('Ne pare rau, contul tau a fost dezactivat.');
+            return redirect()->guest('/auth/login')->withErrors('Contul tau nu este activat.');
         }
     }
 }

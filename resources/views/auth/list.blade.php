@@ -10,9 +10,9 @@
 
     @if($expired)
     <div class="form-group">
-        <p>
-            Utilizatorilor: {{ $expired }} le-a expirat abonamentul.
-        </p>
+        <div class="alert alert-warning">
+            Utilizatorilor: <b>{{ $expired }}</b> le-a expirat abonamentul.
+        </div>
     </div>
     @endif
 

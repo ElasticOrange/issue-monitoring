@@ -35,13 +35,17 @@ class UserController extends Controller
         $users = User::whereActive(true)
                         ->whereType('client')
                         ->get();
-        $expired = [];
+
+        $expiredList = [];
+
         foreach ($users as $user) {
             if ($user->subscriptionExpired()) {
-                $expired[] = $user->name ? $user->name : $user->email;
+                $expiredList[] = $user->name ? $user->name : $user->email;
             }
         }
-        $expired = implode(", ", $expired);
+
+        $expired = "";
+        $expired = implode(", ", $expiredList);
 
         return view('auth.list', compact('expired'));
     }
