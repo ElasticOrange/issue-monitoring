@@ -117,6 +117,10 @@ class User extends Model implements AuthenticatableContract,
 
     public function subscriptionExpired()
     {
+        if ($this->type == 'admin' || $this->type == 'editor') {
+            return false;
+        }
+
         if (! $this->subscription) {
             return false;
         }
