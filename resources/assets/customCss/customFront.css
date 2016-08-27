@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #13a8ac url(/img/cloud_bg.png) no-repeat center center;
+    background: #13a8ac url(/img/cloud_bg.png) no-repeat fixed center;
 }
 
 .white {
