@@ -8,6 +8,14 @@
         </div>
     </div>
 
+    @if($expired)
+    <div class="form-group">
+        <p>
+            Utilizatorilor: {{ $expired }} le-a expirat abonamentul.
+        </p>
+    </div>
+    @endif
+
     <div class="form-group">
         <a href="{{ action('UserController@create') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Adauga user</a>
     </div>

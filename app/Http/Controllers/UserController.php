@@ -32,7 +32,18 @@ class UserController extends Controller
             abort(403);
         }
 
-        return view('auth.list');
+        $users = User::whereActive(true)
+                        ->whereType('client')
+                        ->get();
+        $expired = [];
+        foreach ($users as $user) {
+            if ($user->subscriptionExpired()) {
+                $expired[] = $user->name ? $user->name : $user->email;
+            }
+        }
+        $expired = implode(", ", $expired);
+
+        return view('auth.list', compact('expired'));
     }
 
     /**
