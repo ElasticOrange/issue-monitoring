@@ -115,7 +115,7 @@ class HomeController extends Controller
             abort(403);
         }
 
-        $newsList = $issue->connectedNews()->paginate(10);
+        $newsList = $issue->connectedNews()->orderBy('created_at', 'desc')->paginate(10);
 
         $stakeholdersList = $issue->connectedStakeholders->chunk(10);
         $initiatorsList = $issue->connectedInitiatorsStakeholders->chunk(10);
