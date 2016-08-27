@@ -106,6 +106,10 @@ class HomeController extends Controller
 
         $dateNow = (new \DateTime)->format('Y-m-d H:i:s');
 
+        $issue->status = $this->hyperlinkUrls(strip_tags($issue->status));
+        $issue->impact = $this->hyperlinkUrls(strip_tags($issue->impact));
+        $issue->description = $this->hyperlinkUrls(strip_tags($issue->description));
+
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
             'domain' => $issueDomains[0]->id,
@@ -268,5 +272,18 @@ class HomeController extends Controller
     public function howWorks()
     {
         return view('frontend.pages.howWorks');
+    }
+
+    private function hyperlinkUrls($text)
+    {
+        $regexUrl = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+
+        $newText = $text;
+
+        if (preg_match($regexUrl, $text, $url)) {
+               $newText = preg_replace($regexUrl, '<a href="' . $url[0] . '">' . $url[0] . '</a>', $text);
+        }
+
+        return $newText;
     }
 }

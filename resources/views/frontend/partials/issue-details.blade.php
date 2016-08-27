@@ -54,7 +54,7 @@
                     Impact asupra altor legi
                 </b>
             </p>
-                {{ strip_tags($issue->impact) }}
+                {!! $issue->impact !!}
         @endif
         @if ($issue->description)
         <p>
@@ -63,7 +63,7 @@
                 Descriere scurta:
             </b>
         </p>
-            {{ strip_tags($issue->description) }}
+            {!! $issue->description !!}
         @endif
         @if ($issue->status)
         <p>
@@ -72,7 +72,7 @@
                 Status:
             </b>
         </p>
-            {{ strip_tags($issue->status) }}
+            {!! $issue->status !!}
         @endif
     </div>
 
@@ -155,7 +155,15 @@
                                         style="height: 0px;"
                                     >
                                         <div class="panel-body">
-                                            {!! strip_tags($step->observatii) !!}
+                                            <?php
+                                                $regexUrl = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+                                                if (preg_match($regexUrl, $step->observatii, $url)) {
+                                                    $newStepObservatii = preg_replace($regexUrl, '<a href="' . $url[0] . '">' . $url[0] . '</a>', $step->observatii);
+                                                } else {
+                                                    $newStepObservatii = $step->observatii;
+                                                }
+                                            ?>
+                                            {!! $newStepObservatii !!}
                                         </div>
                                         @if(! $step->documents->isEmpty())
                                             <br>
