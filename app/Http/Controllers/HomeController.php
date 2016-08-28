@@ -276,12 +276,11 @@ class HomeController extends Controller
 
     private function hyperlinkUrls($text)
     {
-        $regexUrl = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-
+        $regexUrl = "/\[([^\]]+)\]\((((http|https):\/\/)[-a-zA-Z0-9@:%_\+.~#?&\/\/=]+)\)/";
         $newText = $text;
 
         if (preg_match($regexUrl, $text, $url)) {
-               $newText = preg_replace($regexUrl, '<a href="' . $url[0] . '">' . $url[0] . '</a>', $text);
+               $newText = preg_replace($regexUrl, '<a href="' . $url[2] . '" target="_blank">' . $url[1] . '</a>', $text);
         }
 
         return $newText;
