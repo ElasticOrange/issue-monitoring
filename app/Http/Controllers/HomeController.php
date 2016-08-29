@@ -160,6 +160,19 @@ class HomeController extends Controller
         return view('frontend.pages.news-list', compact(['news', 'stakeholder']));
     }
 
+    public function getAllStakeholdersConnected($stakeholderId, $stakeholderName)
+    {
+        $stakeholder = Stakeholder::findOrFail($stakeholderId);
+
+        if ($stakeholderName != Str::slug($stakeholder->name)) {
+            abort(403);
+        }
+
+        $stakeholders = $stakeholder->stakeholdersConnectedOfMine()->orderBy('id', 'desc')->paginate(10);
+
+        return view('frontend.pages.stakeholders-list', compact(['stakeholders', 'stakeholder']));
+    }
+
     public function getAllStakeholderIssues($stakeholderId, $stakeholderName)
     {
         $stakeholder = Stakeholder::findOrFail($stakeholderId);
@@ -173,17 +186,26 @@ class HomeController extends Controller
         return view('frontend.pages.issues-list', compact('issues'));
     }
 
-    public function getStakeholders()
+    public function getStakeholders(Request $request)
     {
-        $stakeholders = Stakeholder::paginate(10);
-
         $user = \Auth::user();
 
         if (! $user or ! $user->can_see_stakeholders) {
             abort(403);
         }
 
-        return view('frontend.pages.stakeholders', compact(['stakeholders']));
+        $stakeholders = Stakeholder::paginate(10);
+
+        if ($request->search) {
+            $modelInstance = new Stakeholder;
+
+            $stakeholders = $modelInstance->bySearchTerm($request->search)->paginate(10);
+        }
+
+        return view('frontend.pages.stakeholders', [
+            'stakeholders' => $stakeholders,
+            'search' => $request->search ? $request->search : ''
+        ]);
     }
 
     public function getContact()

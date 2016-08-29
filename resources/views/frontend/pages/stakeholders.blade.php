@@ -5,11 +5,30 @@
 <div class="container white">
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-3">
             <h2>Stakeholderi</h2>
             <br>
             <div class="row">
                 <div class="col-md-12">
+                    <form method="GET">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                <input type="text"
+                                       name="search"
+                                       class="form-control"
+                                       placeholder="Search"
+                                       @if($search)
+                                           value="{{ $search }}"
+                                       @endif
+                                >
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"> Search </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form><br><br>
                     <ul>
                         @foreach($stakeholders as $stakeholder)
                             <li>
@@ -30,7 +49,7 @@
                             </li><br>
                         @endforeach
                     </ul>
-                    {!! $stakeholders->render() !!}
+                    {!! $stakeholders->appends(['search' => $search])->render() !!}
                 </div>
             </div>
         </div>
