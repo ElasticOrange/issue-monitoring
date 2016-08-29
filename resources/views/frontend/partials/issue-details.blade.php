@@ -86,7 +86,7 @@
             </div>
         </div>
             @if($issue->locationsteps)
-                @foreach($issue->locationsteps as $locationStep)
+                @foreach($issue->locationsteps()->orderBy('step_order', 'asc')->get() as $locationStep)
                 <br>
                 <br>
                 <a role="button" data-toggle="collapse" href="#collapse-{{ $locationStep->id }}" aria-expanded="false" aria-controls="collapse-{{ $locationStep->id }}">
