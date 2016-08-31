@@ -55,7 +55,7 @@
                                         @elseif($alert->alertable_type == 'Issue\Issue')
                                             <a href="{{ action('IssueController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="{{ action('IssueController@edit', [$alert->alertable->flowstepsInLocation->issue->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @elseif($alert->alertable_type == 'Issue\Report')
                                             <a href="{{ action('ReportController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                         @endif

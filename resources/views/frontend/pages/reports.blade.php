@@ -4,8 +4,8 @@
 <div class="container white">
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
-        <div class="col-md-8 col-md-offset-2">
-            <h2>Reports</h2>
+        <div class="col-md-8 col-md-offset-3">
+            <h2>Rapoarte</h2>
         </div>
     </div><br><br><br>
     <div class="row" style="min-height: 400px;">

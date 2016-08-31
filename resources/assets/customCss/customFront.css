@@ -411,3 +411,32 @@ span.text-scope {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+@media (min-width: 768px) {
+    .main-menu-buttons>li>a {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 768px) {
+    div.custom-search-stripe {
+        display: none;
+    }
+
+    .reports-img {
+        padding-left: 0px;
+        width: 100%;
+    }
+
+    .stripe-header {
+        width: 100%;
+    }
+
+    .news-title {
+        margin-left: 0px;
+    }
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: #777;
+}

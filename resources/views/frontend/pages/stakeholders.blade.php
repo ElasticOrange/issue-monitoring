@@ -7,7 +7,7 @@
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-8 col-md-offset-3">
             <h2>Stakeholderi</h2>
-            <br>
+            <br><br>
             <div class="row">
                 <div class="col-md-12">
                     <form method="GET">

@@ -1,6 +1,12 @@
+<?php
+    if (\Auth::check() && \Auth::user()->subscriptionExpired()) {
+        \Auth::logout();
+    }
+?>
+
 <div class="row">
     <div class="col-md-6">
-        <img alt="stripe header" src="/img/stripe_header.png" />
+        <img alt="stripe header" class="stripe-header" src="/img/stripe_header.png" />
     </div>
         <div class="col-md-2 social-links-container" style="margin-top: 6px;">
             <a href="https://www.facebook.com/cmpp.issuemonitoring" style="margin-left: 40px;" target="_blank">
@@ -74,7 +80,7 @@
             <div class="collapse navbar-collapse"
                  id="bs-example-navbar-collapse-1"
                  >
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav main-menu-buttons">
                     <li class="active">
                         <a href="{{ action('HomeController@getIndex') }}">Acasă</a>
                     </li>
@@ -97,7 +103,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ action('HomeController@getIssues') }}">Iniţiative</a>
+                        <a href="{{ action('HomeController@getIssues', ['issue_search' => '', 'type' => '', 'phase' => 'curent']) }}">Iniţiative</a>
                     </li>
                     <li>
                         <a href="{{ action('HomeController@getReports') }}">Rapoarte</a>
@@ -109,11 +115,11 @@
                         <a href="{{ action('HomeController@getContact') }}">Contact</a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <!-- <ul class="nav navbar-nav navbar-right">
                         <div class="searching-input">
                             <input type="text" placeholder="CAUTA" />
                         </div>
-                </ul>
+                </ul> -->
             </div>
             <div class="custom-search-stripe"></div>
 

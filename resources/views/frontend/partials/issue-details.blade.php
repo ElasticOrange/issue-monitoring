@@ -51,7 +51,7 @@
             <p>
                 <b>
                     <br>
-                    Impact asupra altor legi
+                    Impact asupra altor legi:
                 </b>
             </p>
                 {!! $issue->impact !!}
@@ -154,17 +154,7 @@
                                         aria-expanded="false"
                                         style="height: 0px;"
                                     >
-                                        <div class="panel-body">
-                                            <?php
-                                                $regexUrl = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
-                                                if (preg_match($regexUrl, $step->observatii, $url)) {
-                                                    $newStepObservatii = preg_replace($regexUrl, '<a href="' . $url[0] . '">' . $url[0] . '</a>', $step->observatii);
-                                                } else {
-                                                    $newStepObservatii = $step->observatii;
-                                                }
-                                            ?>
-                                            {!! $newStepObservatii !!}
-                                        </div>
+                                            {!! $step->observatii !!}
                                         @if(! $step->documents->isEmpty())
                                             <br>
                                             <table class="table table-bordered table-striped" style="background-color: #fff;">
@@ -266,12 +256,14 @@
     </div>
 
     <div class="tab-pane" id="stakeholders">
-        @if($issue->connectedStakeholders->contains('type', 'organizatie'))
+        <h4 class="row col-md-11 col-md-offset-1">Stakeholderi</h4>
+        <div class="row col-md-11 col-md-offset-2">
+            @if($issue->connectedStakeholders->contains('type', 'organizatie'))
             <p>
-                <b>Organizatii</b>
+                <b>Organizaţii</b>
             </p>
-        @endif
-        @foreach ($issue->connectedStakeholders as $stakeholder)
+            @endif
+            @foreach ($issue->connectedStakeholders as $stakeholder)
             @if($stakeholder->type == 'organizatie')
             <ul>
                 <li>
@@ -281,13 +273,13 @@
                 </li>
             </ul>
             @endif
-        @endforeach
-        @if($issue->connectedStakeholders->contains('type', 'persoana'))
+            @endforeach
+            @if($issue->connectedStakeholders->contains('type', 'persoana'))
             <p>
                 <b>Persoane</b>
             </p>
-        @endif
-        @foreach ($issue->connectedStakeholders as $stakeholder)
+            @endif
+            @foreach ($issue->connectedStakeholders as $stakeholder)
             @if($stakeholder->type == 'persoana')
             <ul>
                 <li>
@@ -297,7 +289,45 @@
                 </li>
             </ul>
             @endif
-        @endforeach
+            @endforeach
+            <br>
+        </div>
+        <!--  -->
+        <h4 class="row col-md-11 col-md-offset-1">Iniţiatori</h4>
+        <div class="row col-md-11 col-md-offset-2">
+            @if($issue->connectedInitiatorsStakeholders->contains('type', 'organizatie'))
+            <p>
+                <b>Organizaţii</b>
+            </p>
+            @endif
+            @foreach ($issue->connectedInitiatorsStakeholders as $initiator)
+            @if($initiator->type == 'organizatie')
+            <ul>
+                <li>
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}">
+                        {{ $initiator->name }}
+                    </a>
+                </li>
+            </ul>
+            @endif
+            @endforeach
+            @if($issue->connectedInitiatorsStakeholders->contains('type', 'persoana'))
+            <p>
+                <b>Persoane</b>
+            </p>
+            @endif
+            @foreach ($issue->connectedInitiatorsStakeholders as $initiator)
+            @if($initiator->type == 'persoana')
+            <ul>
+                <li>
+                    <a href="{{ action('HomeController@getStakeholderInfo', ['id' => $initiator->id, 'name' => Illuminate\Support\Str::slug($initiator->name)]) }}">
+                        {{ $initiator->name }}
+                    </a>
+                </li>
+            </ul>
+            @endif
+            @endforeach
+        </div>
     </div>
 
     <div class="tab-pane" id="notifications">
@@ -316,8 +346,18 @@
                 <input type="hidden" name="user_id" value="{{ \Auth::check() ? \Auth::user()->id : '' }}">
                 <label>Vreau să-mi transmiteți notificări pentru aceasta inițiativă</label>
                 <select name="notify" id="notify">
-                    <option value="dont" selected="">NU</option>
-                    <option value="zilnic">ZILNIC</option>
+                    <option value="dont"
+                        @if(\Auth::check() && \Auth::user()->issues()->where('issue_id', $issue->id)->first())
+                            selected="selected"
+                        @endif
+                            >NU
+                    </option>
+                    <option value="zilnic"
+                        @if(\Auth::check() && ! \Auth::user()->issues()->where('issue_id', $issue->id)->first())
+                            selected="selected"
+                        @endif
+                            >ZILNIC
+                        </option>
                 </select>
                 <input type="submit" class="btn btn-default btn-sm" value="Salvează">
             </form>

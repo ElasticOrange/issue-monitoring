@@ -4,6 +4,11 @@
 
 <div class="container white">
     @include('frontend.layout.header')
+    <div class="row" style="margin-top: -20px;">
+        <div class="col-md-8 col-md-offset-3">
+            <h2>Iniţiative</h2><br><br>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3">
             @include('frontend.partials.domainsTree')

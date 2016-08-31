@@ -106,10 +106,6 @@ class HomeController extends Controller
 
         $dateNow = (new \DateTime)->format('Y-m-d H:i:s');
 
-        $issue->status = $this->hyperlinkUrls(strip_tags($issue->status));
-        $issue->impact = $this->hyperlinkUrls(strip_tags($issue->impact));
-        $issue->description = $this->hyperlinkUrls(strip_tags($issue->description));
-
         return view('frontend.pages.info-issue', [
             'issue' => $issue,
             'domain' => $issueDomains[0]->id,

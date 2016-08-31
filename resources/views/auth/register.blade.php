@@ -85,6 +85,19 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-4 control-label">Domeniu dorit</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="domain">
+                                <option value="">Select</option>
+                                @foreach(\Issue\Domain::where('parent_id', 1)->get() as $domain)
+                                    @if($domain->id != 27)
+                                    <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-4 control-label">Parola</label>
                         <div class="col-sm-8">
                             <input 	type="password"

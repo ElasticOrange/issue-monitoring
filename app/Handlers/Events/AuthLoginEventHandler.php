@@ -40,7 +40,7 @@ class AuthLoginEventHandler
             $this->auth->logout();
 
             if ($user->subscription->type == 'trial') {
-                return redirect()->guest('/auth/login')->withErrors('Perioada de testare de 14 zile a expirat.');
+                return redirect()->guest('/auth/login')->withErrors('Perioada de testare de 14 zile a expirat. Pentru detalii despre abonare contactati echipa Issue Monitoring Telefon: 031.080.2370 Email: office@cmpp.ro');
             }
 
             return redirect()->guest('/auth/login')->withErrors('Abonamentul tau a expirat.');

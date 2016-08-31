@@ -61,6 +61,7 @@ class AuthController extends Controller
             'organization' => 'required|string',
             'function' => 'required|string',
             'telephone' => 'string',
+            'domain'=> 'required',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -132,6 +133,18 @@ class AuthController extends Controller
 
         $user->password = bcrypt($data['password']);
         $user->save();
+
+        $user->domains()->attach(
+            $data['domain'],
+            [
+                'can_see_issues' => 1,
+                'can_see_news' => 1,
+                'can_see_reports' => 1,
+                'alert_for_issues' => 1,
+                'alert_for_news' => 1,
+                'alert_for_reports' => 1,
+                'can_see_stakeholders' => 1
+            ]);
 
         $end_date = $user->created_at;
         $end_date = $end_date->modify('+14 days');

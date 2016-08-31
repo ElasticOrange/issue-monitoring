@@ -51,7 +51,7 @@
                         <b>Telefon:</b> {{ $stakeholder->telephone }}<br><br>
                     @endif
                     @if($stakeholder->address)
-                        <b>Adresa:</b> {{ strip_tags($stakeholder->address) }}<br><br>
+                        <b>Adresa:</b> {!! $stakeholder->address !!}<br><br>
                     @endif
                     @if($stakeholder->other_details)
                         <b>Alte detalii:</b> {{ strip_tags($stakeholder->other_details) }}<br>
@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        {{ strip_tags($stakeholder->profile) }}
+                        {!! $stakeholder->profile !!}
                     </p>
                 </div>
             </div><br>
@@ -75,15 +75,15 @@
                 <div class="col-md-12">
                     @foreach($stakeholder->sections as $section)
                     <div>
-                        <h3>
+                        <h4>
                             @if($section->title)
                                 {{ $section->title }}
                             @endif
-                        </h3>
+                        </h4>
                     </div>
                     <p>
                         @if($section->description)
-                            {{ strip_tags($section->description) }}
+                            {{ $section->description }}
                         @endif
                     </p>
                     @endforeach
