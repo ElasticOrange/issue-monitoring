@@ -40,7 +40,7 @@
                                     @endif
                                     title="{{ $stakeholder->name }}"
                                 >
-                                    {{ $stakeholder->name }}
+                                    {{ $stakeholder->name ? $stakeholder->name : $stakeholder->org_name }}
                                 </a>
                                 <br>
                                 @if($stakeholder->position)

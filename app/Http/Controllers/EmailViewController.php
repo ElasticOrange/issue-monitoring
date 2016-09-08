@@ -22,8 +22,7 @@ class EmailViewController extends Controller
             abort(403);
         }
 
-        $newsList = $issue->connectedNews()->paginate(10);
-
+        $newsList = $issue->connectedNews()->orderBy('date', 'DESC')->paginate(10);
         $stakeholdersList = $issue->connectedStakeholders->chunk(10);
         $initiatorsList = $issue->connectedInitiatorsStakeholders->chunk(10);
 

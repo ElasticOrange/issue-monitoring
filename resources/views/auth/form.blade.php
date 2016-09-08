@@ -88,7 +88,7 @@
                 <div class="col-sm-2">
                     <label>Activ de la</label>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                     <label>Expira la</label>
                 </div>
             </div>
