@@ -27,7 +27,10 @@ $(document).ready(function(){
             },
             {
                 data: "name",
-                title: "Nume"
+                title: "Nume",
+                render: function (data, type, rowData) {
+                    return data ? data : rowData['org_name'];
+                }
             },
             {
                 data: "position",
@@ -44,7 +47,7 @@ $(document).ready(function(){
                 render: function (data, type, rowData, meta) {
                     return actionButtonsTemplate({id: data});
                 },
-				orderable: false
+                orderable: false
             }
         ],
         responsive: true,
@@ -55,101 +58,101 @@ $(document).ready(function(){
         }
     });
 
-	var compiled = _.template($('#section_template').html());
+    var compiled = _.template($('#section_template').html());
 
-	$('.add_section').on('click', function() {
-		var template_populated = compiled({ 'sectionid': _.random(100000, 1000000),
-											'id': _.uniqueId('new-')});
-		$('.sections').append(template_populated);
+    $('.add_section').on('click', function() {
+        var template_populated = compiled({ 'sectionid': _.random(100000, 1000000),
+                                            'id': _.uniqueId('new-')});
+        $('.sections').append(template_populated);
 
         preventEnterToSubmit('[prevent-enter=true]');
-	});
+    });
 
-	$(document).on('click', '.delete_section', function() {
-		var selected_id = $(this).attr("id");
-		var result = confirm("Sigur doriti sa stergeti sectiunea?");
-		if (result) {
-			$('#section' + selected_id).remove();
-		}
-	});
+    $(document).on('click', '.delete_section', function() {
+        var selected_id = $(this).attr("id");
+        var result = confirm("Sigur doriti sa stergeti sectiunea?");
+        if (result) {
+            $('#section' + selected_id).remove();
+        }
+    });
 
-	$("input[data-action=publish-stakeholder]").click(function(){
-		var request = $.ajax({
-			url: $(this).attr('update-url'),
-			data: {
-				published:$(this).prop('checked')
-			},
-			method:'get'
-		});
-		request.done(function(data){
-		});
-	});
+    $("input[data-action=publish-stakeholder]").click(function(){
+        var request = $.ajax({
+            url: $(this).attr('update-url'),
+            data: {
+                published:$(this).prop('checked')
+            },
+            method:'get'
+        });
+        request.done(function(data){
+        });
+    });
 
-	CKEDITOR.replace( 'editor1',{
-		toolbar:
-		[
-			{name: 'basicstyles', items: ['Bold','Italic']},
-			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
-			{name: 'links', items: ['Link','Unlink']},
+    CKEDITOR.replace( 'editor1',{
+        toolbar:
+        [
+            {name: 'basicstyles', items: ['Bold','Italic']},
+            {name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
+            {name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
             {name: 'document', items: ['Source']},
             {name: 'about', items: ['About']}
-		]
-	});
+        ]
+    });
 
-	CKEDITOR.replace( 'editor2',{
-		toolbar:
-		[
-			{name: 'basicstyles', items: ['Bold','Italic']},
-			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
-			{name: 'links', items: ['Link','Unlink']},
+    CKEDITOR.replace( 'editor2',{
+        toolbar:
+        [
+            {name: 'basicstyles', items: ['Bold','Italic']},
+            {name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
+            {name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
             {name: 'document', items: ['Source']},
             {name: 'about', items: ['About']}
-		]
-	});
+        ]
+    });
 
-	CKEDITOR.replace( 'editor3',{
-		toolbar:
-		[
-			{name: 'basicstyles', items: ['Bold','Italic']},
-			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
-			{name: 'links', items: ['Link','Unlink']},
+    CKEDITOR.replace( 'editor3',{
+        toolbar:
+        [
+            {name: 'basicstyles', items: ['Bold','Italic']},
+            {name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
+            {name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
             {name: 'document', items: ['Source']},
             {name: 'about', items: ['About']}
-		]
-	});
+        ]
+    });
 
-	CKEDITOR.replace( 'editor4',{
-		toolbar:
-		[
-			{name: 'basicstyles', items: ['Bold','Italic']},
-			{name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
-			{name: 'links', items: ['Link','Unlink']},
+    CKEDITOR.replace( 'editor4',{
+        toolbar:
+        [
+            {name: 'basicstyles', items: ['Bold','Italic']},
+            {name: 'paragraph', items: ['NumberedList', 'BulletedList','-','Outdent','Indent']},
+            {name: 'links', items: ['Link','Unlink']},
             {name: 'styles', items: ['Styles', 'Format']},
             {name: 'document', items: ['Source']},
             {name: 'about', items: ['About']}
-		]
-	});
+        ]
+    });
 
     var stakeholderAutocomplete = $('#stakeholder-autocomplete');
 
-	var stakeholdersList = new Bloodhound({
-		queryTokenizer: Bloodhound.tokenizers.whitespace,
-		datumTokenizer: Bloodhound.tokenizers.whitespace,
-		remote: {
-			url: stakeholderAutocomplete.attr('source-url'),
-			wildcard: '{name}',
-			transform: function (response) {
-				return _.filter(response, function(item){
-					return $('[stakeholder-id=' + item.id + ']').length == 0;
-				});
-			}
-		}
-	});
+    var stakeholdersList = new Bloodhound({
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        datumTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: stakeholderAutocomplete.attr('source-url'),
+            wildcard: '{name}',
+            transform: function (response) {
+                return _.filter(response, function(item){
+                    return $('[stakeholder-id=' + item.id + ']').length == 0;
+                });
+            }
+        }
+    });
 
-	// Autocomplete for stakeholders
+    // Autocomplete for stakeholders
     stakeholderAutocomplete.typeahead(
         null,
         {
@@ -161,67 +164,67 @@ $(document).ready(function(){
     typeaheadAutocomplete(stakeholderAutocomplete);
 
     stakeholderAutocomplete.bind(
-		'typeahead:select',
-		function(event, suggestion) {
-			$(this).typeahead('val', '');
+        'typeahead:select',
+        function(event, suggestion) {
+            $(this).typeahead('val', '');
 
-			var template = _.template($('#connected-stakeholder-template').html());
-			var compiled_template = template(suggestion);
+            var template = _.template($('#connected-stakeholder-template').html());
+            var compiled_template = template(suggestion);
 
-			$('#connected-stakeholders-container').append(compiled_template);
-		}
-	);
+            $('#connected-stakeholders-container').append(compiled_template);
+        }
+    );
 
-	$('#connected-stakeholders-container').on('click', '[connected-stakeholder-delete]', function() {
-		var connected_stakeholder_id = $(this).attr('connected-stakeholder-delete');
-		console.log(connected_stakeholder_id);
-		$('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
-	});
+    $('#connected-stakeholders-container').on('click', '[connected-stakeholder-delete]', function() {
+        var connected_stakeholder_id = $(this).attr('connected-stakeholder-delete');
+        console.log(connected_stakeholder_id);
+        $('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
+    });
 
-	$('[stakeholder-type=true]').change(function() {
-		if($(this).val() == 'organizatie'){
-			$('[stakeholder-cv=true]').hide();
-			$('[stakeholder-position=true]').hide();
-			$('[person-name=true]').hide();
-			$('[organization-name=true]').show();
-		}
-		else{
-			$('[organization-name=true]').hide();
-			$('[stakeholder-cv=true]').show();
-			$('[stakeholder-position=true]').show();
-			$('[person-name=true]').show();
-		}
-	});
+    $('[stakeholder-type=true]').change(function() {
+        if($(this).val() == 'organizatie'){
+            $('[stakeholder-cv=true]').hide();
+            $('[stakeholder-position=true]').hide();
+            $('[person-name=true]').hide();
+            $('[organization-name=true]').show();
+        }
+        else{
+            $('[organization-name=true]').hide();
+            $('[stakeholder-cv=true]').show();
+            $('[stakeholder-position=true]').show();
+            $('[person-name=true]').show();
+        }
+    });
 
-	if($('[stakeholder-type=true]').val() == 'organizatie'){
-		$('[stakeholder-cv=true]').hide();
-		$('[stakeholder-position=true]').hide();
-		$('[person-name=true]').hide();
-	} else if($('[stakeholder-type=true]').val() == 'persoana'){
-		$('[organization-name=true]').hide();
-	}
+    if($('[stakeholder-type=true]').val() == 'organizatie'){
+        $('[stakeholder-cv=true]').hide();
+        $('[stakeholder-position=true]').hide();
+        $('[person-name=true]').hide();
+    } else if($('[stakeholder-type=true]').val() == 'persoana'){
+        $('[organization-name=true]').hide();
+    }
 
-	$(document).on('click', '[delete-cv=true]', function(ev) {
-		ev.preventDefault();
-		var request = $.ajax({
-			url: $(this).attr('href'),
-			method: 'GET'
-		});
-		request.done(function() {
-			$('[file-cv=true]').text('');
-			$('[delete-cv=true]').hide();
-		});
-	});
+    $(document).on('click', '[delete-cv=true]', function(ev) {
+        ev.preventDefault();
+        var request = $.ajax({
+            url: $(this).attr('href'),
+            method: 'GET'
+        });
+        request.done(function() {
+            $('[file-cv=true]').text('');
+            $('[delete-cv=true]').hide();
+        });
+    });
 
-	$(document).on('click', '[delete-poza=true]', function(ev) {
-		ev.preventDefault();
-		var request = $.ajax({
-			url: $(this).attr('href'),
-			method: 'GET'
-		});
-		request.done(function() {
-			$('[file-poza=true]').text('');
-			$('[delete-poza=true]').hide();
-		});
-	});
+    $(document).on('click', '[delete-poza=true]', function(ev) {
+        ev.preventDefault();
+        var request = $.ajax({
+            url: $(this).attr('href'),
+            method: 'GET'
+        });
+        request.done(function() {
+            $('[file-poza=true]').text('');
+            $('[delete-poza=true]').hide();
+        });
+    });
 });

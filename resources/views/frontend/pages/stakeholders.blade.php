@@ -34,7 +34,7 @@
                             <li>
                                 <a
                                     @if(\Auth::user()->can_see_stakeholders == true)
-                                        href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}"
+                                        href="{{ action('HomeController@getStakeholderInfo', ['id' => $stakeholder->id, 'name' => Illuminate\Support\Str::slug($stakeholder->name ? $stakeholder->name : $stakeholder->org_name)]) }}"
                                     @else
                                         href="{{ action('HomeController@getContact') }}"
                                     @endif
