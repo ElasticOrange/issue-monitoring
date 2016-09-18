@@ -34,36 +34,39 @@
                             </thead>
                             <tbody>
                             @foreach ($alerts as $alert)
-                                @if($alert->sent == 0)
-                                <tr class="gradeA odd" role="row">
-                                    <td>{{ $alert->id }}</td>
-                                    <td>{{ $alert->alertable_type }}</td>
-                                    @if($alert->alertable_type == 'Issue\News')
-                                        <td>{{ $alert->alertable->title }}</td>
-                                    @elseif($alert->alertable_type == 'Issue\Issue')
-                                        <td>{{ $alert->alertable->name }}</td>
-                                    @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                        <td>{{ $alert->alertable->flow_name }}</td>
-                                    @elseif($alert->alertable_type == 'Issue\Report')
-                                        <td>{{ $alert->alertable->title }}</td>
-                                    @endif
-                                    <td>{{ $alert->created_at }}</td>
-                                    <td class="text-center">
-                                        <div class="row">
-                                        @if($alert->alertable_type == 'Issue\News')
-                                            <a href="{{ action('NewsController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @elseif($alert->alertable_type == 'Issue\Issue')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable->flowstepsInLocation->issue->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @elseif($alert->alertable_type == 'Issue\Report')
-                                            <a href="{{ action('ReportController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @endif
+                                @if(is_object($alert->alertable) && $alert->sent == 0)
+                                    @if($alert->alertable_type == 'Issue\FlowStep' && !$alert->alertable->flowstepsInLocation->issue)
+                                    @else
+                                        <tr class="gradeA odd" role="row">
+                                            <td>{{ $alert->id }}</td>
+                                            <td>{{ $alert->alertable_type }}</td>
+                                            @if($alert->alertable_type == 'Issue\News')
+                                                <td>{{ $alert->alertable->title }}</td>
+                                            @elseif($alert->alertable_type == 'Issue\Issue')
+                                                <td>{{ $alert->alertable->name }}</td>
+                                            @elseif($alert->alertable_type == 'Issue\FlowStep')
+                                                <td>{{ $alert->alertable->flow_name }}</td>
+                                            @elseif($alert->alertable_type == 'Issue\Report')
+                                                <td>{{ $alert->alertable->title }}</td>
+                                            @endif
+                                            <td>{{ $alert->created_at }}</td>
+                                            <td class="text-center">
+                                                <div class="row">
+                                                @if($alert->alertable_type == 'Issue\News')
+                                                    <a href="{{ action('NewsController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @elseif($alert->alertable_type == 'Issue\Issue')
+                                                    <a href="{{ action('IssueController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @elseif($alert->alertable_type == 'Issue\FlowStep')
+                                                    <a href="{{ action('IssueController@edit', [$alert->alertable->flowstepsInLocation->issue->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @elseif($alert->alertable_type == 'Issue\Report')
+                                                    <a href="{{ action('ReportController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @endif
 
-                                        <a href="{{ action('AlertController@preview', [$alert->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                                <a href="{{ action('AlertController@preview', [$alert->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                             </tbody>
@@ -95,36 +98,39 @@
                             </thead>
                             <tbody>
                             @foreach ($alerts as $alert)
-                                @if($alert->sent == 1)
-                                <tr class="gradeA odd" role="row">
-                                    <td>{{ $alert->id }}</td>
-                                    <td>{{ $alert->alertable_type }}</td>
-                                    @if($alert->alertable_type == 'Issue\News')
-                                        <td>{{ $alert->alertable->title }}</td>
-                                    @elseif($alert->alertable_type == 'Issue\Issue')
-                                        <td>{{ $alert->alertable->name }}</td>
-                                    @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                        <td>{{ $alert->alertable->flow_name }}</td>
-                                    @elseif($alert->alertable_type == 'Issue\Report')
-                                        <td>{{ $alert->alertable->title }}</td>
-                                    @endif
-                                    <td>{{ $alert->created_at }}</td>
-                                    <td class="text-center">
-                                        <div class="row">
-                                        @if($alert->alertable_type == 'Issue\News')
-                                            <a href="{{ action('NewsController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @elseif($alert->alertable_type == 'Issue\Issue')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                            <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @elseif($alert->alertable_type == 'Issue\Report')
-                                            <a href="{{ action('ReportController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        @endif
-                                        </div>
+                                @if(is_object($alert->alertable) && $alert->sent == 1)
+                                    @if($alert->alertable_type == 'Issue\FlowStep' && !$alert->alertable->flowstepsInLocation->issue)
+                                    @else
+                                        <tr class="gradeA odd" role="row">
+                                            <td>{{ $alert->id }}</td>
+                                            <td>{{ $alert->alertable_type }}</td>
+                                            @if($alert->alertable_type == 'Issue\News')
+                                                <td>{{ $alert->alertable->title }}</td>
+                                            @elseif($alert->alertable_type == 'Issue\Issue')
+                                                <td>{{ $alert->alertable->name }}</td>
+                                            @elseif($alert->alertable_type == 'Issue\FlowStep')
+                                                <td>{{ $alert->alertable->flow_name }}</td>
+                                            @elseif($alert->alertable_type == 'Issue\Report')
+                                                <td>{{ $alert->alertable->title }}</td>
+                                            @endif
+                                            <td>{{ $alert->created_at }}</td>
+                                            <td class="text-center">
+                                                <div class="row">
+                                                @if($alert->alertable_type == 'Issue\News')
+                                                    <a href="{{ action('NewsController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @elseif($alert->alertable_type == 'Issue\Issue')
+                                                    <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @elseif($alert->alertable_type == 'Issue\FlowStep')
+                                                    <a href="{{ action('IssueController@edit', [$alert->alertable->flowstepsInLocation->issue->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @elseif($alert->alertable_type == 'Issue\Report')
+                                                    <a href="{{ action('ReportController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                @endif
+                                                </div>
 
-                                        <a href="{{ action('AlertController@preview', [$alert->id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                    </td>
-                                </tr>
+                                                <a href="{{ action('AlertController@preview', [$alert->id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                             </tbody>

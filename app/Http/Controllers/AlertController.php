@@ -18,7 +18,7 @@ class AlertController extends Controller
             abort(403);
         }
 
-        $alerts = Alert::all();
+        $alerts = Alert::limit(100)->get();
 
         return view('admin.backend.alerts.list', ['alerts' => $alerts]);
     }
