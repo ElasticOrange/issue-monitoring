@@ -18,9 +18,14 @@ class AlertController extends Controller
             abort(403);
         }
 
-        $alerts = Alert::limit(100)->get();
+        $sentAlerts = Alert::whereSent('1')->orderBy('created_at', 'DESC')->paginate(10);
+        $unsentAlerts = Alert::whereSent('0')->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('admin.backend.alerts.list', ['alerts' => $alerts]);
+        return view('admin.backend.alerts.list',
+            [
+                'sentAlerts' => $sentAlerts,
+                'unsentAlerts' => $unsentAlerts
+            ]);
     }
 
     public function preview($id)

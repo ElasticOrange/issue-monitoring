@@ -33,8 +33,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($alerts as $alert)
-                                @if(is_object($alert->alertable) && $alert->sent == 0)
+                            @foreach ($unsentAlerts as $alert)
+                                @if(is_object($alert->alertable))
                                     @if($alert->alertable_type == 'Issue\FlowStep' && !$alert->alertable->flowstepsInLocation->issue)
                                     @else
                                         <tr class="gradeA odd" role="row">
@@ -62,7 +62,7 @@
                                                     <a href="{{ action('ReportController@edit', [$alert->alertable_id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                                 @endif
 
-                                                <a href="{{ action('AlertController@preview', [$alert->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                                <!-- <a href="{{ action('AlertController@preview', [$alert->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> -->
                                                 </div>
                                             </td>
                                         </tr>
@@ -71,6 +71,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $unsentAlerts->fragment('netrimise')->render() !!}
                     </div>
                 </div>
             </div>
@@ -97,8 +98,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($alerts as $alert)
-                                @if(is_object($alert->alertable) && $alert->sent == 1)
+                            @foreach ($sentAlerts as $alert)
+                                @if(is_object($alert->alertable))
                                     @if($alert->alertable_type == 'Issue\FlowStep' && !$alert->alertable->flowstepsInLocation->issue)
                                     @else
                                         <tr class="gradeA odd" role="row">
@@ -121,13 +122,13 @@
                                                 @elseif($alert->alertable_type == 'Issue\Issue')
                                                     <a href="{{ action('IssueController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                                 @elseif($alert->alertable_type == 'Issue\FlowStep')
-                                                    <a href="{{ action('IssueController@edit', [$alert->alertable->flowstepsInLocation->issue->id]) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                    <a href="{{ action('IssueController@edit', [$alert->alertable->flowstepsInLocation->issue->id]) }}#flux" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                                 @elseif($alert->alertable_type == 'Issue\Report')
                                                     <a href="{{ action('ReportController@edit', [$alert->alertable_id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
                                                 @endif
                                                 </div>
 
-                                                <a href="{{ action('AlertController@preview', [$alert->id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                                <!-- <a href="{{ action('AlertController@preview', [$alert->id])}}" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> -->
                                             </td>
                                         </tr>
                                     @endif
@@ -135,6 +136,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {!! $sentAlerts->fragment('trimise')->render() !!}
                     </div>
                 </div>
             </div>
@@ -143,4 +145,12 @@
     </div>
 </div>
 
+@endsection
+
+@section('js')
+    <script>
+        if(window.location.hash) {
+            $('.nav-tabs a[href="' + window.location.hash + '"]').tab('show');
+        }
+    </script>
 @endsection
