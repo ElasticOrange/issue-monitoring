@@ -6,7 +6,11 @@
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-8 col-md-offset-3">
-            <h2>Stakeholderi</h2>
+            <h2>
+                <a href="{{ url('/stakeholders') }}">
+                    {{ trans('home.stakeholders') }}
+                </a>
+            </h2>
             <br><br>
             <div class="row">
                 <div class="col-md-12">
@@ -40,11 +44,11 @@
                                     @endif
                                     title="{{ $stakeholder->name }}"
                                 >
-                                    {{ $stakeholder->name ? $stakeholder->name : $stakeholder->org_name }}
+                                    {{ $stakeholder->name ? $stakeholder->name : $stakeholder->translate(App::getLocale())->org_name }}
                                 </a>
                                 <br>
                                 @if($stakeholder->position)
-                                    Pozitie si apartenenta: {{ strip_tags($stakeholder->position) }}
+                                    Pozitie si apartenenta: {{ strip_tags($stakeholder->translate(App::getLocale())->position) }}
                                 @endif
                             </li><br>
                         @endforeach

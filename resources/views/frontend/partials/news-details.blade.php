@@ -1,5 +1,5 @@
 <h3>
-    {{ $news->title }}
+    {{ $news->translate(App::getLocale())->title }}
 </h3>
 <br>
 @if($news->date)
@@ -9,7 +9,7 @@
 @endif
 @if($news->description)
     <p>
-        <b>Extras :</b> {!! strip_tags($news->description) !!}
+        <b>Extras :</b> {!! $news->translate(App::getLocale())->description ? strip_tags($news->translate(App::getLocale())->description) : 'Work in progress' !!}
     </p>
 @endif
 @if($news->fileDocument)

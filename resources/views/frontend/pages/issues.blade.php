@@ -6,7 +6,11 @@
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-8 col-md-offset-3">
-            <h2>Iniţiative</h2><br><br>
+            <h2>
+                <a href="{{ url('/issues') }}?issue_search=&type=&phase=curent">
+                    {{ trans('home.initiatives') }}
+                </a>
+            </h2><br><br>
         </div>
     </div>
     <div class="row">
@@ -66,7 +70,7 @@
                                 <option value="viitor" @if($phase == "viitor") selected="selected" @endif>Viitor</option>
                                 <option value="arhivatRespinsSauAbrogat" @if($phase == "arhivatRespinsSauAbrogat") selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
                                 <option value="arhivatInactiv" @if($phase == "arhivatInactiv") selected="selected" @endif>Arhivată – Inactivă</option>
-                                <option value="publicatMO" @if($phase == "publicatMO") selected="selected" @endif>Publicat in Monitorul Oficial</option>
+                                <option value="publicatMO" @if($phase == "publicatMO") selected="selected" @endif>În vigoare</option>
                             </select>
                         </div>
                     </div>

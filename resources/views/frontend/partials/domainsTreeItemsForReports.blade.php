@@ -4,7 +4,7 @@
                 <a href="{{ action('HomeController@getReports', ['domain' => $domain->id]) }}"
                     id-domain="{{ $domain->id }}"
                 >
-                    {{ $domain->name }}
+                    {{ $domain->translate(App::getLocale())->name }}
                 </a>
             </li>
         @endif

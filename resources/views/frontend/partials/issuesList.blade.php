@@ -11,7 +11,7 @@
                 <div class="glyph-background col-xs-1" style="margin-top: -4px;">
                     <i class="indicator glyphicon glyphicon-plus"></i>
                 </div>
-                {{ $issue->name}}
+                {{ $issue->translate(App::getLocale())->name}}
             </a>
         </h5>
     </div>
@@ -19,7 +19,7 @@
         <div class="panel-body">
             <span><b>Data start:</b> {{ $issue->created_at->format('d-m-Y') }}</span>
             <br/><br/>
-                {!! strip_tags($issue->description) !!}
+                {!! strip_tags($issue->translate(App::getLocale())->description) !!}
             <p>
                 <br>
                 @if(\Auth::user())

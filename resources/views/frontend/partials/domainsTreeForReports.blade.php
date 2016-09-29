@@ -5,7 +5,7 @@
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#domains" href="#collapse-domain-{{ $domain->id }}" aria-expanded="false" aria-controls="collapse-domain-{{ $domain->id }}">
                         <i class="indicator glyphicon glyphicon-triangle-right"></i>
-                        {{ $domain->name }}
+                        {{ $domain->translate(App::getLocale())->name }}
                     </a>
                 </h4>
             </div>

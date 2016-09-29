@@ -5,7 +5,11 @@
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-8 col-md-offset-3">
-            <h2>Rapoarte</h2>
+            <h2>
+                <a href="{{ url('/reports') }}">
+                    {{ trans('home.reports') }}
+                </a>
+            </h2>
         </div>
     </div><br><br><br>
     <div class="row" style="min-height: 400px;">

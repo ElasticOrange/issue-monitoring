@@ -6,7 +6,7 @@
     @include('frontend.layout.header')
     <div class="row" style="margin-top: -20px;">
         <div class="col-md-10 col-md-offset-1">
-            <h1>Contact</h1>
+            <h1>{{ trans('contact.contact') }}</h1>
             <hr />
             <div class="col-md-8 col-sm-8">
 
@@ -51,7 +51,7 @@
                 <address>
                     <strong>Alexandra Preda – Project Manager</strong><br>0727144025<br>
                     <a href="mailto:alexandra.preda@cmpp.ro">alexandra.preda@cmpp.ro</a>
-                </address> 
+                </address>
             </div>
 
         </div>

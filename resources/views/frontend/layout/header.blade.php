@@ -22,12 +22,12 @@
     <div class="col-md-4">
         <ul class="nav navbar-nav">
             <li>
-                <a href="#en">
+                <a href="{{ action('HomeController@setLanguage', ['en']) }}">
                     <img alt="english flag" src="/img/flag_en.png" />
                 </a>
             </li>
             <li>
-                <a href="#ro">
+                <a href="{{ action('HomeController@setLanguage', ['ro']) }}">
                     <img alt="romanian flag" src="/img/flag_ro.png" />
                 </a>
             </li>
@@ -82,34 +82,34 @@
                  >
                 <ul class="nav navbar-nav main-menu-buttons">
                     <li class="active">
-                        <a href="{{ action('HomeController@getIndex') }}">Acasă</a>
+                        <a href="{{ action('HomeController@getIndex') }}">{{ trans('home.home') }}</a>
                     </li>
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Issue Monitoring<strong class="caret"></strong>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ action('HomeController@getAboutUs') }}">Despre noi</a>
+                                <a href="{{ action('HomeController@getAboutUs') }}">{{ trans('about_us.about_us') }}</a>
                             </li>
                             <li>
-                                <a href="{{ action('HomeController@getServices') }}">Servicii</a>
+                                <a href="{{ action('HomeController@getServices') }}">{{ trans('services.services') }}</a>
                             </li>
                             <li>
-                                <a href="{{ action('HomeController@getTeam') }}">Echipa</a>
+                                <a href="{{ action('HomeController@getTeam') }}">{{ trans('team.team') }}</a>
                             </li>
                             <li>
-                                <a href="{{ action('HomeController@howWorks') }}">Cum funcţionează platforma</a>
+                                <a href="{{ action('HomeController@howWorks') }}">{{ trans('how_works.header') }}</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ action('HomeController@getIssues', ['issue_search' => '', 'type' => '', 'phase' => 'curent']) }}">Iniţiative</a>
+                        <a href="{{ action('HomeController@getIssues', ['issue_search' => '', 'type' => '', 'phase' => 'curent']) }}">{{ trans('home.initiatives') }}</a>
                     </li>
                     <li>
-                        <a href="{{ action('HomeController@getReports') }}">Rapoarte</a>
+                        <a href="{{ action('HomeController@getReports') }}">{{ trans('home.reports') }}</a>
                     </li>
                     <li>
-                        <a href="{{ action('HomeController@getStakeholders') }}">Stakeholderi</a>
+                        <a href="{{ action('HomeController@getStakeholders') }}">{{ trans('home.stakeholders') }}</a>
                     </li>
                     <li>
                         <a href="{{ action('HomeController@getContact') }}">Contact</a>

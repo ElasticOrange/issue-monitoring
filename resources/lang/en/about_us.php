@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'about_us' => 'About us',
+    'cmpp' => 'CPPM - organization profile',
+    'p1' => 'The Center for Monitoring Public Policy (CMPP) is a non-governmental organization founded in 2015 by a group of specialists in public policy and civic activists, which aims at improving the mechanisms for the adoption of public policies through analysis and debate, while supporting stakeholders in making well-informed decisions.',
+    'p2' => 'CPPM aims to assist companies, civil society, trade unions, chambers of commerce and corporate affairs professionals by regularly reporting on the initiatives aimed to amend the legislative framework. CPPM follows the development process of adopting public policies by supporting all stakeholders, throughout the debate on legislative initiatives.',
+    'p3' => 'CPPM addresses the needs of the business sector and of non-governmental organizations by writing specialized analyses and reports on public policy, and by organizing public debates in order to involve stakeholders and citizens in the decision-making process.',
+    't2' => 'Issue Monitoring - one step ahead of changes',
+    'p4' => 'is a specialized service for monitoring public decision developed by CMPP that helps anticipate essential changes for any business organization or for the non-governmental sector. Based on a secure online platform optimized for mobile devices, Issue Monitoring reports promptly on potential policy changes, while allowing the interested parties to follow their reflection in the media. Furthermore, the platform incorporates the updated profile of decision makers from public institutions, from the Government, the Parliament, supervisory and regulatory authorities, etc.',
+    'p5' => 'is an advanced tool for monitoring public policy, which incorporates the benefits of modern technology and the analytical expertise of a team of professionals, while being available to public affairs specialists. Issue Monitoring creates the premises for successful public affairs and advocacy interventions and campaigns, ultimately aiming at influencing political decision and formulating public policy.',
+    'p61' => 'In the long run,',
+    'p62' => 'aims at strengthening the communication and the debate practices among institutional decision makers and stakeholders, both in the business sector and in the civil society etc.',
+    't3' => 'Issue Monitoring - the benefits of this service',
+    'p7' => 'introduces new efficiency standards in terms of monitoring, analyzing and reporting on legislative changes promoted by public authorities with decision-making capacities. Thus, Issue Monitoring offers complex and relevant information, associated and structured in a clear way that is easy to use, while providing an alerting system capable of identifying legislative proposals of interest to each stakeholder’s agenda.',
+    'p8' => 'reduces the time required to track the public decision-making process and provides essential information for building the most appropriate response reactions, whether it is an advocacy or lobby activity.',
+    't4' => 'Issue Monitoring - Advantages:',
+    'li1' => 'system of aggregation of all relevant information on the subject pursued by all the involved public institutions;',
+    'li2' => 'preliminary processing and analysis of the collected information and its presentation in an effective way;',
+    'li3' => 'regular analytical reports on the monitored subjects that highlight the evolution of public policies and provide users an overview, even when the decision-making process is long and highly complex;',
+    'li4' => 'updated profile of the involved decision makers, including constant monitoring of their statements and decisions;',
+    'li5' => 'permanent connection with local and national media on the pursued subject;',
+    'li6' => 'qualified personnel in public decision analysis and customized report preparation.',
+    'p9' => 'beneficiaries have access to updated information from the time any possible change in public policy is foreseen, up until the initiative is adopted or rejected. Information is extremely useful to predict the course of the decision-making process and, ultimately, the way changes will influence the organization.',
+];

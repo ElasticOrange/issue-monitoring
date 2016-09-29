@@ -36,6 +36,18 @@ class HomeController extends Controller
         return view('frontend.pages.homepage', compact(['legalNews', 'reports']));
     }
 
+    public function setLanguage($lang)
+    {
+        if (in_array($lang, \Config::get('app.all_locales'))) {
+            \Session::set('applocale', $lang);
+            if (Auth::check()) {
+                Auth::user()->update(['language' => $lang]);
+            }
+        }
+
+        return redirect()->back();
+    }
+
     /**
     * Display a listing of the resource.
     *

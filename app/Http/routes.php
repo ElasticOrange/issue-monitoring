@@ -110,7 +110,6 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 
-
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
@@ -139,6 +138,7 @@ Route::get('services', 'HomeController@getServices');
 Route::get('how-it-works', 'HomeController@howWorks');
 Route::get('team', 'HomeController@getTeam');
 Route::get('', 'HomeController@getIndex');
+Route::get('set-language/{language}', 'HomeController@setLanguage');
 
 Route::get('email/issue/{id}-{name}', 'EmailViewController@getExternalIssueInfo');
 Route::get('email/news/{id}-{name}', 'EmailViewController@getExternalNewsInfo');

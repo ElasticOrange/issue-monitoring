@@ -701,7 +701,7 @@
                     <option value="curent" @if($issue->phase === 'curent') selected="selected" @endif>Inițiativă curentă</option>
                     <option value="arhivatRespinsSauAbrogat" @if($issue->phase === 'arhivatRespinsSauAbrogat') selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
                     <option value="arhivatInactiv" @if($issue->phase === 'arhivatInactiv') selected="selected" @endif>Arhivată – Inactivă</option>
-                    <option value="publicatMO" @if($issue->phase === 'publicatMO') selected="selected" @endif>Publicat in Monitorul Oficial</option>
+                    <option value="publicatMO" @if($issue->phase === 'publicatMO') selected="selected" @endif>În vigoare</option>
                 </select>
             </div>
         </div>

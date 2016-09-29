@@ -195,7 +195,7 @@ class Alert extends Model
             }
 
             foreach ($newsAlert->alertable->connectedIssues as $issue) {
-                if (!$issue->connectedDomains->intersect($user->domains)->isEmpty()) {
+                if (! $issue->connectedDomains->intersect($user->domains)->isEmpty()) {
                     if (! array_key_exists($issue->id, $issues)) {
                         $issues[$issue->id] = [];
                     }
@@ -213,14 +213,19 @@ class Alert extends Model
             $alert_type = 'stire noua';
         }
 
+        $issueName = '';
+        if ($alertsToSendByIssue[0]->connectedIssues) {
+            $issueName = ' - ' . $alertsToSendByIssue[0]->connectedIssues[$alertsToSendByIssue[0]->connectedIssues->count() - 1]->name;
+        }
+
         Mail::send('emails.'.$alertType,
             [
                 'user' => $user,
                 'alertsToSendByIssue' => $alertsToSendByIssue,
                 'alert_type' => $alert_type
             ],
-            function ($m) use ($user, $alertType) {
-                $m->to($user->email)->subject('Stiri recent adaugate');
+            function ($m) use ($user, $alertType, $issueName) {
+                $m->to($user->email)->subject('Stiri recent adaugate' . $issueName);
             }
         );
 
