@@ -41,9 +41,9 @@
                             <a href="{{ action('AdminDashboardController@getIndex') }}">Admin</a>
                         </li>
                     @endif
-                    <li>
-                    <a href="#">Profil</a>
-                        </li>
+                    <!-- <li>
+                        <a href="#">Profil</a>
+                    </li> -->
                     <li>
                     <a href="{{ action('Auth\AuthController@getLogout') }}">Logout</a>
                         </li>

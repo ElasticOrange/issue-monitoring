@@ -55,6 +55,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-md-2 control-label">Limba</label>
+            <div class="col-md-8">
+                <select class="form-control" name="language">
+                    <option value="ro" @if($user->language === 'ro') selected="selected" @endif>Romana</option>
+                    <option value="en" @if($user->language === 'en') selected="selected" @endif>Engleza</option>
+                </select>
+            </div>
+        </div>
+
         <br/><hr/>
         <div class="checkbox col-md-8 col-md-offset-2">
             <label>

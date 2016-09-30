@@ -199,7 +199,7 @@ class UserController extends Controller
             $this->validate(
                 $request,
                 [
-                    'subscription.start_date' => 'date|after:yesterday',
+                    'subscription.start_date' => 'date',
                     'subscription.end_date' => 'date|after:subscription.start_date'
                 ]
             );
