@@ -45,9 +45,7 @@ class DocumentController extends Controller
         abort(403);
         }
 
-        $document = new Document(['init_at' => date('Y-m-d')]);
-
-        return view('admin.backend.documents.create', ['document' => $document]);
+        return view('admin.backend.documents.create');
     }
 
     /**
