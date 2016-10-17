@@ -144,8 +144,14 @@ class HomeController extends Controller
     {
         $stakeholder = Stakeholder::findOrFail($id);
 
-        if ($name != Str::slug($stakeholder->name)) {
-            abort(403);
+        if ($stakeholder->name) {
+            if ($name != Str::slug($stakeholder->name)) {
+                abort(403);
+            }
+        } else {
+            if ($name != Str::slug($stakeholder->org_name)) {
+                abort(403);
+            }
         }
 
         if (\Auth::user()->can_see_stakeholders == false) {

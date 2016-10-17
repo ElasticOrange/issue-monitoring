@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Issue\DomainTranslation;
 use Issue\DocumentTranslation;
 use Issue\LocationTranslation;
+use Issue\StakeholderTranslation;
 use Issue\Http\Requests\IssueRequest;
 use Issue\Http\Controllers\Controller;
 
@@ -179,7 +180,7 @@ class IssueController extends Controller
 
   public function queryDomain(Request $request)
   {
-    $queryDomainName = $request->input('name');
+    $queryDomainName = $request->name;
 
     $domainIds = DomainTranslation::where('name', 'like', '%'.$queryDomainName.'%')
                     ->where('locale', \App::getLocale())
@@ -203,25 +204,49 @@ class IssueController extends Controller
 
   public function queryStakeholder(Request $request)
   {
-    $queryStakeholderName = $request->input('name');
+    $queryStakeholderName = $request->name;
 
-    $stakeholders = Stakeholder::where('name', 'like', '%'.$queryStakeholderName.'%')->get();
+    $stakeholderIds = StakeholderTranslation::where('org_name', 'like', '%'.$queryStakeholderName.'%')
+                                ->lists('stakeholder_id');
+    $stakeholders = Stakeholder::whereIn('id', $stakeholderIds)
+                                ->orWhere('name', 'like', '%'.$queryStakeholderName.'%')
+                                ->with(['translations'])
+                                ->get();
+    $result = [];
+    foreach ($stakeholders as $stakeholder) {
+        $result[] = [
+            'id' => $stakeholder->id,
+            'name' => $stakeholder->org_name ? $stakeholder->org_name : $stakeholder->name
+        ];
+    }
 
-    return $stakeholders;
+    return $result;
   }
 
   public function queryInitiator(Request $request)
   {
-    $queryInitiatorName = $request->input('name');
+    $queryInitiatorName = $request->name;
 
-    $initiators = Stakeholder::where('name', 'like', '%'.$queryInitiatorName.'%')->get();
+    $initiatorIds = StakeholderTranslation::where('org_name', 'like', '%'.$queryInitiatorName.'%')
+                                ->lists('stakeholder_id');
+    $initiators = Stakeholder::whereIn('id', $initiatorIds)
+                                ->orWhere('name', 'like', '%'.$queryInitiatorName.'%')
+                                ->with(['translations'])
+                                ->get();
+    $result = [];
+    foreach ($initiators as $initiator) {
+        $result[] = [
+            'id' => $initiator->id,
+            'name' => $initiator->name ? $initiator->name : $initiator->org_name
+        ];
+    }
 
-    return $initiators;
+    return $result;
   }
 
   public function queryNews(Request $request)
   {
-    $queryNewsName = $request->input('name');
+    $queryNewsName = $request->name;
 
     $newsIds = NewsTranslation::where('title', 'like', '%'.$queryNewsName.'%')
                     ->where('locale', \App::getLocale())
