@@ -2,6 +2,66 @@ var $successBox, $errorBox, $warningBox, successBoxTimeout, errorBoxTimeout;
 var LOADER_DELAY = 200;
 var showTheLoader;
 
+function initAutocomplete(
+        selectAutocomplete,
+        filterDuplicate,
+        templateId,
+        containerId,
+        deleteSelector,
+        deleteAttr,
+        removeSelector
+    ) {
+    var items = 'items';
+    var itemAutocomplete = selectAutocomplete;
+    var itemsList = new Bloodhound({
+        datumTokenizer: function(items) {
+            return Bloodhound.tokenizers.whitespace(items);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: itemAutocomplete.attr('source-url'),
+            wildcard: '{name}',
+            filter: function(response) {
+                return _.filter(response, function (item) {
+                    return $(filterDuplicate + item.id + ']').length === 0;
+                });
+            }
+        }
+    });
+
+    itemsList.initialize();
+
+    itemAutocomplete.typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    }, {
+        name: 'item',
+        displayKey: function(items) {
+            return items.name;
+        },
+        limit: 10,
+        source: itemsList.ttAdapter()
+    });
+    itemAutocomplete.bind(
+        'typeahead:select',
+        function (event, suggestion) {
+            $(this).typeahead('val', '');
+
+            var template = _.template($(templateId).html());
+            var compiledTemplate = template(suggestion);
+
+            $(containerId).append(compiledTemplate);
+        }
+    );
+
+    $(containerId).on('click', deleteSelector, function () {
+        var connectedStakeholderId = $(this).attr(deleteAttr);
+        $(removeSelector + connectedStakeholderId + ']').remove();
+    });
+
+}
+
 function typeaheadAutocomplete(selector) {
     selector.bind('typeahead:render', function() {
         $(this).parent().find('.tt-selectable:first')

@@ -215,7 +215,7 @@
                                 <a class="badge" connected-stakeholder-delete="{{ $stakeholder_connected->id }}">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
                                 </a>
-                                <h4 class="list-group-item-heading">{{ $stakeholder_connected->name }}</h4>
+                                <h4 class="list-group-item-heading">{{ $stakeholder_connected->name ? $stakeholder_connected->name : $stakeholder_connected->org_name }}</h4>
                                 <p class="list-group-item-text"></p>
                                 <input type="hidden" name="stakeholders_connected[]" value="{{ $stakeholder_connected->id }}" />
                             </div>
@@ -259,7 +259,7 @@
                                 <a class="badge" connected-initiator-delete="{{ $initiator_connected->id }}">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> sterge
                                 </a>
-                                <h4 class="list-group-item-heading">{{ $initiator_connected->name }}</h4>
+                                <h4 class="list-group-item-heading">{{ $initiator_connected->name ? $initiator_connected->name : $initiator_connected->org_name }}</h4>
                                 <p class="list-group-item-text"></p>
                                 <input type="hidden" name="initiators_connected[]" value="{{ $initiator_connected->id }}" />
                             </div>

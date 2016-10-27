@@ -209,227 +209,57 @@
             ]
         });
 
-        var domainAutocomplete = $('#domain-autocomplete');
-        var domainList = new Bloodhound({
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: domainAutocomplete.attr('source-url'),
-                wildcard: '{name}',
-                transform: function (response) {
-                    return _.filter(response, function (item) {
-                        return $('[domain-id=' + item.id + ']').length === 0;
-                    });
-                }
-            }
-        });
 
-        domainAutocomplete.typeahead(
-            null,
-            {
-                name: 'domain',
-                display: 'name',
-                source: domainList
-            }
+        initAutocomplete(
+            $('#domain-autocomplete'), //autocomplete selector
+            '[domain-id=', //filter duplicate
+            '#connected-domain-template',
+            '#connected-domains-container',
+            '[connected-domain-delete]', //delete selector
+            'connected-domain-delete', //delete attr
+            '[domain-id=' //remove selector
         );
 
-        typeaheadAutocomplete(domainAutocomplete);
 
-        domainAutocomplete.bind(
-            'typeahead:select',
-            function (event, suggestion) {
-                $(this).typeahead('val', '');
-
-                var template = _.template($('#connected-domain-template').html());
-                var compiled_template = template(suggestion);
-
-                $('#connected-domains-container').append(compiled_template);
-            }
+        initAutocomplete(
+            $('#stakeholder-autocomplete'), //autocomplete selector
+            '[stakeholder-id=', //filter duplicate
+            '#connected-stakeholder-template',
+            '#connected-stakeholders-container',
+            '[connected-stakeholder-delete]', //delete selector
+            'connected-stakeholder-delete', //delete attr
+            '[stakeholder-id=' //remove selector
         );
 
-        $('#connected-domains-container').on('click', '[connected-domain-delete]', function () {
-            var connected_stakeholder_id = $(this).attr('connected-domain-delete');
-            $('[domain-id=' + connected_stakeholder_id + ']').remove();
-        });
-
-        var stakeholderAutocomplete = $('#stakeholder-autocomplete');
-        var stakeholdersList = new Bloodhound({
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: stakeholderAutocomplete.attr('source-url'),
-                wildcard: '{name}',
-                transform: function (response) {
-                    return _.filter(response, function (item) {
-                        return $('[stakeholder-id=' + item.id + ']').length === 0;
-                    });
-                }
-            }
-        });
-
-        stakeholderAutocomplete.typeahead(
-            null,
-            {
-                name: 'stakeholder',
-                display: 'name',
-                source: stakeholdersList
-            }
+        initAutocomplete(
+            $('#news-autocomplete'), //autocomplete selector
+            '[news-id=', //filter duplicate
+            '#connected-news-template',
+            '#connected-news-container',
+            '[connected-news-delete]', //delete selector
+            'connected-news-delete', //delete attr
+            '[news-id=' //remove selector
         );
 
-        typeaheadAutocomplete(stakeholderAutocomplete);
-
-        stakeholderAutocomplete.bind(
-            'typeahead:select',
-            function (event, suggestion) {
-                $(this).typeahead('val', '');
-
-                var template = _.template($('#connected-stakeholder-template').html());
-                var compiled_template = template(suggestion);
-
-                $('#connected-stakeholders-container').append(compiled_template);
-            }
+        initAutocomplete(
+            $('#issue-autocomplete'), //autocomplete selector
+            '[issue-id=', //filter duplicate
+            '#connected-issue-template',
+            '#connected-issues-container',
+            '[connected-issue-delete]', //delete selector
+            'connected-issue-delete', //delete attr
+            '[issue-id=' //remove selector
         );
 
-        $('#connected-stakeholders-container').on('click', '[connected-stakeholder-delete]', function () {
-            var connected_stakeholder_id = $(this).attr('connected-stakeholder-delete');
-            $('[stakeholder-id=' + connected_stakeholder_id + ']').remove();
-        });
-
-
-        var newsAutocomplete = $('#news-autocomplete');
-        var newsList = new Bloodhound({
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: newsAutocomplete.attr('source-url'),
-                wildcard: '{name}',
-                transform: function (response) {
-                    return _.filter(response, function (item) {
-                        return $('[news-id=' + item.id + ']').length === 0;
-                    });
-                }
-            }
-        });
-
-        newsAutocomplete.typeahead(
-            null,
-            {
-                name: 'news',
-                display: 'name',
-                source: newsList
-            }
+        initAutocomplete(
+            $('#initiator-autocomplete'), //autocomplete selector
+            '[initiator-id=', //filter duplicate
+            '#connected-initiator-template',
+            '#connected-initiators-container',
+            '[connected-initiator-delete]', //delete selector
+            'connected-initiator-delete', //delete attr
+            '[initiator-id=' //remove selector
         );
-
-        typeaheadAutocomplete(newsAutocomplete);
-
-        newsAutocomplete.bind(
-            'typeahead:select',
-            function (event, suggestion) {
-                $(this).typeahead('val', '');
-
-                var template = _.template($('#connected-news-template').html());
-                var compiled_template = template(suggestion);
-
-                $('#connected-news-container').append(compiled_template);
-            }
-        );
-
-        $('#connected-news-container').on('click', '[connected-news-delete]', function () {
-            var connected_news_id = $(this).attr('connected-news-delete');
-            $('[news-id=' + connected_news_id + ']').remove();
-        });
-
-        var issueAutocomplete = $('#issue-autocomplete');
-        var roIssueName = $('[name-ro=true]').val();
-        var enIssueName = $('[name-en=true]').val();
-
-        var issuesList = new Bloodhound({
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: issueAutocomplete.attr('source-url'),
-                wildcard: '{name}',
-                transform: function (response) {
-                    return _.filter(response, function (item) {
-                        if (roIssueName == item.name || enIssueName == item.name) {
-                            return withError('Issue is the same with filter result');
-                        }
-                        return $('[issue-id=' + item.id + ']').length === 0;
-                    });
-                }
-            }
-        });
-
-        issueAutocomplete.typeahead(
-            null,
-            {
-                name: 'issue',
-                display: 'name',
-                source: issuesList
-            }
-        );
-
-        typeaheadAutocomplete(issueAutocomplete);
-
-        issueAutocomplete.bind(
-            'typeahead:select',
-            function (event, suggestion) {
-                $(this).typeahead('val', '');
-
-                var template = _.template($('#connected-issue-template').html());
-                var compiled_template = template(suggestion);
-
-                $('#connected-issues-container').append(compiled_template);
-            }
-        );
-
-        $('#connected-issues-container').on('click', '[connected-issue-delete]', function () {
-            var connected_issue_id = $(this).attr('connected-issue-delete');
-            $('[issue-id=' + connected_issue_id + ']').remove();
-        });
-
-        var initiatorAutocomplete = $('#initiator-autocomplete');
-        var initiatorsList = new Bloodhound({
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            datumTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: initiatorAutocomplete.attr('source-url'),
-                wildcard: '{name}',
-                transform: function (response) {
-                    return _.filter(response, function (item) {
-                        return $('[initiator-id=' + item.id + ']').length === 0;
-                    });
-                }
-            }
-        });
-
-        initiatorAutocomplete.typeahead(
-            null,
-            {
-                name: 'initiator',
-                display: 'name',
-                source: initiatorsList
-            }
-        );
-
-        typeaheadAutocomplete(initiatorAutocomplete);
-
-        initiatorAutocomplete.bind(
-            'typeahead:select',
-            function (event, suggestion) {
-                $(this).typeahead('val', '');
-
-                var template = _.template($('#connected-initiator-template').html());
-                var compiled_template = template(suggestion);
-
-                $('#connected-initiators-container').append(compiled_template);
-            }
-        );
-
-        $('#connected-initiators-container').on('click', '[connected-initiator-delete]', function () {
-            var connected_initiator_id = $(this).attr('connected-initiator-delete');
-            $('[initiator-id=' + connected_initiator_id + ']').remove();
-        });
 
 
         $('#locations-container').sortable({
