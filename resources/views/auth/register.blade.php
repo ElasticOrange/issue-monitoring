@@ -89,9 +89,9 @@
                         <div class="col-sm-8">
                             <select class="form-control" name="domain">
                                 <option value="">Select</option>
-                                @foreach(\Issue\Domain::where('parent_id', 1)->get() as $domain)
+                                @foreach(\Issue\Domain::where('parent_id', 1)->where('visible_in_demo', 1)->get() as $domain)
                                     @if($domain->id != 27)
-                                    <option value="{{ $domain->id }}">{{ $domain->name }}</option>
+                                        <option value="{{ $domain->id }}">{{ $domain->name }}</option>
                                     @endif
                                 @endforeach
                             </select>
