@@ -12,6 +12,7 @@ use Issue\User;
 
 class AdminTest extends TestCase
 {
+
 	use DatabaseTransactions;
 	use WithoutMiddleware;
 	/**
