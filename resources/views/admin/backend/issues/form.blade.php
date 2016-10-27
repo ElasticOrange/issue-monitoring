@@ -395,7 +395,7 @@
                                            name="location[{{ $locationStep->id }}][name]"
                                            source-url="{{ action('IssueController@queryLocation') }}/?name={name}"
                                            location-name="true"
-                                           value="{{ $locationStep->location->name }}"
+                                           value="{{ $locationStep->location ? $locationStep->location->name : '' }}"
                                            save-id-to="location-id-location-{{ $locationStep->id }}"
                                            prevent-enter="true"
                                             />
