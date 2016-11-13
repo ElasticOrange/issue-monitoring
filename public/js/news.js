@@ -37,6 +37,19 @@
                     orderable: false
                 },
                 {
+                    data: "title",
+                    title: "Title",
+                    render: function (data, type, rowData) {
+                        if (_.isArray(rowData['translations'])) {
+                            var obj = _.find(rowData['translations'], function(obj) {
+                                return obj.locale === 'en';
+                            });
+                            return obj.title;
+                        }
+                    },
+                    orderable: false
+                },
+                {
                     data: "date",
                     title: "Data",
                     render: function (data, type, rowData, meta) {
