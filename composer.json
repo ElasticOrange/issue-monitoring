@@ -10,7 +10,8 @@
         "dimsav/laravel-translatable": "^5.1",
         "fzaninotto/faker": "^1.5",
         "doctrine/dbal": "^2.5",
-        "guzzlehttp/guzzle": "~4.0"
+        "guzzlehttp/guzzle": "^6.2",
+        "aws/aws-sdk-php": "^3.19"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
