@@ -69,7 +69,7 @@
 
     <div class="row news-title">
         <div class="col-md-8 title-news">
-            <h3 class="text-left">Noutăţi legislative</h3>
+            <h3 class="text-left">{{ trans('home.legislative_updates') }}</h3>
             <br /><br />
             <div class="carousel slide vertical" id="carousel-133466">
                 <div class="carousel-inner">
@@ -114,7 +114,7 @@
                 class="btn subscribe-btn"
                 style="text-decoration: none;"
                 href="{{ action('Auth\AuthController@getRegister') }}">
-                <span class="subscribe-btn-text">Înregistrează-te</span>
+                <span class="subscribe-btn-text">{{ trans('home.sign_up') }}</span>
             </a>
 
             <br />
@@ -122,17 +122,17 @@
 
             <img src="/img/subscribe_img.png" class="subscribe_img">
             <dl style="margin-top: -250px;">
-                <dt class="subscribe-text">Bucură-te de avantaje! <br /> Vei primi notificări privind evoluția inițiativelor legislative din domeniul selectat direct prin e-mail.</dt>
+                <dt class="subscribe-text">{{ trans('home.enjoy_benefits') }} <br /> {{ trans('home.enjoy_alerts') }}</dt>
             </dl>
             <br>
             <li class="text-scope">
-                Monitorizare:<br><span class="text-scope">Monitorizare a inițiativelor legislative relevante pentru domeniul tău de interes.</span>
+                {{ trans('home.monitoring') }}:<br><span class="text-scope">{{ trans('home.monitoring_explain') }}</span>
             </li><br>
             <li class="text-scope">
-                Alertă: <br><span class="text-scope">Alertă pe e-mail cu modificările de status ale inițiativelor relevante.</span>
+                {{ trans('home.alert') }}: <br><span class="text-scope">{{ trans('home.alert_explain') }}</span>
             </li><br>
             <li class="text-scope">
-            Analiză: <br><span class="text-scope">Analiză săptămânale sau lunară asupra evoluției inițiativelor monitorizate.</span>
+            {{ trans('home.analysis') }}: <br><span class="text-scope">{{ trans('home.analysis_explain') }}</span>
             </li>
         </div>
     </div>
@@ -141,7 +141,7 @@
 
     <div class="row">
         <div class="col-md-12 reports-title">
-            <h3 class="report-news">Rapoarte</h3>
+            <h3 class="report-news">{{ trans('home.reports') }}</h3>
         </div>
     </div>
 
@@ -150,7 +150,7 @@
             <img src="/img/reports_img.png" class="reports-img">
         </div>
         <div class="col-md-6">
-            <h3>Cele mai recente rapoarte</h3>
+            <h3>{{ trans('home.latest_reports') }}</h3>
             <div class="carousel slide vertical" id="carousel-1234">
                 <div class="carousel-inner">
                     @foreach ($reports as $report)

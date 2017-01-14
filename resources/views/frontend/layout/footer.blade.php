@@ -11,7 +11,7 @@
             <strong>Issue Monitoring</strong>
         </h4>
         <dl class="text-center">
-            <dt>Telefon: 031.080.2370 | Fax: 031.080.2371 | Email: office@cmpp.ro</dt>
+            <dt>{{ trans('home.phone') }}: 031.080.2370 | Fax: 031.080.2371 | Email: office@cmpp.ro</dt>
             <dd>{{ date('Y') }} © Issue Monitoring. ALL Rights Reserved. Privacy Policy | Terms</dd>
         </dl>
     </div>
