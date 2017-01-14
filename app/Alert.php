@@ -240,7 +240,7 @@ class Alert extends Model
                 'alertsToSendByIssue' => $alertsToSendByIssue,
                 'alert_type' => $alert_type
             ],
-            function ($m) use ($user, $alertType, $issueName) {
+            function ($m) use ($user, $alertType, $issueName, $alert_type) {
                 $m->to($user->email)->subject($alert_type . $issueName);
             }
         );
@@ -285,7 +285,11 @@ class Alert extends Model
     public static function sendReportMail($user, $alert)
     {
         $alert_template = 'report_alert';
-        $alert_type = 'Rapoarte recent adaugate';
+        if ($user->language === 'ro') {
+            $alert_type = 'Rapoarte recent adaugate';
+        } else {
+            $alert_type = 'Newly added reports';
+        }
 
         Mail::send('emails.'.$alert_template,
             [

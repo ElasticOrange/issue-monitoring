@@ -117,7 +117,7 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ ($user->language === 'ro' ? "Au fost adaugate urmatoarele stiri:" : "Check out the page of the bill for more details!") }}</td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ ($user->language === 'ro' ? "Au fost adaugate urmatoarele stiri:" : "Newly added news:") }}</td>
                                         </tr>
                                         @foreach($alertsToSendByIssue as $news)
                                             <tr>
