@@ -117,7 +117,7 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Au fost adaugate urmatoarele stiri:</td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ ($user->language === 'ro' ? "Au fost adaugate urmatoarele stiri:" : "Check out the page of the bill for more details!") }}</td>
                                         </tr>
                                         @foreach($alertsToSendByIssue as $news)
                                             <tr>
@@ -125,7 +125,7 @@
                                                     <ul>
                                                         <li>
                                                             <a href="{{ action('EmailViewController@getExternalNewsInfo', [$news->id, Illuminate\Support\Str::slug($news->title)]) }}">
-                                                                <b>{{ $news->title }}</b>
+                                                                <b>{{ $news->translate($user->language)->title }}</b>
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -133,7 +133,7 @@
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><a href="{{ action('EmailViewController@getExternalIssueInfo', [$news->connectedIssues[0]->id, Illuminate\Support\Str::slug($news->connectedIssues[0]->name)]) }}">Pagina initiativa</a></td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><a href="{{ action('EmailViewController@getExternalIssueInfo', [$news->connectedIssues[0]->id, Illuminate\Support\Str::slug($news->connectedIssues[0]->name)]) }}">{{ ($user->language === 'ro' ? "Vezi pagina initiativei pentru mai multe informatii!" : "Check out the page of the bill for more details!") }}</a></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>

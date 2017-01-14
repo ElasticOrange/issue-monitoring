@@ -166,19 +166,19 @@ class Alert extends Model
             if ($user->language === 'ro') {
                 $alert_type = 'Initiativa recent adaugata';
             } else {
-                $alert_type = 'New issue added';
+                $alert_type = 'Newly added bill';
             }
         } elseif ($alertType == 'alert_issue_status') {
             if ($user->language === 'ro') {
                 $alert_type = 'Modificare initiativa '.$alert->alertable->translate('ro')->name;
             } else {
-                $alert_type = 'Issue modified '.$alert->alertable->translate('en')->name;
+                $alert_type = 'Draft bill update for '.$alert->alertable->translate('en')->name;
             }
         } elseif ($alertType == 'alert_issue_stage') {
             if ($user->language === 'ro') {
                 $alert_type = 'Modificare initiativa '.$alert->alertable->flowstepsInLocation->issue->translate('ro')->name;
             } else {
-                $alert_type = 'Issue modified '.$alert->alertable->flowstepsInLocation->issue->translate('en')->name;
+                $alert_type = 'Draft bill update for '.$alert->alertable->flowstepsInLocation->issue->translate('en')->name;
             }
         }
 
@@ -222,12 +222,16 @@ class Alert extends Model
     {
         $alert_type = '';
         if ($alertType == 'alert_news') {
-            $alert_type = 'stire noua';
+            if ($user->language === 'ro') {
+                $alert_type = 'Stiri recent adaugate';
+            } else {
+                $alert_type = 'Newly added news';
+            }
         }
 
         $issueName = '';
         if ($alertsToSendByIssue[0]->connectedIssues) {
-            $issueName = ' - ' . $alertsToSendByIssue[0]->connectedIssues[$alertsToSendByIssue[0]->connectedIssues->count() - 1]->name;
+            $issueName = ' - ' . $alertsToSendByIssue[0]->connectedIssues[$alertsToSendByIssue[0]->connectedIssues->count() - 1]->translate($user->language)->name;
         }
 
         Mail::send('emails.'.$alertType,
@@ -237,7 +241,7 @@ class Alert extends Model
                 'alert_type' => $alert_type
             ],
             function ($m) use ($user, $alertType, $issueName) {
-                $m->to($user->email)->subject('Stiri recent adaugate' . $issueName);
+                $m->to($user->email)->subject($alert_type . $issueName);
             }
         );
 
