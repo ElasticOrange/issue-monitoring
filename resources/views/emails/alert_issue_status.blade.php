@@ -117,14 +117,14 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ $alert->alertable->name }}</ul></td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ $alert->alertable->translate($user->language)->name }}</ul></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ strip_tags($alert->alertable->status) }}</b></ul></td>
+                                            <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ strip_tags($alert->alertable->translate($user->language)->status) }}</b></ul></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
-                                                <ul><a href="{{ action('EmailViewController@getExternalIssueInfo', [$alert->alertable->id, Illuminate\Support\Str::slug($alert->alertable->name)]) }}">Vezi pagina initiativei pentru mai multe informatii!</a></ul></td>
+                                                <ul><a href="{{ action('EmailViewController@getExternalIssueInfo', [$alert->alertable->id, Illuminate\Support\Str::slug($alert->alertable->name)]) }}">{{ ($user->language === 'ro' ? "Vezi pagina initiativei pentru mai multe informatii!" : "See issue page for more info!") }}</a></ul></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>

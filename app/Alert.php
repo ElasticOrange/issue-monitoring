@@ -163,11 +163,23 @@ class Alert extends Model
     {
         $alert_type = '';
         if ($alertType == 'alert_new_issue') {
-            $alert_type = 'Initiativa recent adaugata';
+            if ($user->language === 'ro') {
+                $alert_type = 'Initiativa recent adaugata';
+            } else {
+                $alert_type = 'New issue added';
+            }
         } elseif ($alertType == 'alert_issue_status') {
-            $alert_type = 'Modificare initiativa '.$alert->alertable->name;
+            if ($user->language === 'ro') {
+                $alert_type = 'Modificare initiativa '.$alert->alertable->translate('ro')->name;
+            } else {
+                $alert_type = 'Issue modified '.$alert->alertable->translate('en')->name;
+            }
         } elseif ($alertType == 'alert_issue_stage') {
-            $alert_type = 'Modificare initiativa '.$alert->alertable->flowstepsInLocation->issue->name;
+            if ($user->language === 'ro') {
+                $alert_type = 'Modificare initiativa '.$alert->alertable->flowstepsInLocation->issue->translate('ro')->name;
+            } else {
+                $alert_type = 'Issue modified '.$alert->alertable->flowstepsInLocation->issue->translate('en')->name;
+            }
         }
 
         Mail::send('emails.'.$alertType,
