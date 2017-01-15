@@ -46,31 +46,31 @@
                     <div class="form-group">
                         <div class="col-md-5 col-md-offset-1">
                             <select class="form-control auto-refresh" name="type">
-                                <option value="">Tipul inițiativei</option>
-                                <option value="Propunere legislativă" @if($type == "Propunere legislativă") selected="selected" @endif>Propunere legislativă</option>
-                                <option value="Proiect de lege" @if($type == "Proiect de lege") selected="selected" @endif>Proiect de lege</option>
-                                <option value="Decizie" @if($type == "Decizie") selected="selected" @endif>Decizie</option>
-                                <option value="Ordin" @if($type == "Ordin") selected="selected" @endif>Ordin</option>
-                                <option value="Hotărâre de Guvern" @if($type == "Hotărâre de Guvern") selected="selected" @endif>Hotărâre de Guvern</option>
-                                <option value="Ordonanță" @if($type == "Ordonanță") selected="selected" @endif>Ordonanță</option>
-                                <option value="Directivă europeană" @if($type == "Directivă europeană") selected="selected" @endif>Directivă europeană</option>
-                                <option value="Regulament" @if($type == "Regulament") selected="selected" @endif>Regulament</option>
-                                <option value="Plan" @if($type == "Plan") selected="selected" @endif>Plan</option>
-                                <option value="Strategie" @if($type == "Strategie") selected="selected" @endif>Strategie</option>
-                                <option value="Memorandum" @if($type == "Memorandum") selected="selected" @endif>Memorandum</option>
-                                <option value="Program" @if($type == "Program") selected="selected" @endif>Program</option>
-                                <option value="Instructiune" @if($type == "Instructiune") selected="selected" @endif>Instructiune</option>
-                                <option value="Tip" @if($type == "Tip") selected="selected" @endif>Tip</option>
+                                <option value="">{{ trans('issue.issue_type') }}</option>
+                                <option value="Propunere legislativă" @if($type == "Propunere legislativă") selected="selected" @endif>{{ trans('issue.legislative_proposal') }}</option>
+                                <option value="Proiect de lege" @if($type == "Proiect de lege") selected="selected" @endif>{{ trans('issue.bill') }}</option>
+                                <option value="Decizie" @if($type == "Decizie") selected="selected" @endif>{{ trans('issue.decision') }}</option>
+                                <option value="Ordin" @if($type == "Ordin") selected="selected" @endif>{{ trans('issue.order') }}</option>
+                                <option value="Hotărâre de Guvern" @if($type == "Hotărâre de Guvern") selected="selected" @endif>{{ trans('issue.government_resolution') }}</option>
+                                <option value="Ordonanță" @if($type == "Ordonanță") selected="selected" @endif>{{ trans('issue.ordinance') }}</option>
+                                <option value="Directivă europeană" @if($type == "Directivă europeană") selected="selected" @endif>{{ trans('issue.european_directive') }}</option>
+                                <option value="Regulament" @if($type == "Regulament") selected="selected" @endif>{{ trans('issue.regulation') }}</option>
+                                <option value="Plan" @if($type == "Plan") selected="selected" @endif>{{ trans('issue.plan') }}</option>
+                                <option value="Strategie" @if($type == "Strategie") selected="selected" @endif>{{ trans('issue.strategy') }}</option>
+                                <option value="Memorandum" @if($type == "Memorandum") selected="selected" @endif>{{ trans('issue.memorandum') }}</option>
+                                <option value="Program" @if($type == "Program") selected="selected" @endif>{{ trans('issue.program') }}</option>
+                                <option value="Instructiune" @if($type == "Instructiune") selected="selected" @endif>{{ trans('issue.instruction') }}</option>
+                                <option value="Tip" @if($type == "Tip") selected="selected" @endif>{{ trans('issue.type') }}</option>
                             </select>
                         </div>
                         <div class="col-md-5">
                             <select class="form-control auto-refresh" name="phase">
-                                <option value="">Faza inițiativei</option>
-                                <option value="curent" @if($phase == "curent") selected="selected" @endif>Curent</option>
-                                <option value="viitor" @if($phase == "viitor") selected="selected" @endif>Viitor</option>
-                                <option value="arhivatRespinsSauAbrogat" @if($phase == "arhivatRespinsSauAbrogat") selected="selected" @endif>Arhivată – Respinsă sau abrogată </option>
-                                <option value="arhivatInactiv" @if($phase == "arhivatInactiv") selected="selected" @endif>Arhivată – Inactivă</option>
-                                <option value="publicatMO" @if($phase == "publicatMO") selected="selected" @endif>În vigoare</option>
+                                <option value="">{{ trans('issue.phase') }}</option>
+                                <option value="curent" @if($phase == "curent") selected="selected" @endif>{{ trans('issue.current') }}</option>
+                                <option value="viitor" @if($phase == "viitor") selected="selected" @endif>{{ trans('issue.future') }}</option>
+                                <option value="arhivatRespinsSauAbrogat" @if($phase == "arhivatRespinsSauAbrogat") selected="selected" @endif>{{ trans('issue.archived_rejected') }}</option>
+                                <option value="arhivatInactiv" @if($phase == "arhivatInactiv") selected="selected" @endif>{{ trans('issue.archived_inactive') }}</option>
+                                <option value="publicatMO" @if($phase == "publicatMO") selected="selected" @endif>{{ trans('issue.in_effect') }}</option>
                             </select>
                         </div>
                     </div>

@@ -8,7 +8,7 @@
         @if($stakeholder->photo_source)
             <div class="text-right">
                 <small>
-                    Sursa: {{ $stakeholder->photo_source }}
+                    {{ trans('stakeholders.source') }}: {{ $stakeholder->photo_source }}
                 </small>
             </div><br>
         @endif
@@ -41,17 +41,17 @@
             <hr>
             <div>
                 <h4 class="text-center">
-                    Date de contact
+                    {{ trans('stakeholders.contact_information') }}
                 </h4><br>
                 <p>
                     @if($stakeholder->email)
                         <b>Email:</b> {{ $stakeholder->email }}<br><br>
                     @endif
                     @if($stakeholder->telephone)
-                        <b>Telefon:</b> {{ $stakeholder->telephone }}<br><br>
+                        <b>{{ trans('stakeholders.tel') }}:</b> {{ $stakeholder->telephone }}<br><br>
                     @endif
                     @if($stakeholder->address)
-                        <b>Adresa:</b> {!! $stakeholder->address !!}<br><br>
+                        <b>{{ trans('stakeholders.address') }}:</b> {!! $stakeholder->address !!}<br><br>
                     @endif
                     @if($stakeholder->other_details)
                         <b>Alte detalii:</b> {{ strip_tags($stakeholder->other_details) }}<br>
@@ -92,7 +92,7 @@
         @endif
         @if(! $stakeholder->connectedIssues()->get()->isEmpty())
             <div>
-                <h3>Inițiative pentru care este relevant</h3>
+                <h3>{{ trans('stakeholders.issue_relevant') }}</h3>
             </div>
             <hr>
             @foreach($stakeholder->connectedIssues()->orderBy('id', 'desc')->limit(5)->get() as $stakeholderIssue)
@@ -105,7 +105,7 @@
             <br>
             @if($stakeholder->connectedIssues()->count() > 5)
                 <a href="{{ action('HomeController@getAllStakeholderIssues', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">
-                    Vezi toate
+                    {{ trans('stakeholders.show_all') }}
                 </a>
             @endif
             <hr>
@@ -114,7 +114,7 @@
 
         @if(! $stakeholder->connectedNews()->get()->isEmpty())
             <div>
-                <h3>Știri / declarații în care este menționat</h3>
+                <h3>{{ trans('stakeholders.news_mentions') }}</h3>
             </div>
             <hr>
             @foreach($stakeholder->connectedNews()->orderBy('id', 'desc')->limit(5)->get() as $stakeholderNews)
@@ -128,14 +128,14 @@
             @endforeach
             <br>
             @if($stakeholder->connectedNews()->count() > 5)
-                <a href="{{ action('HomeController@getAllStakeholderNews', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">Vezi toate</a>
+                <a href="{{ action('HomeController@getAllStakeholderNews', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">{{ trans('stakeholders.show_all') }}</a>
             @endif
             <hr>
             <br><br>
         @endif
         @if(! $stakeholder->stakeholdersConnectedOfMine()->get()->isEmpty())
             <div>
-                <h3>Stakeholderi conectați</h3>
+                <h3>{{ trans('stakeholders.connected_stakeholders') }}</h3>
             </div>
             <hr>
             @foreach($stakeholder->stakeholdersConnectedOfMine()->orderBy('id', 'desc')->limit(5)->get() as $s)
@@ -156,7 +156,7 @@
             @endforeach
             <br>
             @if($stakeholder->stakeholdersConnectedOfMine()->count() > 5)
-                <a href="{{ action('HomeController@getAllStakeholdersConnected', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">Vezi toate</a>
+                <a href="{{ action('HomeController@getAllStakeholdersConnected', ['id' => $stakeholder, 'name' => Illuminate\Support\Str::slug($stakeholder->name)]) }}">{{ trans('stakeholders.show_all') }}</a>
             @endif
             <hr>
             <br><br>

@@ -117,7 +117,7 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ ($user->language === 'ro' ? "A fost adaugat urmatorul raport:" : "Newly added report:") }}</td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ ($user->language === 'ro' ? "A fost adaugat urmatorul raport:" : "Recently added report:") }}</td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ $alert->alertable->translate($user->language)->title }}</b></ul></td>

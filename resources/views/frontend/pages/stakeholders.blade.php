@@ -48,7 +48,7 @@
                                 </a>
                                 <br>
                                 @if($stakeholder->position)
-                                    Pozitie si apartenenta: {{ strip_tags($stakeholder->translate(App::getLocale())->position) }}
+                                    {{ trans('stakeholders.position') }}: {{ strip_tags($stakeholder->translate(App::getLocale())->position) }}
                                 @endif
                             </li><br>
                         @endforeach

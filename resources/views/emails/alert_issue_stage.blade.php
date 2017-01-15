@@ -117,11 +117,11 @@
                                     <!-- COPY -->
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ $alert->alertable->flowstepsInLocation->issue->name }}</b></ul></td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul><b>{{ $alert->alertable->flowstepsInLocation->issue->translate($user->language)->name }}</b></ul></td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ strip_tags($alert->alertable->observatii) }} </ul>
-                                                <ul><a href="{{ action('EmailViewController@getExternalIssueInfo', [$alert->alertable->flowstepsInLocation->issue->id, Illuminate\Support\Str::slug($alert->alertable->flowstepsInLocation->issue->name)]) }}">Vezi pagina initiativei pentru mai multe informatii!</a></ul></td>
+                                            <td align="left" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy"><ul>{{ strip_tags($alert->alertable->translate($user->language)->observatii) }} </ul>
+                                                <ul><a href="{{ action('EmailViewController@getExternalIssueInfo', [$alert->alertable->flowstepsInLocation->issue->id, Illuminate\Support\Str::slug($alert->alertable->flowstepsInLocation->issue->name)]) }}">{{ ($user->language === 'ro' ? "Vezi pagina initiativei pentru mai multe informatii!" : "Check out the page of the bill for more details!") }}</a></ul></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">{{ date("Y") }} &copy; Issue Monitoring</td>

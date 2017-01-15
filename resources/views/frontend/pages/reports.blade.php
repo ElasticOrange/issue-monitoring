@@ -25,11 +25,11 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <select class="form-control" name="report_type">
-                                <option value="">Tipul raportului</option>
-                                <option value="4" @if($report_type == 4) selected="selected" @endif>Minuta</option>
-                                <option value="3" @if($report_type == 3) selected="selected" @endif>Progres</option>
-                                <option value="1" @if($report_type == 1) selected="selected" @endif>Saptamanal</option>
-                                <option value="2" @if($report_type == 2) selected="selected" @endif>Lunar</option>
+                                <option value="">{{ trans('reports.report_type') }}</option>
+                                <option value="4" @if($report_type == 4) selected="selected" @endif>{{ trans('reports.minute') }}</option>
+                                <option value="3" @if($report_type == 3) selected="selected" @endif>{{ trans('reports.progress') }}</option>
+                                <option value="1" @if($report_type == 1) selected="selected" @endif>{{ trans('reports.weekly') }}</option>
+                                <option value="2" @if($report_type == 2) selected="selected" @endif>{{ trans('reports.monthly') }}</option>
                             </select>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                                 <br>
                                 @if(\Auth::user() and $report->file)
                                     <p>
-                                        Descarca raportul:
+                                        {{ trans('reports.download_report') }}:
                                         <a href="{{ action( "UploadedFileController@downloadFile" , [$report->file->file_name]) }}" target="_blank" title="{{ $report->file->original_file_name }}">
                                             <i class="fa fa-file-pdf-o" style="font-size: 18px;"></i>
                                         </a>

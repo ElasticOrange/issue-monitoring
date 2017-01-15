@@ -17,13 +17,13 @@
     </div>
     <div id="issues_{{ $issue->id }}" class="panel-collapse collapse" aria-expanded="false">
         <div class="panel-body">
-            <span><b>Data start:</b> {{ $issue->created_at->format('d-m-Y') }}</span>
+            <span><b>{{ trans('issue.start_date') }}:</b> {{ $issue->created_at->format('d-m-Y') }}</span>
             <br/><br/>
                 {!! strip_tags($issue->translate(App::getLocale())->description) !!}
             <p>
                 <br>
                 @if(\Auth::user())
-                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $issue->id, 'name' => Illuminate\Support\Str::slug($issue->name)]) }}" rel="nofollow">Mai multe detalii</a>
+                    <a href="{{ action('HomeController@getIssueInfo', ['id' => $issue->id, 'name' => Illuminate\Support\Str::slug($issue->name)]) }}" rel="nofollow">{{ trans('issue.show_details') }}</a>
                 @else
                     <a href="{{ action('HomeController@getContact') }}" rel="nofollow">Pentru a accesa mai multe informații, vă rugăm să ne contactați !</a>
                 @endif

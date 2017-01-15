@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'issue_type'            => 'Tipul inițiativei',
+    'legislative_proposal'  => 'Propunere legislativă',
+    'bill'                  => 'Proiect de lege',
+    'decision'              => 'Decizie',
+    'order'                 => 'Ordin',
+    'government_resolution' => 'Hotărâre de Guvern',
+    'ordinance'             => 'Ordonanță',
+    'european_directive'    => 'Directivă europeană',
+    'regulation'            => 'Regulament',
+    'plan'                  => 'Plan',
+    'strategy'              => 'Strategie',
+    'memorandum'            => 'Memorandum',
+    'program'               => 'Program',
+    'instruction'           => 'Instructiune',
+    'type'                  => 'Tip',
+    'phase'                 => 'Faza inițiativei',
+    'current'               => 'Curent',
+    'future'                => 'Viitor',
+    'archived_rejected'     => 'Arhivată – Respinsă sau abrogată',
+    'archived_inactive'     => 'Arhivată – Inactivă',
+    'in_effect'             => 'În vigoare',
+    'start_date'            => 'Data start',
+    'show_details'          => 'Mai multe detalii',
+];

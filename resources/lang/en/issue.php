@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'issue_type'            => 'Initiatives',
+    'legislative_proposal'  => 'Legislative proposal',
+    'bill'                  => 'Bill',
+    'decision'              => 'Decision',
+    'order'                 => 'Order',
+    'government_resolution' => 'Government Resolution',
+    'ordinance'             => 'Ordinance',
+    'european_directive'    => 'European Directive',
+    'regulation'            => 'Regulation',
+    'plan'                  => 'Plan',
+    'strategy'              => 'Strategy',
+    'memorandum'            => 'Memorandum',
+    'program'               => 'Program',
+    'instruction'           => 'Instruction',
+    'type'                  => 'Type',
+    'phase'                 => 'Phase',
+    'current'               => 'Current',
+    'future'                => 'Future',
+    'archived_rejected'     => 'Archived – Rejected or repealed',
+    'archived_inactive'     => 'Archived – Inactive',
+    'in_effect'             => 'In effect',
+    'start_date'            => 'Start date',
+    'show_details'          => 'Show details',
+];
