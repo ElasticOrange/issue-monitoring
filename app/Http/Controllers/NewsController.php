@@ -14,6 +14,7 @@ use Issue\Http\Requests;
 use Issue\IssueTranslation;
 use Illuminate\Http\Request;
 use Issue\DomainTranslation;
+use Issue\StakeholderTranslation;
 use Issue\Http\Requests\NewsRequest;
 use Issue\Http\Controllers\Controller;
 
@@ -150,10 +151,23 @@ class NewsController extends Controller
 
     public function queryStakeholder(Request $request)
     {
-        $queryStakeholderName = $request->input('name');
-        $stakeholders = Stakeholder::where('name', 'like', '%'. $queryStakeholderName .'%')->get();
+        $queryStakeholderName = $request->name;
 
-        return $stakeholders;
+        $stakeholderIds = StakeholderTranslation::where('org_name', 'like', '%'.$queryStakeholderName.'%')
+                                    ->lists('stakeholder_id');
+        $stakeholders = Stakeholder::whereIn('id', $stakeholderIds)
+                                    ->orWhere('name', 'like', '%'.$queryStakeholderName.'%')
+                                    ->with(['translations'])
+                                    ->get();
+        $result = [];
+        foreach ($stakeholders as $stakeholder) {
+            $result[] = [
+                'id' => $stakeholder->id,
+                'name' => $stakeholder->org_name ? $stakeholder->org_name : $stakeholder->name
+            ];
+        }
+
+        return $result;
     }
 
     public function queryDomain(Request $request)
@@ -209,7 +223,7 @@ class NewsController extends Controller
         $queryIssueName = $request->input('name');
 
         $issueIds = IssueTranslation::where('name', 'like', '%'.$queryIssueName.'%')
-            ->where('locale', \App::getLocale())
+            // ->where('locale', \App::getLocale())
             ->lists('issue_id');
         $issues = Issue::whereIn('id', $issueIds)
             ->with(['translations'])
