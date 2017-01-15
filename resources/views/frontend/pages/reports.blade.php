@@ -73,7 +73,7 @@
                                         </a>
                                     </p>
                                 @else
-                                    <a href="{{ action('Auth\AuthController@getLogin') }}">Pentru a downloada rapoartul trebuie să vă autentificați</a>
+                                    <a href="{{ action('Auth\AuthController@getLogin') }}">{{ trans('reports.login_to_download') }}</a>
                                 @endif
                             </p>
                         </div>
