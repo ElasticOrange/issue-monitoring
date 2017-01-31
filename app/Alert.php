@@ -164,21 +164,21 @@ class Alert extends Model
         $alert_type = '';
         if ($alertType == 'alert_new_issue') {
             if ($user->language === 'ro') {
-                $alert_type = 'Initiativa recent adaugata';
+                $alert_type = 'Initiativa recent adaugata'.$alert->alertable->connectedDomains[0]->translate('ro')->name;
             } else {
-                $alert_type = 'Newly added bill';
+                $alert_type = 'Newly added bill'.$alert->alertable->connectedDomains[0]->translate('en')->name;
             }
         } elseif ($alertType == 'alert_issue_status') {
             if ($user->language === 'ro') {
-                $alert_type = 'Modificare initiativa '.$alert->alertable->translate('ro')->name;
+                $alert_type = 'Modificare initiativa '.$alert->alertable->connectedDomains[0]->translate('ro')->name . " " . $alert->alertable->translate('ro')->name;
             } else {
-                $alert_type = 'Draft bill update for '.$alert->alertable->translate('en')->name;
+                $alert_type = 'Draft bill update for '.$alert->alertable->connectedDomains[0]->translate('en')->name . " " . $alert->alertable->translate('en')->name;
             }
         } elseif ($alertType == 'alert_issue_stage') {
             if ($user->language === 'ro') {
-                $alert_type = 'Modificare initiativa '.$alert->alertable->flowstepsInLocation->issue->translate('ro')->name;
+                $alert_type = 'Modificare initiativa '.$alert->alertable->flowstepsInLocation->issue->connectedDomains[0]->translate('ro')->name . " " . $alert->alertable->flowstepsInLocation->issue->translate('ro')->name;
             } else {
-                $alert_type = 'Draft bill update for '.$alert->alertable->flowstepsInLocation->issue->translate('en')->name;
+                $alert_type = 'Draft bill update for '.$alert->alertable->flowstepsInLocation->issue->connectedDomains[0]->translate('en')->name . " " . $alert->alertable->flowstepsInLocation->issue->translate('en')->name;
             }
         }
 
