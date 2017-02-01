@@ -164,9 +164,9 @@ class Alert extends Model
         $alert_type = '';
         if ($alertType == 'alert_new_issue') {
             if ($user->language === 'ro') {
-                $alert_type = 'Initiativa recent adaugata'.$alert->alertable->connectedDomains[0]->translate('ro')->name;
+                $alert_type = 'Initiativa recent adaugata '.$alert->alertable->connectedDomains[0]->translate('ro')->name;
             } else {
-                $alert_type = 'Newly added bill'.$alert->alertable->connectedDomains[0]->translate('en')->name;
+                $alert_type = 'Newly added bill '.$alert->alertable->connectedDomains[0]->translate('en')->name;
             }
         } elseif ($alertType == 'alert_issue_status') {
             if ($user->language === 'ro') {
