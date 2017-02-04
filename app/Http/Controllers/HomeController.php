@@ -2,6 +2,7 @@
 
 namespace Issue\Http\Controllers;
 
+use Log;
 use Auth;
 use Mail;
 use Issue\News;
@@ -38,12 +39,30 @@ class HomeController extends Controller
 
     public function setLanguage($lang)
     {
+        Log::info(
+            'Language change - before.',
+            [
+                'user' => Auth::check() ? Auth::user()->toArray() : 'guest',
+                'lang' => $lang,
+                'session' => \Session::get('applocale')
+            ]
+        );
+
         if (in_array($lang, \Config::get('app.all_locales'))) {
             \Session::set('applocale', $lang);
             if (Auth::check()) {
                 Auth::user()->update(['language' => $lang]);
             }
         }
+
+        Log::info(
+            'Language change - after.',
+            [
+                'user' => Auth::check() ? Auth::user()->toArray() : 'guest',
+                'lang' => $lang,
+                'session' => \Session::get('applocale')
+            ]
+        );
 
         return redirect()->back();
     }
