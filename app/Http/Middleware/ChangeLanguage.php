@@ -37,9 +37,7 @@ class ChangeLanguage
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check() && in_array($this->auth->user()->language, Config::get('app.all_locales'))) {
-            App::setLocale($this->auth->user()->language);
-        } else if (Session::has('applocale') && in_array(Session::get('applocale'), Config::get('app.all_locales'))) {
+        if (Session::has('applocale') && in_array(Session::get('applocale'), Config::get('app.all_locales'))) {
             App::setLocale(Session::get('applocale'));
         }
 
