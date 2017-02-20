@@ -24,4 +24,9 @@ return [
     'in_effect'             => 'În vigoare',
     'start_date'            => 'Data start',
     'show_details'          => 'Mai multe detalii',
+    'summary'               => 'Sumar',
+    'impact_on_other_laws'  => 'Impact asupra altor legi',
+    'show_all_stakeholders' => 'Arata toti stakeholderii',
+    'initiators'            => 'Initiatori',
+    'short_desc'            => 'Descriere scurta',
 ];

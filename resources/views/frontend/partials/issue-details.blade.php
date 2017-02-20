@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#summary" data-toggle="tab">Sumar</a></li>
+    <li class="active"><a href="#summary" data-toggle="tab">{{ trans('issue.summary') }}</a></li>
     <li><a href="#flux" data-toggle="tab">Flux procedural</a></li>
     <li><a href="#documents" data-toggle="tab">Documente</a></li>
     <li><a href="#news" data-toggle="tab">Stiri si declaratii</a></li>
@@ -12,13 +12,13 @@
     <div class="tab-pane active" id="summary">
         @if($issue->type)
             <p>
-                <b>Tip:</b> {{ $issue->type }}
+                <b>{{ trans('issue.type') }}:</b> {{ $issue->translate(App::getLocale())->type }}
             </p>
         @endif
         @if(count($initiatorsList) > 1)
         <p>
             <b>
-                Initiatori:
+                {{ trans('issue.initiators') }}:
             </b>
         </p>
         @foreach ($initiatorsList[0] as $initiator)
@@ -44,26 +44,26 @@
                 @endfor
             </div>
             <a role="button" data-toggle="collapse" href="#stakeholdersList" aria-expanded="false" aria-controls="stakeholdersList">
-                Arata toti stakeholderii
+                {{ trans('issue.show_all_stakeholders') }}
             </a>
         @endif
         @if ($issue->impact)
             <p>
                 <b>
                     <br>
-                    Impact asupra altor legi:
+                    {{ trans('issue.impact_on_other_laws') }}:
                 </b>
             </p>
-                {!! $issue->impact !!}
+                {!! $issue->translate(App::getLocale())->impact !!}
         @endif
         @if ($issue->description)
         <p>
             <b>
                 <br>
-                Descriere scurta:
+                {{ trans('issue.short_desc') }}:
             </b>
         </p>
-            {!! $issue->description !!}
+            {!! $issue->translate(App::getLocale())->description !!}
         @endif
         @if ($issue->status)
         <p>
@@ -72,7 +72,7 @@
                 Status:
             </b>
         </p>
-            {!! $issue->status !!}
+            {!! $issue->translate(App::getLocale())->status !!}
         @endif
     </div>
 

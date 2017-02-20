@@ -24,4 +24,9 @@ return [
     'in_effect'             => 'In effect',
     'start_date'            => 'Start date',
     'show_details'          => 'Show details',
+    'summary'               => 'Summary',
+    'impact_on_other_laws'  => 'Impact on other laws',
+    'show_all_stakeholders' => 'Show all stakeholders',
+    'initiators'            => 'Initiators',
+    'short_desc'            => 'Short description',
 ];
