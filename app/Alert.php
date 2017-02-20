@@ -142,14 +142,14 @@ class Alert extends Model
         $usersToSendTo = [];
 
         foreach ($users as $user) {
-            if ($alert->alertable->flowstepsInLocation == null
+            if ($alert->alertable && $alert->alertable->flowstepsInLocation == null
                 && ! $user->domains->intersect($alert->alertable->connectedDomains)->isEmpty()
                 && ! $user->issues()->where('issue_id', $alert->alertable_id)->first()) {
 
                 $usersToSendTo[] = $user;
             }
 
-            if ($alert->alertable->flowstepsInLocation != null
+            if ($alert->alertable && $alert->alertable->flowstepsInLocation != null
                 && ! $user->domains->intersect($alert->alertable->flowstepsInLocation->issue->connectedDomains)->isEmpty()
                 && ! $user->issues()->where('issue_id', $alert->alertable->flowstepsInLocation->issue->id)->first()) {
 
